@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lepore Salgados — Cardápio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #F7ECD9;
+    --cream-deep: #EFE0C4;
+    --paper: #FFFBF3;
+    --coffee: #3A2314;
+    --coffee-soft: #6B4A32;
+    --gold: #C08A31;
+    --gold-deep: #8C5F1E;
+    --clay: #B5502C;
+    --line: rgba(58,35,20,0.14);
+    --shadow: 0 10px 30px rgba(58,35,20,0.10);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--coffee);
+    font-family:'Manrope', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{ background:var(--gold); color:var(--paper); }
+
+  /* ---------- texture ---------- */
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:5; opacity:.035; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position:relative;
+    padding:44px 24px 32px;
+    text-align:center;
+    overflow:hidden;
+  }
+  header::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(192,138,49,0.16), transparent 70%);
+  }
+  .crest{
+    width:72px; height:72px; margin:0 auto 14px;
+    border:2px solid var(--gold-deep); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--paper);
+    position:relative; z-index:1;
+  }
+  .crest svg{ width:40px; height:40px; }
+  .eyebrow{
+    position:relative; z-index:1;
+    font-family:'Manrope'; font-weight:700; letter-spacing:.22em; text-transform:uppercase;
+    font-size:11.5px; color:var(--gold-deep);
+    margin:0 0 6px;
+  }
+  h1.brand{
+    position:relative; z-index:1;
+    font-family:'Fraunces', serif; font-weight:900; font-size:clamp(30px,5.5vw,48px);
+    margin:0; line-height:.98; color:var(--coffee);
+    letter-spacing:-.01em;
+  }
+  .tagline{
+    position:relative; z-index:1;
+    font-family:'Fraunces', serif; font-style:italic; font-weight:500;
+    color:var(--coffee-soft); font-size:clamp(13px,1.8vw,16px);
+    margin:10px auto 0; max-width:420px;
+  }
+  .divider{
+    width:64px; height:3px; background:var(--gold); margin:26px auto 0; border-radius:2px; position:relative; z-index:1;
+  }
+
+  /* ---------- nav pills ---------- */
+  nav.filters{
+    max-width:920px; margin:0 auto; padding:0 20px 8px;
+    display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
+  }
+  .pill{
+    border:1.5px solid var(--line); background:var(--paper); color:var(--coffee-soft);
+    font-family:'Manrope'; font-weight:700; font-size:13px;
+    padding:9px 18px; border-radius:99px; cursor:pointer;
+    transition:.2s ease;
+  }
+  .pill:hover{ border-color:var(--gold); color:var(--coffee); }
+  .pill.active{ background:var(--coffee); border-color:var(--coffee); color:var(--paper); }
+
+  /* ---------- grid ---------- */
+  main{ max-width:840px; margin:0 auto; padding:30px 20px 40px; }
+  .grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(190px,1fr)); gap:16px;
+    justify-content:center;
+  }
+  .card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    display:flex; flex-direction:column;
+    max-width:220px; margin:0 auto; width:100%;
+    transition:transform .25s ease, box-shadow .25s ease;
+    opacity:0; transform:translateY(16px);
+    animation:rise .6s ease forwards;
+  }
+  .card:hover{ transform:translateY(-4px); box-shadow:0 18px 40px rgba(58,35,20,0.14); }
+  @keyframes rise{ to{ opacity:1; transform:translateY(0);} }
+
+  .art{
+    height:110px; position:relative; overflow:hidden;
+    background: var(--art-bg, linear-gradient(160deg,#EFDBB2,#E4C68C));
+  }
+  .art img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s ease; }
+  .card:hover .art img{ transform:scale(1.06); }
+  .badge{
+    position:absolute; top:7px; right:7px;
+    background:var(--clay); color:var(--paper);
+    font-size:8.5px; font-weight:800; letter-spacing:.05em; text-transform:uppercase;
+    padding:3px 8px; border-radius:99px;
+  }
+
+  .body{ padding:12px 14px 14px; display:flex; flex-direction:column; gap:9px; flex:1; }
+  .name{ font-family:'Fraunces', serif; font-weight:700; font-size:15px; margin:0; color:var(--coffee); line-height:1.15; }
+  .desc{ font-size:11px; color:var(--coffee-soft); margin:-5px 0 0; line-height:1.35; }
+
+  .tiers{ display:flex; flex-direction:column; gap:5px; margin-top:auto; }
+  .tier{
+    display:flex; align-items:center; justify-content:space-between;
+    border:1.5px solid var(--line); border-radius:9px; padding:6px 9px;
+    cursor:pointer; transition:.15s ease; background:transparent;
+  }
+  .tier:hover{ border-color:var(--gold); background:rgba(192,138,49,.06); }
+  .tier.selected{ border-color:var(--gold-deep); background:var(--coffee); }
+  .tier.selected .tier-label, .tier.selected .tier-price{ color:var(--paper); }
+  .tier-label{ font-size:10.5px; font-weight:600; color:var(--coffee-soft); }
+  .tier-price{ font-family:'Fraunces', serif; font-weight:700; font-size:12.5px; color:var(--coffee); }
+
+  .addbtn{
+    margin-top:4px; width:100%; border:none; border-radius:9px; padding:9px;
+    background:var(--gold-deep); color:var(--paper); font-family:'Manrope'; font-weight:800;
+    font-size:11px; letter-spacing:.02em; cursor:pointer; transition:.2s ease;
+  }
+  .addbtn:hover{ background:var(--coffee); }
+  .addbtn:disabled{ opacity:.45; cursor:not-allowed; }
+  .addbtn.added{ background:#4B7A4E; }
+
+  /* ---------- cart ---------- */
+  .cart-fab{
+    position:fixed; right:22px; bottom:22px; z-index:20;
+    background:var(--coffee); color:var(--paper); border:none;
+    border-radius:99px; padding:16px 22px; display:flex; align-items:center; gap:10px;
+    font-family:'Manrope'; font-weight:800; font-size:14px; cursor:pointer;
+    box-shadow:0 12px 28px rgba(58,35,20,.35);
+    transition:transform .2s ease;
+  }
+  .cart-fab:hover{ transform:translateY(-2px); }
+  .cart-count{
+    background:var(--gold); color:var(--coffee); border-radius:50%;
+    width:22px; height:22px; display:flex; align-items:center; justify-content:center;
+    font-size:12px;
+  }
+
+  .cart-panel{
+    position:fixed; top:0; right:0; height:100vh; width:min(400px,92vw);
+    background:var(--paper); box-shadow:-16px 0 40px rgba(58,35,20,.18);
+    z-index:30; transform:translateX(100%); transition:transform .35s cubic-bezier(.65,0,.35,1);
+    display:flex; flex-direction:column;
+  }
+  .cart-panel.open{ transform:translateX(0); }
+  .cart-head{ padding:24px 22px 16px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; }
+  .cart-head h2{ font-family:'Fraunces',serif; font-size:24px; margin:0; }
+  .close-btn{ background:none; border:none; font-size:22px; cursor:pointer; color:var(--coffee-soft); }
+  .cart-items{ flex:1; overflow-y:auto; padding:14px 22px; display:flex; flex-direction:column; gap:12px; }
+  .cart-empty{ color:var(--coffee-soft); font-size:14px; text-align:center; margin-top:40px; }
+  .cart-item{ display:flex; justify-content:space-between; align-items:center; gap:10px; border-bottom:1px dashed var(--line); padding-bottom:10px; }
+  .ci-name{ font-weight:700; font-size:14px; }
+  .ci-tier{ font-size:12px; color:var(--coffee-soft); }
+  .ci-price{ font-family:'Fraunces',serif; font-weight:700; }
+  .ci-remove{ background:none; border:none; color:var(--clay); font-size:12px; cursor:pointer; font-weight:700; margin-top:4px; }
+  .cart-foot{ padding:18px 22px 24px; border-top:1px solid var(--line); }
+  .cart-total{ display:flex; justify-content:space-between; font-family:'Fraunces',serif; font-size:20px; font-weight:700; margin-bottom:14px; }
+  .whatsapp-btn{
+    display:block; text-align:center; text-decoration:none;
+    background:#3E7C4A; color:var(--paper); font-weight:800; padding:14px; border-radius:12px; font-size:14.5px;
+  }
+  .overlay{ position:fixed; inset:0; background:rgba(58,35,20,.35); z-index:25; opacity:0; pointer-events:none; transition:.3s ease; }
+  .overlay.show{ opacity:1; pointer-events:auto; }
+
+  footer{
+    text-align:center; padding:44px 20px 56px; color:var(--coffee-soft);
+    font-family:'Fraunces', serif; font-style:italic; font-size:16px;
+  }
+  footer .line{ width:40px; height:2px; background:var(--gold); margin:0 auto 16px; }
+
+  @media (max-width:520px){
+    .cart-fab span.label{ display:none; }
+  }
+
+  .download-btn{
+    position:relative; z-index:1; margin:22px auto 0;
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--coffee); color:var(--paper); border:none;
+    font-family:'Manrope'; font-weight:800; font-size:13px; letter-spacing:.02em;
+    padding:12px 22px; border-radius:99px; cursor:pointer;
+    box-shadow:0 10px 24px rgba(58,35,20,.22); transition:.2s ease;
+  }
+  .download-btn:hover{ background:var(--gold-deep); transform:translateY(-2px); }
+
+  @media print{
+    .no-print, .cart-fab, .cart-panel, .overlay, nav.filters{ display:none !important; }
+    body{ background:#fff; }
+    .card{ break-inside:avoid; box-shadow:none; border:1px solid #ddd; }
+    header::before{ display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header>
+  <div class="crest">
+    <svg viewBox="0 0 64 64" fill="none"><path d="M32 8c-6 0-9 5-9 10 0 3 1 5 2 6-6 1-11 6-11 13 0 1 0 2 .3 3h35.4c.3-1 .3-2 .3-3 0-7-5-12-11-13 1-1 2-3 2-6 0-5-3-10-9-10z" stroke="#8C5F1E" stroke-width="2" fill="#F7ECD9"/><path d="M16 48h32v3a3 3 0 0 1-3 3H19a3 3 0 0 1-3-3v-3z" fill="#8C5F1E"/></svg>
+  </div>
+  <p class="eyebrow">Feito à mão, todos os dias</p>
+  <h1 class="brand">Lepore Salgados</h1>
+  <p class="tagline">Cardápio completo — escolha seu salgado, sua quantidade, e monte seu pedido.</p>
+  <div class="divider"></div>
+  <button class="download-btn no-print" id="downloadBtn">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5" stroke="#F7ECD9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 18v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#F7ECD9" stroke-width="2" stroke-linecap="round"/></svg>
+    Baixar cardápio (PDF)
+  </button>
+</header>
+
+<nav class="filters" id="filters"></nav>
+
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  <div class="line"></div>
+  Estamos aqui para servir você — obrigado pela preferência!
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<button class="cart-fab" id="cartFab">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 3h2l2.4 12.2a2 2 0 0 0 2 1.8h8.6a2 2 0 0 0 2-1.6L21.6 7H6" stroke="#F7ECD9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="21" r="1.3" fill="#F7ECD9"/><circle cx="18" cy="21" r="1.3" fill="#F7ECD9"/></svg>
+  <span class="label">Meu pedido</span>
+  <span class="cart-count" id="cartCount">0</span>
+</button>
+
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-head">
+    <h2>Seu pedido</h2>
+    <button class="close-btn" id="closeCart">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty">Seu carrinho está vazio.<br>Escolha seus salgados favoritos!</p>
+  </div>
+  <div class="cart-foot">
+    <div class="cart-total"><span>Total</span><span id="cartTotal">R$ 0,00</span></div>
+    <a href="#" id="waLink" class="whatsapp-btn" target="_blank">Enviar pedido pelo WhatsApp</a>
+  </div>
+</div>
+
+<script>
+const WHATSAPP_NUMBER = "5511999999999"; // troque pelo número da loja
+
+const products = [
+  {
+    id:"coxinha", name:"Coxinha", cat:"frango", desc:"Massa crocante recheada com frango desfiado temperado.",
+    bg:"linear-gradient(160deg,#F2C879,#E2A94C)",
+    icon:`<img src="../loja/assets/coxinha.jpg" alt="Coxinha">`,
+    tiers:[{label:"1 unidade", qty:1, price:2.50},{label:"6 unidades", qty:6, price:14.00},{label:"12 unidades", qty:12, price:26.00}]
+  },
+  {
+    id:"bolinho-queijo", name:"Bolinho de Queijo", cat:"queijo", desc:"Bolinha macia com recheio de queijo derretido.",
+    bg:"linear-gradient(160deg,#F4D48F,#E0AA51)",
+    icon:`<img src="../loja/assets/bolinho_queijo.jpg" alt="Bolinho de Queijo">`,
+    tiers:[{label:"1 unidade", qty:1, price:2.50},{label:"6 unidades", qty:6, price:14.00},{label:"12 unidades", qty:12, price:26.00}]
+  },
+  {
+    id:"bolinho-carne", name:"Bolinho de Carne", cat:"carne", desc:"Casquinha dourada e crocante com carne moída suculenta.",
+    bg:"linear-gradient(160deg,#D7A45E,#B77A38)",
+    icon:`<img src="../loja/assets/bolinho_carne.jpg" alt="Bolinho de Carne">`,
+    tiers:[{label:"1 unidade", qty:1, price:2.50},{label:"6 unidades", qty:6, price:14.00},{label:"12 unidades", qty:12, price:26.00}]
+  },
+  {
+    id:"kibe", name:"Kibe", cat:"carne", desc:"Trigo com carne temperada, formato tradicional, bem crocante.",
+    bg:"linear-gradient(160deg,#B98A54,#8E6234)",
+    icon:`<img src="../loja/assets/kibe.jpg" alt="Kibe">`,
+    tiers:[{label:"1 unidade", qty:1, price:2.80},{label:"6 unidades", qty:6, price:16.00},{label:"12 unidades", qty:12, price:29.00}]
+  },
+  {
+    id:"risole", name:"Risole de Presunto c/ Queijo", cat:"queijo", desc:"Triangular, empanado, com recheio cremoso de presunto e queijo.",
+    bg:"linear-gradient(160deg,#F0C878,#DDA34E)",
+    icon:`<img src="../loja/assets/risole_presunto_queijo.jpg" alt="Risole de Presunto c/ Queijo">`,
+    tiers:[{label:"1 unidade", qty:1, price:2.80},{label:"6 unidades", qty:6, price:16.00},{label:"12 unidades", qty:12, price:29.00}]
+  },
+  {
+    id:"enroladinho", name:"Enroladinho de Salsicha", cat:"salsicha", desc:"Massa fofinha enrolada em salsicha, assado até dourar.",
+    bg:"linear-gradient(160deg,#F1C97D,#DEA751)",
+    icon:`<img src="../loja/assets/enroladinho_salsicha.jpg" alt="Enroladinho de Salsicha">`,
+    tiers:[{label:"1 unidade", qty:1, price:2.80},{label:"6 unidades", qty:6, price:16.00},{label:"12 unidades", qty:12, price:29.00}]
+  }
+];
+
+const cats = [
+  {id:"todos", label:"Todos"},
+  {id:"frango", label:"Frango"},
+  {id:"carne", label:"Carne"},
+  {id:"queijo", label:"Queijo"},
+  {id:"salsicha", label:"Salsicha"}
+];
+
+let activeCat = "todos";
+let selection = {}; // productId -> tierIndex
+let cart = []; // {id, name, tierLabel, price}
+
+const grid = document.getElementById('grid');
+const filtersNav = document.getElementById('filters');
+
+function renderFilters(){
+  filtersNav.innerHTML = cats.map(c =>
+    `<button class="pill ${c.id===activeCat?'active':''}" data-cat="${c.id}">${c.label}</button>`
+  ).join('');
+  filtersNav.querySelectorAll('.pill').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      activeCat = btn.dataset.cat;
+      renderFilters();
+      renderGrid();
+    });
+  });
+}
+
+function money(v){
+  return v.toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
+}
+
+function renderGrid(){
+  const list = products.filter(p => activeCat==='todos' || p.cat===activeCat);
+  grid.innerHTML = list.map((p, idx) => {
+    const selIdx = selection[p.id] ?? 0;
+    return `
+    <div class="card" style="animation-delay:${idx*0.05}s">
+      <div class="art" style="--art-bg:${p.bg}">
+        ${p.icon}
+        <span class="badge">${p.cat}</span>
+      </div>
+      <div class="body">
+        <h3 class="name">${p.name}</h3>
+        <p class="desc">${p.desc}</p>
+        <div class="tiers" data-product="${p.id}">
+          ${p.tiers.map((t,i)=>`
+            <div class="tier ${i===selIdx?'selected':''}" data-idx="${i}">
+              <span class="tier-label">${t.label}</span>
+              <span class="tier-price">${money(t.price)}</span>
+            </div>`).join('')}
+        </div>
+        <button class="addbtn" data-product="${p.id}">Adicionar ao pedido</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  grid.querySelectorAll('.tiers').forEach(tiersEl=>{
+    const pid = tiersEl.dataset.product;
+    tiersEl.querySelectorAll('.tier').forEach(tierEl=>{
+      tierEl.addEventListener('click', ()=>{
+        selection[pid] = parseInt(tierEl.dataset.idx);
+        tiersEl.querySelectorAll('.tier').forEach(t=>t.classList.remove('selected'));
+        tierEl.classList.add('selected');
+      });
+    });
+  });
+
+  grid.querySelectorAll('.addbtn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const pid = btn.dataset.product;
+      const product = products.find(p=>p.id===pid);
+      const tierIdx = selection[pid] ?? 0;
+      const tier = product.tiers[tierIdx];
+      cart.push({id:pid, name:product.name, tierLabel:tier.label, price:tier.price});
+      renderCart();
+      btn.textContent = "Adicionado ✓";
+      btn.classList.add('added');
+      setTimeout(()=>{ btn.textContent = "Adicionar ao pedido"; btn.classList.remove('added'); }, 1100);
+    });
+  });
+}
+
+const cartItemsEl = document.getElementById('cartItems');
+const cartCountEl = document.getElementById('cartCount');
+const cartTotalEl = document.getElementById('cartTotal');
+const waLink = document.getElementById('waLink');
+
+function renderCart(){
+  cartCountEl.textContent = cart.length;
+  if(cart.length===0){
+    cartItemsEl.innerHTML = `<p class="cart-empty">Seu carrinho está vazio.<br>Escolha seus salgados favoritos!</p>`;
+  } else {
+    cartItemsEl.innerHTML = cart.map((item, i)=>`
+      <div class="cart-item">
+        <div>
+          <div class="ci-name">${item.name}</div>
+          <div class="ci-tier">${item.tierLabel}</div>
+          <button class="ci-remove" data-i="${i}">remover</button>
+        </div>
+        <div class="ci-price">${money(item.price)}</div>
+      </div>`).join('');
+    cartItemsEl.querySelectorAll('.ci-remove').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        cart.splice(parseInt(b.dataset.i),1);
+        renderCart();
+      });
+    });
+  }
+  const total = cart.reduce((s,i)=>s+i.price,0);
+  cartTotalEl.textContent = money(total);
+
+  let msg = "Olá! Gostaria de fazer o seguinte pedido:%0A%0A";
+  cart.forEach(item=>{
+    msg += `• ${item.name} — ${item.tierLabel} (${money(item.price)})%0A`;
+  });
+  msg += `%0ATotal: ${money(total)}`;
+  waLink.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+}
+
+const cartPanel = document.getElementById('cartPanel');
+const overlay = document.getElementById('overlay');
+document.getElementById('cartFab').addEventListener('click', ()=>{
+  cartPanel.classList.add('open'); overlay.classList.add('show');
+});
+document.getElementById('closeCart').addEventListener('click', closeCart);
+overlay.addEventListener('click', closeCart);
+function closeCart(){ cartPanel.classList.remove('open'); overlay.classList.remove('show'); }
+
+renderFilters();
+renderGrid();
+renderCart();
+
+document.getElementById('downloadBtn').addEventListener('click', ()=>{
+  window.print();
+});
+</script>
+</body>
+</html>
