@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moura.ai | A Super Inteligência Artificial Multifuncional</title>
+    
+    <!-- Fontes Outfit e JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Ícones Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- JSZip para exportação e compactação opcional -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-cyberpunk">
+    
+    <div class="app-container">
+        
+        <!-- SIDEBAR PRINCIPAL -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-icon-wrapper">
+                        <i class="ph-fill ph-planet"></i>
+                        <span class="pulse-ring"></span>
+                    </div>
+                    <div>
+                        <h2>Moura.ai</h2>
+                        <span class="logo-tag">Universal Super AI</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PERFIL DO USUÁRIO COM ÍCONE DE ENGRENAGEM NO LADO DIREITO -->
+            <div class="user-tier-badge">
+                <div class="tier-info" id="open-plans-modal" title="Gerenciar Plano">
+                    <span class="tier-label">Perfil & Plano</span>
+                    <strong class="tier-name" id="current-tier-name">Marquinhos • Grátis</strong>
+                </div>
+                <div class="tier-badge-actions">
+                    <button class="btn-gear-setting nav-item-gear" data-target="page-settings" title="Configurações">
+                        <i class="ph-fill ph-gear"></i>
+                    </button>
+                    <button class="btn-upgrade-badge" id="btn-quick-upgrade" title="Ver Planos Pro & Ultra">
+                        <i class="ph-fill ph-crown"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navegação da Sidebar com Scroll -->
+            <div class="sidebar-scroll-area">
+                
+                <!-- SEÇÃO 1: CÉREBRO & CONVERSAÇÃO -->
+                <div class="sidebar-group">
+                    <h4 class="sidebar-subtitle"><i class="ph ph-brain"></i> Inteligência & Chat</h4>
+                    <nav class="nav-menu">
+                        <button class="nav-item active" id="btn-new-chat" data-target="page-chat">
+                            <i class="ph ph-chat-teardrop-dots"></i>
+                            <span>Moura Chat Universal</span>
+                            <span class="badge-new">IA</span>
+                        </button>
+                        <button class="nav-item" data-target="page-prompt-library">
+                            <i class="ph ph-books"></i>
+                            <span>Biblioteca (+30.000 Prompts)</span>
+                            <span class="badge-money">+30K</span>
+                        </button>
+                        <button class="nav-item" data-target="page-creative-unfiltered">
+                            <i class="ph ph-flame"></i>
+                            <span>Modo Criativo & Livre</span>
+                            <span class="badge-nsfw-status" id="sidebar-nsfw-badge">OFF</span>
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- SEÇÃO 2: CRIAÇÃO MULTIMÍDIA -->
+                <div class="sidebar-group">
+                    <h4 class="sidebar-subtitle"><i class="ph ph-palette"></i> Moura Studios</h4>
+                    <nav class="nav-menu">
+                        <button class="nav-item" data-target="page-image-gen">
+                            <i class="ph ph-image"></i>
+                            <span>Gerador de Imagens 4K</span>
+                            <span class="badge-speed" id="image-speed-badge">8s Pro</span>
+                        </button>
+                        <button class="nav-item" data-target="page-video-gen">
+                            <i class="ph ph-video-camera"></i>
+                            <span>Gerador de Vídeos & Reels</span>
+                        </button>
+                        <button class="nav-item" data-target="page-social-posts">
+                            <i class="ph ph-instagram-logo"></i>
+                            <span>Posts, Reels & Carrosséis</span>
+                        </button>
+                        <button class="nav-item" data-target="page-cover-gen">
+                            <i class="ph ph-youtube-logo"></i>
+                            <span>Gerador de Capas & Thumbs</span>
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- SEÇÃO 3: TECNOLOGIA & CRIAÇÃO -->
+                <div class="sidebar-group">
+                    <h4 class="sidebar-subtitle"><i class="ph ph-cpu"></i> Moura Builder</h4>
+                    <nav class="nav-menu">
+                        <button class="nav-item" data-target="page-sites">
+                            <i class="ph ph-browsers"></i>
+                            <span>Fábrica de Sites & Apps</span>
+                            <span class="badge-live">Live</span>
+                        </button>
+                        <button class="nav-item" data-target="page-ebook">
+                            <i class="ph ph-book-open"></i>
+                            <span>Criador de eBooks</span>
+                        </button>
+                        <button class="nav-item" data-target="page-slides">
+                            <i class="ph ph-presentation-chart"></i>
+                            <span>Slides & Apresentações</span>
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- SEÇÃO 4: CENTRAL DE ARQUIVOS & CONFIGURAÇÕES -->
+                <div class="sidebar-group">
+                    <h4 class="sidebar-subtitle"><i class="ph ph-folder-notch-open"></i> Central de Criações</h4>
+                    <nav class="nav-menu">
+                        <button class="nav-item" data-target="page-storage" id="nav-btn-storage">
+                            <i class="ph-fill ph-folder-open"></i>
+                            <span>Meus Arquivos (Galeria Central)</span>
+                            <span class="badge-count" id="cloud-items-count">0</span>
+                        </button>
+                        <button class="nav-item" data-target="page-settings" id="nav-btn-settings">
+                            <i class="ph ph-sliders"></i>
+                            <span>Configurações & Temas</span>
+                            <span class="badge-setting">10 Temas</span>
+                        </button>
+                    </nav>
+                </div>
+
+                <!-- Histórico de Conversas -->
+                <div class="recent-chats-container">
+                    <h4 class="sidebar-subtitle"><i class="ph ph-clock-counter-clockwise"></i> Histórico de Chats</h4>
+                    <div id="recent-chats-list" class="recent-chats-list">
+                        <!-- Preenchido via JS -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer da Sidebar -->
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    <span>Moura Core 3.0 • Latência 0.04s</span>
+                </div>
+                <div class="footer-buttons">
+                    <button class="btn-theme nav-item-gear" data-target="page-settings" title="Configurações & 10 Temas">
+                        <i class="ph ph-paint-roller"></i>
+                    </button>
+                    <button id="btn-open-plans" class="btn-plan-footer">
+                        <i class="ph-fill ph-crown"></i> Planos Pro / Ultra
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            
+            <!-- TOP BAR -->
+            <header class="top-nav-bar glass-panel">
+                <div class="top-bar-left">
+                    <button class="btn-mobile-menu" id="mobile-menu-toggle">
+                        <i class="ph ph-list"></i>
+                    </button>
+                    <span class="active-tool-title" id="top-bar-title">Moura Chat Universal</span>
+                </div>
+                <div class="top-bar-right">
+                    <div class="theme-indicator-pill nav-item-gear" data-target="page-settings" title="Trocar Fundo (10 Opções)">
+                        <i class="ph-fill ph-paint-brush"></i>
+                        <span id="current-theme-name-pill">Cyberpunk Neon</span>
+                    </div>
+                    <div class="ai-status-pill">
+                        <i class="ph-fill ph-lightning"></i>
+                        <span id="active-mode-label">Todas as IAs Conectadas</span>
+                    </div>
+                    <button class="btn-plans-cta" id="btn-top-upgrade">
+                        <i class="ph-fill ph-sparkle"></i> Planos Pro / Ultra
+                    </button>
+                </div>
+            </header>
+
+            <!-- ==================== 1. CHAT UNIVERSAL ==================== -->
+            <section id="page-chat" class="page-section active">
+                <div class="chat-container">
+                    
+                    <!-- Sugestões Rápidas de Início -->
+                    <div class="chat-mode-selector">
+                        <button class="mode-chip active" data-mode="all">✨ Todas as IAs Juntas</button>
+                        <button class="mode-chip" data-mode="code">💻 Modo Programador</button>
+                        <button class="mode-chip" data-mode="business">📈 Modo Negócios & Vendas</button>
+                        <button class="mode-chip" data-mode="creative">🎨 Modo Criativo</button>
+                        <button class="mode-chip" data-mode="unfiltered">🔥 Modo Sem Filtros</button>
+                    </div>
+
+                    <!-- Mensagens do Chat -->
+                    <div class="chat-messages" id="chat-messages">
+                        <!-- Mensagens renderizadas via JS -->
+                    </div>
+
+                    <!-- Input do Chat -->
+                    <footer class="chat-input-area glass-panel">
+                        <div class="chat-quick-actions">
+                            <button type="button" class="quick-action-btn" onclick="insertPrompt('Crie um plano completo para monetizar com IA em 7 dias')">
+                                <i class="ph ph-money"></i> Monetizar com IA
+                            </button>
+                            <button type="button" class="quick-action-btn" onclick="insertPrompt('Escreva uma Landing Page de alta conversão para meu negócio')">
+                                <i class="ph ph-layout"></i> Criar Landing Page
+                            </button>
+                            <button type="button" class="quick-action-btn" onclick="insertPrompt('Crie um roteiro de Reels viral sobre inteligência artificial')">
+                                <i class="ph ph-video"></i> Roteiro Viral
+                            </button>
+                            <button type="button" class="quick-action-btn" onclick="document.querySelector('[data-target=\'page-prompt-library\']').click()">
+                                <i class="ph ph-books"></i> Ver +30.000 Prompts
+                            </button>
+                        </div>
+                        <form id="chat-form">
+                            <div class="chat-input-wrapper">
+                                <textarea id="chat-input" placeholder="Pergunte qualquer coisa, peça códigos, sites, estratégias ou artes..." rows="1" required></textarea>
+                                <button type="submit" class="btn-send" id="btn-submit-chat">
+                                    <i class="ph-fill ph-paper-plane-right"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </footer>
+                </div>
+            </section>
+
+            <!-- ==================== 2. MEGA BIBLIOTECA DE +30.000 PROMPTS ==================== -->
+            <section id="page-prompt-library" class="page-section tool-dashboard">
+                <header class="tool-header">
+                    <div>
+                        <h1><i class="ph-fill ph-books text-emerald"></i> Mega Biblioteca (+30.000 Prompts & Combinações)</h1>
+                        <p>Copie e cole prompts profissionais de todos os nichos: Mulher do job (modelos 3D comerciais sem pessoas reais), proporções de vídeo/imagem, estilos, sites, códigos e copywriting.</p>
+                    </div>
+                    <div class="prompts-counter-pill">
+                        <i class="ph-fill ph-sparkle"></i> +30.000 Combinações Prontas
+                    </div>
+                </header>
+
+                <!-- Barra de Pesquisa e Filtros de Categoria -->
+                <div class="glass-panel" style="padding: 16px; margin-bottom: 20px;">
+                    <div class="prompt-search-bar">
+                        <i class="ph ph-magnifying-glass search-icon"></i>
+                        <input type="text" id="prompt-search-input" placeholder="Buscar por qualquer assunto (ex: Mulher do Job, Proporção 9:16, 3D Render, Landing Page, Slides, Reels, Vendas)...">
+                    </div>
+
+                    <div class="prompt-category-filter" style="margin-top: 14px;">
+                        <button class="btn-filter-category active" data-category="all">Todos os Prompts (+30K)</button>
+                        <button class="btn-filter-category" data-category="virtual-model">👗 Mulher do Job / Modelos 3D</button>
+                        <button class="btn-filter-category" data-category="ratio-camera">📐 Proporções & Câmeras</button>
+                        <button class="btn-filter-category" data-category="sites">🌐 Sites & Web Apps</button>
+                        <button class="btn-filter-category" data-category="slides">📊 Slides & Pitch Decks</button>
+                        <button class="btn-filter-category" data-category="video">🎬 Vídeos & Reels</button>
+                        <button class="btn-filter-category" data-category="images">🎨 Imagens 4K & Octane</button>
+                        <button class="btn-filter-category" data-category="jobs">💰 Jobs & Freelance</button>
+                        <button class="btn-filter-category" data-category="marketing">📈 Copywriting & Vendas</button>
+                        <button class="btn-filter-category" data-category="code">💻 Programação & Scripts</button>
+                    </div>
+                </div>
+
+                <!-- Grid de Prompts -->
+                <div class="job-prompts-grid" id="prompt-library-grid">
+                    <!-- Preenchido dinamicamente via JS com centenas de opções -->
+                </div>
+            </section>
+
+            <!-- ==================== 3. MODO CRIATIVO & LIVRE ==================== -->
+            <section id="page-creative-unfiltered" class="page-section tool-dashboard">
+                <header class="tool-header">
+                    <div>
+                        <h1><i class="ph-fill ph-flame text-rose"></i> Modo Criativo & Livre (Sem Censura Criativa)</h1>
+                        <p>Crie histórias, roteiros de ficção, diálogos dramáticos, roleplay e conteúdos criativos sem barreiras artificiais.</p>
+                    </div>
+                    <div class="nsfw-badge-pill" id="header-nsfw-pill">
+                        <i class="ph-fill ph-flame"></i> Modo NSFW: <span id="header-nsfw-state">Desativado</span>
+                    </div>
+                </header>
+
+                <div class="glass-panel alert-box-responsibility">
+                    <i class="ph-fill ph-shield-check"></i>
+                    <div>
+                        <strong>Uso Consciente & Responsável:</strong>
+                        <p>A Moura.ai oferece liberdade máxima para escrita e arte. Você pode ativar ou desativar o modo NSFW nas <strong>Configurações</strong> (ícone de engrenagem na sidebar) a qualquer momento.</p>
+                    </div>
+                </div>
+
+                <div class="glass-panel" style="padding: 24px; margin-top: 20px;">
+                    <h3>Gerador de Narrativas & Diálogos Livres</h3>
+                    <div style="display: flex; gap: 10px; margin: 15px 0; flex-wrap: wrap;">
+                        <button class="btn-outline active" onclick="setCreativeStyle('Ficção Cyberpunk Intensa')">Cyberpunk Distópico</button>
+                        <button class="btn-outline" onclick="setCreativeStyle('Romance & Drama Realista')">Romance & Drama</button>
+                        <button class="btn-outline" onclick="setCreativeStyle('Suspense & Mistério Dark')">Suspense Dark</button>
+                        <button class="btn-outline" onclick="setCreativeStyle('Comédia e Ironia Ácida')">Humor Ácido</button>
+                    </div>
+                    <textarea id="creative-input" placeholder="Descreva a história, diálogo ou cena que você quer gerar sem filtros de criatividade..." rows="5" class="styled-textarea"></textarea>
+                    <button class="btn-primary" id="btn-run-creative" style="margin-top: 15px; width: 100%;">
+                        <i class="ph-fill ph-lightning"></i> Gerar Conteúdo Livre em Alta Velocidade
+                    </button>
+                    <div id="creative-output" class="creative-output-box glass-panel" style="display:none; margin-top: 20px; padding: 20px;">
+                        <div class="output-header">
+                            <strong><i class="ph ph-sparkle"></i> Resultado Gerado:</strong>
+                            <button class="btn-copy-sm" onclick="copyCreativeResult()"><i class="ph ph-copy"></i> Copiar</button>
+                        </div>
+                        <div id="creative-text-content" style="white-space: pre-line; line-height: 1.6; margin-top: 10px;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== 4. GERADOR DE IMAGENS 4K ==================== -->
+            <section id="page-image-gen" class="page-section tool-dashboard">
+                <header class="tool-header">
+                    <div>
+                        <h1><i class="ph-fill ph-image text-purple"></i> Moura Image Studio 4K</h1>
+                        <p>Geração de imagens em ultra resolução. No plano Pro gera em <strong class="text-cyan">até 8 segundos</strong> com renderização 30x mais nítida.</p>
+                    </div>
+                    <div class="render-speed-pill" id="image-timer-display">
+                        <i class="ph-fill ph-timer"></i> Velocidade: <span id="current-render-speed">8.0s (Pro Engine)</span>
+                    </div>
+                </header>
+
+                <div class="glass-panel" style="padding: 26px;">
+                    <!-- Seletor de Estilo -->
+                    <div class="style-selector-row">
+                        <button class="btn-style-chip active" data-style="Photorealism 8K">📸 Fotorrealismo 8K</button>
+                        <button class="btn-style-chip" data-style="Cyberpunk Neon">🌆 Cyberpunk Neon</button>
+                        <button class="btn-style-chip" data-style="3D Pixar Style">🧸 3D Render / Pixar</button>
+                        <button class="btn-style-chip" data-style="Anime & Manga Masterpiece">⚡ Anime Shonen</button>
+                        <button class="btn-style-chip" data-style="Dark Fantasy">🐉 Dark Fantasy</button>
+                        <button class="btn-style-chip" data-style="Futuristic Architecture">🏛️ Arquitetura Futurista</button>
+                    </div>
+
+                    <!-- Input de Prompt -->
+                    <div class="image-prompt-box" style="margin-top: 18px;">
+                        <div class="input-with-button">
+                            <input type="text" id="image-prompt-input" placeholder="Ex: Supercarro futurista voando entre arranha-céus iluminados em Tóquio, chuva, reflexos neon, 8k..." autocomplete="off">
+                            <button class="btn-primary" id="btn-generate-image">
+                                <i class="ph-fill ph-magic-wand"></i> Pintar Imagem
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Configurações Rápidas -->
+                    <div class="image-settings-bar">
+                        <div class="setting-item">
+                            <label>Proporção:</label>
+                            <select id="image-aspect-ratio" class="styled-select-sm">
+                                <option value="1:1">1:1 (Quadrado / Insta)</option>
+                                <option value="16:9" selected>16:9 (YouTube / Telas)</option>
+                                <option value="9:16">9:16 (Stories / Reels)</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>Qualidade:</label>
+                            <span class="badge-quality" id="badge-img-quality">Ultra HD (30x)</span>
+                        </div>
+                    </div>
+
+                    <!-- Barra de Progresso da Renderização -->
+                    <div class="render-progress-wrapper" id="image-progress-bar" style="display:none;">
+                        <div class="progress-info">
+                            <span>Sintetizando pixels quânticos...</span>
+                            <span id="image-timer-counter">0.0s / 8.0s</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="image-progress-fill"></div>
+                        </div>
+                    </div>
+
+                    <!-- Galeria de Imagens Geradas -->
+                    <h3 style="margin: 30px 0 16px 0; display:flex; justify-content:space-between; align-items:center;">
+                        <span><i class="ph ph-images"></i> Galeria Recente do Studio</span>
+                        <small style="color: var(--text-secondary); font-size: 13px;">Salvo automaticamente na aba <strong>Meus Arquivos</strong></small>
+                    </h3>
+                    <div class="image-gallery-grid" id="image-gallery-container">
+                        <!-- Imagens populadas via JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== 5. GERADOR DE VÍDEOS & REELS ==================== -->
+            <section id="page-video-gen" class="page-section tool-dashboard">
+                <header class="tool-header">
+                    <div>
+                        <h1><i class="ph-fill ph-video-camera text-rose"></i> Moura Cinema & Video AI</h1>
+                        <p>Transforme ideias e textos em vídeos cinematográficos de alto impacto com movimentos de câmera realistas.</p>
+                    </div>
+                </header>
+
+                <div class="glass-panel" style="padding: 26px;">
+                    <textarea id="video-prompt-input" placeholder="Descreva a cena cinematográfica. Ex: Drone FPV sobrevoando uma montanha de cristais bioluminescentes ao pôr do sol, efeito volumétrico de luz, 60fps ultra suave..." rows="3" class="styled-textarea"></textarea>
+                    
+                    <div class="video-options-grid" style="margin: 16px 0;">
+                        <div class="option-field">
+                            <label>Formato do Vídeo</label>
+                            <select id="video-ratio" class="styled-select">
+                                <option value="16:9">16:9 Cinemático (YouTube/TV)</option>
+                                <option value="9:16">9:16 Vertical (TikTok / Reels / Shorts)</option>
+                                <option value="1:1">1:1 Feed (Instagram)</option>
+                            </select>
+                        </div>
+                        <div class="option-field">
+                            <label>Movimento de Câmera</label>
+                            <select id="video-camera" class="styled-select">
+                                <option>Drone FPV Alta Velocidade</option>
+                                <option>Dolly Zoom Lento & Dramático</option>
+                                <option>Orbital 360 Graus</option>
+                                <option>Câmera de Mão Estilo Documentário</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn-primary btn-gradient-rose" id="btn-generate-video" style="width: 100%; padding: 16px; font-size: 16px;">
+                        <i class="ph-fill ph-film-strip"></i> Gerar Vídeo Cinemático
+                    </button>
+
+                    <!-- Player / Preview de Vídeo -->
+                    <div class="video-preview-canvas" id="video-canvas-container" style="margin-top: 25px;">
+                        <div class="video-placeholder" id="video-placeholder-state">
+                            <i class="ph-fill ph-play-circle video-play-icon"></i>
+                            <h3>Nenhum vídeo sendo renderizado</h3>
+                            <p>Digite seu prompt acima para sintetizar o primeiro clipe</p>
+                        </div>
+                        <div class="video-rendered-box" id="video-rendered-state" style="display: none;">
+                            <div class="video-mock-player" id="mock-video-player">
+                                <div class="video-overlay-details">
+                                    <span class="video-tag-hd">4K Ultra HD</span>
+                                    <p id="video-active-prompt-text">Drone FPV em cidade cyberpunk...</p>
+                                </div>
+                            </div>
+                            <div class="video-actions-bar">
+                                <button class="btn-primary" onclick="alert('Vídeo visualizado e salvo em Meus Arquivos!')"><i class="ph ph-check"></i> Salvo em Meus Arquivos</button>
+                                <button class="btn-outline" onclick="document.querySelector('[data-target=\'page-storage\']').click()"><i class="ph ph-folder"></i> Ver na Galeria Central</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== 6. POSTS, REELS & CARROSSÉIS ==================== -->
+            <section id="page-social-posts" class="page-section tool-dashboard">
+                <header class="tool-header">
+                    <div>
+                        <h1><i class="ph-fill ph-instagram-logo text-purple"></i> Gerador de Posts, Reels & Carrosséis</h1>
+                        <p>Crie conteúdo pronto para postar nas redes sociais com copywriting, ganchos e hashtags de alto alcance.</p>
+                    </div>
+                </header>
+
+                <div class="glass-panel" style="padding: 24px;">
+                    <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                        <input type="text" id="social-topic-input" placeholder="Sobre o que é seu post ou reels? (Ex: Como sair do zero no marketing digital)" style="flex: 1;" class="styled-input">
+                        <button class="btn-primary" id="btn-generate-social"><i class="ph-fill ph-lightning"></i> Gerar Conteúdo Viral</button>
+                    </div>
+
+                    <div class="social-results-grid" id="social-results-container" style="display: none; margin-top: 20px;">
+                        <!-- Coluna 1: Roteiro de Reels -->
+                        <div class="social-card glass-panel">
+                            <h3><i class="ph-fill ph-video-camera text-rose"></i> Roteiro de Reels (0-30s)</h3>
+                            <div id="social-reels-content" class="social-box-content"></div>
+                        </div>
+
+                        <!-- Coluna 2: Carrossel Instagram -->
+                        <div class="social-card glass-panel">
+                            <h3><i class="ph-fill ph-browsers text-cyan"></i> Carrossel (5 Slides)</h3>
+                            <div id="social-carousel-content" class="social-box-content"></div>
+                        </div>
+
+                        <!-- Coluna 3: Legenda & Hashtags -->
+                        <div class="social-card glass-panel">
+                            <h3><i class="ph-fill ph-chat-centered-text text-emerald"></i> Legenda & Hashtags</h3>
+                            <div id="social-caption-content" class="social-box-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== 7. GERADOR DE CAPAS & THUMBNAILS ==================== -->
+            <section id="page-cover-gen" class="page-section tool-dashboard">
+                <header class="tool-header">
+                    <div>
+                        <h1><i class="ph-fill ph-youtube-logo text-rose"></i> Gerador de Capas (Thumbnails Virais)</h1>
+                        <p>Capas altamente chamativas para YouTube que aumentam o CTR e atraem milhares de cliques.</p>
+                    </div>
+                </header>
+
+                <div class="glass-panel" style="padding: 24px;">
+                    <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                        <input type="text" id="cover-title-input" placeholder="Qual é o título do seu vídeo no YouTube?" class="styled-input" style="flex: 1;">
+                        <button class="btn-primary btn-gradient-rose" id="btn-generate-covers"><i class="ph-fill ph-sparkle"></i> Gerar Capas Virais</button>
+                    </div>
+
+                    <div class="covers-gallery-grid" id="covers-gallery-grid">
+                        <div class="cover-card-wrapper">
+                            <div class="mock-cover" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=600');">
+                                <div class="cover-overlay">
+                                    <h2 id="thumb-preview-1">COMO LUCRAR RÁPIDO COM IA!</h2>
+                                </div>
+                            </div>
+                            <button class="btn-download-thumb" onclick="alert('Thumbnail visualizada e salva!')"><i class="ph ph-check"></i> Salva em Arquivos</button>
+                        </div>
+                        <div class="cover-card-wrapper">
+                            <div class="mock-cover" style="background-image: url('https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=600');">
+                                <div class="cover-overlay" style="justify-content: flex-end;">
+                                    <h2 id="thumb-preview-2" style="color: #00ffcc;">O SEGREDO REVELADO!</h2>
+                                </div>
+                            </div>
+                            <button class="btn-download-thumb" onclick="alert('Thumbnail visualizada e salva!')"><i class="ph ph-check"></i> Salva em Arquivos</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== 8. FÁBRICA DE SITES & APPS (LIVE PREVIEW) ==================== -->
+            <section id="page-sites" class="page-section tool-dashboard">
+                <header class="tool-header">
+                    <div>
+                        <h1><i class="ph-fill ph-browsers text-cyan"></i> Fábrica de Sites & Apps (Live Preview)</h1>
+                        <p>Descreva o site ou aplicativo que você quer e a Moura.ai constrói o código e exibe a <strong>visualização funcional em tempo real</strong>.</p>
+                    </div>
+                </header>
+
+                <div class="site-builder-container glass-panel">
+                    <!-- Painel de Controle do Construtor -->
+                    <div class="builder-control-bar">
+                        <div class="builder-presets">
+                            <button class="btn-preset active" onclick="loadSiteTemplate('saas')">🚀 Landing Page SaaS</button>
+                            <button class="btn-preset" onclick="loadSiteTemplate('portfolio')">🎨 Portfólio Dark Cyberpunk</button>
+                            <button class="btn-preset" onclick="loadSiteTemplate('restaurant')">🍕 App de Delivery / Pizzaria</button>
+                            <button class="btn-preset" onclick="loadSiteTemplate('finance')">💰 Dashboard Financeiro</button>
+                        </div>
+                        <div class="builder-actions">
+                            <button class="btn-view-mode active" id="btn-show-preview"><i class="ph ph-eye"></i> Visualizar</button>
+                            <button class="btn-view-mode" id="btn-show-code"><i class="ph ph-code"></i> Ver Código</button>
+                            <button class="btn-primary btn-sm" id="btn-download-html"><i class="ph ph-download"></i> Baixar .HTML</button>
+                        </div>
+                    </div>
+
+                    <!-- Input Personalizado -->
+                    <div class="builder-input-row">
+                        <input type="text" id="builder-custom-prompt" placeholder="Ou descreva seu próprio site/app: Ex: Aplicativo de controle de hábitos diários..." class="styled-input">
+                        <button class="btn-primary" id="btn-build-custom-site"><i class="ph-fill ph-hammer"></i> Construir Agora</button>
+                    </div>
+
+                    <!-- Visualizador / Editor com Live Preview -->
+                    <div class="builder-stage">
+                        <!-- Aba Preview (Iframe) -->
+                        <div class="stage-preview" id="stage-preview-container">
+                            <iframe id="live-site-frame" srcdoc="<h1>Carregando o Moura Site Engine...</h1>"></iframe>
+                        </div>
+
+                        <!-- Aba Código -->
+                        <div class="stage-code" id="stage-code-container" style="display: none;">
+                            <pre><code id="live-code-display" class="language-html"></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== 9. CRIADOR DE EBOOKS ==================== -->
+            <section id="page-ebook" class="page-section tool-dashboard">
+                <header class="tool-header">
+                    <div>
+                        <h1><i class="ph-fill ph-book-open text-purple"></i> Criador de eBooks & Livros Digitais</h1>
+                        <p>Gere livros completos prontos para vender na Hotmart, Kiwify ou Amazon Kindle.</p>
+                    </div>
+                </header>
+
+                <div class="glass-panel" style="padding: 24px;">
+                    <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                        <input type="text" id="ebook-topic-input" placeholder="Tema do eBook (Ex: O Guia Definitivo da Produtividade com IA)" class="styled-input" style="flex: 1;">
+                        <button class="btn-primary" id="btn-generate-ebook"><i class="ph-fill ph-book-bookmark"></i> Escrever eBook Completo</button>
+                    </div>
+
+                    <div id="ebook-viewer-container" class="ebook-paper glass-panel" style="display:none; padding: 30px; margin-top: 20px;">
+                        <div class="ebook-header-bar">
+                            <h2 id="ebook-rendered-title">Título do eBook</h2>
+                            <button class="btn-primary btn-sm" onclick="alert('eBook formatado e salvo na sua galeria de arquivos!')"><i class="ph ph-check"></i> Salvo em Arquivos</button>
+                        </div>
+                        <div id="ebook-rendered-body" style="margin-top: 20px; line-height: 1.8;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== 10. SLIDES & APRESENTAÇÕES ==================== -->
+            <section id="page-slides" class="page-section tool-dashboard">
+                <header class="tool-header">
+                    <div>
+                        <h1><i class="ph-fill ph-presentation-chart text-emerald"></i> Slides & Pitch Decks</h1>
+                        <p>Apresentações executivas criadas em segundos para reuniões, aulas e captação de clientes.</p>
+                    </div>
+                </header>
+
+                <div class="glass-panel" style="padding: 24px;">
+                    <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                        <input type="text" id="slides-topic-input" placeholder="Tema da Apresentação (Ex: Proposta Comercial para Clínica Médica)" class="styled-input" style="flex: 1;">
+                        <button class="btn-primary" id="btn-generate-slides"><i class="ph-fill ph-presentation"></i> Gerar Slides</button>
+                    </div>
+
+                    <div id="slides-deck-container" class="slides-grid" style="display: none;">
+                        <!-- Preenchido via JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ==================== 11. CENTRAL DE ARQUIVOS & VISUALIZAÇÃO UNIFICADA ==================== -->
+            <section id="page-storage" class="page-section tool-dashboard">
+                <header class="tool-header">
+                    <div>
+                        <h1><i class="ph-fill ph-folder-open text-cyan"></i> Central de Arquivos & Visualizador Geral</h1>
+                        <p>Tudo o que você cria (imagens, vídeos, sites, slides, ebooks e textos) fica <strong>reunido e visualizável aqui em um só lugar</strong>, sem espalhar nada.</p>
+                    </div>
+                    <div style="display:flex; gap:10px;">
+                        <button class="btn-outline btn-sm" onclick="clearAllStorage()"><i class="ph ph-trash"></i> Limpar Galeria</button>
+                    </div>
+                </header>
+
+                <!-- Filtros de Visualização de Arquivos -->
+                <div class="glass-panel" style="padding: 16px; margin-bottom: 20px;">
+                    <div class="storage-stats-bar">
+                        <div class="stat-card" onclick="filterStorageItems('all')">
+                            <span class="stat-num" id="stat-total-all">0</span>
+                            <span class="stat-label">Total Criado</span>
+                        </div>
+                        <div class="stat-card" onclick="filterStorageItems('image')">
+                            <span class="stat-num" id="stat-total-images">0</span>
+                            <span class="stat-label">🎨 Imagens 4K</span>
+                        </div>
+                        <div class="stat-card" onclick="filterStorageItems('video')">
+                            <span class="stat-num" id="stat-total-videos">0</span>
+                            <span class="stat-label">🎬 Vídeos</span>
+                        </div>
+                        <div class="stat-card" onclick="filterStorageItems('site')">
+                            <span class="stat-num" id="stat-total-sites">0</span>
+                            <span class="stat-label">🌐 Sites & Apps</span>
+                        </div>
+                        <div class="stat-card" onclick="filterStorageItems('slides')">
+                            <span class="stat-num" id="stat-total-slides">0</span>
+                            <span class="stat-label">📊 Slides</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid Visual de Todos os Arquivos Criados -->
+                <div class="storage-gallery-grid" id="storage-visual-gallery">
+                    <!-- Cards Visuais com Miniaturas e Prévias Geradas via JS -->
+                </div>
+            </section>
+
+            <!-- ==================== 12. CONFIGURAÇÕES & 10 TEMAS DE FUNDO ==================== -->
+            <section id="page-settings" class="page-section tool-dashboard">
+                <header class="tool-header">
+                    <div>
+                        <h1><i class="ph-fill ph-sliders text-cyan"></i> Configurações & Personalização</h1>
+                        <p>Gerencie sua conta, privacidade, segurança, interruptor NSFW e escolha entre <strong>10 temas visuais de fundo</strong>.</p>
+                    </div>
+                </header>
+
+                <div class="settings-grid-layout">
+                    
+                    <!-- CARTÃO 1: TEMAS DE FUNDO (10 OPÇÕES) -->
+                    <div class="settings-card glass-panel" style="grid-column: 1 / -1;">
+                        <div class="settings-card-header">
+                            <div class="icon-circle"><i class="ph-fill ph-paint-brush-broad"></i></div>
+                            <div>
+                                <h3>Modo de Fundo do Site (10 Temas Visuais)</h3>
+                                <p>Personalize a estética e os efeitos de iluminação da sua Moura.ai com 1 clique.</p>
+                            </div>
+                        </div>
+
+                        <div class="themes-selector-grid" id="themes-grid">
+                            <div class="theme-option-card active" data-theme="theme-cyberpunk" onclick="selectTheme('theme-cyberpunk', 'Cyberpunk Neon')">
+                                <div class="theme-preview-color" style="background: linear-gradient(135deg, #030712, #8b5cf6, #00ffcc);"></div>
+                                <div class="theme-option-info">
+                                    <strong>1. Cyberpunk Neon</strong>
+                                    <span>Roxo & Ciano Brilhante (Padrão)</span>
+                                </div>
+                            </div>
+
+                            <div class="theme-option-card" data-theme="theme-space" onclick="selectTheme('theme-space', 'Abismo Quântico')">
+                                <div class="theme-preview-color" style="background: linear-gradient(135deg, #02040a, #1e1b4b, #38bdf8);"></div>
+                                <div class="theme-option-info">
+                                    <strong>2. Abismo Quântico</strong>
+                                    <span>Galáxia & Azul Cósmico</span>
+                                </div>
+                            </div>
+
+                            <div class="theme-option-card" data-theme="theme-matrix" onclick="selectTheme('theme-matrix', 'Matrix Digital Rain')">
+                                <div class="theme-preview-color" style="background: linear-gradient(135deg, #020a05, #064e3b, #10b981);"></div>
+                                <div class="theme-option-info">
+                                    <strong>3. Matrix Digital</strong>
+                                    <span>Verde Hacker & Esmeralda</span>
+                                </div>
+                            </div>
+
+                            <div class="theme-option-card" data-theme="theme-synthwave" onclick="selectTheme('theme-synthwave', 'Sunset Synthwave')">
+                                <div class="theme-preview-color" style="background: linear-gradient(135deg, #180828, #f43f5e, #fb923c);"></div>
+                                <div class="theme-option-info">
+                                    <strong>4. Sunset Synthwave</strong>
+                                    <span>Neon 80s, Rosa & Laranja</span>
+                                </div>
+                            </div>
+
+                            <div class="theme-option-card" data-theme="theme-oled" onclick="selectTheme('theme-oled', 'Midnight OLED')">
+                                <div class="theme-preview-color" style="background: linear-gradient(135deg, #000000, #0a0a0a, #333333);"></div>
+                                <div class="theme-option-info">
+                                    <strong>5. Midnight OLED</strong>
+                                    <span>Preto Puro & Alto Contraste</span>
+                                </div>
+                            </div>
+
+                            <div class="theme-option-card" data-theme="theme-violet" onclick="selectTheme('theme-violet', 'Aura Violeta')">
+                                <div class="theme-preview-color" style="background: linear-gradient(135deg, #10061f, #6d28d9, #c084fc);"></div>
+                                <div class="theme-option-info">
+                                    <strong>6. Aura Violeta</strong>
+                                    <span>Nebulosa Roxa Profunda</span>
+                                </div>
+                            </div>
+
+                            <div class="theme-option-card" data-theme="theme-aurora" onclick="selectTheme('theme-aurora', 'Aurora Boreal')">
+                                <div class="theme-preview-color" style="background: linear-gradient(135deg, #041318, #0d9488, #2dd4bf);"></div>
+                                <div class="theme-option-info">
+                                    <strong>7. Aurora Boreal</strong>
+                                    <span>Verde Turquesa Nórdico</span>
+                                </div>
+                            </div>
+
+                            <div class="theme-option-card" data-theme="theme-crimson" onclick="selectTheme('theme-crimson', 'Crimson Cyber')">
+                                <div class="theme-preview-color" style="background: linear-gradient(135deg, #1a0508, #881337, #f43f5e);"></div>
+                                <div class="theme-option-info">
+                                    <strong>8. Crimson Cyber</strong>
+                                    <span>Vermelho Sangue & Aço</span>
+                                </div>
+                            </div>
+
+                            <div class="theme-option-card" data-theme="theme-frost" onclick="selectTheme('theme-frost', 'Clean Frost (Claro)')">
+                                <div class="theme-preview-color" style="background: linear-gradient(135deg, #f8fafc, #e2e8f0, #38bdf8);"></div>
+                                <div class="theme-option-info">
+                                    <strong>9. Clean Frost</strong>
+                                    <span>Branco Cristalino Futurista</span>
+                                </div>
+                            </div>
+
+                            <div class="theme-option-card" data-theme="theme-gold" onclick="selectTheme('theme-gold', 'Imperial Gold')">
+                                <div class="theme-preview-color" style="background: linear-gradient(135deg, #140d02, #78350f, #fbbf24);"></div>
+                                <div class="theme-option-info">
+                                    <strong>10. Imperial Gold</strong>
+                                    <span>Dourado Luxuoso & Preto</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARTÃO 2: CONTA & PERFIL -->
+                    <div class="settings-card glass-panel">
+                        <div class="settings-card-header">
+                            <div class="icon-circle"><i class="ph-fill ph-user-circle"></i></div>
+                            <div>
+                                <h3>Minha Conta</h3>
+                                <p>Gerencie seus dados de acesso e plano.</p>
+                            </div>
+                        </div>
+                        <div class="settings-form-group">
+                            <label>Nome do Usuário</label>
+                            <input type="text" id="setting-user-name" value="Marquinhos Dev" class="styled-input">
+                        </div>
+                        <div class="settings-form-group">
+                            <label>E-mail Vinculado</label>
+                            <input type="email" id="setting-user-email" value="marquinhos@moura.ai" class="styled-input">
+                        </div>
+                        <div class="settings-form-group">
+                            <label>Plano Atual</label>
+                            <div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.03); padding:10px 14px; border-radius:8px;">
+                                <strong id="setting-tier-display" class="text-cyan">Grátis Ilimitado</strong>
+                                <button class="btn-primary btn-sm" onclick="document.getElementById('plans-modal').style.display='flex'">Alterar</button>
+                            </div>
+                        </div>
+                        <button class="btn-outline" style="width:100%; margin-top:10px;" onclick="saveAccountSettings()"><i class="ph ph-floppy-disk"></i> Salvar Alterações</button>
+                    </div>
+
+                    <!-- CARTÃO 3: PRIVACIDADE, SEGURANÇA & MODO NSFW -->
+                    <div class="settings-card glass-panel">
+                        <div class="settings-card-header">
+                            <div class="icon-circle"><i class="ph-fill ph-shield-check"></i></div>
+                            <div>
+                                <h3>Privacidade & Segurança</h3>
+                                <p>Controle de dados, filtros e permissões.</p>
+                            </div>
+                        </div>
+
+                        <!-- TOGGLE SWITCH NSFW -->
+                        <div class="setting-toggle-row">
+                            <div>
+                                <strong>🔥 Modo NSFW / Sem Censura Criativa</strong>
+                                <p>Permite gerar histórias, ficções e roleplays adultos sem bloqueios.</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="toggle-nsfw-switch" onchange="toggleNsfwMode(this.checked)">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                        <!-- TOGGLE HISTÓRICO -->
+                        <div class="setting-toggle-row">
+                            <div>
+                                <strong>💾 Salvar em Meus Arquivos</strong>
+                                <p>Armazena automaticamente cada imagem, vídeo e site criado.</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked id="toggle-history-switch">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                        <!-- TOGGLE CRIPTOGRAFIA -->
+                        <div class="setting-toggle-row">
+                            <div>
+                                <strong>🔒 Criptografia Neural Ponta a Ponta</strong>
+                                <p>Seus dados permanecem 100% seguros no seu dispositivo.</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked disabled>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ==================== MODAL DE PLANOS (GRÁTIS, PRO, ULTRA) ==================== -->
+    <div class="modal-overlay" id="plans-modal" style="display: none;">
+        <div class="modal-card glass-panel">
+            <button class="btn-close-modal" id="btn-close-modal"><i class="ph ph-x"></i></button>
+            <div class="modal-header">
+                <div class="modal-badge"><i class="ph-fill ph-crown"></i> UPGRADE MOURA.AI</div>
+                <h2>Escolha a Potência da sua Super IA</h2>
+                <p>Acesse o processamento mais avançado do planeta com servidores prioritários e qualidade gráfica 30x superior.</p>
+            </div>
+
+            <div class="pricing-cards-grid">
+                
+                <!-- PLANO 1: GRÁTIS -->
+                <div class="pricing-card" id="plan-card-free">
+                    <div class="pricing-card-header">
+                        <h3>Grátis</h3>
+                        <div class="price">R$ 0<span>/sempre</span></div>
+                        <p class="plan-desc">Acesso ilimitado às ferramentas essenciais do dia a dia.</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="ph-fill ph-check-circle"></i> Chat Universal Ilimitado</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Gerador de Imagens Padrão</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Biblioteca (+30.000 Prompts)</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Galeria Central de Arquivos</li>
+                    </ul>
+                    <button class="btn-plan-select active" onclick="activatePlan('free')">Plano Atual</button>
+                </div>
+
+                <!-- PLANO 2: PRO (R$ 27,90) -->
+                <div class="pricing-card featured" id="plan-card-pro">
+                    <div class="featured-ribbon">MAIS POPULAR</div>
+                    <div class="pricing-card-header">
+                        <h3>Moura Pro</h3>
+                        <div class="price">R$ 27,90<span>/mês</span></div>
+                        <p class="plan-desc">Mais assertividade, gráficos 30x melhores e velocidade extrema.</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="ph-fill ph-check-circle"></i> <strong>Imagens em até 8 segundos</strong> em 4K</li>
+                        <li><i class="ph-fill ph-check-circle"></i> <strong>Gráficos até 30x melhores</strong> que o padrão</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Raciocínio Profundo & Assertividade Máxima</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Fábrica de Sites & Apps com Live Preview</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Criação de Vídeos e Reels em HD</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Sem filas de espera (GPU Dedicada)</li>
+                    </ul>
+                    <button class="btn-plan-select btn-primary" onclick="activatePlan('pro')">Ativar Modo Pro (R$ 27,90)</button>
+                </div>
+
+                <!-- PLANO 3: ULTRA (R$ 45,90) -->
+                <div class="pricing-card ultra-tier" id="plan-card-ultra">
+                    <div class="ultra-ribbon">POTÊNCIA SUPREMA</div>
+                    <div class="pricing-card-header">
+                        <h3>Moura Ultra</h3>
+                        <div class="price">R$ 45,90<span>/mês</span></div>
+                        <p class="plan-desc">O dobro de recursos, velocidade instantânea em segundos e máxima inteligência.</p>
+                    </div>
+                    <ul class="plan-features">
+                        <li><i class="ph-fill ph-check-circle"></i> <strong>Tudo do Pro em dobro</strong></li>
+                        <li><i class="ph-fill ph-check-circle"></i> Geração de tudo em <strong>questão de segundos</strong></li>
+                        <li><i class="ph-fill ph-check-circle"></i> Vídeos Cinemáticos 4K com controle total de câmera</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Construtor de Apps Full-Stack Complexos</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Processador Quântico Neural Ilimitado</li>
+                        <li><i class="ph-fill ph-check-circle"></i> Suporte Prioritário VIP 24/7</li>
+                    </ul>
+                    <button class="btn-plan-select btn-gradient-ultra" onclick="activatePlan('ultra')">Ativar Modo Ultra (R$ 45,90)</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Principal -->
+    <script src="app.js"></script>
+</body>
+</html>

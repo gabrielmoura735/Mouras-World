@@ -101,27 +101,7 @@ function getCentoDraftTotal() {
 
 // Render the Cento Builder interface
 function renderCentoBuilder() {
-    const grid = document.getElementById('cento-sabores-grid');
-    if (!grid) return;
-    
-    grid.innerHTML = '';
-    
-    SABORES.forEach(sabor => {
-        const card = document.createElement('div');
-        card.className = 'sabor-item-display';
-        
-        card.innerHTML = `
-            <!-- Product Image -->
-            <div class="sabor-img-container" style="width: 100%; height: 160px; overflow: hidden; border-radius: var(--radius-sm); margin-bottom: 12px; border: 1px solid var(--border-color);">
-                <img src="assets/${sabor.id}.jpg" alt="${sabor.name}" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div class="sabor-info" style="text-align: center;">
-                <h4 style="font-size: 1.1rem; margin-bottom: 6px; color: var(--primary-dark); font-family: 'Playfair Display', serif;">${sabor.name}</h4>
-                <p class="sabor-desc" style="font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.4;">${sabor.desc}</p>
-            </div>
-        `;
-        grid.appendChild(card);
-    });
+    // No longer rendering flavors grid since it was replaced by the pricing table image
 }
 
 // Render the Grande/Avulso Builder interface (Displays only the catalog image)

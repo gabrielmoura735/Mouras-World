@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Faça seu pedido online na Lépore Salgados. Salgados fritos na hora ou congelados na região do Jaraguá, SP. Prático, saboroso e quentinho!">
+    <title>Lépore Salgados - Loja Oficial</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Top Info Bar -->
+    <div class="top-bar">
+        <p><i class="fa-solid fa-location-dot"></i> Atendendo Jaraguá e região (Jardim Ipanema) - São Paulo, SP</p>
+    </div>
+
+    <!-- Header / Hero Section -->
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="logo-container">
+                <img src="assets/logo.png" alt="Lépore Salgados Logo">
+            </div>
+            <h1 class="hero-title">Sabor que reúne, qualidade que encanta!</h1>
+            <p class="hero-subtitle">Salgados artesanais feitos com carinho, prontinhos para a sua mesa.</p>
+            <div class="hero-badges">
+                <span class="badge"><i class="fa-solid fa-fire"></i> Fritos na Hora</span>
+                <span class="badge"><i class="fa-solid fa-snowflake"></i> Congelados Práticos</span>
+            </div>
+            <div class="hero-actions" style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
+                <a href="#menu" class="btn-primary"><i class="fa-solid fa-utensils"></i> Ver Cardápio</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="container">
+        
+        <!-- Interactive Service Mode Selector (Frito vs Congelado) -->
+        <section id="menu" class="section">
+            <div class="section-header">
+                <span class="section-tagline">Faça seu Pedido</span>
+                <h2 class="section-title">Nosso Cardápio</h2>
+                <p class="section-desc">Escolha como prefere receber seus salgados e monte sua combinação ideal.</p>
+            </div>
+
+            <!-- Category Selector Tabs -->
+            <div class="menu-tabs">
+                <button class="tab-btn active" id="tab-cento" onclick="setProductType('cento')">
+                    <i class="fa-solid fa-box-open"></i>
+                    <div>
+                        <strong>Centos (Festa)</strong>
+                        <span>Selecione a quantidade</span>
+                    </div>
+                </button>
+                <button class="tab-btn" id="tab-grande" onclick="setProductType('grande')">
+                    <i class="fa-solid fa-cookie"></i>
+                    <div>
+                        <strong>Salgados Avulsos</strong>
+                        <span>Porções (1, 6 ou 12 un.)</span>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Sub-Option: Frito vs Congelado State Banner -->
+            <div class="preparation-selector">
+                <span class="prep-label">Opção de Preparo:</span>
+                <div class="toggle-container">
+                    <button class="toggle-btn active" id="prep-frito" onclick="setPreparo('frito')">
+                        <i class="fa-solid fa-fire"></i> Frito na Hora
+                    </button>
+                    <button class="toggle-btn" id="prep-congelado" onclick="setPreparo('congelado')">
+                        <i class="fa-solid fa-snowflake"></i> Congelado
+                    </button>
+                </div>
+            </div>
+
+            <!-- Price Info Callout -->
+            <div class="price-banner">
+                <div class="price-banner-info">
+                    <span class="price-badge-title" id="current-category-title">Cento de Salgados</span>
+                    <span class="price-badge-prep" id="current-prep-title">Frito na Hora</span>
+                </div>
+                <div class="price-banner-value" id="current-price-value">R$ 45,00</div>
+            </div>
+
+            <!-- Cento Build Panel (Visible when 'cento' is selected) -->
+            <div id="cento-builder" class="menu-container active">
+                
+                <!-- Cento Packages Selector -->
+                <div class="cento-packages">
+                    <div class="package-card" id="package-30" onclick="setCentoSize(30)">
+                        <div class="package-img-container">
+                            <img src="assets/cento_30.png" onerror="this.onerror=null; this.src='file:///C:/Users/User/.gemini/antigravity-ide/brain/db4cae2b-8c19-4f4d-b9db-5a5dd083eb89/kit_30_unidades_oficial_1785503738594.png';" alt="Kit 30 Unidades">
+                        </div>
+                        <h4>Kit 30 Unidades</h4>
+                        <div class="package-price" id="price-card-30">R$ 54,90</div>
+                        <p class="package-desc">30 unidades de mini salgados fritos na hora.</p>
+                    </div>
+                    
+                    <div class="package-card active" id="package-60" onclick="setCentoSize(60)">
+                        <div class="package-img-container">
+                            <img src="assets/cento_60.png" onerror="this.onerror=null; this.src='file:///C:/Users/User/.gemini/antigravity-ide/brain/db4cae2b-8c19-4f4d-b9db-5a5dd083eb89/kit_60_unidades_oficial_1785503814116.png';" alt="Kit 60 Unidades">
+                        </div>
+                        <h4>Kit 60 Unidades</h4>
+                        <div class="package-price" id="price-card-60">R$ 94,90</div>
+                        <p class="package-desc">60 unidades de mini salgados fritos na hora.</p>
+                    </div>
+                    
+                    <div class="package-card" id="package-90" onclick="setCentoSize(90)">
+                        <div class="package-img-container">
+                            <img src="assets/cento_90.png" onerror="this.onerror=null; this.src='file:///C:/Users/User/.gemini/antigravity-ide/brain/db4cae2b-8c19-4f4d-b9db-5a5dd083eb89/kit_90_unidades_oficial_1785503887427.png';" alt="Kit 90 Unidades">
+                        </div>
+                        <h4>Kit 90 Unidades</h4>
+                        <div class="package-price" id="price-card-90">R$ 134,90</div>
+                        <p class="package-desc">90 unidades de mini salgados fritos na hora.</p>
+                    </div>
+                </div>
+
+                <div class="builder-card">
+                    <div class="builder-header">
+                        <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Monte seu Cento Misto</h3>
+                        <p>Distribua as unidades do seu pacote entre os nossos sabores clássicos.</p>
+                    </div>
+                    
+                    <div class="sabores-grid" id="cento-sabores-grid">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Individual/Grande Panel (Visible when 'grande' is selected) -->
+            <div id="grande-builder" class="menu-container">
+                <div class="builder-card">
+                    <div class="builder-header">
+                        <h3><i class="fa-solid fa-book-open"></i> Catálogo Oficial de Salgados</h3>
+                        <p>Confira nossas opções de salgados artesanais e preços por porção no catálogo abaixo.</p>
+                    </div>
+                    
+                    <!-- Catalogo Image Display -->
+                    <div class="info-card-center" style="margin-bottom: 20px; display: flex; flex-direction: column; align-items: center;">
+                        <a href="assets/catalogo.jpg" target="_blank" title="Clique para ampliar o catálogo" style="display: block; cursor: pointer; transition: var(--transition);">
+                            <img src="assets/catalogo.jpg" alt="Catálogo Oficial Lépore Salgados" style="width: 100%; max-width: 520px; border-radius: var(--radius-md); box-shadow: var(--shadow-lg); border: 4px solid var(--border-color); display: block;">
+                        </a>
+                        <span style="font-size: 0.85rem; color: var(--text-muted); margin-top: 10px;"><i class="fa-solid fa-magnifying-glass-plus"></i> Clique na imagem para abrir em tela cheia</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Informational Section (Payment and Location) -->
+        <section class="info-section grid-2">
+            <div class="info-card info-card-center">
+                <div class="info-icon-wrapper"><i class="fa-solid fa-wallet"></i></div>
+                <h3>Formas de Pagamento & Entrega</h3>
+                <p style="margin-bottom: 15px;">Confira nossas opções aceitas e informações de frete:</p>
+                <div class="crop-instagram" style="max-width: 320px; border: 3px solid var(--border-color); box-shadow: var(--shadow-md);">
+                    <img src="assets/formas_pagamento.png" alt="Formas de Pagamento e Entrega Lépore Salgados">
+                </div>
+                <div class="instagram-bio-box">
+                    <p><i class="fa-solid fa-money-bill-1-wave"></i> Dinheiro, Pix, Crédito ou Débito</p>
+                    <p><i class="fa-solid fa-truck-fast"></i> Entregas disponíveis na região</p>
+                    <p><i class="fa-solid fa-location-dot"></i> Opção de retirada no local (Jardim Ipanema)</p>
+                </div>
+            </div>
+            <div class="info-card info-card-center">
+                <div class="info-icon-wrapper"><i class="fa-solid fa-utensils"></i></div>
+                <h3>Nossos Sabores Artesanais</h3>
+                <p style="margin-bottom: 15px;">Sabores feitos à mão com ingredientes selecionados:</p>
+                <div class="crop-instagram" style="max-width: 320px; border: 3px solid var(--border-color); box-shadow: var(--shadow-md);">
+                    <img src="assets/nossos_sabores.png" alt="Nossos Sabores Lépore Salgados">
+                </div>
+                <div class="instagram-bio-box" style="border-left-color: var(--secondary);">
+                    <p>✨ O sabor que conquista!</p>
+                    <p>🥟 Salgados fritos na hora e congelados.</p>
+                    <p>📍 Jaraguá | Zona Oeste - São Paulo, SP.</p>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Floating Shopping Cart Button / Sidebar -->
+    <div class="cart-floating-btn" id="cart-float-btn" onclick="toggleCart()">
+        <span class="cart-badge" id="cart-count">0</span>
+        <i class="fa-solid fa-basket-shopping"></i>
+    </div>
+
+    <!-- Cart Overlay & Sidebar -->
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    <aside class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-sidebar-header">
+            <h2>Seu Carrinho</h2>
+            <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+        
+        <div class="cart-sidebar-content">
+            <!-- Cart Items Container -->
+            <div id="cart-items" class="cart-items-container">
+                <div class="empty-cart-message">
+                    <i class="fa-solid fa-basket-shopping"></i>
+                    <p>Seu carrinho está vazio. Adicione alguns salgados para começar!</p>
+                </div>
+            </div>
+            
+            <!-- Checkout Form (visible only when there are items) -->
+            <div id="checkout-section" class="checkout-form-container" style="display: none;">
+                <hr class="divider">
+                
+                <h3>Dados do Pedido</h3>
+                
+                <div class="form-group">
+                    <label for="client-name">Seu Nome *</label>
+                    <input type="text" id="client-name" placeholder="Ex: Maria Silva" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="delivery-method">Como deseja receber? *</label>
+                    <select id="delivery-method" onchange="handleDeliveryChange()" required>
+                        <option value="retirada">Retirar no Local (Jardim Ipanema)</option>
+                        <option value="entrega">Entrega em Domicílio (Região do Jaraguá)</option>
+                    </select>
+                </div>
+                
+                <!-- Delivery Fields -->
+                <div id="delivery-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="delivery-address">Endereço de Entrega *</label>
+                        <input type="text" id="delivery-address" placeholder="Rua, Número, Bairro, Complemento">
+                    </div>
+                </div>
+                
+                <!-- Retirada Fields -->
+                <div id="retirada-fields">
+                    <div class="form-group">
+                        <label for="pickup-time">Horário Estimado para Retirada *</label>
+                        <input type="time" id="pickup-time">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="payment-method">Forma de Pagamento *</label>
+                    <select id="payment-method" onchange="handlePaymentChange()" required>
+                        <option value="pix">Pix (Chave Pix no próximo passo)</option>
+                        <option value="dinheiro">Dinheiro</option>
+                        <option value="cartao_credito">Cartão de Crédito</option>
+                        <option value="cartao_debito">Cartão de Débito</option>
+                    </select>
+                </div>
+                
+                <div id="change-field" class="form-group" style="display: none;">
+                    <label for="cash-change">Precisa de troco para quanto?</label>
+                    <input type="text" id="cash-change" placeholder="Ex: R$ 50,00 ou Não preciso">
+                </div>
+
+                <div class="form-group">
+                    <label for="order-notes">Observações do Pedido</label>
+                    <textarea id="order-notes" rows="2" placeholder="Ex: Capricha no Kibe, sem cebola, etc."></textarea>
+                </div>
+                
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="summary-subtotal">R$ 0,00</span>
+                    </div>
+                    <div class="summary-row delivery-cost-row">
+                        <span>Taxa de Entrega:</span>
+                        <span id="summary-delivery">A consultar</span>
+                    </div>
+                    <div class="summary-row total-row">
+                        <span>Total estimado:</span>
+                        <span id="summary-total" class="text-accent">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <!-- WhatsApp WhatsApp Action Buttons -->
+                <div class="whatsapp-options">
+                    <p class="whatsapp-prompt">Selecione para qual número deseja enviar o pedido:</p>
+                    <div class="whatsapp-btn-group">
+                        <button class="btn-whatsapp" onclick="sendToWhatsApp('957020150')">
+                            <i class="fa-brands fa-whatsapp"></i> Enviar p/ WhatsApp (1)
+                        </button>
+                        <button class="btn-whatsapp btn-whatsapp-secondary" onclick="sendToWhatsApp('991099017')">
+                            <i class="fa-brands fa-whatsapp"></i> Enviar p/ WhatsApp (2)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Footer Section -->
+    <footer class="main-footer">
+        <div class="footer-content container">
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="Lépore Salgados Logo" class="footer-logo">
+                <p>Sabor que reúne, qualidade que encanta!</p>
+            </div>
+            <div class="footer-info">
+                <h4>Contatos</h4>
+                <p><i class="fa-solid fa-phone"></i> 
+                    <a href="https://wa.me/5511957020150" target="_blank" class="contact-link">(11) 95702-0150</a> / 
+                    <a href="https://wa.me/5511991099017" target="_blank" class="contact-link">(11) 99109-9017</a>
+                </p>
+                <p><i class="fa-solid fa-location-dot"></i> Jardim Ipanema - Jaraguá, São Paulo - SP</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Lépore Salgados. Todos os direitos reservados. Feito com carinho.</p>
+        </div>
+    </footer>
+
+    <!-- App Logic JS -->
+    <script src="js/app.js"></script>
+</body>
+</html>
