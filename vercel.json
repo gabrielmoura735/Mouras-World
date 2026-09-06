@@ -1,15 +1,10 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "loja/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/loja/$1"
-    }
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/", "destination": "/loja/index.html" },
+    { "source": "/css/:path*", "destination": "/loja/css/:path*" },
+    { "source": "/js/:path*", "destination": "/loja/js/:path*" },
+    { "source": "/assets/:path*", "destination": "/loja/assets/:path*" },
+    { "source": "/(.*)", "destination": "/loja/$1" }
   ]
 }
