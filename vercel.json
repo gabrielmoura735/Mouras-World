@@ -2,9 +2,10 @@
   "cleanUrls": true,
   "rewrites": [
     { "source": "/", "destination": "/loja/index.html" },
-    { "source": "/css/:path*", "destination": "/loja/css/:path*" },
-    { "source": "/js/:path*", "destination": "/loja/js/:path*" },
-    { "source": "/assets/:path*", "destination": "/loja/assets/:path*" },
+    { "source": "/loja", "destination": "/loja/index.html" },
+    { "source": "/css/(.*)", "destination": "/loja/css/$1" },
+    { "source": "/js/(.*)", "destination": "/loja/js/$1" },
+    { "source": "/assets/(.*)", "destination": "/loja/assets/$1" },
     { "source": "/(.*)", "destination": "/loja/$1" }
   ]
 }
