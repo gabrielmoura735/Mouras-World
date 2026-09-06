@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acessar EncurtaLink & Loja</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background-color: #07090e;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(99, 102, 241, 0.12) 0%, transparent 40%);
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+    }
+    .container {
+      max-width: 680px;
+      width: 100%;
+      background: rgba(18, 26, 44, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(59, 130, 246, 0.1);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      color: #60a5fa;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    h1 span {
+      background: linear-gradient(135deg, #38bdf8, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    p.desc {
+      color: #94a3b8;
+      font-size: 0.95rem;
+    }
+    .card-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .action-card {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .action-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(59, 130, 246, 0.5);
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
+      background: rgba(20, 30, 55, 0.9);
+    }
+    .card-info h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card-info p {
+      color: #94a3b8;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+    .url-text {
+      color: #38bdf8;
+      font-family: monospace;
+      font-size: 0.82rem;
+      margin-top: 0.35rem;
+    }
+    .btn-open {
+      padding: 0.75rem 1.4rem;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.35);
+      pointer-events: none;
+    }
+    .action-card.secondary .btn-open {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: none;
+    }
+    .footer-help {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.85rem;
+      color: #64748b;
+      line-height: 1.6;
+    }
+    .footer-help strong {
+      color: #cbd5e1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <div class="badge">Acesso Rápido Oficial</div>
+      <h1>Central <span>EncurtaLink</span> & Loja</h1>
+      <p class="desc">Selecione o serviço abaixo para abrir diretamente no seu navegador:</p>
+    </div>
+
+    <div class="card-grid">
+      
+      <!-- Card Encurtador Online -->
+      <a href="https://encurtador-links-1831.web.app" target="_blank" class="action-card">
+        <div class="card-info">
+          <h3>🔗 Encurtador de Links (Online)</h3>
+          <p>Painel oficial com login seguro, encurtador de 6 dígitos e cliques em tempo real.</p>
+          <div class="url-text">https://encurtador-links-1831.web.app</div>
+        </div>
+        <div class="btn-open">Abrir Site →</div>
+      </a>
+
+      <!-- Card Loja Online -->
+      <a href="https://lepore-salgados.web.app" target="_blank" class="action-card secondary">
+        <div class="card-info">
+          <h3>🏪 Loja Lépore Salgados (Online)</h3>
+          <p>Site do catálogo e pedidos de salgados fritos e congelados.</p>
+          <div class="url-text">https://lepore-salgados.web.app</div>
+        </div>
+        <div class="btn-open">Abrir Loja →</div>
+      </a>
+
+      <!-- Card Firebase Console -->
+      <a href="https://console.firebase.google.com/project/encurtador-links-1831/overview" target="_blank" class="action-card secondary">
+        <div class="card-info">
+          <h3>⚙️ Console do Firebase</h3>
+          <p>Acesse o painel do Google para gerenciar usuários, Firestore e Hosting.</p>
+          <div class="url-text">console.firebase.google.com/project/encurtador-links-1831</div>
+        </div>
+        <div class="btn-open">Acessar →</div>
+      </a>
+
+    </div>
+
+    <div class="footer-help">
+      💡 <strong>Dica de uso:</strong> Para encurtar o link da sua loja, abra o <strong>Encurtador de Links</strong>, faça login (ou clique em <em>Criar Conta</em>), cole o endereço da loja <code>https://lepore-salgados.web.app</code> no campo e clique em <strong>Encurtar</strong>.
+    </div>
+  </div>
+
+</body>
+</html>

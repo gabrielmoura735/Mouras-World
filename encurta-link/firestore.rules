@@ -1,0 +1,22 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /links/{linkId} {
+      // Leitura pública para permitir resolução e redirecionamento de links curtos
+      allow read: if true;
+
+      // Criação permitida apenas para o usuário autenticado que assina o link
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+
+      // Atualização permitida:
+      // 1. Visitantes/público podem apenas incrementar o campo 'clicks'
+      // 2. O dono do link autenticado pode alterar os dados do seu próprio link
+      allow update: if (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['clicks']))
+                    || (request.auth != null && resource.data.userId == request.auth.uid);
+
+      // Exclusão permitida somente para o dono do link
+      allow delete: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+  }
+}

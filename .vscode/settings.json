@@ -1,9 +1,3 @@
 {
-    "python-envs.pythonProjects": [
-        {
-            "path": "_memoria",
-            "envManager": "ms-python.python:venv",
-            "packageManager": "ms-python.python:pip"
-        }
-    ]
+    "git.ignoreLimitWarning": true
 }
