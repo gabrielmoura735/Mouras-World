@@ -221,7 +221,7 @@ window.autoDistributeCento = function() {
     renderCentoBuilder();
 };
 
-// Set package size of cento (50, 100, 150)
+// Set package size of cento (30, 60, 90)
 window.setCentoSize = function(size) {
     appState.centoSize = size;
     
@@ -230,7 +230,9 @@ window.setCentoSize = function(size) {
         card.classList.remove('active');
     });
     const activeCard = document.getElementById(`package-${size}`);
-    if (activeCard) activeCard.classList.add('active');
+    if (activeCard) {
+        activeCard.classList.add('active');
+    }
     
     resetCentoDraft();
     updatePriceBanner();
