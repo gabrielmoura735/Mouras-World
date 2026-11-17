@@ -28,13 +28,28 @@ function montarMensagem(lead, nicho) {
 }
 
 function lerLeads(arquivo) {
-  const conteudo = fs.readFileSync(arquivo, 'utf8')
-  const linhas = conteudo.trim().split('\n')
-  const cabecalho = linhas[0].split(',').map(c => c.trim().replace(/"/g, ''))
-  return linhas.slice(1).map(linha => {
-    const valores = linha.split(',').map(v => v.trim().replace(/"/g, ''))
+  let conteudo = fs.readFileSync(arquivo, 'utf8').replace(/^﻿/, '')
+  const linhas = conteudo.trim().split(/\r?\n/)
+  // detecta separador: ';' (planilha do scraper) ou ',' (csv do bot)
+  const sep = (linhas[0].split(';').length > linhas[0].split(',').length) ? ';' : ','
+  const cabecalho = linhas[0].split(sep).map(c => c.trim().replace(/"/g, '').toLowerCase())
+  return linhas.slice(1).filter(l => l.trim()).map(linha => {
+    const valores = linha.split(sep).map(v => v.trim().replace(/"/g, ''))
     return Object.fromEntries(cabecalho.map((c, i) => [c, valores[i] || '']))
   })
+}
+
+function soDigitos(s) { return (s || '').replace(/\D/g, '') }
+
+function numerosJaEnviados() {
+  const set = new Set()
+  if (fs.existsSync(DISPAROS_FILE)) {
+    try {
+      const d = JSON.parse(fs.readFileSync(DISPAROS_FILE, 'utf8'))
+      for (const r of d) if (r.enviado) set.add(soDigitos(r.numero))
+    } catch {}
+  }
+  return set
 }
 
 function registrarDisparo(lead, nicho, preview, ok) {
@@ -85,21 +100,44 @@ async function main() {
     })
   })
 
-  let enviados = 0
+  const jaEnviados = numerosJaEnviados()
+  let enviados = 0, pulados = 0
   for (let i = 0; i < leads.length; i++) {
     const lead = leads[i]
-    const nome = lead.name || lead.nome || ''
-    const telefone = (lead.phone || lead.telefone || '').replace(/\D/g, '')
-    const numero = (telefone.startsWith('55') ? telefone : '55' + telefone) + '@s.whatsapp.net'
+    const nome = lead.name || lead.nome || lead.empresa || 'vocês'
+    const telefone = soDigitos(lead.phone || lead.telefone || lead.whatsapp)
+    const numeroBr = telefone.startsWith('55') ? telefone : '55' + telefone
+    const numero = numeroBr + '@s.whatsapp.net'
 
-    const nicho = detectarNicho(nome, lead.category || lead.categoria || '')
-    const preview = CONFIG.previews[nicho] || CONFIG.previews.default
-    const mensagem = montarMensagem(lead, nicho)
+    const nicho = lead.nicho || detectarNicho(nome, lead.category || lead.categoria || '')
+    const nota = lead.nota || lead.rating || '?'
+    const avaliacoes = lead.avaliacoes || lead['avaliações'] || lead.reviews || '?'
+    const previewUrl = lead.preview_url || lead.previewurl || ''
+    const preview = previewUrl || CONFIG.previews[nicho] || CONFIG.previews.default
+
+    if (jaEnviados.has(numeroBr)) {
+      pulados++
+      console.log(`[${i + 1}/${leads.length}] ${nome} | ${telefone} — já contatado, pulando\n`)
+      continue
+    }
 
     console.log(`[${i + 1}/${leads.length}] ${nome} | ${nicho} | ${telefone}`)
 
+    // Monta as duas mensagens (v2) ou cai pro template antigo de uma mensagem
+    const usarV2 = CONFIG.mensagens_v2 && previewUrl
+    const subst = (t) => t
+      .replace(/{nome}/g, nome).replace(/{nota}/g, nota)
+      .replace(/{avaliacoes}/g, avaliacoes).replace(/{preview_url}/g, previewUrl).replace(/{preview}/g, preview)
+
     try {
-      await sock.sendMessage(numero, { text: mensagem })
+      if (usarV2) {
+        await sock.sendMessage(numero, { text: subst(CONFIG.mensagens_v2.apresentacao) })
+        try { await sock.sendPresenceUpdate('composing', numero) } catch {}
+        await sleep(6000 + Math.random() * 4000) // 6-10s "digitando"
+        await sock.sendMessage(numero, { text: subst(CONFIG.mensagens_v2.preview) })
+      } else {
+        await sock.sendMessage(numero, { text: montarMensagem(lead, nicho) })
+      }
       registrarDisparo(lead, nicho, preview, true)
       enviados++
       console.log(`  ✅ enviado\n`)
@@ -115,7 +153,7 @@ async function main() {
     }
   }
 
-  console.log(`\n=== Concluído: ${enviados}/${leads.length} enviadas ===`)
+  console.log(`\n=== Concluído: ${enviados}/${leads.length} enviadas (${pulados} puladas) ===`)
   console.log(`Registro em: ${DISPAROS_FILE}`)
   process.exit(0)
 }

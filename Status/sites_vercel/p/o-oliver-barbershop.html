@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Oliver Barbershop</title>
+<meta name="description" content="A barbearia premium da região. Cortes clássicos, barba perfeita, ambiente exclusivo. Agende agora.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050505;
+  --bg2: #0a0a0a;
+  --surface: #111111;
+  --surface2: #181818;
+  --gold: #C9A84C;
+  --gold2: #E8C97A;
+  --gold-dim: #8A6D2A;
+  --muted: #888;
+  --text: #F5F0E8;
+  --dim: #555;
+  --border: rgba(201,168,76,.2);
+  --border2: rgba(232,201,122,.35);
+  --glow: 0 0 32px rgba(201,168,76,.25);
+  --radius: 12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.6}
+
+/* STICKY BAR */
+.sticky-bar{position:sticky;top:0;z-index:999;background:rgba(5,5,5,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.sticky-brand{font-family:'Cinzel',serif;font-size:.9rem;font-weight:700;color:var(--gold);letter-spacing:1px}
+.sticky-cta{background:linear-gradient(135deg,#C9A84C,#E8C97A);color:#050505;padding:9px 18px;border-radius:6px;font-size:.82rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:opacity .2s;display:flex;align-items:center;gap:7px}
+.sticky-cta:hover{opacity:.88}
+
+/* HERO */
+.hero{position:relative;min-height:95vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.7)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(5,5,5,.99) 0%, rgba(5,5,5,.5) 60%, transparent 100%)}
+.hero-content{position:relative;z-index:2;padding:0 24px 72px;max-width:720px;margin:0 auto;width:100%;text-align:center}
+.hero-badge{display:inline-block;background:rgba(201,168,76,.12);border:1px solid var(--border2);border-radius:4px;padding:5px 16px;font-size:.7rem;font-weight:700;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:24px}
+.hero h1{font-family:'Cinzel',serif;font-size:clamp(2rem,7vw,3.6rem);font-weight:900;line-height:1.1;margin-bottom:16px;letter-spacing:1px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero-line{width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 20px}
+.hero-sub{font-size:1rem;color:rgba(245,240,232,.65);max-width:440px;margin:0 auto 36px;letter-spacing:.3px}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-gold{background:linear-gradient(135deg,#C9A84C,#E8C97A);color:#050505;padding:14px 30px;border-radius:4px;font-weight:700;font-size:.9rem;text-decoration:none;transition:all .22s;display:inline-flex;align-items:center;gap:8px;letter-spacing:.5px}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.4)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid rgba(245,240,232,.3);padding:13px 30px;border-radius:4px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .22s;display:inline-flex;align-items:center;gap:8px}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+
+/* STATS */
+.stats-strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 24px;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{text-align:center;padding:8px 12px;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'Cinzel',serif;font-size:1.8rem;font-weight:900;color:var(--gold);line-height:1}
+.stat-label{font-size:.68rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-top:5px}
+
+/* SECTION */
+.section{padding:72px 24px;max-width:1100px;margin:0 auto}
+.section-label{display:flex;align-items:center;gap:14px;margin-bottom:36px}
+.section-label h2{font-family:'Cinzel',serif;font-size:1.5rem;font-weight:700;color:var(--gold);white-space:nowrap;letter-spacing:1px}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* CAROUSEL */
+.carousel-wrap{position:relative;overflow:hidden;border-radius:var(--radius);aspect-ratio:16/9;background:var(--surface);border:1px solid var(--border)}
+.carousel-track{display:flex;transition:transform .5s ease;height:100%}
+.carousel-track img{flex-shrink:0;width:100%;height:100%;object-fit:cover}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(5,5,5,.8);border:1px solid var(--border2);color:var(--gold);width:44px;height:44px;border-radius:0;font-size:1.3rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;z-index:2}
+.car-btn:hover{background:var(--gold);color:#050505}
+.car-prev{left:0}
+.car-next{right:0}
+.car-dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.car-dot{width:24px;height:2px;background:rgba(255,255,255,.3);cursor:pointer;transition:all .2s}
+.car-dot.active{background:var(--gold)}
+
+/* SERVIÇOS */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--border);border:1px solid var(--border)}
+.service-item{background:var(--surface);padding:28px 24px;transition:background .2s;cursor:default}
+.service-item:hover{background:var(--surface2)}
+.service-icon{font-size:1.8rem;margin-bottom:12px}
+.service-title{font-family:'Cinzel',serif;font-size:.9rem;font-weight:700;color:var(--gold);letter-spacing:.5px;margin-bottom:6px}
+.service-desc{font-size:.8rem;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.service-price{font-size:.85rem;font-weight:700;color:var(--text)}
+
+/* DEPOIMENTOS */
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.review-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:border-color .2s}
+.review-card:hover{border-color:var(--border2)}
+.review-stars{color:var(--gold);margin-bottom:12px;font-size:.95rem}
+.review-text{font-size:.87rem;color:var(--muted);line-height:1.65;font-style:italic;margin-bottom:16px}
+.review-author{display:flex;align-items:center;gap:10px}
+.review-avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border2)}
+.review-name{font-weight:700;font-size:.85rem}
+.review-date{font-size:.7rem;color:var(--dim);margin-top:1px}
+
+/* GALERIA */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.gal-img{width:100%;aspect-ratio:1;object-fit:cover;transition:opacity .2s}
+.gal-img:hover{opacity:.85}
+
+/* CTA */
+.cta-final{background:linear-gradient(135deg,var(--surface) 0%,#0f0d08 100%);border:1px solid var(--border2);border-radius:0;padding:52px 32px;text-align:center;margin:0 24px;position:relative;overflow:hidden}
+.cta-final::before{content:'✂';position:absolute;font-size:120px;opacity:.04;top:-10px;right:10px}
+.cta-final h2{font-family:'Cinzel',serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:900;margin-bottom:12px;letter-spacing:1px}
+.cta-final h2 em{font-style:normal;color:var(--gold)}
+.cta-final p{color:var(--muted);max-width:420px;margin:0 auto 28px;font-size:.9rem}
+.cta-wpp{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;padding:14px 36px;border-radius:4px;font-weight:700;font-size:.95rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .22s;box-shadow:0 4px 20px rgba(37,211,102,.4)}
+.cta-wpp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.5)}
+
+/* FLOATING FAB */
+.fab{position:fixed;bottom:24px;right:24px;z-index:999;background:linear-gradient(135deg,#25D366,#128C7E);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(37,211,102,.5);text-decoration:none;transition:all .22s}
+.fab:hover{transform:scale(1.1)}
+
+footer{text-align:center;padding:28px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:.78rem}
+
+@media(max-width:600px){
+  .stats-strip{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:none}
+  .stat:nth-child(3){border-top:1px solid var(--border)}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div style="background:#101010;color:#e8e8e8;text-align:center;padding:8px 14px;font-size:.72rem;letter-spacing:.6px;font-family:'Inter',system-ui,sans-serif;border-bottom:1px solid rgba(255,255,255,.12)">PRÉVIA DE DEMONSTRAÇÃO — site ainda não publicado</div>
+
+<div class="sticky-bar">
+  <div class="sticky-brand">O OLIVER BARBERSHOP</div>
+  <a href="https://wa.me/5511939318424?text=Ol%C3%A1!%20Vi%20a%20pr%C3%A9via%20do%20site%20da%20O%20Oliver%20Barbershop%20e%20quero%20saber%20mais." target="_blank" class="sticky-cta">📲 Quero meu site</a>
+</div>
+
+<section class="hero">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1600&q=80&fit=crop" alt="Barbearia O Oliver Barbershop" loading="eager">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Arte Masculina</div>
+    <h1>Barbearia<br><em>O Oliver Barbershop</em></h1>
+    <div class="hero-line"></div>
+    <p class="hero-sub">Cortes precisos, barba impecável e uma experiência que vai além do estilo. Bem-vindo ao seu espaço.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/5511939318424?text=Ol%C3%A1!%20Vi%20a%20pr%C3%A9via%20do%20site%20da%20O%20Oliver%20Barbershop%20e%20quero%20saber%20mais." target="_blank" class="btn-gold">✂ Agendar Agora</a>
+      <a href="#servicos" class="btn-outline">📋 Ver Serviços</a>
+    </div>
+  </div>
+</section>
+
+<div class="stats-strip">
+  <div class="stat"><div class="stat-num">4,9★</div><div class="stat-label">Nota no Google</div></div>
+  <div class="stat"><div class="stat-num">159</div><div class="stat-label">Avaliações</div></div>
+  <div class="stat"><div class="stat-num">Jardim Felicidade</div><div class="stat-label">São Paulo</div></div>
+  <div class="stat"><div class="stat-num">7 dias</div><div class="stat-label">Pra ficar no ar</div></div>
+</div>
+
+
+<!-- GALERIA -->
+<div class="section">
+  <div class="section-label"><h2>Galeria</h2></div>
+  <div class="carousel-wrap">
+    <div class="carousel-track" id="carTrack">
+      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1200&q=80&fit=crop" alt="Corte masculino" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1521490683712-35a1cb235d1c?w=1200&q=80&fit=crop" alt="Barba e cabelo" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1200&q=80&fit=crop" alt="Interior barbearia" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1534297635766-a262cdcb8ee4?w=1200&q=80&fit=crop" alt="Estilo masculino" loading="lazy">
+    </div>
+    <button class="car-btn car-prev" onclick="carMove(-1)">‹</button>
+    <button class="car-btn car-next" onclick="carMove(1)">›</button>
+    <div class="car-dots" id="carDots"></div>
+  </div>
+</div>
+
+<!-- SERVIÇOS -->
+<div class="section" id="servicos">
+  <div class="section-label"><h2>Serviços & Preços</h2></div>
+  <div class="services-grid">
+    <div class="service-item">
+      <div class="service-icon">✂</div>
+      <div class="service-title">Corte Clássico</div>
+      <div class="service-desc">Tesoura, máquina ou degradê. Finalização com produtos premium.</div>
+      <div class="service-price">R$ 45</div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">🪒</div>
+      <div class="service-title">Barba Completa</div>
+      <div class="service-desc">Toalha quente, navalha, modelagem e hidratação profissional.</div>
+      <div class="service-price">R$ 35</div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">👑</div>
+      <div class="service-title">Corte + Barba VIP</div>
+      <div class="service-desc">Combo completo com os dois serviços + sobrancelha grátis.</div>
+      <div class="service-price">R$ 70</div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">💆</div>
+      <div class="service-title">Hidratação Capilar</div>
+      <div class="service-desc">Tratamento profundo para cabelos ressecados ou danificados.</div>
+      <div class="service-price">R$ 55</div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">🎨</div>
+      <div class="service-title">Coloração</div>
+      <div class="service-desc">Pigmentação, luzes ou cobertura de grisalhos com produtos de alta qualidade.</div>
+      <div class="service-price">A partir de R$ 80</div>
+    </div>
+    <div class="service-item">
+      <div class="service-icon">⚡</div>
+      <div class="service-title">Progressiva Masculina</div>
+      <div class="service-desc">Alisar e domar o cabelo com durabilidade de até 4 meses.</div>
+      <div class="service-price">A partir de R$ 120</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOTOS -->
+<div class="section">
+  <div class="section-label"><h2>Nosso Trabalho</h2></div>
+  <div class="gallery-grid">
+    <img class="gal-img" src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400&h=400&fit=crop&q=80" alt="Corte" loading="lazy">
+    <img class="gal-img" src="https://images.unsplash.com/photo-1521490683712-35a1cb235d1c?w=400&h=400&fit=crop&q=80" alt="Barba" loading="lazy">
+    <img class="gal-img" src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=400&h=400&fit=crop&q=80" alt="Barbearia" loading="lazy">
+    <img class="gal-img" src="https://images.unsplash.com/photo-1534297635766-a262cdcb8ee4?w=400&h=400&fit=crop&q=80" alt="Estilo" loading="lazy">
+    <img class="gal-img" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&h=400&fit=crop&q=80" alt="Profissional" loading="lazy">
+    <img class="gal-img" src="https://images.unsplash.com/photo-1512864084360-7c0c4d7d3022?w=400&h=400&fit=crop&q=80" alt="Detalhe" loading="lazy">
+  </div>
+</div>
+
+<!-- AVALIAÇÃO REAL GOOGLE -->
+<div class="section">
+  <div class="section-label"><h2>Reputação no Google</h2></div>
+  <div style="text-align:center;padding:24px 0">
+    <div style="font-size:3.6rem;font-weight:800;line-height:1;color:var(--gold)">4,9<span style="font-size:1.6rem">★</span></div>
+    <div style="margin-top:10px;font-size:1.05rem;opacity:.85">159 avaliações reais no Google</div>
+    <div style="margin-top:4px;font-size:.82rem;opacity:.55">Jardim Felicidade · São Paulo</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-final">
+  <h2>Agende seu Horário<br><em>Hoje Mesmo</em></h2>
+  <p>Entre em contato pelo WhatsApp e garanta sua hora com um dos nossos experts. Rápido e sem complicação.</p>
+  <a href="https://wa.me/5511939318424?text=Ol%C3%A1!%20Vi%20a%20pr%C3%A9via%20do%20site%20da%20O%20Oliver%20Barbershop%20e%20quero%20saber%20mais." target="_blank" class="cta-wpp">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Agendar no WhatsApp
+  </a>
+</div>
+<br>
+
+<footer>
+  <strong>O Oliver Barbershop</strong> · Jardim Felicidade, São Paulo<br>
+  <span style="font-size:.7rem;opacity:.5">Prévia de demonstração</span>
+</footer>
+
+<a href="https://wa.me/5511939318424?text=Ol%C3%A1!%20Vi%20a%20pr%C3%A9via%20do%20site%20da%20O%20Oliver%20Barbershop%20e%20quero%20saber%20mais." target="_blank" class="fab" title="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+let carIdx=0;
+const carTrack=document.getElementById('carTrack');
+const carDots=document.getElementById('carDots');
+const carTotal=carTrack.children.length;
+for(let i=0;i<carTotal;i++){const d=document.createElement('div');d.className='car-dot'+(i===0?' active':'');d.onclick=()=>carGoto(i);carDots.appendChild(d);}
+function carGoto(n){carIdx=Math.max(0,Math.min(n,carTotal-1));carTrack.style.transform=`translateX(-${carIdx*100}%)`;document.querySelectorAll('.car-dot').forEach((d,i)=>d.classList.toggle('active',i===carIdx));}
+function carMove(dir){carGoto(carIdx+dir)}
+setInterval(()=>carGoto((carIdx+1)%carTotal),4500);
+</script>
+</body>
+</html>

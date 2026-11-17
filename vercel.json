@@ -16,6 +16,7 @@
     { "source": "/farmacia", "destination": "/Status/sites_vercel/drogaria-vida-manipulacao" },
     { "source": "/barbearia", "destination": "/Status/sites_vercel/dom-rafael-barbearia-vip" },
     { "source": "/pizzaria", "destination": "/Status/sites_vercel/pizzaria-bella-napoli" },
+    { "source": "/p/(.*)", "destination": "/Status/sites_vercel/p/$1" },
     { "source": "/loja", "destination": "/loja/index.html" },
     { "source": "/loja/(.*)", "destination": "/loja/$1" },
     { "source": "/preview/bella-sisters", "destination": "/clientes/bella-sisters-studio-de-beleza/site/index.html" },
