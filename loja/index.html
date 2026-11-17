@@ -43,6 +43,62 @@
         </div>
     </header>
 
+    <!-- Como Funciona -->
+    <section class="como-funciona">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tagline">Simples assim</span>
+                <h2 class="section-title">Como Pedir</h2>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card reveal">
+                    <div class="step-icon"><i class="fa-solid fa-list-check"></i></div>
+                    <div class="step-num">01</div>
+                    <h3>Escolha</h3>
+                    <p>Selecione o sabor, a quantidade e se prefere frito na hora ou congelado.</p>
+                </div>
+                <div class="step-arrow reveal"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-card reveal">
+                    <div class="step-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div class="step-num">02</div>
+                    <h3>Monte e Envie</h3>
+                    <p>Monte seu carrinho e envie o pedido direto pelo WhatsApp com um clique.</p>
+                </div>
+                <div class="step-arrow reveal"><i class="fa-solid fa-chevron-right"></i></div>
+                <div class="step-card reveal">
+                    <div class="step-icon"><i class="fa-solid fa-fire-flame-curved"></i></div>
+                    <div class="step-num">03</div>
+                    <h3>Receba Quentinho</h3>
+                    <p>Seus salgados chegam fresquinhos na sua porta ou ficam prontos pra retirada.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-target="50000">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Salgados entregues</span>
+                </div>
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-target="8">0</span>
+                    <span class="stat-label">Anos de experiência</span>
+                </div>
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-target="1200">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Clientes satisfeitos</span>
+                </div>
+                <div class="stat-item reveal">
+                    <span class="stat-num" data-target="8">0</span>
+                    <span class="stat-label">Sabores artesanais</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Main Content Grid -->
     <main class="container">
         
@@ -99,37 +155,11 @@
                 
                 <!-- Cento Packages Selector (3 Kits Lado a Lado) -->
                 <div class="cento-packages">
-                    <!-- Kit 30 -->
-                    <div class="package-card" id="package-30" onclick="setCentoSize(30)">
-                        <div class="package-header">
-                            <h3 class="package-title">Kit 30 Salgados</h3>
-                        </div>
-                        <div class="package-body">
-                            <div class="package-img-container">
-                                <img src="assets/caixa_salgados.jpg" alt="Caixa com Mini Salgados">
-                            </div>
-                            <div class="package-flavors">
-                                <span class="flavors-label">Vem na caixa:</span>
-                                <ul class="flavor-list">
-                                    <li><i class="fa-solid fa-circle-check"></i> Coxinha</li>
-                                    <li><i class="fa-solid fa-circle-check"></i> Bolinho de Queijo</li>
-                                    <li><i class="fa-solid fa-circle-check"></i> Bolinho de Carne</li>
-                                    <li><i class="fa-solid fa-circle-check"></i> Kibe</li>
-                                    <li><i class="fa-solid fa-circle-check"></i> Risole Presunto/Queijo</li>
-                                    <li><i class="fa-solid fa-circle-check"></i> Enroladinho de Salsicha</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="package-footer">
-                            <div class="package-price" id="price-card-30">R$ 54,90</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Kit 60 -->
-                    <div class="package-card active" id="package-60" onclick="setCentoSize(60)">
+                    <!-- 1 Cento -->
+                    <div class="package-card active" id="package-100" onclick="setCentoSize(100)">
                         <div class="package-header">
                             <span class="badge-pop"><i class="fa-solid fa-star"></i> Mais Pedido</span>
-                            <h3 class="package-title">Kit 60 Salgados</h3>
+                            <h3 class="package-title">1 Cento (100 un.)</h3>
                         </div>
                         <div class="package-body">
                             <div class="package-img-container">
@@ -148,14 +178,14 @@
                             </div>
                         </div>
                         <div class="package-footer">
-                            <div class="package-price" id="price-card-60">R$ 94,90</div>
+                            <div class="package-price" id="price-card-100">R$ 50,00</div>
                         </div>
                     </div>
                     
-                    <!-- Kit 90 -->
-                    <div class="package-card" id="package-90" onclick="setCentoSize(90)">
+                    <!-- 2 Centos -->
+                    <div class="package-card" id="package-200" onclick="setCentoSize(200)">
                         <div class="package-header">
-                            <h3 class="package-title">Kit 90 Salgados</h3>
+                            <h3 class="package-title">2 Centos (200 un.)</h3>
                         </div>
                         <div class="package-body">
                             <div class="package-img-container">
@@ -174,7 +204,33 @@
                             </div>
                         </div>
                         <div class="package-footer">
-                            <div class="package-price" id="price-card-90">R$ 134,90</div>
+                            <div class="package-price" id="price-card-200">R$ 100,00</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 3 Centos -->
+                    <div class="package-card" id="package-300" onclick="setCentoSize(300)">
+                        <div class="package-header">
+                            <h3 class="package-title">3 Centos (300 un.)</h3>
+                        </div>
+                        <div class="package-body">
+                            <div class="package-img-container">
+                                <img src="assets/caixa_salgados.jpg" alt="Caixa com Mini Salgados">
+                            </div>
+                            <div class="package-flavors">
+                                <span class="flavors-label">Vem na caixa:</span>
+                                <ul class="flavor-list">
+                                    <li><i class="fa-solid fa-circle-check"></i> Coxinha</li>
+                                    <li><i class="fa-solid fa-circle-check"></i> Bolinho de Queijo</li>
+                                    <li><i class="fa-solid fa-circle-check"></i> Bolinho de Carne</li>
+                                    <li><i class="fa-solid fa-circle-check"></i> Kibe</li>
+                                    <li><i class="fa-solid fa-circle-check"></i> Risole Presunto/Queijo</li>
+                                    <li><i class="fa-solid fa-circle-check"></i> Enroladinho de Salsicha</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="package-footer">
+                            <div class="package-price" id="price-card-300">R$ 150,00</div>
                         </div>
                     </div>
                 </div>
@@ -196,6 +252,40 @@
                             <img src="assets/catalogo.jpg" alt="Catálogo Oficial Lépore Salgados" style="width: 100%; max-width: 520px; border-radius: var(--radius-md); box-shadow: var(--shadow-lg); border: 4px solid var(--border-color); display: block;">
                         </a>
                         <span style="font-size: 0.85rem; color: var(--text-muted); margin-top: 10px;"><i class="fa-solid fa-magnifying-glass-plus"></i> Clique na imagem para abrir em tela cheia</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Depoimentos -->
+        <section class="section depoimentos-section">
+            <div class="section-header reveal">
+                <span class="section-tagline">O que dizem</span>
+                <h2 class="section-title">Quem já pediu, voltou!</h2>
+            </div>
+            <div class="depoimentos-grid">
+                <div class="depo-card reveal">
+                    <div class="depo-stars">★★★★★</div>
+                    <p class="depo-text">"Encomendei 2 centos pra minha festa e foi um sucesso! As coxinhas estavam crocantes e o recheio cheio. Todo mundo pediu o contato da Lépore."</p>
+                    <div class="depo-autor">
+                        <div class="depo-avatar">A</div>
+                        <div><strong>Amanda R.</strong><span>Festa de aniversário</span></div>
+                    </div>
+                </div>
+                <div class="depo-card reveal">
+                    <div class="depo-stars">★★★★★</div>
+                    <p class="depo-text">"Peço sempre os congelados pra ter em casa. Fritam igual ao frito na hora, crocante por fora e recheado por dentro. Atendimento super rápido no WhatsApp!"</p>
+                    <div class="depo-autor">
+                        <div class="depo-avatar">C</div>
+                        <div><strong>Carlos M.</strong><span>Cliente fiel</span></div>
+                    </div>
+                </div>
+                <div class="depo-card reveal">
+                    <div class="depo-stars">★★★★★</div>
+                    <p class="depo-text">"Melhor salgado do Jaraguá, sem dúvida. O risole de camarão é uma delícia, não tem igual. Recomendo de olhos fechados pra qualquer evento!"</p>
+                    <div class="depo-autor">
+                        <div class="depo-avatar">P</div>
+                        <div><strong>Patricia L.</strong><span>Chá de bebê</span></div>
                     </div>
                 </div>
             </div>

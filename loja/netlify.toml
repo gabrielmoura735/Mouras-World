@@ -1,7 +1,0 @@
-﻿[build]
-  publish = "loja"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200

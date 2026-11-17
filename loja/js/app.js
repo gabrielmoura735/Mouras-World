@@ -8,14 +8,16 @@ const SABORES = [
     { id: 'bolinho_carne', name: 'Bolinho de Carne', desc: 'Delicioso recheio de carne moída selecionada com temperos especiais da casa.' },
     { id: 'kibe', name: 'Kibe', desc: 'Trigo para kibe temperado com hortelã fresca e carne moída suculenta.' },
     { id: 'risole_presunto_queijo', name: 'Risole Presunto c/ Queijo', desc: 'Massa fofinha com recheio clássico de presunto e queijo derretido.' },
-    { id: 'enroladinho_salsicha', name: 'Enroladinho de Salsicha', desc: 'Salsicha selecionada envolta em uma massa macia e crocante.' }
+    { id: 'enroladinho_salsicha', name: 'Enroladinho de Salsicha', desc: 'Salsicha selecionada envolta em uma massa macia e crocante.' },
+    { id: 'coxinha_catupiry', name: 'Coxinha de Catupiry', desc: 'Nossa coxinha clássica com um toque irresistível de cream cheese cremoso.' },
+    { id: 'risole_camarao', name: 'Risole de Camarão', desc: 'Recheio sofisticado de camarão temperado com alho, limão e cheiro-verde.' }
 ];
 
 const PRECOS = {
     cento: {
-        30: { frito: 54.90, congelado: 44.90 },
-        60: { frito: 94.90, congelado: 84.90 },
-        90: { frito: 134.90, congelado: 124.90 }
+        100: { frito: 50.00, congelado: 45.00 },
+        200: { frito: 100.00, congelado: 90.00 },
+        300: { frito: 150.00, congelado: 135.00 }
     }
 };
 
@@ -25,14 +27,16 @@ const AVULSO_PRECOS = {
     bolinho_carne: { 1: 2.50, 6: 14.00, 12: 26.00 },
     kibe: { 1: 2.80, 6: 16.00, 12: 29.00 },
     risole_presunto_queijo: { 1: 2.80, 6: 16.00, 12: 29.00 },
-    enroladinho_salsicha: { 1: 2.80, 6: 16.00, 12: 29.00 }
+    enroladinho_salsicha: { 1: 2.80, 6: 16.00, 12: 29.00 },
+    coxinha_catupiry: { 1: 3.00, 6: 17.00, 12: 32.00 },
+    risole_camarao: { 1: 3.50, 6: 20.00, 12: 38.00 }
 };
 
 // Global App State
 let appState = {
     currentProductType: 'cento', // 'cento' or 'grande'
     currentPreparo: 'frito',      // 'frito' or 'congelado'
-    centoSize: 60,               // 30, 60, 90
+    centoSize: 100,               // 100, 200, 300
     centoDraftQty: 1,             // Quantity of centos to add
     centoDraft: {},               // Temporary counts for the cento builder: { saborId: count }
     avulsoDraft: {                 // Selected portion size (1, 6, 12) for each flavor in the menu
@@ -41,7 +45,9 @@ let appState = {
         bolinho_carne: 1,
         kibe: 1,
         risole_presunto_queijo: 1,
-        enroladinho_salsicha: 1
+        enroladinho_salsicha: 1,
+        coxinha_catupiry: 1,
+        risole_camarao: 1
     },
     avulsoDraftQty: {              // Selected package quantity (1, 2, 3...) to add to cart
         coxinha: 1,
@@ -49,7 +55,9 @@ let appState = {
         bolinho_carne: 1,
         kibe: 1,
         risole_presunto_queijo: 1,
-        enroladinho_salsicha: 1
+        enroladinho_salsicha: 1,
+        coxinha_catupiry: 1,
+        risole_camarao: 1
     },
     cart: []                      // Items in the cart
 };
@@ -118,7 +126,7 @@ function updatePriceBanner() {
     const priceValue = document.getElementById('current-price-value');
     
     // Update package card price tags dynamically
-    [30, 60, 90].forEach(size => {
+    [100, 200, 300].forEach(size => {
         const cardPriceEl = document.getElementById(`price-card-${size}`);
         if (cardPriceEl && PRECOS.cento[size]) {
             const price = PRECOS.cento[size][appState.currentPreparo];
@@ -132,7 +140,7 @@ function updatePriceBanner() {
     prepTitle.textContent = preparoText;
     
     if (appState.currentProductType === 'cento') {
-        const sizeText = appState.centoSize === 30 ? 'Kit 30 Unidades' : (appState.centoSize === 90 ? 'Kit 90 Unidades' : 'Kit 60 Unidades');
+        const sizeText = appState.centoSize === 100 ? '1 Cento (100 un.)' : (appState.centoSize === 300 ? '3 Centos (300 un.)' : '2 Centos (200 un.)');
         categoryTitle.textContent = sizeText;
         const price = PRECOS.cento[appState.centoSize][appState.currentPreparo];
         priceValue.textContent = `R$ ${price.toFixed(2).replace('.', ',')}`;
@@ -486,7 +494,7 @@ function updateCartUI() {
                 
             const centoQty = item.qty || 1;
             const itemTotal = item.price * centoQty;
-            const sizeText = item.centoSize === 30 ? 'Kit 30 Unidades' : (item.centoSize === 90 ? 'Kit 90 Unidades' : 'Kit 60 Unidades');
+            const sizeText = item.centoSize === 100 ? '1 Cento (100 un.)' : (item.centoSize === 300 ? '3 Centos (300 un.)' : '2 Centos (200 un.)');
                 
             itemCard.innerHTML = `
                 <div class="cart-item-header">
@@ -652,7 +660,7 @@ window.sendToWhatsApp = function(phoneNum) {
         const preparoText = item.preparo === 'frito' ? 'Frito' : 'Congelado';
         
         if (item.type === 'cento') {
-            const sizeText = item.centoSize === 30 ? 'Kit 30 Unidades' : (item.centoSize === 90 ? 'Kit 90 Unidades' : 'Kit 60 Unidades');
+            const sizeText = item.centoSize === 100 ? '1 Cento (100 un.)' : (item.centoSize === 300 ? '3 Centos (300 un.)' : '2 Centos (200 un.)');
             const qty = item.qty || 1;
             const itemTotal = item.price * qty;
             
@@ -762,10 +770,48 @@ function injectToastStyles() {
 }
 
 // Initialize on page load
+// Scroll reveal
+function initScrollReveal() {
+    const els = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+    els.forEach(el => observer.observe(el));
+}
+
+// Animated counters
+function initCounters() {
+    const counters = document.querySelectorAll('.stat-num');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            const target = parseInt(el.dataset.target, 10);
+            const duration = 1800;
+            const step = Math.ceil(target / (duration / 16));
+            let current = 0;
+            const timer = setInterval(() => {
+                current = Math.min(current + step, target);
+                el.textContent = current.toLocaleString('pt-BR');
+                if (current >= target) clearInterval(timer);
+            }, 16);
+            observer.unobserve(el);
+        });
+    }, { threshold: 0.5 });
+    counters.forEach(el => observer.observe(el));
+}
+
 window.addEventListener('DOMContentLoaded', () => {
     injectToastStyles();
     updatePriceBanner();
     renderCentoBuilder();
     renderGrandeBuilder();
     updateCartUI();
+    initScrollReveal();
+    initCounters();
 });

@@ -1604,3 +1604,159 @@ h1, h2, h3, h4 {
     gap: 4px;
 }
 
+/* ==========================================================================
+   SCROLL REVEAL
+   ========================================================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   COMO FUNCIONA
+   ========================================================================== */
+.como-funciona {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    padding: 72px 0;
+    color: var(--white);
+}
+.como-funciona .section-tagline { color: var(--secondary); }
+.como-funciona .section-title { color: var(--white); }
+.steps-grid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+.step-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--radius-lg);
+    padding: 32px 24px;
+    text-align: center;
+    flex: 1;
+    min-width: 200px;
+    max-width: 240px;
+    transition: var(--transition);
+    position: relative;
+}
+.step-card:hover {
+    background: rgba(255,255,255,0.14);
+    transform: translateY(-6px);
+}
+.step-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: var(--white);
+    margin: 0 auto 16px;
+}
+.step-num {
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.08);
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    line-height: 1;
+}
+.step-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.step-card p { font-size: 0.9rem; color: rgba(255,255,255,0.75); }
+.step-arrow {
+    font-size: 1.5rem;
+    color: var(--secondary);
+    opacity: 0.6;
+}
+@media (max-width: 600px) { .step-arrow { display: none; } }
+
+/* ==========================================================================
+   STATS
+   ========================================================================== */
+.stats-section {
+    background: var(--secondary);
+    padding: 48px 0;
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    text-align: center;
+}
+@media (max-width: 700px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+.stat-item { color: var(--white); }
+.stat-num {
+    display: block;
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1;
+}
+.stat-suffix { font-size: 2rem; font-weight: 800; color: var(--white); }
+.stat-label {
+    display: block;
+    font-size: 0.85rem;
+    margin-top: 6px;
+    opacity: 0.85;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   DEPOIMENTOS
+   ========================================================================== */
+.depoimentos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 32px;
+}
+@media (max-width: 768px) { .depoimentos-grid { grid-template-columns: 1fr; } }
+.depo-card {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+.depo-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.depo-stars { color: var(--secondary); font-size: 1.2rem; margin-bottom: 12px; letter-spacing: 2px; }
+.depo-text {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+.depo-autor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.depo-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--secondary);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.depo-autor strong { display: block; font-size: 0.95rem; }
+.depo-autor span { font-size: 0.8rem; color: var(--text-muted); }
+
