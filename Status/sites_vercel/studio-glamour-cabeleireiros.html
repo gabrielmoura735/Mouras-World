@@ -1,765 +1,327 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Studio Glamour & Beauty Spa — Studio de Beleza, Cabelo & Estética Feminina</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #07090e;
-      --bg-surface: #0f141f;
-      --bg-elevated: #161e2e;
-      --primary: #38bdf8;
-      --primary-glow: rgba(56, 189, 248, 0.35);
-      --accent: #10b981;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-glow: rgba(56, 189, 248, 0.4);
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --font-main: 'Plus Jakarta Sans', -apple-system, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-main);
-      overflow-x: hidden;
-      line-height: 1.6;
-      background-image: 
-        radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
-        radial-gradient(circle at 85% 75%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Glamour — Cabeleireiros & Estética</title>
+<meta name="description" content="Transformações reais, cabelos incríveis. Corte, coloração, tratamentos e estética no coração de SP. Agende agora.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0507;
+  --bg2: #110810;
+  --surface: #180e16;
+  --surface2: #1f1320;
+  --rose: #C2718F;
+  --rose2: #D9879F;
+  --gold: #D4A5B5;
+  --lilac: #BBA0C8;
+  --muted: #8A6B7A;
+  --text: #F9EEF4;
+  --dim: #5A4050;
+  --border: rgba(194,113,143,.2);
+  --border2: rgba(194,113,143,.38);
+  --glow: 0 0 32px rgba(194,113,143,.25);
+  --radius: 14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.6}
 
-    /* Top Floating Conversion Banner (Moura.AI Style) */
-    .closing-banner {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border-glow);
-      padding: 12px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    }
-    .banner-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 13px;
-    }
-    .pulse-dot {
-      width: 10px;
-      height: 10px;
-      background: #10b981;
-      border-radius: 50%;
-      box-shadow: 0 0 12px #10b981;
-      animation: pulse 1.8s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
-    }
-    .banner-info strong {
-      color: #fff;
-    }
-    .banner-cta {
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: #fff;
-      padding: 9px 18px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
-    }
-    .banner-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
-    }
+.sticky-bar{position:sticky;top:0;z-index:999;background:rgba(10,5,7,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.sticky-brand{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:700;color:var(--gold);font-style:italic}
+.sticky-cta{background:linear-gradient(135deg,#C2718F,#D9879F);color:#fff;padding:9px 18px;border-radius:8px;font-size:.82rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:opacity .2s;display:flex;align-items:center;gap:7px}
+.sticky-cta:hover{opacity:.88}
 
-    /* Header Nav */
-    header {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 24px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .logo-badge {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #38bdf8, #2563eb);
-      display: grid;
-      place-items: center;
-      font-weight: 900;
-      font-size: 18px;
-      color: #fff;
-      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
-    }
-    .brand-name {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: #fff;
-    }
-    .brand-city {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-    .header-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .header-btn:hover {
-      background: rgba(56, 189, 248, 0.1);
-      border-color: var(--primary);
-      color: var(--primary);
-    }
+.hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,5,7,.98) 0%,rgba(10,5,7,.45) 60%,rgba(10,5,7,.1) 100%)}
+.hero-content{position:relative;z-index:2;padding:0 24px 64px;max-width:780px;margin:0 auto;width:100%;text-align:center}
+.hero-badge{display:inline-block;background:rgba(194,113,143,.15);border:1px solid var(--border2);border-radius:100px;padding:5px 16px;font-size:.72rem;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,7vw,4rem);font-weight:700;line-height:1.1;margin-bottom:16px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:1rem;color:rgba(249,238,244,.6);max-width:460px;margin:0 auto 32px}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-rose{background:linear-gradient(135deg,#C2718F,#D9879F);color:#fff;padding:14px 28px;border-radius:9999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .22s;box-shadow:0 4px 20px rgba(194,113,143,.4);display:inline-flex;align-items:center;gap:8px}
+.btn-rose:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(194,113,143,.55)}
+.btn-outline{background:transparent;color:var(--text);border:1.5px solid rgba(249,238,244,.25);padding:13px 28px;border-radius:9999px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .22s;display:inline-flex;align-items:center;gap:8px}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
 
-    /* Hero Section */
-    .hero {
-      max-width: 1200px;
-      margin: 30px auto 60px;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 48px;
-      align-items: center;
-    }
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; margin-top: 10px; }
-    }
-    .tagline-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      color: #38bdf8;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      margin-bottom: 20px;
-    }
-    .hero h1 {
-      font-size: 44px;
-      font-weight: 900;
-      letter-spacing: -1.2px;
-      line-height: 1.15;
-      margin-bottom: 18px;
-      color: #fff;
-    }
-    .hero h1 span {
-      background: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero-desc {
-      font-size: 16px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 28px;
-    }
-    .badge-extra {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: #34d399;
-      padding: 8px 16px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 24px;
-    }
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, #38bdf8, #2563eb);
-      color: #fff;
-      padding: 14px 28px;
-      border-radius: 12px;
-      font-size: 15px;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.25s ease;
-      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.6);
-    }
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border);
-      color: #fff;
-      padding: 14px 24px;
-      border-radius: 12px;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    .btn-secondary:hover {
-      border-color: rgba(255, 255, 255, 0.2);
-      background: rgba(255, 255, 255, 0.08);
-    }
+.stats-strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 24px;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{text-align:center;padding:8px;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--gold);line-height:1}
+.stat-label{font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:4px}
 
-    /* 3D Visual Mesh Container */
-    .hero-visual {
-      position: relative;
-      height: 380px;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 1px solid var(--border-glow);
-      background: radial-gradient(circle at center, rgba(56, 189, 248, 0.15) 0%, rgba(15, 20, 31, 0.8) 70%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-    }
-    #meshCanvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-    .visual-overlay-card {
-      position: relative;
-      z-index: 2;
-      background: rgba(15, 20, 31, 0.88);
-      backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 24px;
-      border-radius: 18px;
-      width: 86%;
-      box-shadow: 0 16px 45px rgba(0,0,0,0.6);
-      animation: floatMotion 5s ease-in-out infinite;
-    }
-    @keyframes floatMotion {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
-    }
-    .glass-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(16, 185, 129, 0.18);
-      color: #34d399;
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
+.section{padding:72px 24px;max-width:1100px;margin:0 auto}
+.section-label{display:flex;align-items:center;gap:12px;margin-bottom:36px}
+.section-label h2{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;white-space:nowrap;color:var(--gold);font-style:italic}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
 
-    /* Stats Bar */
-    .stats-bar {
-      max-width: 1200px;
-      margin: 0 auto 70px;
-      padding: 0 24px;
-    }
-    .stats-inner {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 24px 36px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 24px;
-      text-align: center;
-    }
-    .stat-number {
-      font-size: 34px;
-      font-weight: 900;
-      color: #38bdf8;
-      letter-spacing: -0.5px;
-    }
-    .stat-label {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
+/* CAROUSEL */
+.carousel-wrap{position:relative;overflow:hidden;border-radius:var(--radius);aspect-ratio:16/9;background:var(--surface)}
+.carousel-track{display:flex;transition:transform .55s ease;height:100%}
+.carousel-track img{flex-shrink:0;width:100%;height:100%;object-fit:cover}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(10,5,7,.75);border:1px solid var(--border2);color:var(--gold);width:44px;height:44px;border-radius:50%;font-size:1.2rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;z-index:2}
+.car-btn:hover{background:var(--rose);border-color:var(--rose);color:#fff}
+.car-prev{left:14px}.car-next{right:14px}
+.car-dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:7px}
+.car-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .2s}
+.car-dot.active{background:var(--gold);width:22px;border-radius:4px}
 
-    /* Section Global */
-    section {
-      max-width: 1200px;
-      margin: 0 auto 80px;
-      padding: 0 24px;
-    }
-    .section-title {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    .section-title h2 {
-      font-size: 32px;
-      font-weight: 800;
-      letter-spacing: -0.8px;
-      color: #fff;
-      margin-bottom: 8px;
-    }
-    .section-title p {
-      color: var(--text-muted);
-      font-size: 15px;
-    }
+/* SERVIÇOS */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.service-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all .22s;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--rose),var(--lilac));opacity:0;transition:opacity .22s}
+.service-card:hover{transform:translateY(-3px);box-shadow:var(--glow);border-color:var(--border2)}
+.service-card:hover::before{opacity:1}
+.service-icon{font-size:1.6rem;margin-bottom:12px}
+.service-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:700;color:var(--gold);margin-bottom:6px}
+.service-desc{font-size:.83rem;color:var(--muted);line-height:1.55;margin-bottom:12px}
+.service-price{font-weight:700;font-size:.88rem;color:var(--rose2)}
 
-    /* Services Grid */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .service-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-    .service-card:hover {
-      border-color: var(--border-glow);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(56, 189, 248, 0.15);
-    }
-    .service-icon {
-      font-size: 34px;
-      margin-bottom: 16px;
-    }
-    .service-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 8px;
-    }
-    .service-desc {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
+/* GALERIA ANTES/DEPOIS */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.gallery-item{border-radius:var(--radius);overflow:hidden;aspect-ratio:3/4;position:relative}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.gallery-item:hover img{transform:scale(1.05)}
+.gallery-label{position:absolute;bottom:0;left:0;right:0;padding:12px;background:linear-gradient(to top,rgba(10,5,7,.85),transparent);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold)}
 
-    /* Reviews Section */
-    .reviews-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-    }
-    .review-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-    }
-    .stars {
-      color: #fbbf24;
-      font-size: 16px;
-      margin-bottom: 12px;
-    }
-    .review-text {
-      font-size: 14px;
-      color: #d1d5db;
-      font-style: italic;
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-    .review-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-    }
-    .author {
-      font-weight: 700;
-      color: #fff;
-    }
-    .badge-verified {
-      color: #34d399;
-      font-size: 11px;
-      font-weight: 600;
-    }
-    .review-time {
-      font-size: 11px;
-      color: #64748b;
-      margin-top: 4px;
-    }
+/* EQUIPE */
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.team-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;text-align:center;transition:all .22s}
+.team-card:hover{box-shadow:var(--glow);border-color:var(--border2)}
+.team-img{width:100%;height:200px;object-fit:cover;object-position:top}
+.team-info{padding:18px 16px}
+.team-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:var(--gold);margin-bottom:3px}
+.team-role{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+.team-tags{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
+.team-tag{background:rgba(194,113,143,.12);border:1px solid var(--border);border-radius:100px;padding:3px 10px;font-size:.7rem;color:var(--rose2)}
 
-    /* Final CTA */
-    .final-cta {
-      text-align: center;
-      margin-bottom: 80px;
-    }
-    .final-cta-box {
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(16, 185, 129, 0.08));
-      border: 1px solid var(--border-glow);
-      border-radius: 24px;
-      padding: 48px 24px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .final-cta-box h2 {
-      font-size: 32px;
-      font-weight: 800;
-      margin-bottom: 12px;
-      color: #fff;
-    }
-    .final-cta-box p {
-      color: var(--text-muted);
-      margin-bottom: 28px;
-      font-size: 15px;
-    }
+/* DEPOIMENTOS */
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.review-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:border-color .2s}
+.review-card:hover{border-color:var(--border2)}
+.review-stars{color:var(--rose2);font-size:.95rem;margin-bottom:12px}
+.review-text{font-size:.87rem;color:var(--muted);line-height:1.65;font-style:italic;margin-bottom:16px}
+.review-author{display:flex;align-items:center;gap:10px}
+.review-avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border2)}
+.review-name{font-weight:700;font-size:.85rem}.review-date{font-size:.7rem;color:var(--dim);margin-top:1px}
 
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 36px 24px;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 13px;
-    }
-    footer a {
-      color: var(--primary);
-      text-decoration: none;
-    }
+.cta-final{background:linear-gradient(135deg,var(--surface) 0%,#120409 100%);border:1px solid var(--border2);border-radius:20px;padding:52px 32px;text-align:center;margin:0 24px;position:relative;overflow:hidden}
+.cta-final::before{content:'✂';position:absolute;font-size:120px;opacity:.04;top:-10px;right:0}
+.cta-final h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,5vw,2.5rem);font-weight:700;font-style:italic;margin-bottom:12px;color:var(--gold)}
+.cta-final p{color:var(--muted);max-width:440px;margin:0 auto 28px;font-size:.9rem}
+.cta-wpp{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;padding:14px 36px;border-radius:9999px;font-weight:700;font-size:.95rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .22s;box-shadow:0 4px 20px rgba(37,211,102,.4)}
+.cta-wpp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.5)}
 
-    /* Floating WhatsApp Icon */
-    .floating-whatsapp {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      width: 58px;
-      height: 58px;
-      background: #25d366;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      font-size: 28px;
-      color: #fff;
-      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
-      z-index: 998;
-      text-decoration: none;
-      transition: all 0.25s ease;
-    }
-    .floating-whatsapp:hover {
-      transform: scale(1.08);
-    }
-  </style>
+.fab{position:fixed;bottom:24px;right:24px;z-index:999;background:linear-gradient(135deg,#25D366,#128C7E);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(37,211,102,.5);text-decoration:none;transition:all .22s}
+.fab:hover{transform:scale(1.1)}
+footer{text-align:center;padding:28px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:.78rem}
+@media(max-width:600px){.stats-strip{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:none}.stat:nth-child(3){border-top:1px solid var(--border)}.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
 </head>
 <body>
 
-  <!-- Top Floating Closing Banner (Moura.AI) -->
-  <div class="closing-banner">
-    <div class="banner-info">
-      <div class="pulse-dot"></div>
-      <div>
-        <strong>Prévia Interativa 10x:</strong> Desenvolvida com MotionSites & Spline 3D para <strong>Studio Glamour & Beauty Spa</strong>
-      </div>
-    </div>
-    <a href="https://wa.me/5511939318424?text=Ol%C3%A1%20Marquinhos%21%20Vi%20a%20pr%C3%A9via%20exclusiva%20do%20site%20da%20%2AStudio%20Glamour%20%26%20Beauty%20Spa%2A%20que%20voc%C3%AA%20preparou.%20Gostei%20muito%20da%20apresenta%C3%A7%C3%A3o%20e%20quero%20saber%20os%20detalhes%20para%20colocar%20no%20ar%20em%2024h%20com%20dom%C3%ADnio%20pr%C3%B3prio%21" target="_blank" class="banner-cta">
-      <span>🚀</span> Colocar no Ar em 24h com Marquinhos
-    </a>
-  </div>
+<div class="sticky-bar">
+  <div class="sticky-brand">✂ Studio Glamour</div>
+  <a href="https://wa.me/5511939318424?text=Ol%C3%A1%20Marquinhos%21%20Vi%20a%20pr%C3%A9via%20exclusiva%20do%20site%20do%20%2AStudio%20Glamour%2A%20que%20voc%C3%AA%20preparou.%20Adorei%20e%20quero%20saber%20os%20detalhes%20para%20colocar%20no%20ar%21" target="_blank" class="sticky-cta">📲 Quero meu site</a>
+</div>
 
-  <!-- Header -->
-  <header>
-    <div class="logo-area">
-      <div class="logo-badge">S</div>
-      <div>
-        <div class="brand-name">Studio Glamour & Beauty Spa</div>
-        <div class="brand-city">São Paulo - SP • Studio de Beleza, Cabelo & Estética Feminina</div>
-      </div>
-    </div>
-    <a href="https://wa.me/11939318424?text=Ol%C3%A1%21%20Vi%20a%20p%C3%A1gina%20da%20Studio%20Glamour%20%26%20Beauty%20Spa%20e%20gostaria%20de%20solicitar%20um%20atendimento%20priorit%C3%A1rio." target="_blank" class="header-btn">
-      <span>💬</span> Falar com a Recepção
-    </a>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div>
-      <div class="tagline-chip">✦ TRANSFORMAÇÃO CAPILAR & CUIDADO EXCLUSIVO</div>
-      <h1>Realce Sua Beleza com Tratamentos Capilares de Alto Padrão</h1>
-      <p class="hero-desc">Especialistas em mechas loiras, morena iluminada, cronograma capilar de luxo e escovas modeladas. Atendimento VIP com hora marcada.</p>
-      <div class="badge-extra">✨ Produtos Importados & Diagnóstico Capilar Gratuito</div>
-      <div class="hero-actions">
-        <a href="https://wa.me/11939318424?text=Ol%C3%A1%21%20Vi%20a%20p%C3%A1gina%20da%20Studio%20Glamour%20%26%20Beauty%20Spa%20e%20gostaria%20de%20solicitar%20um%20atendimento%20priorit%C3%A1rio." target="_blank" class="btn-primary">
-          <span>📅</span> Solicitar Horário Prioritário
-        </a>
-        <a href="#servicos" class="btn-secondary">
-          Conhecer Serviços
-        </a>
-      </div>
-    </div>
-
-    <div class="hero-visual">
-      <canvas id="meshCanvas"></canvas>
-      <div class="visual-overlay-card">
-        <div class="glass-pill">● REPUTAÇÃO MÁXIMA NO GOOGLE</div>
-        <div style="font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 4px;">4.9 ★★★★★</div>
-        <div style="font-size: 13px; color: #cbd5e1; margin-bottom: 16px;">Baseado em mais de 215 avaliações espontâneas de clientes em São Paulo - SP.</div>
-        <div style="display: flex; gap: 8px; font-size: 12px; color: #94a3b8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px;">
-          <span>✓ Atendimento 100% humanizado</span>
-          <span>•</span>
-          <span>✓ Tecnologia sem burocracia</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Stats Bar -->
-  <div class="stats-bar">
-    <div class="stats-inner">
-      <div>
-        <div class="stat-number">4.9 ★</div>
-        <div class="stat-label">Classificação no Google Maps</div>
-      </div>
-      <div>
-        <div class="stat-number">+215</div>
-        <div class="stat-label">Famílias & Clientes Atendidos</div>
-      </div>
-      <div>
-        <div class="stat-number">100%</div>
-        <div class="stat-label">Compromisso com o Paciente</div>
-      </div>
-      <div>
-        <div class="stat-number">&lt; 15 min</div>
-        <div class="stat-label">Tempo Médio de Resposta</div>
-      </div>
+<section class="hero">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600&q=80&fit=crop" alt="Studio Glamour" loading="eager">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✨ Corte · Coloração · Estética</div>
+    <h1>Sua melhor versão<br><em>começa aqui</em></h1>
+    <p class="hero-sub">Profissionais apaixonados, técnicas modernas e produtos premium. Cada visita é uma transformação completa.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/5511939318424?text=Oi%21%20Quero%20agendar%20no%20Studio%20Glamour%21" target="_blank" class="btn-rose">📅 Agendar Horário</a>
+      <a href="#servicos" class="btn-outline">💅 Ver Serviços</a>
     </div>
   </div>
+</section>
 
-  <!-- Services Section -->
-  <section id="servicos">
-    <div class="section-title">
-      <h2>Nossos Serviços Especializados</h2>
-      <p>Tratamentos e soluções de alto padrão pensados exclusivamente para você</p>
-    </div>
-    <div class="services-grid">
-      
-        <div class="service-card">
-          <div class="service-icon">💇‍♀️</div>
-          <div class="service-title">Mechas & Morena Iluminada</div>
-          <div class="service-desc">Técnicas modernas sem quebra dos fios, tonalidades personalizadas e brilho tridimensional.</div>
-        </div>
-        
-        <div class="service-card">
-          <div class="service-icon">✨</div>
-          <div class="service-title">Tratamentos & Reconstrução</div>
-          <div class="service-desc">Cronograma capilar profundo com marcas líderes mundiais para recuperar fios danificados.</div>
-        </div>
-        
-        <div class="service-card">
-          <div class="service-icon">💅</div>
-          <div class="service-title">Manicure, Pedicure & Nail Art</div>
-          <div class="service-desc">Unhas de gel, esmaltação em gel e spa dos pés com esterilização cirúrgica em autoclave.</div>
-        </div>
-        
-        <div class="service-card">
-          <div class="service-icon">💄</div>
-          <div class="service-title">Make & Penteados para Noivas/Eventos</div>
-          <div class="service-desc">Produção completa para formaturas, casamentos e festas com fixação prolongada 24h.</div>
-        </div>
-        
-    </div>
-  </section>
+<div class="stats-strip">
+  <div class="stat"><div class="stat-num">1.2k+</div><div class="stat-label">Clientes Felizes</div></div>
+  <div class="stat"><div class="stat-num">4.9★</div><div class="stat-label">Google Reviews</div></div>
+  <div class="stat"><div class="stat-num">12</div><div class="stat-label">Anos de Expertise</div></div>
+  <div class="stat"><div class="stat-num">5</div><div class="stat-label">Profissionais</div></div>
+</div>
 
-  <!-- Reviews Section -->
-  <section>
-    <div class="section-title">
-      <h2>O Que Dizem Nossos Clientes</h2>
-      <p>Depoimentos reais de quem confia no trabalho da Studio Glamour & Beauty Spa</p>
+<!-- GALERIA PRINCIPAL -->
+<div class="section">
+  <div class="section-label"><h2>Transformações em Destaque</h2></div>
+  <div class="carousel-wrap">
+    <div class="carousel-track" id="carTrack">
+      <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&q=80&fit=crop" alt="Salão" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1200&q=80&fit=crop" alt="Coloração" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1619451334792-150fd785ee74?w=1200&q=80&fit=crop" alt="Corte feminino" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=1200&q=80&fit=crop" alt="Escova" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=1200&q=80&fit=crop" alt="Tratamento" loading="lazy">
     </div>
-    <div class="reviews-container">
-      
-        <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <p class="review-text">"Fiz meu loiro dos sonhos aqui! Meu cabelo ficou super saudável e com uma cor incrível. Atendimento de princesa."</p>
-          <div class="review-meta">
-            <span class="author">Juliana Paes M.</span>
-            <span class="badge-verified">✓ Verificado no Google</span>
-          </div>
-          <div class="review-time">Há 5 dias</div>
-        </div>
-        
-        <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <p class="review-text">"Melhor salão da cidade. Pontuais, educadas e o resultado da morena iluminada superou minhas expectativas."</p>
-          <div class="review-meta">
-            <span class="author">Larissa Menezes</span>
-            <span class="badge-verified">✓ Verificado no Google</span>
-          </div>
-          <div class="review-time">Há 2 semanas</div>
-        </div>
-        
-        <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <p class="review-text">"Salão impecável e café maravilhoso. Fiz reconstrução capilar e meu cabelo renasceu. Super recomendo!"</p>
-          <div class="review-meta">
-            <span class="author">Carla Vasconcelos</span>
-            <span class="badge-verified">✓ Verificado no Google</span>
-          </div>
-          <div class="review-time">Há 3 semanas</div>
-        </div>
-        
+    <button class="car-btn car-prev" onclick="carMove(-1)">‹</button>
+    <button class="car-btn car-next" onclick="carMove(1)">›</button>
+    <div class="car-dots" id="carDots"></div>
+  </div>
+</div>
+
+<!-- SERVIÇOS -->
+<div class="section" id="servicos">
+  <div class="section-label"><h2>Nossos Serviços</h2></div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">✂</div>
+      <div class="service-title">Corte Feminino</div>
+      <div class="service-desc">Corte personalizado para seu rosto e estilo de vida, com finalização e penteado inclusos.</div>
+      <div class="service-price">A partir de R$ 80</div>
     </div>
-  </section>
-
-  <!-- Final CTA -->
-  <section class="final-cta">
-    <div class="final-cta-box">
-      <h2>Pronto para Ter a Melhor Experiência em São Paulo - SP?</h2>
-      <p>Entre em contato direto pelo WhatsApp. Nossa equipe está a postos para te responder com prioridade.</p>
-      <a href="https://wa.me/11939318424?text=Ol%C3%A1%21%20Vi%20a%20p%C3%A1gina%20da%20Studio%20Glamour%20%26%20Beauty%20Spa%20e%20gostaria%20de%20solicitar%20um%20atendimento%20priorit%C3%A1rio." target="_blank" class="btn-primary" style="font-size: 16px; padding: 18px 36px;">
-        <span>💬</span> Iniciar Atendimento sem Compromisso
-      </a>
+    <div class="service-card">
+      <div class="service-icon">🎨</div>
+      <div class="service-title">Coloração Completa</div>
+      <div class="service-desc">Tintura profissional L'Oréal ou Wella, cobertura total de fios brancos e tons vibrantes.</div>
+      <div class="service-price">A partir de R$ 150</div>
     </div>
-  </section>
+    <div class="service-card">
+      <div class="service-icon">✨</div>
+      <div class="service-title">Mechas & Balayage</div>
+      <div class="service-desc">Técnicas modernas de iluminação — babylights, balayage californiana e ombré hair.</div>
+      <div class="service-price">A partir de R$ 220</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💆</div>
+      <div class="service-title">Tratamento Capilar</div>
+      <div class="service-desc">Hidratação, reconstrução e nutrição com protocolos Cadiveu, Wella e Olaplex.</div>
+      <div class="service-price">A partir de R$ 90</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💃</div>
+      <div class="service-title">Progressiva / Escova</div>
+      <div class="service-desc">Progressivas à base de formol zero, escovas definitivas e escovas modeladoras.</div>
+      <div class="service-price">A partir de R$ 180</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💅</div>
+      <div class="service-title">Manicure & Pedicure</div>
+      <div class="service-desc">Unhas naturais, gel, acrílico e nail art. Procedimento higiênico com kit descartável.</div>
+      <div class="service-price">A partir de R$ 50</div>
+    </div>
+  </div>
+</div>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2026 Studio Glamour & Beauty Spa. Todos os direitos reservados. • São Paulo - SP</p>
-    <p style="margin-top: 8px; font-size: 11px; color: #64748b;">
-      Prévia de Alta Conversão desenvolvida por <a href="https://wa.me/5511939318424?text=Ol%C3%A1%20Marquinhos%21%20Vi%20a%20pr%C3%A9via%20exclusiva%20do%20site%20da%20%2AStudio%20Glamour%20%26%20Beauty%20Spa%2A%20que%20voc%C3%AA%20preparou.%20Gostei%20muito%20da%20apresenta%C3%A7%C3%A3o%20e%20quero%20saber%20os%20detalhes%20para%20colocar%20no%20ar%20em%2024h%20com%20dom%C3%ADnio%20pr%C3%B3prio%21" target="_blank">Marquinhos (Moura.AI)</a>
-    </p>
-  </footer>
+<!-- GALERIA ANTES/DEPOIS -->
+<div class="section">
+  <div class="section-label"><h2>Antes e Depois</h2></div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80&fit=crop" alt="Coloração" loading="lazy">
+      <div class="gallery-label">Coloração</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1619451334792-150fd785ee74?w=600&q=80&fit=crop" alt="Corte" loading="lazy">
+      <div class="gallery-label">Corte & Finalização</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=600&q=80&fit=crop" alt="Escova" loading="lazy">
+      <div class="gallery-label">Escova Modeladora</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=600&q=80&fit=crop" alt="Tratamento" loading="lazy">
+      <div class="gallery-label">Tratamento Premium</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80&fit=crop" alt="Mechas" loading="lazy">
+      <div class="gallery-label">Balayage</div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80&fit=crop" alt="Luzes" loading="lazy">
+      <div class="gallery-label">Luzes & Mechas</div>
+    </div>
+  </div>
+</div>
 
-  <!-- Floating WhatsApp Icon -->
-  <a href="https://wa.me/11939318424?text=Ol%C3%A1%21%20Vi%20a%20p%C3%A1gina%20da%20Studio%20Glamour%20%26%20Beauty%20Spa%20e%20gostaria%20de%20solicitar%20um%20atendimento%20priorit%C3%A1rio." target="_blank" class="floating-whatsapp" title="Falar no WhatsApp">
-    💬
+<!-- EQUIPE -->
+<div class="section">
+  <div class="section-label"><h2>Nossa Equipe</h2></div>
+  <div class="team-grid">
+    <div class="team-card">
+      <img class="team-img" src="https://i.pravatar.cc/400?img=47" alt="Fernanda">
+      <div class="team-info">
+        <div class="team-name">Fernanda Lima</div>
+        <div class="team-role">Diretora & Colorista</div>
+        <div class="team-tags"><span class="team-tag">Balayage</span><span class="team-tag">Coloração</span></div>
+      </div>
+    </div>
+    <div class="team-card">
+      <img class="team-img" src="https://i.pravatar.cc/400?img=25" alt="Carla">
+      <div class="team-info">
+        <div class="team-name">Carla Santos</div>
+        <div class="team-role">Especialista em Cortes</div>
+        <div class="team-tags"><span class="team-tag">Corte</span><span class="team-tag">Progressiva</span></div>
+      </div>
+    </div>
+    <div class="team-card">
+      <img class="team-img" src="https://i.pravatar.cc/400?img=32" alt="Juliana">
+      <div class="team-info">
+        <div class="team-name">Juliana Melo</div>
+        <div class="team-role">Estética & Unhas</div>
+        <div class="team-tags"><span class="team-tag">Nail Art</span><span class="team-tag">Gel</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEPOIMENTOS -->
+<div class="section">
+  <div class="section-label"><h2>Clientes Encantadas</h2></div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Fiz um balayage incrível com a Fernanda! Ficou exatamente como eu queria. Super cuidadosa com a saúde do cabelo. Já sou cliente fixa há 3 anos!"</p>
+      <div class="review-author"><img class="review-avatar" src="https://i.pravatar.cc/80?img=20" alt=""><div><div class="review-name">Amanda Silva</div><div class="review-date">há 2 dias</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Melhor salão da região! Atendimento impecável, ambiente luxuoso e resultado acima de qualquer expectativa. A progressiva durou meses!"</p>
+      <div class="review-author"><img class="review-avatar" src="https://i.pravatar.cc/80?img=35" alt=""><div><div class="review-name">Patricia Rocha</div><div class="review-date">há 1 semana</div></div></div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"A Carla fez um corte que transformou completamente minha autoestima. Profissional demais! E a manicure da Juliana é perfeição. Recomendo muito!"</p>
+      <div class="review-author"><img class="review-avatar" src="https://i.pravatar.cc/80?img=52" alt=""><div><div class="review-name">Mariana Costa</div><div class="review-date">há 2 semanas</div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-final">
+  <h2>Agende sua<br><em>Transformação</em></h2>
+  <p>Entre em contato pelo WhatsApp e garanta seu horário. Transformamos cabelos, elevamos autoestimas.</p>
+  <a href="https://wa.me/5511939318424?text=Ol%C3%A1%21%20Quero%20agendar%20um%20hor%C3%A1rio%20no%20Studio%20Glamour%21" target="_blank" class="cta-wpp">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Agendar Agora
   </a>
+</div>
+<br>
 
-  <!-- Interactive 3D Canvas Mesh Script (MotionSites Style com Física Reativa ao Mouse) -->
-  <script>
-    const canvas = document.getElementById('meshCanvas');
-    const ctx = canvas.getContext('2d');
-    let width, height;
+<footer>
+  <strong>Studio Glamour Cabeleireiros</strong> · Jaraguá, São Paulo · (11) 93931-8424<br>
+  <span style="font-size:.7rem;opacity:.5">Prévia de site — desenvolvido por <a href="https://wa.me/5511939318424" style="color:var(--gold)">Gabriel Moura · Mouras-World</a></span>
+</footer>
 
-    function resize() {
-      width = canvas.width = canvas.offsetWidth;
-      height = canvas.height = canvas.offsetHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
+<a href="https://wa.me/5511939318424?text=Ol%C3%A1%21%20Quero%20agendar%20no%20Studio%20Glamour%21" target="_blank" class="fab">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
-    let mouse = { x: width / 2, y: height / 2, active: false };
-    canvas.addEventListener('mousemove', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
-      mouse.active = true;
-    });
-    canvas.addEventListener('mouseleave', () => { mouse.active = false; });
-
-    let points = [];
-    const POINT_COUNT = 45;
-    for (let i = 0; i < POINT_COUNT; i++) {
-      points.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.9,
-        vy: (Math.random() - 0.5) * 0.9,
-        radius: Math.random() * 2.2 + 1,
-        baseColor: '#38bdf8'
-      });
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, width, height);
-
-      // Conexões de Linha com Gradiente
-      for (let i = 0; i < points.length; i++) {
-        for (let j = i + 1; j < points.length; j++) {
-          const dx = points[i].x - points[j].x;
-          const dy = points[i].y - points[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(points[i].x, points[i].y);
-            ctx.lineTo(points[j].x, points[j].y);
-            const alpha = (1 - dist / 120) * 0.7;
-            ctx.strokeStyle = `rgba(56, 189, 248, ${alpha})`;
-            ctx.lineWidth = 0.9;
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Conexão com o cursor do mouse (Efeito Físico Spline 3D)
-      if (mouse.active) {
-        for (let p of points) {
-          const dx = mouse.x - p.x;
-          const dy = mouse.y - p.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 140) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(mouse.x, mouse.y);
-            ctx.strokeStyle = `rgba(168, 85, 247, ${1 - dist / 140})`;
-            ctx.lineWidth = 1.2;
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Partículas
-      for (let p of points) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = p.baseColor;
-        ctx.shadowColor = '#38bdf8';
-        ctx.shadowBlur = 10;
-        ctx.fill();
-
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
-      }
-
-      requestAnimationFrame(draw);
-    }
-    draw();
-  </script>
+<script>
+let carIdx=0;
+const carTrack=document.getElementById('carTrack');
+const carDots=document.getElementById('carDots');
+const carTotal=carTrack.children.length;
+for(let i=0;i<carTotal;i++){const d=document.createElement('div');d.className='car-dot'+(i===0?' active':'');d.onclick=()=>carGoto(i);carDots.appendChild(d);}
+function carGoto(n){carIdx=Math.max(0,Math.min(n,carTotal-1));carTrack.style.transform=`translateX(-${carIdx*100}%)`;document.querySelectorAll('.car-dot').forEach((d,i)=>d.classList.toggle('active',i===carIdx));}
+function carMove(dir){carGoto(carIdx+dir)}
+setInterval(()=>carGoto((carIdx+1)%carTotal),4500);
+</script>
 </body>
 </html>
