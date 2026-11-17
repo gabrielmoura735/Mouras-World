@@ -1,0 +1,126 @@
+{
+ "nome": "Haipets Center Mahoo",
+ "slug": "haipets-center-mahoo",
+ "categoria": "Pet Shop",
+ "endereco": "Haipets Center Mahoo - Av. Mutinga, 701 - Vila Pirituba, São Paulo - SP, 05154-000",
+ "endereco_partes": {
+  "borough": "Vila Pirituba",
+  "street": "Av. Mutinga, 701",
+  "city": "São Paulo",
+  "postal_code": "05154-000",
+  "state": "São Paulo",
+  "country": "BR"
+ },
+ "telefone": "(11) 96920-6455",
+ "celular": true,
+ "whatsapp": "https://wa.me/5511969206455",
+ "horarios": {
+  "domingo": [
+   "Fechado"
+  ],
+  "quarta-feira": [
+   "09:00–19:00"
+  ],
+  "quinta-feira": [
+   "09:00–19:00"
+  ],
+  "segunda-feira": [
+   "09:00–19:00"
+  ],
+  "sexta-feira": [
+   "09:00–15:00"
+  ],
+  "sábado": [
+   "09:00–18:00"
+  ],
+  "terça-feira": [
+   "09:00–19:00"
+  ]
+ },
+ "nota": 4.7,
+ "avaliacoes": 766,
+ "por_estrela": {
+  "1": 7,
+  "2": 4,
+  "3": 31,
+  "4": 129,
+  "5": 595
+ },
+ "descricao": "",
+ "comodidades": [
+  {
+   "id": "accessibility",
+   "name": "Acessibilidade",
+   "options": [
+    {
+     "name": "Entrada com acessibilidade para pessoas em cadeira de rodas",
+     "enabled": true
+    },
+    {
+     "name": "Estacionamento com acessibilidade para pessoas em cadeira de rodas",
+     "enabled": true
+    }
+   ]
+  }
+ ],
+ "website": "https://www.instagram.com/mahoopetshop/",
+ "tipo_site": "instagram",
+ "maps": "https://www.google.com/maps/place/Haipets+Center+Mahoo/data=!4m7!3m6!1s0x94cef938b3f03907:0x6c4363b9abcc071e!8m2!3d-23.4881389!4d-46.7338352!16s%2Fg%2F1v5_bkwd!19sChIJBznwszj5zpQRHgfMq7ljQ2w?authuser=0&hl=pt-BR&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1",
+ "lat": "-23.488139",
+ "lon": "-46.733835",
+ "plus_code": "G768+PF Vila Pirituba, São Paulo - SP",
+ "faixa_preco": "",
+ "dono": {
+  "id": "110709861046003690827",
+  "name": "Haipets Center Mahoo (proprietário)",
+  "link": "https://www.google.com/maps/contrib/110709861046003690827"
+ },
+ "reservas": [],
+ "pedido_online": [],
+ "cardapio": {
+  "link": "",
+  "source": ""
+ },
+ "avaliacoes_texto": [
+  {
+   "nome": "ALEXANDRE TAKARA",
+   "nota": 5,
+   "quando": "2 semanas atrás",
+   "texto": "Ótimo atendimento , ampla variedade de produtos e  muito completo",
+   "fotos": 0
+  },
+  {
+   "nome": "Renata Santos",
+   "nota": 5,
+   "quando": "2 semanas atrás",
+   "texto": "Adoro fazer as compras das minhas filhas 🤭., tem um bom preço, prestam um bom atendimento. Uma ampla variedade de produtos.",
+   "fotos": 0
+  },
+  {
+   "nome": "Vitoria Carolina",
+   "nota": 5,
+   "quando": "11 meses atrás",
+   "texto": "Quero agradecer de todo meu coração a vendedora Kyhara, extremamente simpática e atenciosa um amor de pessoa. Minha cachorinha fez cirurgia de castração e ela foi super solicita e simpática me ajudando e me auxiliando, esclareceu todas as minhas dúvidas, comprei tudo que eu precisava pelo whast e me entregaram no conforto de casa,vendedora maravilhosa e a loja também, muitas variedades amei essa loja se tornou a minha favorita. Gratidão a todos os envolvidos nessa compra o atendimento foi nota mil.",
+   "fotos": 0
+  },
+  {
+   "nome": "Shirley Delboni",
+   "nota": 5,
+   "quando": "4 semanas atrás",
+   "texto": "Grande variedade de produtos,  com bons preços.",
+   "fotos": 0
+  },
+  {
+   "nome": "Marcos Appolinario",
+   "nota": 5,
+   "quando": "2 meses atrás",
+   "texto": "Lugar limpo, tudo organizado,  bons preços,  atendimento ótimo.",
+   "fotos": 0
+  }
+ ],
+ "fonte_csv": "da54dd6d-5461-4c93-86a4-68cddbff9914.csv",
+ "fotos_baixadas": [
+  "00-capa-google.jpg"
+ ],
+ "mosaico": "C:\\Users\\User\\Desktop\\Projetos\\Marquinhos\\clientes\\haipets-center-mahoo\\pesquisa\\fotos\\mosaico.png"
+}

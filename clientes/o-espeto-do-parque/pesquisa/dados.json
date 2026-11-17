@@ -1,0 +1,130 @@
+{
+ "nome": "O Espeto do Parque",
+ "slug": "o-espeto-do-parque",
+ "categoria": "Churrascaria",
+ "endereco": "O Espeto do Parque - Rua Celestino Marinelli, 55 - Vila Pirituba, São Paulo - SP, 05126-120",
+ "endereco_partes": {
+  "borough": "Vila Pirituba",
+  "street": "Rua Celestino Marinelli, 55",
+  "city": "São Paulo",
+  "postal_code": "05126-120",
+  "state": "São Paulo",
+  "country": "BR"
+ },
+ "telefone": "(11) 91612-2716",
+ "celular": true,
+ "whatsapp": "https://wa.me/5511916122716",
+ "horarios": {
+  "domingo": [
+   "12:00–18:00"
+  ],
+  "quarta-feira": [
+   "12:00–23:00"
+  ],
+  "quinta-feira": [
+   "12:00–23:00"
+  ],
+  "segunda-feira": [
+   "12:00–16:00"
+  ],
+  "sexta-feira": [
+   "12:00–00:00"
+  ],
+  "sábado": [
+   "12:00–00:00"
+  ],
+  "terça-feira": [
+   "12:00–23:00"
+  ]
+ },
+ "nota": 4.7,
+ "avaliacoes": 164,
+ "por_estrela": {
+  "1": 6,
+  "2": 1,
+  "3": 3,
+  "4": 14,
+  "5": 140
+ },
+ "descricao": "",
+ "comodidades": [
+  {
+   "id": "accessibility",
+   "name": "Acessibilidade",
+   "options": [
+    {
+     "name": "Assento com acessibilidade para pessoas em cadeira de rodas",
+     "enabled": true
+    },
+    {
+     "name": "Entrada com acessibilidade para pessoas em cadeira de rodas",
+     "enabled": true
+    }
+   ]
+  }
+ ],
+ "website": "https://instagram.com/oespetodoparque55?igshid=YmMyMTA2M2Y=",
+ "tipo_site": "instagram",
+ "maps": "https://www.google.com/maps/place/O+Espeto+do+Parque/data=!4m7!3m6!1s0x94cef9338b4b8bb7:0xc3cfaa6ce31abda3!8m2!3d-23.5002397!4d-46.7402842!16s%2Fg%2F11s8yq7h16!19sChIJt4tLizP5zpQRo70a42yqz8M?authuser=0&hl=pt-BR&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1",
+ "lat": "-23.500240",
+ "lon": "-46.740284",
+ "plus_code": "F7X5+WV São Paulo",
+ "faixa_preco": "",
+ "dono": {
+  "id": "113306506751667145029",
+  "name": "O Espeto do Parque (proprietário)",
+  "link": "https://www.google.com/maps/contrib/113306506751667145029"
+ },
+ "reservas": [],
+ "pedido_online": [],
+ "cardapio": {
+  "link": "",
+  "source": ""
+ },
+ "avaliacoes_texto": [
+  {
+   "nome": "Cassio Chan",
+   "nota": 5,
+   "quando": "3 meses atrás",
+   "texto": "Barzinho especializados em espetinhos, com ambiente descontraido e agradavel.\nTem bastante opcoes e variedades de espetinhos, porcoes e hamburgeres. E tudo bem feito e gostoso.\nTeve musica ao vivo na sexta feira.\nFomos muito bem atendidos,\nUnico ponto negativo foi que o garcom sem querer derrubou o copo de cerveja da minha madrinha e molhou tudo, se desculparam e limparam tudo, acontece, mas poderiam repor a cerveja para ela, que ficou sem.",
+   "fotos": 4
+  },
+  {
+   "nome": "Rogério Santos",
+   "nota": 1,
+   "quando": "um mês atrás",
+   "texto": "Pedi uma feijoada média pelo Ifood, ao receber fiquei extremamente desapontada, primeiro porque a comida veio fria, segundo porque a porção de feijoada média é minúscula, pelo valor cobrado seria muito bem servida com minha família em qualquer outro estabelecimento. Indignada expressei minha insatisfação, mas simplesmente disseram que o pedido foi enviado corretamente. Sem problemas, não faço questão alguma de ser ressarcida pelo valor que paguei, simplesmente nunca mais comprarei algo do Espeto do Parque, mas lamento que outros clientes serão desapontados como eu, uma tremenda palhaçada.",
+   "fotos": 0
+  },
+  {
+   "nome": "Ana Paula Dos Reis Silva",
+   "nota": 5,
+   "quando": "um mês atrás",
+   "texto": "Comoda maravilhosa, bem temperada , tudo fresquinho. Os atendentes muito atenciosos, e se mostram preocupados com o nosso conforto e satisfaçao! Valeu a pena",
+   "fotos": 0
+  },
+  {
+   "nome": "DARIPLAST EMPRESA",
+   "nota": 5,
+   "quando": "3 meses atrás",
+   "texto": "Fui com minha família em um dia de música ao vivo e foi ótimo. O som estava na medida certa, deu para conversar tranquilamente durante toda a noite. Ambiente agradável, atendimento atencioso e comida muito boa. Voltaremos com certeza!",
+   "fotos": 0
+  },
+  {
+   "nome": "Anderson Correia",
+   "nota": 5,
+   "quando": "3 meses atrás",
+   "texto": "Minha experiência foi bastante positiva.\nO Ambiente é agradável e acolhedor, a comida e gostosa os espetos são de ótima qualidade e muito saborosos.\nE por fim o atendimento, o pessoal mandam bem, cerveja gelada e tudo bem rapidinho até a mesa.",
+   "fotos": 0
+  }
+ ],
+ "fonte_csv": "b4fdff3f-1d54-4169-bb1d-53e4cbeb1bd9.csv",
+ "fotos_baixadas": [
+  "00-capa-google.jpg",
+  "01-avaliacao.jpg",
+  "02-avaliacao.jpg",
+  "03-avaliacao.jpg",
+  "04-avaliacao.jpg"
+ ],
+ "mosaico": "C:\\Users\\User\\Desktop\\Projetos\\Marquinhos\\clientes\\o-espeto-do-parque\\pesquisa\\fotos\\mosaico.png"
+}

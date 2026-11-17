@@ -1,0 +1,37 @@
+[
+  {
+    "id": "fogao-de-ouro-churrascaria",
+    "nome": "Churrascaria & Steakhouse Fogo de Ouro",
+    "nicho": "Churrascaria & Cortes Nobres",
+    "arquivo": "fogao-de-ouro-churrascaria.html",
+    "url_local": "previas/fogao-de-ouro-churrascaria.html"
+  },
+  {
+    "id": "studio-glamour-cabeleireiros",
+    "nome": "Studio Glamour & Beauty Spa",
+    "nicho": "Cabeleireiro & Studio de Beleza",
+    "arquivo": "studio-glamour-cabeleireiros.html",
+    "url_local": "previas/studio-glamour-cabeleireiros.html"
+  },
+  {
+    "id": "drogaria-vida-manipulacao",
+    "nome": "Drogaria & Farmácia de Manipulação Vida",
+    "nicho": "Farmácia & Manipulação",
+    "arquivo": "drogaria-vida-manipulacao.html",
+    "url_local": "previas/drogaria-vida-manipulacao.html"
+  },
+  {
+    "id": "dom-rafael-barbearia-vip",
+    "nome": "Barbearia Dom Rafael VIP",
+    "nicho": "Barbearia Clássica & Estética",
+    "arquivo": "dom-rafael-barbearia-vip.html",
+    "url_local": "previas/dom-rafael-barbearia-vip.html"
+  },
+  {
+    "id": "pizzaria-bella-napoli",
+    "nome": "Pizzaria Artesanal Bella Napoli",
+    "nicho": "Restaurante & Pizzaria",
+    "arquivo": "pizzaria-bella-napoli.html",
+    "url_local": "previas/pizzaria-bella-napoli.html"
+  }
+]

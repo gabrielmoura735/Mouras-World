@@ -1,0 +1,20 @@
+[
+  {
+    "id": "guia-renda-ia-sem-estoque",
+    "nome": "Guia Prático: Renda com IA & Vendas Sem Estoque (Método 2026)",
+    "preco": "47,00",
+    "margem": "98%",
+    "formato": "E-book em PDF Interativo + Planilha de Mineração + Pack de Prompts",
+    "arquivo": "C:\\Users\\User\\Desktop\\Projetos\\Marquinhos\\Status\\infoprodutos\\guia-renda-ia-sem-estoque.html",
+    "url_relativa": "infoprodutos/guia-renda-ia-sem-estoque.html"
+  },
+  {
+    "id": "pack-100-prompts-fechamento-b2b",
+    "nome": "Pack 100 Prompts de Ouro para Fechamento de Vendas B2B",
+    "preco": "27,00",
+    "margem": "98%",
+    "formato": "Documento Digital + Notion Dashboard + Roteiros Prontos",
+    "arquivo": "C:\\Users\\User\\Desktop\\Projetos\\Marquinhos\\Status\\infoprodutos\\pack-100-prompts-fechamento-b2b.html",
+    "url_relativa": "infoprodutos/pack-100-prompts-fechamento-b2b.html"
+  }
+]

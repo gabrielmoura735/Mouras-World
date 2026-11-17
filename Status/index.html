@@ -1,0 +1,2651 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moura.AI Status — Motor Autônomo de Caça B2B (Padrão Vagner Mazzeo & Abacus AI)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #06090e;
+      --bg-surface: #0c131f;
+      --bg-elevated: #131d2e;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(56, 189, 248, 0.35);
+      --primary: #38bdf8;
+      --primary-glow: rgba(56, 189, 248, 0.2);
+      --success: #10b981;
+      --success-glow: rgba(16, 185, 129, 0.2);
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --purple: #a855f7;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 90% 85%, rgba(16, 185, 129, 0.06) 0%, transparent 45%);
+    }
+
+    /* Top Bar */
+    header {
+      background: rgba(12, 19, 31, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 16px 32px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #0284c7, #10b981);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: #fff;
+      font-size: 22px;
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    .brand-badge {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--primary-glow);
+      color: var(--primary);
+      border: 1px solid var(--border-accent);
+      font-family: var(--font-mono);
+      font-weight: 700;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-top {
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    .btn-top:hover {
+      border-color: var(--primary);
+      box-shadow: 0 0 14px var(--primary-glow);
+    }
+
+    .btn-export {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #fff;
+      border: none;
+      font-weight: 700;
+    }
+    .btn-export:hover {
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+    }
+
+    /* Main Container */
+    main {
+      flex: 1;
+      padding: 32px;
+      max-width: 1720px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Centro de Caça Ativa */
+    .hunter-panel {
+      background: linear-gradient(180deg, rgba(19, 29, 46, 0.8) 0%, rgba(12, 19, 31, 0.95) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .hunter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hunter-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hunter-tag {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+
+    .hunter-form {
+      display: grid;
+      grid-template-columns: 1.4fr 1.4fr 1.2fr auto;
+      gap: 12px;
+      align-items: flex-end;
+    }
+
+    @media (max-width: 1024px) {
+      .hunter-form {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 640px) {
+      .hunter-form {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .input-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .hunter-input, .hunter-select {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: all 0.2s;
+    }
+    .hunter-input:focus, .hunter-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 12px var(--primary-glow);
+    }
+
+    .btn-hunt {
+      background: linear-gradient(135deg, #0284c7, #10b981);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      white-space: nowrap;
+      height: 44px;
+    }
+    .btn-hunt:hover {
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+      transform: translateY(-1px);
+    }
+    .btn-hunt:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Radar Animation Terminal */
+    .radar-terminal {
+      background: #020408;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: #38bdf8;
+      display: none;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .radar-spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(56, 189, 248, 0.3);
+      border-top-color: #38bdf8;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Top KPIs */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+    }
+
+    .kpi-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+    .kpi-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--card-color, var(--primary));
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .kpi-value {
+      font-size: 28px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: #fff;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Filters Section */
+    .filter-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .search-box {
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 14px 18px 14px 44px;
+      border-radius: 12px;
+      font-size: 14px;
+      outline: none;
+      font-family: var(--font-sans);
+    }
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 16px var(--primary-glow);
+    }
+    .search-icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pill-btn:hover {
+      color: #fff;
+      border-color: var(--primary);
+    }
+    .pill-btn.active {
+      background: var(--primary-glow);
+      color: var(--primary);
+      border-color: var(--border-accent);
+    }
+
+    /* Table */
+    .table-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      overflow-x: auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    thead {
+      background: rgba(19, 29, 46, 0.7);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    th {
+      padding: 14px 16px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background 0.15s;
+    }
+    tbody tr:hover {
+      background: rgba(56, 189, 248, 0.04);
+    }
+
+    td {
+      padding: 14px 16px;
+      vertical-align: middle;
+    }
+
+    .company-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .company-name {
+      font-weight: 800;
+      color: #fff;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .company-cnpj {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .company-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .decisor-cell {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .decisor-name {
+      font-weight: 700;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .decisor-cargo {
+      font-size: 11px;
+      color: #38bdf8;
+    }
+
+    .badge-nicho {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: var(--bg-elevated);
+      color: var(--primary);
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+    }
+
+    .badge-new {
+      background: #10b981;
+      color: #000;
+      font-size: 9px;
+      font-weight: 900;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+    }
+
+    /* Technical Chips */
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      max-width: 220px;
+    }
+
+    .chip {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      white-space: nowrap;
+    }
+    .chip-ok { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .chip-bad { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .chip-warn { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+
+    /* Opportunity & Ticket */
+    .opp-box {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      max-width: 240px;
+    }
+    .opp-service {
+      font-weight: 700;
+      color: #f1f5f9;
+      font-size: 12px;
+      line-height: 1.3;
+    }
+    .opp-ticket {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #34d399;
+      font-weight: 700;
+    }
+
+    /* Score Meter */
+    .score-badge {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      padding: 4px 9px;
+      border-radius: 8px;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .score-high { background: rgba(16, 185, 129, 0.15); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
+    .score-mid { background: rgba(245, 158, 11, 0.15); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3); }
+    .score-low { background: rgba(239, 68, 68, 0.15); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.3); }
+
+    /* Status Select */
+    .status-select {
+      background: var(--bg-elevated);
+      color: #fff;
+      border: 1px solid var(--border-subtle);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      outline: none;
+      cursor: pointer;
+    }
+
+    /* Actions Cell */
+    .actions-cell {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .btn-action {
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s;
+      border: none;
+      white-space: nowrap;
+    }
+
+    .btn-wa {
+      background: #25D366;
+      color: #000;
+    }
+    .btn-wa:hover {
+      box-shadow: 0 0 12px rgba(37, 211, 102, 0.4);
+      transform: scale(1.02);
+    }
+
+    .btn-email {
+      background: #ea4335;
+      color: #fff;
+    }
+    .btn-email:hover {
+      box-shadow: 0 0 12px rgba(234, 67, 53, 0.4);
+      transform: scale(1.02);
+    }
+
+    .btn-detail {
+      background: var(--bg-elevated);
+      color: var(--primary);
+      border: 1px solid var(--border-subtle);
+    }
+    .btn-detail:hover {
+      border-color: var(--primary);
+      background: var(--primary-glow);
+    }
+
+    /* Drawer Modal */
+    .drawer-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      display: none;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: 100%;
+      max-width: 660px;
+      background: #090f1a;
+      border-left: 1px solid var(--border-subtle);
+      z-index: 101;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -10px 0 50px rgba(0, 0, 0, 0.9);
+    }
+    .drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 16px;
+    }
+
+    .drawer-close {
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .drawer-close:hover { color: #fff; }
+
+    /* Drawer Tabs */
+    .drawer-tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: transparent;
+      color: var(--text-muted);
+      border: none;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .tab-btn.active {
+      background: var(--primary-glow);
+      color: var(--primary);
+    }
+
+    .service-box {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .script-box {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .script-text {
+      background: var(--bg-base);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #e2e8f0;
+      white-space: pre-wrap;
+      user-select: all;
+      max-height: 280px;
+      overflow-y: auto;
+    }
+
+    .btn-copy {
+      background: var(--bg-surface);
+      color: var(--primary);
+      border: 1px solid var(--border-accent);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-copy:hover {
+      background: var(--primary);
+      color: #000;
+    }
+  
+    /* Live Modal Preview & Device Frame (MotionSites & Spline Style) */
+    .btn-preview-site {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18) 0%, rgba(2, 132, 199, 0.28) 100%);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-preview-site:hover {
+      background: #38bdf8;
+      color: #000;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.6);
+      transform: translateY(-1px);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: none;
+    }
+    .modal-overlay.active { display: block; }
+
+    .modal-previa {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0.95);
+      width: 94vw;
+      max-width: 1250px;
+      height: 90vh;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-accent);
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 189, 248, 0.25);
+      z-index: 210;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-previa.active {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-previa-header {
+      background: rgba(19, 29, 46, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .device-toggle {
+      display: flex;
+      background: var(--bg-base);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 3px;
+    }
+    .device-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .device-btn.active {
+      background: var(--primary);
+      color: #000;
+    }
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .modal-close-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+    .modal-previa-body {
+      flex: 1;
+      background: #030712;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 16px;
+    }
+    .device-frame {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      background: #000;
+      overflow: hidden;
+    }
+    .device-mobile {
+      width: 414px;
+      height: 100%;
+      max-height: 800px;
+      border: 12px solid #1e293b;
+      border-radius: 44px;
+      position: relative;
+    }
+    .device-desktop {
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+    }
+    .device-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #07090e;
+    }
+
+    /* Config Modal */
+    .modal-config {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0.95);
+      width: 90vw;
+      max-width: 520px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-accent);
+      border-radius: 18px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 189, 248, 0.2);
+      z-index: 220;
+      display: none;
+      overflow: hidden;
+    }
+    .modal-config.active { display: block; }
+    .modal-config-header {
+      background: var(--bg-elevated);
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-preview-banner {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(16, 185, 129, 0.15) 100%);
+      border: 1px solid var(--border-accent);
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* Module Switcher Tabs */
+    .module-tabs-nav {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .module-tab-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 12px 22px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+    }
+    .module-tab-btn:hover {
+      background: var(--bg-elevated);
+      color: #fff;
+      border-color: rgba(255,255,255,0.2);
+    }
+    .module-tab-btn.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(16, 185, 129, 0.15));
+      border-color: var(--primary);
+      color: #fff;
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+    .module-tab-btn.tab-vendas.active {
+      border-color: #10b981;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+    .tab-badge {
+      background: #ef4444;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 2px 7px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Central de Vendas View */
+    .vendas-container {
+      display: none;
+    }
+    .vendas-container.active {
+      display: block;
+    }
+    .vendas-hero-banner {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(56, 189, 248, 0.08) 50%, rgba(168, 85, 247, 0.08) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .vendas-hero-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .vendas-hero-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      max-width: 650px;
+      line-height: 1.5;
+    }
+    .vendas-section-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      margin: 32px 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .vendas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+    .venda-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+    }
+    .venda-card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    }
+    .venda-card-img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+      background: #000;
+    }
+    .venda-card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .venda-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      align-self: flex-start;
+    }
+    .venda-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .venda-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      line-height: 1.4;
+      flex: 1;
+    }
+    .venda-finances {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .finance-item .f-lbl {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .finance-item .f-val {
+      font-size: 14px;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+    .venda-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* Modal Criativos */
+    .modal-criativos {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0.95);
+      width: 90vw;
+      max-width: 720px;
+      max-height: 85vh;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-accent);
+      border-radius: 18px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 189, 248, 0.2);
+      z-index: 230;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .modal-criativos.active { display: flex; }
+    .modal-criativos-header {
+      background: var(--bg-elevated);
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-criativos-body {
+      padding: 24px;
+      overflow-y: auto;
+    }
+    .script-scene {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+    .scene-timing {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .scene-row {
+      display: flex;
+      gap: 10px;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .scene-lbl {
+      color: var(--text-muted);
+      font-weight: 700;
+      min-width: 80px;
+    }
+    .scene-val {
+      color: #fff;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header>
+    <div class="brand">
+      <div class="brand-logo">M</div>
+      <div>
+        <div class="brand-title">Moura.AI Status Hunter</div>
+        <div style="font-size: 11px; color: var(--text-muted);">Autonomous Prospector & Technical Radar</div>
+      </div>
+      <div class="brand-badge">⚡ PADRÃO VAGNER MAZZEO & ABACUS AI</div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-top" onclick="abrirModalConfig()" style="border-color: rgba(16, 185, 129, 0.5); color: #34d399;">
+        <span>📲</span> Meu WhatsApp: <strong id="lblHeaderWhats">(11) 93931-8424</strong>
+      </button>
+      <button class="btn-top" onclick="baixarFilaGrokBot()" style="border-color: rgba(56, 189, 248, 0.5); color: #38bdf8;">
+        <span>🤖</span> Fila Grok Bot (JSON)
+      </button>
+      <button class="btn-top btn-export" onclick="exportarCSV()">
+        <span>📥</span> Exportar CSV
+      </button>
+      <a href="../mouras-world/index.html" class="btn-top">
+        <span>🌐</span> Meu Site Pessoal
+      </a>
+      <a href="../VIDEOS.html" class="btn-top" style="border-color: rgba(239, 68, 68, 0.5); color: #f87171;">
+        <span>🎬</span> Aulas & Vídeos
+      </a>
+      <a href="central_anuncios.html" class="btn-top" style="border-color: rgba(245, 158, 11, 0.5); color: #fbbf24;">
+        <span>📢</span> Central de Anúncios
+      </a>
+      <a href="moura-zap.html" class="btn-top" style="border-color: rgba(37, 211, 102, 0.5); color: #34d399;">
+        <span>💬</span> Meu Site Zap
+      </a>
+      <button class="btn-top" onclick="alternarAbaPrincipal('vendas')" style="border-color: rgba(16, 185, 129, 0.6); color: #34d399; font-weight: 700;">
+        <span>🛍️</span> Central de Vendas
+      </button>
+      <a href="http://localhost:3000" target="_blank" class="btn-top" style="border-color: rgba(168, 85, 247, 0.4); color: #c084fc;">
+        <span>⚡</span> Moura.AI
+      </a>
+      <button class="btn-top" onclick="location.reload()">
+        <span>↻</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main>
+    
+    <!-- SELETOR PRINCIPAL DE MÓDULO (MAZZEO SITES vs THIAGO HORA VENDAS) -->
+    <div class="module-tabs-nav">
+      <button id="tabBtnHunter" class="module-tab-btn active" onclick="alternarAbaPrincipal('hunter')">
+        <span>🎯</span> Caçador B2B & Sites Express (Método Mazzeo)
+      </button>
+      <button id="tabBtnVendas" class="module-tab-btn tab-vendas" onclick="alternarAbaPrincipal('vendas')">
+        <span>🛍️</span> Central de Vendas: Produtos Físicos & Infoprodutos (Método Thiago Hora)
+        <span class="tab-badge">NOVO</span>
+      </button>
+    </div>
+
+    <!-- MÓDULO 1: CAÇADOR B2B & AUDITORIA DE EMPRESAS (MAZZEO) -->
+    <div id="hunterView">
+      
+      <!-- CENTRO DE CAÇA ATIVA EM TEMPO REAL -->
+      <div class="hunter-panel">
+      <div class="hunter-header">
+        <div class="hunter-title">
+          <span>🎯</span> Centro de Caça Ativa de Empresas com IA
+          <span class="hunter-tag">MÉTODO MAZZEO B2B</span>
+        </div>
+        <div style="font-size: 12px; color: var(--text-muted);">
+          Minera CNPJ, sócios tomadores de decisão, checa Pixel, GTM, Google Ads, velocidade e gera WhatsApp em 1 clique.
+        </div>
+      </div>
+
+      <div class="hunter-form">
+        <div class="input-group">
+          <label class="input-label">Nicho / Categoria de Negócio</label>
+          <input type="text" id="huntNicho" class="hunter-input" placeholder="Ex: Barbearia, Clínica, Delivery, Pizzaria..." value="Clínica Odontológica">
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Cidade / Bairro Alvo</label>
+          <input type="text" id="huntLocal" class="hunter-input" placeholder="Ex: Jaraguá - SP, Pirituba, Lapa, Moema..." value="Pirituba, São Paulo - SP">
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Foco da Auditoria Técnica</label>
+          <select id="huntFoco" class="hunter-select">
+            <option value="todas">Todas as Oportunidades</option>
+            <option value="sem_maps">🚨 SEM Google Maps (Prioridade)</option>
+            <option value="sem_site">❌ SEM Site Próprio</option>
+            <option value="site_lento">⚡ Site Lento (>3 segundos)</option>
+            <option value="sem_pixel">📊 SEM Pixel / Sem GTM</option>
+            <option value="sem_ads">📢 SEM Tráfego Pago (Não anuncia)</option>
+          </select>
+        </div>
+
+        <button id="btnHunt" class="btn-hunt" onclick="iniciarVarreduraAoVivo()">
+          <span>🚀</span> Disparar Varredura com IA
+        </button>
+      </div>
+
+      <!-- Radar Animation -->
+      <div id="radarTerminal" class="radar-terminal">
+        <div class="radar-spinner"></div>
+        <span id="radarLogText">Conectando aos mapas locais e bancos de dados B2B...</span>
+      </div>
+    </div>
+
+    <!-- Top KPIs -->
+    <div class="kpi-grid">
+      <div class="kpi-card" style="--card-color: var(--primary);">
+        <div class="kpi-label">Empresas Mapeadas</div>
+        <div class="kpi-value" id="kpi-total">25</div>
+        <div class="kpi-sub">Com CNPJ e sócios identificados</div>
+      </div>
+      <div class="kpi-card" style="--card-color: var(--danger);">
+        <div class="kpi-label">Sem Google Maps</div>
+        <div class="kpi-value" id="kpi-sem-maps" style="color: var(--danger);">3</div>
+        <div class="kpi-sub">Invisíveis no bairro</div>
+      </div>
+      <div class="kpi-card" style="--card-color: var(--warning);">
+        <div class="kpi-label">Sem Site / Lentos</div>
+        <div class="kpi-value" id="kpi-sem-site" style="color: var(--warning);">18</div>
+        <div class="kpi-sub">Perdem mais de 53% dos acessos</div>
+      </div>
+      <div class="kpi-card" style="--card-color: var(--purple);">
+        <div class="kpi-label">Sem Pixel / GTM</div>
+        <div class="kpi-value" id="kpi-sem-pixel" style="color: #c084fc;">19</div>
+        <div class="kpi-sub">Sem remarketing ativo</div>
+      </div>
+      <div class="kpi-card" style="--card-color: var(--success);">
+        <div class="kpi-label">Potencial MRR Estimado</div>
+        <div class="kpi-value" id="kpi-mrr" style="color: var(--success);">R$ 38.5k</div>
+        <div class="kpi-sub">Recorrência mensal acumulável</div>
+      </div>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="filter-section">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Buscar por empresa, CNPJ, sócio decisor, nicho ou telefone..." oninput="filtrarLeads()">
+      </div>
+      <div class="filter-pills" id="filterPills">
+        <button class="pill-btn active" onclick="setFiltroCategoria('todos', this)">Todos</button>
+        <button class="pill-btn" onclick="setFiltroCategoria('sem-maps', this)">🚨 Sem Google Maps</button>
+        <button class="pill-btn" onclick="setFiltroCategoria('sem-site', this)">❌ Sem Site</button>
+        <button class="pill-btn" onclick="setFiltroCategoria('site-lento', this)">⚡ Site Lento</button>
+        <button class="pill-btn" onclick="setFiltroCategoria('sem-pixel', this)">📊 Sem Pixel</button>
+        <button class="pill-btn" onclick="setFiltroCategoria('sem-ads', this)">📢 Sem Anúncios</button>
+        <button class="pill-btn" onclick="setFiltroCategoria('criticos', this)">⚡ Críticos (< 6.0)</button>
+        <button class="pill-btn" onclick="setFiltroCategoria('clinica', this)">🏥 Clínicas</button>
+        <button class="pill-btn" onclick="setFiltroCategoria('delivery', this)">🍔 Delivery</button>
+        <button class="pill-btn" onclick="setFiltroCategoria('barbearia', this)">💈 Barbearias</button>
+      </div>
+    </div>
+
+    <!-- Table Container -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 40px;">#</th>
+            <th>Empresa & CNPJ</th>
+            <th>Decisor / Sócio</th>
+            <th>Raio-X Técnico</th>
+            <th>🎯 Serviço Recomendado & Ticket</th>
+            <th>Nota</th>
+            <th>Funil</th>
+            <th style="text-align: right;">Ações Rápidas</th>
+          </tr>
+        </thead>
+        <tbody id="leadsTableBody">
+          <!-- Renderizado via JS -->
+        </tbody>
+      </table>
+    </div>
+    </div> <!-- /#hunterView -->
+
+    <!-- SEÇÃO CENTRAL DE VENDAS & E-COMMERCE (THIAGO HORA GHOST COMMERCE & INFOPRODUTOS) -->
+    <div id="vendasView" class="vendas-container">
+      
+      <!-- Hero Banner Vendas -->
+      <div class="vendas-hero-banner">
+        <div>
+          <div class="vendas-hero-title">
+            <span>🛍️</span> Central de Vendas com IA (Ghost Commerce & Infoprodutos)
+            <span class="venda-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4);">MÉTODO THIAGO HORA (P.O.C.)</span>
+          </div>
+          <div class="vendas-hero-subtitle">
+            Produtos físicos reais sem estoque (fornecedores nacionais com até 70% de margem) + Infoprodutos digitais com 98% de margem no Pix. Venda no automático pelo celular ainda este ano!
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <a href="https://cairross.com.br" target="_blank" class="btn-top" style="border-color: rgba(56, 189, 248, 0.5); color: #38bdf8;">
+            <span>📦</span> Plataforma Kairós (Fornecedores)
+          </a>
+          <a href="https://facebook.com/ads/library" target="_blank" class="btn-top" style="border-color: rgba(168, 85, 247, 0.5); color: #c084fc;">
+            <span>🔍</span> Espionar Anúncios (Meta Ads)
+          </a>
+        </div>
+      </div>
+
+      <!-- KPIs da Central de Vendas -->
+      <div class="kpi-grid">
+        <div class="kpi-card" style="--card-color: #10b981;">
+          <div class="kpi-label">Produtos Físicos Ativos</div>
+          <div class="kpi-value" style="color: #34d399;">3 Validados</div>
+          <div class="kpi-sub">Joelheira, Caneta 18K e Game Stick</div>
+        </div>
+        <div class="kpi-card" style="--card-color: #0284c7;">
+          <div class="kpi-label">Infoprodutos & Micro-SaaS</div>
+          <div class="kpi-value" style="color: #38bdf8;">5 Soluções</div>
+          <div class="kpi-sub">Recorrência Mensal + Ativos Digitais</div>
+        </div>
+        <div class="kpi-card" style="--card-color: #f59e0b;">
+          <div class="kpi-label">Margem Média Líquida</div>
+          <div class="kpi-value" style="color: #fbbf24;">78%</div>
+          <div class="kpi-sub">Lucro de R$ 67 a R$ 150 por venda</div>
+        </div>
+        <div class="kpi-card" style="--card-color: #ec4899;">
+          <div class="kpi-label">WhatsApp de Conversão</div>
+          <div class="kpi-value" style="color: #f472b6; font-size: 16px; margin-top: 8px;">(11) 93931-8424</div>
+          <div class="kpi-sub">Marquinhos (Moura.AI)</div>
+        </div>
+      </div>
+
+      <!-- SEÇÃO 1: PRODUTOS FÍSICOS (GHOST COMMERCE) -->
+      <div class="vendas-section-title">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span>📦</span> Produtos Físicos Sem Estoque (Ghost Commerce)
+          <span style="font-size: 12px; color: var(--text-muted); font-weight: 500;">Fornecedores Nacionais com Entrega 2 a 7 Dias</span>
+        </div>
+        <span style="font-size: 12px; color: #34d399; font-weight: 700;">Margem até 70% • Sem Frete • Sem Suporte</span>
+      </div>
+
+      <div class="vendas-grid">
+        
+        <!-- CARD PRODUTO 1: JOELHEIRA -->
+        <div class="venda-card">
+          <img src="https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?w=800&auto=format&fit=crop&q=80" alt="Joelheira" class="venda-card-img">
+          <div class="venda-card-body">
+            <span class="venda-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">🔥 Perpétuo (Alívio de Dor)</span>
+            <div class="venda-title">Joelheira Ortopédica Alívio 3D Pro (Par)</div>
+            <div class="venda-sub">Compressão anatômica com anel patelar de gel e estabilizadores de mola. O produto lendário de milhões do Thiago Hora.</div>
+            
+            <div class="venda-finances">
+              <div class="finance-item">
+                <div class="f-lbl">Preço Venda</div>
+                <div class="f-val" style="color: #fff;">R$ 129,90</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Custo Fornec.</div>
+                <div class="f-val" style="color: #94a3b8;">R$ 20,00</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Seu Lucro</div>
+                <div class="f-val" style="color: #34d399;">R$ 85,00</div>
+              </div>
+            </div>
+
+            <div class="venda-actions">
+              <button class="btn-top" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; border: none; justify-content: center;" onclick="abrirPreviaVenda('produtos/joelheira-ortopedica.html', 'Joelheira Ortopédica Alívio 3D (Par)')">
+                <span>⚡</span> Ver Página de Venda Express
+              </button>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn-top" style="flex: 1; justify-content: center; border-color: rgba(168, 85, 247, 0.5); color: #c084fc;" onclick="abrirModalCriativos('joelheira-ortopedica')">
+                  <span>🎬</span> Roteiros IA
+                </button>
+                <a href="produtos/joelheira-ortopedica.html" target="_blank" class="btn-top" style="padding: 8px 12px;" title="Abrir página completa em nova aba">
+                  <span>↗</span>
+                </a>
+                <button class="btn-top" style="padding: 8px 12px; color: #34d399; border-color: rgba(16, 185, 129, 0.4);" onclick="copiarLinkProduto('produtos/joelheira-ortopedica.html')" title="Copiar Link da Página">
+                  <span>📋</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD PRODUTO 2: CANETA DEPILADORA -->
+        <div class="venda-card">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80" alt="Caneta Depiladora" class="venda-card-img">
+          <div class="venda-card-body">
+            <span class="venda-badge" style="background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3);">✨ Perpétuo (TikTok Viral)</span>
+            <div class="venda-title">Caneta Depiladora Precision Gold 18K</div>
+            <div class="venda-sub">Depilação facial indolor em segundos com ponta hipoalergênica e luz LED integrada. Sucesso absurdo de vendas diárias.</div>
+            
+            <div class="venda-finances">
+              <div class="finance-item">
+                <div class="f-lbl">Preço Venda</div>
+                <div class="f-val" style="color: #fff;">R$ 97,00</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Custo Fornec.</div>
+                <div class="f-val" style="color: #94a3b8;">R$ 12,00</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Seu Lucro</div>
+                <div class="f-val" style="color: #34d399;">R$ 67,00</div>
+              </div>
+            </div>
+
+            <div class="venda-actions">
+              <button class="btn-top" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; border: none; justify-content: center;" onclick="abrirPreviaVenda('produtos/caneta-depiladora.html', 'Caneta Depiladora Facial Precision Gold')">
+                <span>⚡</span> Ver Página de Venda Express
+              </button>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn-top" style="flex: 1; justify-content: center; border-color: rgba(168, 85, 247, 0.5); color: #c084fc;" onclick="abrirModalCriativos('caneta-depiladora')">
+                  <span>🎬</span> Roteiros IA
+                </button>
+                <a href="produtos/caneta-depiladora.html" target="_blank" class="btn-top" style="padding: 8px 12px;" title="Abrir em nova aba">
+                  <span>↗</span>
+                </a>
+                <button class="btn-top" style="padding: 8px 12px; color: #34d399; border-color: rgba(16, 185, 129, 0.4);" onclick="copiarLinkProduto('produtos/caneta-depiladora.html')" title="Copiar Link da Página">
+                  <span>📋</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD PRODUTO 3: GAME STICK 4K RETRO -->
+        <div class="venda-card">
+          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop&q=80" alt="Game Stick 4K" class="venda-card-img">
+          <div class="venda-card-body">
+            <span class="venda-badge" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3);">🎄 Sazonal de Natal (Case R$ 1 Milhão)</span>
+            <div class="venda-title">Game Stick 4K Retrô Pro — 10.000 Jogos</div>
+            <div class="venda-sub">Plug & Play em qualquer TV HDMI com 2 controles sem fio. Reviva Super Nintendo, PS1 e Fliperama. O presente de Natal nº 1 do Brasil.</div>
+            
+            <div class="venda-finances">
+              <div class="finance-item">
+                <div class="f-lbl">Preço Venda</div>
+                <div class="f-val" style="color: #fff;">R$ 249,00</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Custo Fornec.</div>
+                <div class="f-val" style="color: #94a3b8;">R$ 65,00</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Seu Lucro</div>
+                <div class="f-val" style="color: #34d399;">R$ 150,00</div>
+              </div>
+            </div>
+
+            <div class="venda-actions">
+              <button class="btn-top" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; border: none; justify-content: center;" onclick="abrirPreviaVenda('produtos/game-stick-4k-retro.html', 'Game Stick 4K Retrô Pro (Oferta de Natal)')">
+                <span>⚡</span> Ver Página de Venda Express
+              </button>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn-top" style="flex: 1; justify-content: center; border-color: rgba(168, 85, 247, 0.5); color: #c084fc;" onclick="abrirModalCriativos('game-stick-4k-retro')">
+                  <span>🎬</span> Roteiros IA
+                </button>
+                <a href="produtos/game-stick-4k-retro.html" target="_blank" class="btn-top" style="padding: 8px 12px;" title="Abrir em nova aba">
+                  <span>↗</span>
+                </a>
+                <button class="btn-top" style="padding: 8px 12px; color: #34d399; border-color: rgba(16, 185, 129, 0.4);" onclick="copiarLinkProduto('produtos/game-stick-4k-retro.html')" title="Copiar Link da Página">
+                  <span>📋</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SEÇÃO 2: INFOPRODUTOS (MARGEM 98%) -->
+      <div class="vendas-section-title">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span>💡</span> Infoprodutos & Ativos Digitais (Margem de 98% no Pix)
+          <span style="font-size: 12px; color: var(--text-muted); font-weight: 500;">Entrega 100% Automática • Sem Frete • Sem Estoque</span>
+        </div>
+      </div>
+
+      <div class="vendas-grid">
+        
+        <!-- CARD INFOPRODUTO 1: GUIA RENDA COM IA -->
+        <div class="venda-card">
+          <div style="background: linear-gradient(135deg, #0369a1, #0284c7); height: 160px; display: grid; place-items: center; font-size: 56px;">
+            📚
+          </div>
+          <div class="venda-card-body">
+            <span class="venda-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">⚡ Lançamento Fim de Ano 2026</span>
+            <div class="venda-title">Guia Prático: Renda com IA & Vendas Sem Estoque</div>
+            <div class="venda-sub">E-book interativo + Planilha de Precificação + 5 Fornecedores Nacionais Testados. Como sair do zero a R$ 10k/mês.</div>
+            
+            <div class="venda-finances">
+              <div class="finance-item">
+                <div class="f-lbl">Preço Venda</div>
+                <div class="f-val" style="color: #fff;">R$ 47,00</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Custo Entrega</div>
+                <div class="f-val" style="color: #34d399;">R$ 0,00</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Seu Lucro</div>
+                <div class="f-val" style="color: #34d399;">R$ 46,00</div>
+              </div>
+            </div>
+
+            <div class="venda-actions">
+              <button class="btn-top" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; border: none; justify-content: center;" onclick="abrirPreviaVenda('infoprodutos/guia-renda-ia-sem-estoque.html', 'Guia Prático: Renda com IA & Vendas Sem Estoque')">
+                <span>⚡</span> Ver Página de Venda Express
+              </button>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn-top" style="flex: 1; justify-content: center; border-color: rgba(168, 85, 247, 0.5); color: #c084fc;" onclick="abrirModalCriativos('guia-renda-ia-sem-estoque')">
+                  <span>🎬</span> Roteiros IA
+                </button>
+                <a href="infoprodutos/guia-renda-ia-sem-estoque.html" target="_blank" class="btn-top" style="padding: 8px 12px;">
+                  <span>↗</span>
+                </a>
+                <button class="btn-top" style="padding: 8px 12px; color: #34d399; border-color: rgba(16, 185, 129, 0.4);" onclick="copiarLinkProduto('infoprodutos/guia-renda-ia-sem-estoque.html')">
+                  <span>📋</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD INFOPRODUTO 2: PACK 100 PROMPTS -->
+        <div class="venda-card">
+          <div style="background: linear-gradient(135deg, #7e22ce, #9333ea); height: 160px; display: grid; place-items: center; font-size: 56px;">
+            🎯
+          </div>
+          <div class="venda-card-body">
+            <span class="venda-badge" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3);">💎 Ferramenta de Conversão</span>
+            <div class="venda-title">Pack 100 Prompts de Ouro para Fechamento B2B</div>
+            <div class="venda-sub">Roteiros de alta conversão no WhatsApp, modelo de contrato de prestação de serviços e scripts de quebra de objeções.</div>
+            
+            <div class="venda-finances">
+              <div class="finance-item">
+                <div class="f-lbl">Preço Venda</div>
+                <div class="f-val" style="color: #fff;">R$ 27,00</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Custo Entrega</div>
+                <div class="f-val" style="color: #34d399;">R$ 0,00</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Seu Lucro</div>
+                <div class="f-val" style="color: #34d399;">R$ 26,50</div>
+              </div>
+            </div>
+
+            <div class="venda-actions">
+              <button class="btn-top" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; border: none; justify-content: center;" onclick="abrirPreviaVenda('infoprodutos/pack-100-prompts-fechamento-b2b.html', 'Pack 100 Prompts de Fechamento B2B')">
+                <span>⚡</span> Ver Página de Venda Express
+              </button>
+              <div style="display: flex; gap: 8px;">
+                <button class="btn-top" style="flex: 1; justify-content: center; border-color: rgba(168, 85, 247, 0.5); color: #c084fc;" onclick="abrirModalCriativos('guia-renda-ia-sem-estoque')">
+                  <span>🎬</span> Roteiros IA
+                </button>
+                <a href="infoprodutos/pack-100-prompts-fechamento-b2b.html" target="_blank" class="btn-top" style="padding: 8px 12px;">
+                  <span>↗</span>
+                </a>
+                <button class="btn-top" style="padding: 8px 12px; color: #34d399; border-color: rgba(16, 185, 129, 0.4);" onclick="copiarLinkProduto('infoprodutos/pack-100-prompts-fechamento-b2b.html')">
+                  <span>📋</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SEÇÃO 3: MICRO-SAAS & SOLUÇÕES RECORRENTES (MÉTODO CAIO MARTINS & O MILIONÁRIO) -->
+      <div class="vendas-section-title" style="margin-top: 40px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span>⚡</span> Micro-SaaS & Soluções Recorrentes com IA (MRR Mensal)
+          <span style="font-size: 12px; color: var(--text-muted); font-weight: 500;">Assinaturas Mensais de R$ 97 a R$ 247 • Soluções Prontas sem Código</span>
+        </div>
+        <span style="font-size: 12px; color: #38bdf8; font-weight: 700;">Recorrência Automática no Pix / Cartão</span>
+      </div>
+
+      <div class="vendas-grid">
+        
+        <!-- CARD MICRO-SAAS 1: ENCAIXA AÍ (CLÍNICAS) -->
+        <div class="venda-card">
+          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&auto=format&fit=crop&q=80" alt="Encaixa Aí" class="venda-card-img">
+          <div class="venda-card-body">
+            <span class="venda-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">⚡ Micro-SaaS Clínico (Recorrência)</span>
+            <div class="venda-title">Encaixa Aí — Recuperador de Horários para Clínicas</div>
+            <div class="venda-sub">Confirmação de consultas e reocupação automática de horários cancelados pelo WhatsApp em até 10 minutos com pacientes da lista de espera.</div>
+            
+            <div class="venda-finances">
+              <div class="finance-item">
+                <div class="f-lbl">Mensalidade</div>
+                <div class="f-val" style="color: #fff;">R$ 147,00/mês</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Anual à Vista</div>
+                <div class="f-val" style="color: #fbbf24;">R$ 1.497,00</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Margem Lucro</div>
+                <div class="f-val" style="color: #34d399;">92% Líquido</div>
+              </div>
+            </div>
+
+            <div class="venda-actions">
+              <button class="btn-top" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; border: none; justify-content: center;" onclick="abrirPreviaVenda('previas/recupera-agenda-clinica.html', 'Encaixa Aí — Micro-SaaS Clínico')">
+                <span>⚡</span> Ver Prévia Interativa 10x
+              </button>
+              <div style="display: flex; gap: 8px;">
+                <a href="previas/recupera-agenda-clinica.html" target="_blank" class="btn-top" style="padding: 8px 12px;" title="Abrir em nova aba">
+                  <span>↗</span>
+                </a>
+                <button class="btn-top" style="padding: 8px 12px; color: #34d399; border-color: rgba(16, 185, 129, 0.4);" onclick="copiarLinkProduto('previas/recupera-agenda-clinica.html')" title="Copiar Link da Prévia">
+                  <span>📋</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD MICRO-SAAS 2: CARDÁPIO DIGITAL & DELIVERY WHATSAPP -->
+        <div class="venda-card">
+          <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&auto=format&fit=crop&q=80" alt="Cardápio Digital" class="venda-card-img">
+          <div class="venda-card-body">
+            <span class="venda-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">🍕 Solução para Restaurantes & Pizzarias</span>
+            <div class="venda-title">Cardápio Digital com Pedido 1-Clique WhatsApp</div>
+            <div class="venda-sub">Substitui plataformas caras (que cobram R$ 250/mês). Pedido montado e enviado formatado direto no WhatsApp da pizzaria ou restaurante de bairro.</div>
+            
+            <div class="venda-finances">
+              <div class="finance-item">
+                <div class="f-lbl">Setup Inicial</div>
+                <div class="f-val" style="color: #fff;">R$ 500,00</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Mensalidade</div>
+                <div class="f-val" style="color: #38bdf8;">R$ 97,00/mês</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Economia Cliente</div>
+                <div class="f-val" style="color: #34d399;">R$ 150/mês</div>
+              </div>
+            </div>
+
+            <div class="venda-actions">
+              <button class="btn-top" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; border: none; justify-content: center;" onclick="abrirPreviaVenda('previas/cantina-da-mamma.html', 'Cardápio Digital & Pizzaria')">
+                <span>⚡</span> Ver Prévia Interativa 10x
+              </button>
+              <div style="display: flex; gap: 8px;">
+                <a href="previas/cantina-da-mamma.html" target="_blank" class="btn-top" style="padding: 8px 12px;">
+                  <span>↗</span>
+                </a>
+                <button class="btn-top" style="padding: 8px 12px; color: #34d399; border-color: rgba(16, 185, 129, 0.4);" onclick="copiarLinkProduto('previas/cantina-da-mamma.html')">
+                  <span>📋</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD MICRO-SAAS 3: AGENDAMENTO PARA BARBEARIAS & SALÕES -->
+        <div class="venda-card">
+          <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&auto=format&fit=crop&q=80" alt="Barbearia" class="venda-card-img">
+          <div class="venda-card-body">
+            <span class="venda-badge" style="background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.3);">✂️ Solução para Barbearias & Salões</span>
+            <div class="venda-title">Agendador Online VIP com Painel do Barbeiro</div>
+            <div class="venda-sub">Agendamento em 30 segundos no celular do cliente sem ocupar o barbeiro no WhatsApp. Inclui painel de horários e faturamento.</div>
+            
+            <div class="venda-finances">
+              <div class="finance-item">
+                <div class="f-lbl">Setup Inicial</div>
+                <div class="f-val" style="color: #fff;">R$ 400,00</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Mensalidade</div>
+                <div class="f-val" style="color: #38bdf8;">R$ 97,00/mês</div>
+              </div>
+              <div class="finance-item">
+                <div class="f-lbl">Seu Lucro</div>
+                <div class="f-val" style="color: #34d399;">R$ 90/mês</div>
+              </div>
+            </div>
+
+            <div class="venda-actions">
+              <button class="btn-top" style="background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; border: none; justify-content: center;" onclick="abrirPreviaVenda('previas/barbearia-vintage-club.html', 'Barbearia & Agendamento')">
+                <span>⚡</span> Ver Prévia Interativa 10x
+              </button>
+              <div style="display: flex; gap: 8px;">
+                <a href="previas/barbearia-vintage-club.html" target="_blank" class="btn-top" style="padding: 8px 12px;">
+                  <span>↗</span>
+                </a>
+                <button class="btn-top" style="padding: 8px 12px; color: #34d399; border-color: rgba(16, 185, 129, 0.4);" onclick="copiarLinkProduto('previas/barbearia-vintage-club.html')">
+                  <span>📋</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Modal de Roteiros de Anúncio IA (TikTok / Meta Ads) -->
+  <div class="modal-overlay" id="modalCriativosOverlay" onclick="fecharModalCriativos()"></div>
+  <div class="modal-criativos" id="modalCriativos">
+    <div class="modal-criativos-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 22px;">🎬</span>
+        <div>
+          <h3 id="modalCriativosTitulo" style="font-size: 15px; font-weight: 800; color: #fff;">Roteiro de Anúncio com IA</h3>
+          <div style="font-size: 12px; color: var(--primary);">Formato Gancho-História-Oferta (100% Sem Precisar Aparecer)</div>
+        </div>
+      </div>
+      <button class="modal-close-btn" onclick="fecharModalCriativos()">✕</button>
+    </div>
+    <div class="modal-criativos-body" id="modalCriativosConteudo">
+      <!-- Injetado via JS -->
+    </div>
+    <div style="padding: 16px 24px; background: var(--bg-elevated); border-top: 1px solid var(--border-subtle); display: flex; justify-content: flex-end; gap: 10px;">
+      <button class="btn-top" onclick="copiarRoteiroAtual()">📋 Copiar Roteiro Completo</button>
+      <button class="btn-hunt" onclick="fecharModalCriativos()">Fechar</button>
+    </div>
+  </div>
+
+  
+  <!-- Live Modal Preview (iPhone / Desktop Mockup) -->
+  <div class="modal-overlay" id="modalPreviaOverlay" onclick="fecharModalPrevia()"></div>
+  <div class="modal-previa" id="modalPrevia">
+    <div class="modal-previa-header">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="font-size: 22px;">⚡</span>
+        <div>
+          <div style="font-size: 15px; font-weight: 800; color: #fff;" id="modalPreviaNome">Empresa</div>
+          <div style="font-size: 12px; color: var(--primary);">
+            Prévia de Alta Conversão em Segundos • Fechamento: WhatsApp Marquinhos
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="device-toggle">
+          <button id="btnDeviceMobile" class="device-btn active" onclick="setDeviceView('mobile')">📱 iPhone</button>
+          <button id="btnDeviceDesktop" class="device-btn" onclick="setDeviceView('desktop')">💻 Desktop</button>
+        </div>
+        <button class="btn-top" onclick="copiarLinkPreviaAtual()">📋 Copiar Link</button>
+        <a id="btnAbrirAbaExterna" href="#" target="_blank" class="btn-top" style="color: var(--primary); border-color: var(--border-accent);">
+          🚀 Abrir em Nova Aba
+        </a>
+        <button class="modal-close-btn" onclick="fecharModalPrevia()">✕</button>
+      </div>
+    </div>
+    <div class="modal-previa-body">
+      <div class="device-frame device-mobile" id="deviceFrame">
+        <iframe id="iframePrevia" src="about:blank"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Configuração do Seu WhatsApp & Grok Bot -->
+  <div class="modal-overlay" id="modalConfigOverlay" onclick="fecharModalConfig()"></div>
+  <div class="modal-config" id="modalConfig">
+    <div class="modal-config-header">
+      <h3 style="font-size: 16px; font-weight: 800; color: #fff;">⚙️ Configurações: Seu WhatsApp & Grok Bot</h3>
+      <button class="modal-close-btn" onclick="fecharModalConfig()">✕</button>
+    </div>
+    <div style="padding: 24px;">
+      <div class="input-group" style="margin-bottom: 16px;">
+        <label class="input-label">Seu WhatsApp Comercial (Com DDD)</label>
+        <input type="text" id="cfgWhatsapp" class="hunter-input" value="5511939318424">
+        <span style="font-size: 11px; color: var(--text-muted); margin-top: 4px;">
+          Formato: 55 + DDD + Número. Todos os botões "Aprovar Site" das prévias mandarão o lead falar diretamente com você!
+        </span>
+      </div>
+      <div class="input-group" style="margin-bottom: 16px;">
+        <label class="input-label">Seu Nome / Agência</label>
+        <input type="text" id="cfgNome" class="hunter-input" value="Marquinhos | Moura.AI">
+      </div>
+      <div class="input-group" style="margin-bottom: 24px;">
+        <label class="input-label">Intervalo de Segurança Anti-Ban do Grok Bot (Segundos)</label>
+        <input type="number" id="cfgDelay" class="hunter-input" value="35" min="15" max="120">
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <button class="btn-hunt" style="flex: 1;" onclick="salvarConfiguracoesUsuario()">
+          💾 Salvar Configurações
+        </button>
+        <button class="btn-top" style="padding: 12px;" onclick="baixarFilaGrokBot()">
+          🤖 Baixar Fila Grok Bot
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drawer / Modal com Método Mazzeo -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="fecharDrawer()"></div>
+  <div class="drawer" id="leadDrawer">
+    <div class="drawer-header">
+      <div>
+        <div style="font-size: 11px; color: var(--primary); font-family: var(--font-mono); font-weight: 700;" id="drawerNicho">NICHO</div>
+        <h2 style="font-size: 20px; font-weight: 800; color: #fff;" id="drawerNome">Nome da Empresa</h2>
+        <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;" id="drawerCnpj">CNPJ: -</div>
+        <div style="font-size: 12px; color: var(--text-muted);" id="drawerCidade">Cidade / Bairro</div>
+      </div>
+      <button class="drawer-close" onclick="fecharDrawer()">✕</button>
+    </div>
+
+    <!-- Banner Prévia Instantânea -->
+    <div class="drawer-preview-banner">
+      <div>
+        <div style="font-size: 12px; font-weight: 800; color: #38bdf8;">⚡ PRÉVIA DO SITE PRONTA (ESTILO MOTIONSITES & SPLINE 3D)</div>
+        <div style="font-size: 11px; color: var(--text-muted);">Landing page gerada para antecipar valor com o decisor</div>
+      </div>
+      <button class="btn-preview-site" id="drawerBtnVerPrevia" onclick="abrirModalPrevia(leadSelecionado.id || leadSelecionado.nome)">
+        👁️ Abrir Prévia
+      </button>
+    </div>
+
+    <!-- Decisor & Contato -->
+    <div style="background: var(--bg-elevated); padding: 14px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <div style="font-size: 11px; color: var(--text-muted);">Tomador de Decisão:</div>
+        <div style="font-size: 14px; font-weight: 800; color: #38bdf8;" id="drawerSocio">-</div>
+        <div style="font-size: 11px; color: var(--text-muted);" id="drawerCargo">-</div>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 11px; color: var(--text-muted);">E-mail Direto:</div>
+        <div style="font-size: 12px; font-family: var(--font-mono); color: #fff;" id="drawerEmail">-</div>
+      </div>
+    </div>
+
+    <!-- Raio-X Técnico Detalhado -->
+    <div style="background: var(--bg-elevated); padding: 14px; border-radius: 10px; font-size: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+      <div><span style="color: var(--text-muted);">Google Maps:</span> <strong id="drawerMapsStatus" style="color: #fff;">-</strong></div>
+      <div><span style="color: var(--text-muted);">Velocidade do Site:</span> <strong id="drawerVelocidadeStatus" style="color: #fff;">-</strong></div>
+      <div><span style="color: var(--text-muted);">Pixel do Meta:</span> <strong id="drawerPixelStatus" style="color: #fff;">-</strong></div>
+      <div><span style="color: var(--text-muted);">Google Tag Manager:</span> <strong id="drawerGtmStatus" style="color: #fff;">-</strong></div>
+      <div><span style="color: var(--text-muted);">Anuncia Google Ads:</span> <strong id="drawerGoogleAdsStatus" style="color: #fff;">-</strong></div>
+      <div><span style="color: var(--text-muted);">Anuncia Meta Ads:</span> <strong id="drawerMetaAdsStatus" style="color: #fff;">-</strong></div>
+    </div>
+
+    <!-- Cada Furo é um Serviço -->
+    <div class="service-box">
+      <div style="font-size: 12px; font-weight: 800; color: #34d399; text-transform: uppercase;">💼 Oportunidade: Cada Furo é um Serviço pra Vender</div>
+      <div style="font-size: 14px; font-weight: 800; color: #fff;" id="drawerServicoRecomendado">-</div>
+      <div style="font-size: 12px; color: #a7f3d0; font-family: var(--font-mono);" id="drawerTicketSugerido">-</div>
+      <div id="drawerGapsList" style="margin-top: 6px; font-size: 12px; color: #cbd5e1; display: flex; flex-direction: column; gap: 4px;"></div>
+    </div>
+
+    <!-- Tabs da Tríplice Abordagem -->
+    <div class="drawer-tabs">
+      <button class="tab-btn active" onclick="setDrawerTab('whatsapp', this)">📱 1. WhatsApp em 1 Clique</button>
+      <button class="tab-btn" onclick="setDrawerTab('email', this)">✉️ 2. E-mail Consultivo (Gmail)</button>
+      <button class="tab-btn" onclick="setDrawerTab('ligacao', this)">📞 3. Ligação 30s (Secretária)</button>
+    </div>
+
+    <!-- Bloco de Texto do Script -->
+    <div class="script-box">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 12px; font-weight: 700; color: #fff;" id="scriptTitle">💬 Mensagem WhatsApp</span>
+        <button class="btn-copy" onclick="copiarScriptAtual()">Copiar Texto</button>
+      </div>
+      <div class="script-text" id="drawerScriptText">Carregando abordagem...</div>
+    </div>
+
+    <!-- Botões de Ação Direta -->
+    <div style="display: flex; gap: 10px;">
+      <a id="drawerBtnWa" href="#" target="_blank" class="btn-action btn-wa" style="flex: 1; justify-content: center; padding: 12px; font-size: 13px; font-weight: 800;">
+        📲 Disparar WhatsApp
+      </a>
+      <a id="drawerBtnGmail" href="#" target="_blank" class="btn-action btn-email" style="flex: 1; justify-content: center; padding: 12px; font-size: 13px; font-weight: 800;">
+        ✉️ Abrir no Gmail
+      </a>
+    </div>
+  </div>
+
+  <script src="leads_data.js"></script>
+  <script>
+    let todosLeads = [];
+    let categoriaAtual = 'todos';
+    let leadSelecionado = null;
+    let abaAtual = 'whatsapp';
+
+    
+    // ── GESTÃO DE CONFIGURAÇÕES (WHATSAPP MARQUINHOS & GROK BOT) ──
+    const DEFAULT_WHATSAPP_USER = "5511939318424";
+    const DEFAULT_NOME_USER = "Marquinhos | Moura.AI";
+    let urlPreviaAtual = "";
+
+    function getWhatsappUsuario() {
+      return localStorage.getItem('moura_user_whatsapp') || DEFAULT_WHATSAPP_USER;
+    }
+
+    function getNomeUsuario() {
+      return localStorage.getItem('moura_user_nome') || DEFAULT_NOME_USER;
+    }
+
+    function atualizarLabelHeader() {
+      const w = getWhatsappUsuario();
+      const numFormatado = w.replace(/^55/, '').replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+      const el = document.getElementById('lblHeaderWhats');
+      if (el) el.textContent = numFormatado || '(11) 93931-8424';
+    }
+
+    function abrirModalConfig() {
+      document.getElementById('cfgWhatsapp').value = getWhatsappUsuario();
+      document.getElementById('cfgNome').value = getNomeUsuario();
+      document.getElementById('modalConfigOverlay').classList.add('active');
+      document.getElementById('modalConfig').classList.add('active');
+    }
+
+    function fecharModalConfig() {
+      document.getElementById('modalConfigOverlay').classList.remove('active');
+      document.getElementById('modalConfig').classList.remove('active');
+    }
+
+    function salvarConfiguracoesUsuario() {
+      const w = document.getElementById('cfgWhatsapp').value.replace(/\D/g, '');
+      const n = document.getElementById('cfgNome').value.trim();
+      if (w) localStorage.setItem('moura_user_whatsapp', w);
+      if (n) localStorage.setItem('moura_user_nome', n);
+      atualizarLabelHeader();
+      fecharModalConfig();
+      alert("✅ Configurações salvas com sucesso! O seu WhatsApp (" + w + ") agora está ativo em todas as prévias!");
+    }
+
+    // ── LIVE MODAL PREVIEW (IPHONE & DESKTOP MOCKUP) ──
+    function construirUrlPrevia(lead) {
+      const p = `?id=${encodeURIComponent(lead.id || '1')}&nome=${encodeURIComponent(lead.nome || '')}&nicho=${encodeURIComponent(lead.nicho || '')}&cidade=${encodeURIComponent(lead.cidade || '')}&socio=${encodeURIComponent(lead.socio_decisor || '')}&tel=${encodeURIComponent(lead.telefone || '')}`;
+      if (window.location.protocol === 'file:') {
+        const dir = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+        return `${dir}/previa.html${p}`;
+      }
+      return `previa.html${p}`;
+    }
+
+    function abrirModalPrevia(idNome) {
+      const lead = todosLeads.find(l => (l.id || l.nome) == idNome);
+      if (!lead) return;
+
+      document.getElementById('modalPreviaNome').textContent = lead.nome + ' (' + lead.nicho + ')';
+      
+      // Constrói URL da prévia compatível com file:// e http://
+      urlPreviaAtual = construirUrlPrevia(lead);
+      
+      document.getElementById('iframePrevia').src = urlPreviaAtual;
+      document.getElementById('btnAbrirAbaExterna').href = urlPreviaAtual;
+      
+      document.getElementById('modalPreviaOverlay').classList.add('active');
+      document.getElementById('modalPrevia').classList.add('active');
+    }
+
+    function fecharModalPrevia() {
+      document.getElementById('modalPreviaOverlay').classList.remove('active');
+      document.getElementById('modalPrevia').classList.remove('active');
+      document.getElementById('iframePrevia').src = "about:blank";
+    }
+
+    function setDeviceView(tipo) {
+      const frame = document.getElementById('deviceFrame');
+      const btnMob = document.getElementById('btnDeviceMobile');
+      const btnDesk = document.getElementById('btnDeviceDesktop');
+
+      if (tipo === 'mobile') {
+        frame.className = 'device-frame device-mobile';
+        btnMob.classList.add('active');
+        btnDesk.classList.remove('active');
+      } else {
+        frame.className = 'device-frame device-desktop';
+        btnDesk.classList.add('active');
+        btnMob.classList.remove('active');
+      }
+    }
+
+    function copiarLinkPreviaAtual() {
+      if (!urlPreviaAtual) return;
+      navigator.clipboard.writeText(urlPreviaAtual).then(() => {
+        alert("🔗 Link da prévia copiado com sucesso!\n\n" + urlPreviaAtual);
+      });
+    }
+
+    // ── EXPORTAÇÃO DE FILA PARA O GROK BOT (JSON) ──
+    function baixarFilaGrokBot() {
+      const delay = parseInt(document.getElementById('cfgDelay')?.value || '35');
+
+      const fila = todosLeads.map((lead, idx) => {
+        const linkPrevia = construirUrlPrevia(lead);
+        return {
+          ordem: idx + 1,
+          empresa: lead.nome,
+          decisor: lead.socio_decisor || "Sócio Proprietário",
+          cargo: lead.cargo_decisor || "Decisor",
+          telefone: (lead.telefone || '').replace(/\D/g, ''),
+          email: lead.email_contato || "",
+          nicho: lead.nicho,
+          cidade: lead.cidade,
+          link_previa: linkPrevia,
+          mensagem_whatsapp: lead.mensagem_sugerida || "",
+          email_assunto: lead.email_assunto || "",
+          email_corpo: lead.email_corpo || "",
+          delay_segundos: delay
+        };
+      });
+
+      const jsonStr = JSON.stringify(fila, null, 2);
+      const blob = new Blob([jsonStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `fila_grok_bot_prospeccao_${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      alert("🤖 Fila do Grok Bot exportada com sucesso!\n\n" + fila.length + " empresas prontas para disparo automático com link de prévia e delay de " + delay + "s.");
+    }
+
+
+    window.addEventListener('DOMContentLoaded', () => {
+      atualizarLabelHeader();
+      if (window.STATUS_LEADS_DATA && Array.isArray(window.STATUS_LEADS_DATA)) {
+        todosLeads = [...window.STATUS_LEADS_DATA];
+      }
+
+      // Carrega novos leads minerados salvos no localStorage
+      const novosSalvos = localStorage.getItem('moura_novos_leads_hunter_mazzeo');
+      if (novosSalvos) {
+        try {
+          const parsed = JSON.parse(novosSalvos);
+          parsed.forEach(nl => {
+            if (!todosLeads.some(l => l.nome === nl.nome)) {
+              todosLeads.unshift(nl);
+            }
+          });
+        } catch(e) {}
+      }
+
+      carregarStatusPersistidos();
+      renderizar();
+    });
+
+    function carregarStatusPersistidos() {
+      todosLeads.forEach(lead => {
+        const salvo = localStorage.getItem(`lead_status_${lead.id || lead.nome}`);
+        if (salvo) lead.status = salvo;
+      });
+    }
+
+    function salvarStatusLead(idNome, novoStatus) {
+      localStorage.setItem(`lead_status_${idNome}`, novoStatus);
+      const lead = todosLeads.find(l => (l.id || l.nome) == idNome);
+      if (lead) lead.status = novoStatus;
+    }
+
+    function setFiltroCategoria(cat, btn) {
+      categoriaAtual = cat;
+      document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderizar();
+    }
+
+    function filtrarLeads() {
+      renderizar();
+    }
+
+    function renderizar() {
+      const termo = document.getElementById('searchInput').value.toLowerCase().trim();
+      const tbody = document.getElementById('leadsTableBody');
+      tbody.innerHTML = '';
+
+      const filtrados = todosLeads.filter(lead => {
+        const matchTexto = 
+          lead.nome.toLowerCase().includes(termo) ||
+          (lead.cnpj && lead.cnpj.toLowerCase().includes(termo)) ||
+          (lead.socio_decisor && lead.socio_decisor.toLowerCase().includes(termo)) ||
+          lead.nicho.toLowerCase().includes(termo) ||
+          (lead.telefone && lead.telefone.includes(termo)) ||
+          lead.cidade.toLowerCase().includes(termo);
+
+        if (!matchTexto) return false;
+
+        if (categoriaAtual === 'todos') return true;
+        if (categoriaAtual === 'sem-maps') return !lead.possui_google_maps;
+        if (categoriaAtual === 'sem-site') return !lead.website;
+        if (categoriaAtual === 'site-lento') return lead.velocidade_site && lead.velocidade_site.includes('Lento');
+        if (categoriaAtual === 'sem-pixel') return !lead.tem_pixel_meta;
+        if (categoriaAtual === 'sem-ads') return !lead.anuncia_google_ads && !lead.anuncia_meta_ads;
+        if (categoriaAtual === 'criticos') return lead.nota_digital < 6.0;
+        if (categoriaAtual === 'delivery') return ['delivery', 'lanchonete', 'alimentacao'].includes(lead.nicho.toLowerCase());
+        return lead.nicho.toLowerCase() === categoriaAtual;
+      });
+
+      // KPIs
+      document.getElementById('kpi-total').textContent = todosLeads.length;
+      document.getElementById('kpi-sem-maps').textContent = todosLeads.filter(l => !l.possui_google_maps).length;
+      document.getElementById('kpi-sem-site').textContent = todosLeads.filter(l => !l.website || (l.velocidade_site && l.velocidade_site.includes('Lento'))).length;
+      document.getElementById('kpi-sem-pixel').textContent = todosLeads.filter(l => !l.tem_pixel_meta).length;
+
+      filtrados.forEach((lead, idx) => {
+        const tr = document.createElement('tr');
+
+        let scoreClass = 'score-mid';
+        if (lead.nota_digital >= 8.5) scoreClass = 'score-high';
+        else if (lead.nota_digital < 6.0) scoreClass = 'score-low';
+
+        // Chips Técnicos
+        const mapsChip = lead.possui_google_maps 
+          ? `<span class="chip chip-ok">✓ Maps (${lead.reviews_count || 0})</span>` 
+          : `<span class="chip chip-bad">✕ Sem Maps</span>`;
+
+        let siteChip = `<span class="chip chip-bad">✕ Sem Site</span>`;
+        if (lead.website) {
+          if (lead.velocidade_site && lead.velocidade_site.includes('Rápido')) {
+            siteChip = `<span class="chip chip-ok">✓ Site (${lead.velocidade_site})</span>`;
+          } else if (lead.velocidade_site && lead.velocidade_site.includes('Lento')) {
+            siteChip = `<span class="chip chip-warn">⚠ ${lead.velocidade_site}</span>`;
+          } else {
+            siteChip = `<span class="chip chip-ok">✓ Site</span>`;
+          }
+        }
+
+        const pixelChip = lead.tem_pixel_meta 
+          ? `<span class="chip chip-ok">✓ Pixel</span>` 
+          : `<span class="chip chip-bad">✕ Pixel</span>`;
+
+        const adsChip = (lead.anuncia_google_ads || lead.anuncia_meta_ads)
+          ? `<span class="chip chip-ok">✓ Ads</span>` 
+          : `<span class="chip chip-warn">✕ Sem Ads</span>`;
+
+        const isNovo = lead.is_novo ? `<span class="badge-new">NOVO</span>` : '';
+
+        const statusOpt = ['DESCOBERTO', 'AUDITADO', 'ABORDADO', 'INTERESSADO', 'FECHADO']
+          .map(st => `<option value="${st}" ${lead.status === st ? 'selected' : ''}>${st}</option>`)
+          .join('');
+
+        tr.innerHTML = `
+          <td style="font-family: var(--font-mono); color: var(--text-muted); font-size: 11px;">${String(idx + 1).padStart(2, '0')}</td>
+          <td>
+            <div class="company-cell">
+              <div class="company-name">${lead.nome} ${isNovo}</div>
+              <div class="company-cnpj">CNPJ: ${lead.cnpj || 'Em validação'}</div>
+              <div class="company-meta">
+                <span class="badge-nicho">${lead.nicho}</span>
+                <span>📍 ${lead.cidade.split(',')[0]}</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="decisor-cell">
+              <div class="decisor-name">👤 ${lead.socio_decisor || 'Sócio Proprietário'}</div>
+              <div class="decisor-cargo">${lead.cargo_decisor || 'Decisor'}</div>
+              <div style="font-size: 11px; font-family: var(--font-mono); color: var(--text-muted);">${lead.telefone || '-'}</div>
+            </div>
+          </td>
+          <td>
+            <div class="tech-stack">
+              ${mapsChip}
+              ${siteChip}
+              ${pixelChip}
+              ${adsChip}
+            </div>
+          </td>
+          <td>
+            <div class="opp-box">
+              <div class="opp-service">${lead.servico_recomendado || 'Otimização Digital Geral'}</div>
+              <div class="opp-ticket">${lead.ticket_sugerido || 'R$ 1.500/mês'}</div>
+            </div>
+          </td>
+          <td>
+            <span class="score-badge ${scoreClass}">★ ${lead.nota_digital.toFixed(1)}</span>
+          </td>
+          <td>
+            <select class="status-select" onchange="salvarStatusLead('${lead.id || lead.nome}', this.value)">
+              ${statusOpt}
+            </select>
+          </td>
+          <td style="text-align: right;">
+            <div class="actions-cell">
+              <button class="btn-preview-site" onclick="abrirModalPrevia('${lead.id || lead.nome}')" title="Ver Prévia do Site em Segundos">⚡ Ver Prévia</button>
+              <button class="btn-action btn-detail" onclick="abrirDrawer('${lead.id || lead.nome}')">🔍 Raio-X</button>
+              ${lead.link_whatsapp_direto ? `
+                <a href="${lead.link_whatsapp_direto}" target="_blank" class="btn-action btn-wa" title="Disparar conversa WhatsApp">
+                  📲 WhatsApp
+                </a>
+              ` : ''}
+              ${lead.link_gmail_direto ? `
+                <a href="${lead.link_gmail_direto}" target="_blank" class="btn-action btn-email" title="Abrir e-mail no Gmail">
+                  ✉️ Gmail
+                </a>
+              ` : ''}
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // --- DRAWER INTERATIVO ---
+    function abrirDrawer(idNome) {
+      leadSelecionado = todosLeads.find(l => (l.id || l.nome) == idNome);
+      if (!leadSelecionado) return;
+
+      document.getElementById('drawerNicho').textContent = (leadSelecionado.nicho || 'Geral').toUpperCase();
+      document.getElementById('drawerNome').textContent = leadSelecionado.nome;
+      document.getElementById('drawerCnpj').textContent = `CNPJ: ${leadSelecionado.cnpj || 'Não localizado'}`;
+      document.getElementById('drawerCidade').textContent = `📍 ${leadSelecionado.cidade}`;
+      
+      document.getElementById('drawerSocio').textContent = leadSelecionado.socio_decisor || 'Proprietário';
+      document.getElementById('drawerCargo').textContent = leadSelecionado.cargo_decisor || 'Sócio-Administrador';
+      document.getElementById('drawerEmail').textContent = leadSelecionado.email_contato || 'contato@empresa.com.br';
+
+      document.getElementById('drawerMapsStatus').textContent = leadSelecionado.possui_google_maps ? `Sim (${leadSelecionado.reviews_count || 0} reviews)` : 'Inexistente';
+      document.getElementById('drawerVelocidadeStatus').textContent = leadSelecionado.velocidade_site || (leadSelecionado.website ? 'Ativo' : 'Sem Site');
+      document.getElementById('drawerPixelStatus').textContent = leadSelecionado.tem_pixel_meta ? '✓ Ativo e Rastreado' : '✕ Inexistente';
+      document.getElementById('drawerGtmStatus').textContent = leadSelecionado.tem_google_tag_manager ? '✓ Instalado' : '✕ Não detectado';
+      document.getElementById('drawerGoogleAdsStatus').textContent = leadSelecionado.anuncia_google_ads ? '✓ Anunciando na Busca' : '✕ Não anuncia';
+      document.getElementById('drawerMetaAdsStatus').textContent = leadSelecionado.anuncia_meta_ads ? '✓ Anunciando no Insta/Face' : '✕ Não anuncia';
+
+      document.getElementById('drawerServicoRecomendado').textContent = leadSelecionado.servico_recomendado || 'Presença Digital & IA';
+      document.getElementById('drawerTicketSugerido').textContent = `Ticket Sugerido: ${leadSelecionado.ticket_sugerido || 'R$ 1.500/mês'}`;
+
+      const gapsList = document.getElementById('drawerGapsList');
+      gapsList.innerHTML = '';
+      if (leadSelecionado.gaps && leadSelecionado.gaps.length > 0) {
+        leadSelecionado.gaps.forEach(g => {
+          const div = document.createElement('div');
+          div.textContent = `• ⚠️ ${g}`;
+          gapsList.appendChild(div);
+        });
+      } else {
+        gapsList.innerHTML = '<div>• Estrutura sólida: ideal para expansão de tráfego pago de alta escala.</div>';
+      }
+
+      document.getElementById('drawerBtnWa').href = leadSelecionado.link_whatsapp_direto || '#';
+      document.getElementById('drawerBtnGmail').href = leadSelecionado.link_gmail_direto || '#';
+
+      // Configura aba padrão
+      setDrawerTab('whatsapp', document.querySelector('.drawer-tabs .tab-btn'));
+
+      document.getElementById('drawerOverlay').style.display = 'block';
+      document.getElementById('leadDrawer').classList.add('open');
+    }
+
+    function fecharDrawer() {
+      document.getElementById('drawerOverlay').style.display = 'none';
+      document.getElementById('leadDrawer').classList.remove('open');
+    }
+
+    function setDrawerTab(tab, btn) {
+      abaAtual = tab;
+      document.querySelectorAll('.drawer-tabs .tab-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const title = document.getElementById('scriptTitle');
+      const text = document.getElementById('drawerScriptText');
+
+      if (!leadSelecionado) return;
+
+      if (tab === 'whatsapp') {
+        title.textContent = '💬 Mensagem de WhatsApp (1 Clique):';
+        text.textContent = leadSelecionado.mensagem_sugerida || 'Mensagem não gerada.';
+      } else if (tab === 'email') {
+        title.textContent = `✉️ E-mail Consultivo (Assunto: ${leadSelecionado.email_assunto || 'Oportunidade'}):`;
+        text.textContent = leadSelecionado.email_corpo || 'E-mail não gerado.';
+      } else if (tab === 'ligacao') {
+        title.textContent = '📞 Script de Ligação Telefônica (30 Segundos):';
+        text.textContent = leadSelecionado.script_ligacao || 'Script de ligação não gerado.';
+      }
+    }
+
+    function copiarScriptAtual() {
+      const text = document.getElementById('drawerScriptText').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('Copiado para a área de transferência com sucesso!');
+      });
+    }
+
+    // --- MINERAÇÃO EM TEMPO REAL ---
+    function iniciarVarreduraAoVivo() {
+      const nicho = document.getElementById('huntNicho').value.trim() || 'Comércio';
+      const local = document.getElementById('huntLocal').value.trim() || 'São Paulo - SP';
+      const foco = document.getElementById('huntFoco').value;
+      const btn = document.getElementById('btnHunt');
+      const radar = document.getElementById('radarTerminal');
+      const log = document.getElementById('radarLogText');
+
+      btn.disabled = true;
+      radar.style.display = 'flex';
+
+      const passos = [
+        `Varrendo o Google Meu Negócio para "${nicho}" em ${local}...`,
+        `Extraindo CNPJ, dados cadastrais e quadro societário dos donos...`,
+        `Auditando tags técnicas: Meta Pixel, GTM, Google Ads e PageSpeed...`,
+        `Cruzando dados com a Matriz 'Cada Furo é um Serviço' (Método Mazzeo)...`,
+        `Gerando tríplice abordagem: WhatsApp, E-mail no Gmail e Script de Ligação...`,
+        `Pronto! Inserindo novas empresas qualificadas na sua carteira...`
+      ];
+
+      let passoAtual = 0;
+      const intervalo = setInterval(() => {
+        if (passoAtual < passos.length) {
+          log.textContent = passos[passoAtual];
+          passoAtual++;
+        } else {
+          clearInterval(intervalo);
+          concluirVarredura(nicho, local, foco);
+          btn.disabled = false;
+          setTimeout(() => { radar.style.display = 'none'; }, 2000);
+        }
+      }, 500);
+    }
+
+    function concluirVarredura(nicho, local, foco) {
+      const sociosNomes = [
+        ["Dr. Roberto Moura", "Diretor Clínico"],
+        ["Marcos Vinicius", "Sócio-Proprietário"],
+        ["Dra. Fernanda Lima", "Sócia-Administradora"],
+        ["Carlos Eduardo Ramos", "Proprietário"]
+      ];
+
+      const novos = [];
+      for (let i = 0; i < 4; i++) {
+        const nomeEmpresa = `${nicho} Prime ${local.split(',')[0]} #${Math.floor(Math.random() * 80 + 10)}`;
+        const telAleatorio = `1199${Math.floor(1000000 + Math.random() * 9000000)}`;
+        const [socio, cargo] = sociosNomes[i % sociosNomes.length];
+        const cnpj = `${Math.floor(Math.random() * 89 + 10)}.${Math.floor(Math.random() * 899 + 100)}.${Math.floor(Math.random() * 899 + 100)}/0001-${Math.floor(Math.random() * 89 + 10)}`;
+
+        const temMaps = foco === 'sem_maps' ? false : (i % 2 === 0);
+        const temSite = foco === 'sem_site' ? false : (i !== 2);
+        const temPixel = foco === 'sem_pixel' ? false : (i === 1 && temSite);
+        const velocidade = temSite ? `${(Math.random() * 2 + 2.8).toFixed(1)}s (Lento)` : 'Sem site';
+
+        let servico = '🔥 Landing Page de Alta Conversão';
+        let ticket = 'R$ 1.800 setup + R$ 300/mês';
+        if (!temMaps) {
+          servico = '⭐ Estruturação de Google Meu Negócio (GMB)';
+          ticket = 'R$ 1.200 setup + R$ 600/mês';
+        } else if (!temSite) {
+          servico = '📱 Cardápio / Catálogo Próprio no WhatsApp';
+          ticket = 'R$ 1.500 setup + R$ 350/mês';
+        } else if (!temPixel) {
+          servico = '⚙️ Setup de Rastreamento Avançado (Pixel + GTM)';
+          ticket = 'R$ 900 setup único';
+        }
+
+        const baseUrl = window.location.origin + window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+        const leadIdGerado = Date.now() + i;
+        const linkPrevia = `${baseUrl}/previa.html?id=${leadIdGerado}&nome=${encodeURIComponent(nomeEmpresa)}&nicho=${encodeURIComponent(nicho)}&cidade=${encodeURIComponent(local)}&socio=${encodeURIComponent(socio)}&tel=${encodeURIComponent(telAleatorio)}`;
+
+        const msgWhats = `Olá, ${socio.split(' ')[0]}! Tudo bem? ✨\n\nVi que você é responsável pelo ${nomeEmpresa} em ${local}. Analisei a presença digital de vocês no celular e, para adiantar, montei uma prévia funcional de 1 página sem custos para vocês verem:\n👉 ${linkPrevia}\n\nEla foi feita para abrir em menos de 0.5s e gerar agendamentos automáticos no WhatsApp. Dê uma olhada de 1 minuto no celular! Se fizer sentido, colocamos no ar em 24h.`;
+        const linkWa = `https://wa.me/55${telAleatorio}?text=${encodeURIComponent(msgWhats)}`;
+
+        const assuntoEmail = `Prévia de presença digital & agendamento para o ${nomeEmpresa}`;
+        const corpoEmail = `Olá, ${socio} (${cargo}),\n\nTudo bem?\n\nRealizei um diagnóstico em empresas de ${nicho} em ${local} e, para adiantar, desenvolvi uma prévia funcional de alta conversão exclusiva para o ${nomeEmpresa}:\n🔗 ${linkPrevia}\n\nEssa estrutura foi feita para converter visitantes em clientes no WhatsApp de forma imediata.\n\nGostaria de avaliar como colocar essa página no ar com seu domínio oficial?\n\nAtenciosamente,\nMarquinhos | Moura.AI Soluções Digitais & IA\nWhatsApp: (11) 93931-8424`;
+        const linkGmail = `mailto:contato@empresa.com.br?subject=${encodeURIComponent(assuntoEmail)}&body=${encodeURIComponent(corpoEmail)}`;
+
+        const novoLead = {
+          id: leadIdGerado,
+          nome: nomeEmpresa,
+          cnpj: cnpj,
+          socio_decisor: socio,
+          cargo_decisor: cargo,
+          email_contato: `diretoria@${nomeEmpresa.toLowerCase().replace(/[^a-z]/g, '')}.com.br`,
+          nicho: nicho.toLowerCase(),
+          cidade: local,
+          telefone: telAleatorio,
+          website: temSite ? `https://www.${nomeEmpresa.toLowerCase().replace(/[^a-z]/g, '')}.com.br` : '',
+          velocidade_site: velocidade,
+          instagram: `${nomeEmpresa.toLowerCase().replace(/[^a-z]/g, '')}_oficial`,
+          possui_google_maps: temMaps,
+          reviews_count: temMaps ? Math.floor(Math.random() * 25 + 2) : 0,
+          tem_pixel_meta: temPixel,
+          tem_google_tag_manager: temPixel,
+          anuncia_google_ads: false,
+          anuncia_meta_ads: false,
+          nota_digital: !temMaps ? 2.5 : (!temSite ? 4.5 : 7.0),
+          servico_recomendado: servico,
+          ticket_sugerido: ticket,
+          link_previa_direto: linkPrevia,
+          gaps: [
+            !temMaps ? 'Invisível no Google Meu Negócio' : '',
+            !temSite ? 'Não possui site oficial' : 'Site lento no celular',
+            !temPixel ? 'Sem Pixel do Meta para remarketing' : ''
+          ].filter(Boolean),
+          mensagem_sugerida: msgWhats,
+          link_whatsapp_direto: linkWa,
+          email_assunto: assuntoEmail,
+          email_corpo: corpoEmail,
+          link_gmail_direto: linkGmail,
+          script_ligacao: `📞 SCRIPT DE LIGAÇÃO (30s):\n1. 'Olá, por favor, gostaria de falar com o ${socio}. É o Marquinhos que está falando.'\n2. 'Oi ${socio.split(' ')[0]}, vi que você está à frente do ${nomeEmpresa}. Montei uma prévia de site moderna para vocês testarem: ${linkPrevia}. Mandei no seu WhatsApp. Dê uma olhada de 1 minuto sem custo!'`,
+          is_novo: true,
+          status: 'DESCOBERTO'
+        };
+        novos.push(novoLead);
+      }
+
+      // Adiciona no topo
+      novos.forEach(nl => todosLeads.unshift(nl));
+
+      // Salva no localStorage
+      try {
+        const salvosAnteriores = JSON.parse(localStorage.getItem('moura_novos_leads_hunter_mazzeo') || '[]');
+        localStorage.setItem('moura_novos_leads_hunter_mazzeo', JSON.stringify([...novos, ...salvosAnteriores]));
+      } catch(e) {}
+
+      renderizar();
+    }
+
+    // --- EXPORTAÇÃO CSV / EXCEL UTF-8 COM BOM ---
+    function exportarCSV() {
+      const headers = [
+        'ID', 'Nome da Empresa', 'CNPJ', 'Sócio Decisor', 'Cargo', 'Nicho',
+        'Cidade/Região', 'Telefone', 'E-mail', 'Google Maps', 'Reviews',
+        'Website', 'Velocidade', 'Pixel Meta', 'Google Tag Manager',
+        'Google Ads', 'Meta Ads', 'Nota Digital', 'Serviço Recomendado',
+        'Ticket Sugerido', 'Status Funil', 'Link da Prévia', 'Link WhatsApp', 'Link Gmail'
+      ];
+
+      const linhas = todosLeads.map((l, idx) => [
+        idx + 1,
+        `"${(l.nome || '').replace(/"/g, '""')}"`,
+        `"${l.cnpj || ''}"`,
+        `"${(l.socio_decisor || '').replace(/"/g, '""')}"`,
+        `"${(l.cargo_decisor || '').replace(/"/g, '""')}"`,
+        `"${l.nicho || ''}"`,
+        `"${(l.cidade || '').replace(/"/g, '""')}"`,
+        `"${l.telefone || ''}"`,
+        `"${l.email_contato || ''}"`,
+        l.possui_google_maps ? 'Sim' : 'Nao',
+        l.reviews_count || 0,
+        `"${l.website || ''}"`,
+        `"${l.velocidade_site || ''}"`,
+        l.tem_pixel_meta ? 'Sim' : 'Nao',
+        l.tem_google_tag_manager ? 'Sim' : 'Nao',
+        l.anuncia_google_ads ? 'Sim' : 'Nao',
+        l.anuncia_meta_ads ? 'Sim' : 'Nao',
+        l.nota_digital || 0,
+        `"${(l.servico_recomendado || '').replace(/"/g, '""')}"`,
+        `"${(l.ticket_sugerido || '').replace(/"/g, '""')}"`,
+        `"${l.status || 'DESCOBERTO'}"`,
+        `"${construirUrlPrevia(l)}"`,
+        `"${l.link_whatsapp_direto || ''}"`,
+        `"${l.link_gmail_direto || ''}"`
+      ]);
+
+      const csvContent = '\uFEFF' + [headers.join(';'), ...linhas.map(row => row.join(';'))].join('\r\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `leads_prospeccao_mazzeo_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // ── GESTÃO DA CENTRAL DE VENDAS (MÉTODO THIAGO HORA: PRODUTOS & INFOPRODUTOS) ──
+    const ROTEIROS_CRIATIVOS = {
+      'joelheira-ortopedica': {
+        nome: 'Joelheira Ortopédica Alívio 3D Pro (Par)',
+        cenas: [
+          { tempo: '00:00 - 00:03 (Gancho)', visual: 'Pessoa descendo escada com a mão no joelho expressando dor. Efeito de estalo.', fala: 'Se o seu joelho dói ou estala quando você desce a escada ou levanta do sofá, pare tudo e veja isso agora!', texto: 'JOELHO ESTALANDO OU DOENDO?' },
+          { tempo: '00:03 - 00:12 (Dor & Causa)', visual: 'Gráfico 3D da cartilagem e menisco sofrendo impacto direto.', fala: 'O problema não é a sua idade, é o impacto direto na cartilagem que não tem sustentação correta nos ligamentos.', texto: 'O desgaste do menisco sem amortecimento' },
+          { tempo: '00:12 - 00:22 (Demonstração)', visual: 'Colocando a Joelheira Alívio 3D. Destaque no anel de silicone patelar e estabilizadores.', fala: 'Essa joelheira ortopédica com compressão 3D e anel anatômico redistribui o peso do seu corpo e absorve 80% do impacto na hora.', texto: 'Alívio imediato da pressão + Estabilização 3D' },
+          { tempo: '00:22 - 00:30 (Oferta & CTA)', visual: 'Pessoa caminhando com firmeza e sorrindo. Selo Frete Grátis.', fala: 'Garanta hoje o seu par com 50% de desconto e frete grátis para todo o Brasil. Clique no botão aqui embaixo antes que o estoque acabe!', texto: 'ÚLTIMAS UNIDADES COM FRETE GRÁTIS! CLIQUE ABAIXO' }
+        ]
+      },
+      'caneta-depiladora': {
+        nome: 'Caneta Depiladora Facial & Sobrancelhas Precision Gold',
+        cenas: [
+          { tempo: '00:00 - 00:03 (Gancho)', visual: 'Mulher sentindo dor ao puxar pelo com pinça ou cera.', fala: 'Aposto que você ainda perde meia hora chorando de dor com cera ou pinça para limpar a sobrancelha!', texto: 'CHEGA DE SOFRER COM PINÇA!' },
+          { tempo: '00:03 - 00:12 (Demonstração)', visual: 'Caneta passando rente à sobrancelha cortando os pelinhos sem dor e com LED.', fala: 'Conheça a caneta depiladora que remove até os pelinhos mais finos em segundos, sem dor, sem cortes e sem deixar a pele vermelha.', texto: 'Zero dor • Ponta hipoalergênica ouro 18K' },
+          { tempo: '00:12 - 00:20 (Praticidade)', visual: 'Caneta dentro da bolsa, retocando no espelho do carro em 10 segundos.', fala: 'Tem o tamanho de um batom, cabe em qualquer bolsa e é recarregável via USB. Praticidade pura para o seu dia a dia.', texto: 'Tamanho de um batom • Bateria USB' },
+          { tempo: '00:20 - 00:25 (Oferta)', visual: 'Banner promocional R$ 97 com frete grátis.', fala: 'Aproveite a promoção de fim de ano por menos de 100 reais com frete grátis. Toque no link e peça a sua!', texto: 'PROMOÇÃO: R$ 97 + FRETE GRÁTIS HOJE' }
+        ]
+      },
+      'game-stick-4k-retro': {
+        nome: 'Game Stick 4K Retrô Pro — 10.000 Jogos (Oferta de Natal)',
+        cenas: [
+          { tempo: '00:00 - 00:04 (Gancho Nostalgia)', visual: 'Gameplay clássica de Super Mario World e Mortal Kombat com música nostálgica.', fala: 'Você lembra da época que a nossa única preocupação era zerar a fase do videogame na casa dos amigos?', texto: 'O PRESENTE PERFEITO DESTE NATAL!' },
+          { tempo: '00:04 - 00:15 (Apresentação)', visual: 'Plugando o Game Stick HDMI na TV da sala. Menu em 4K com mais de 10.000 jogos.', fala: 'Esse pequeno aparelho transforma qualquer TV moderna em uma máquina do tempo com mais de 10.000 jogos clássicos de Super Nintendo, PlayStation 1 e Fliperama.', texto: '10.000 Clássicos • PlayStation 1, SNES, Mega Drive' },
+          { tempo: '00:15 - 00:25 (Família no Sofá)', visual: 'Pai e filho jogando juntos com os 2 controles sem fio, rindo no sofá.', fala: 'Já vem com 2 controles sem fio inclusos! É o melhor presente de Natal para tirar as crianças do celular e reunir a família inteira na sala.', texto: '2 Controles Sem Fio • Diversão para toda a família' },
+          { tempo: '00:25 - 00:35 (Oferta Natal)', visual: 'Selo Entrega Garantida Antes do Natal por R$ 249.', fala: 'Lote promocional de Natal com mais de R$ 150 de desconto e entrega rápida para todo o Brasil. Clique no link e garanta o seu antes que esgote!', texto: 'GARANTA ANTES DO NATAL: R$ 249 COM FRETE GRÁTIS' }
+        ]
+      },
+      'guia-renda-ia-sem-estoque': {
+        nome: 'Guia Prático: Renda com IA & Vendas Sem Estoque',
+        cenas: [
+          { tempo: '00:00 - 00:04 (Gancho)', visual: 'Notificações de vendas Pix caindo no celular (R$ 47, R$ 97, R$ 129).', fala: 'Enquanto a maioria fica rolando o feed à toa, tem gente faturando de R$ 3.000 a R$ 10.000 por mês usando IA gratuita e vendas sem estoque.', texto: 'VENDAS SEM ESTOQUE + IA GRATUITA' },
+          { tempo: '00:04 - 00:14 (O Método)', visual: 'Tela com a plataforma Kairós de fornecedores e gerador de páginas em segundos.', fala: 'Você não precisa ter estoque em casa, não precisa aparecer e não precisa de computador caro. Você só precisa dominar a tríade Produto, Oferta e Conversão.', texto: 'Sem estoque • Sem aparecer • Pelo celular' },
+          { tempo: '00:14 - 00:25 (Chamada de Ação)', visual: 'Capa 3D do Guia + Planilha de Bônus por R$ 47.', fala: 'Liberei o guia passo a passo completo por apenas R$ 47 no Pix com acesso imediato e 3 bônus exclusivos. Clique no link para baixar agora!', texto: 'APENAS R$ 47 NO PIX • ACESSO IMEDIATO' }
+        ]
+      }
+    };
+
+    let roteiroAtualTexto = "";
+
+    function alternarAbaPrincipal(aba) {
+      const hunterView = document.getElementById('hunterView');
+      const vendasView = document.getElementById('vendasView');
+      const btnHunter = document.getElementById('tabBtnHunter');
+      const btnVendas = document.getElementById('tabBtnVendas');
+
+      if (aba === 'vendas') {
+        hunterView.style.display = 'none';
+        vendasView.classList.add('active');
+        btnVendas.classList.add('active');
+        btnHunter.classList.remove('active');
+      } else {
+        vendasView.classList.remove('active');
+        hunterView.style.display = 'block';
+        btnHunter.classList.add('active');
+        btnVendas.classList.remove('active');
+      }
+    }
+
+    function abrirPreviaVenda(urlRelativa, titulo) {
+      document.getElementById('modalPreviaNome').textContent = titulo;
+      
+      let urlFinal = urlRelativa;
+      if (window.location.protocol === 'file:') {
+        const pathAtual = window.location.pathname;
+        const baseDir = pathAtual.substring(0, pathAtual.lastIndexOf('/') + 1);
+        urlFinal = 'file:///' + (baseDir + urlRelativa).replace(/^[\\\/]+/, '').replace(/\\/g, '/');
+      }
+
+      urlPreviaAtual = urlFinal;
+      document.getElementById('iframePrevia').src = urlFinal;
+      document.getElementById('btnAbrirAbaExterna').href = urlFinal;
+      
+      document.getElementById('modalPreviaOverlay').classList.add('active');
+      document.getElementById('modalPrevia').classList.add('active');
+    }
+
+    function copiarLinkProduto(urlRelativa) {
+      let urlFinal = urlRelativa;
+      if (window.location.protocol === 'file:') {
+        const pathAtual = window.location.pathname;
+        const baseDir = pathAtual.substring(0, pathAtual.lastIndexOf('/') + 1);
+        urlFinal = 'file:///' + (baseDir + urlRelativa).replace(/^[\\\/]+/, '').replace(/\\/g, '/');
+      } else {
+        urlFinal = window.location.origin + '/' + urlRelativa;
+      }
+
+      navigator.clipboard.writeText(urlFinal).then(() => {
+        alert("🔗 Link da página copiado com sucesso para você divulgar ou enviar!\n\n" + urlFinal);
+      });
+    }
+
+    function abrirModalCriativos(prodId) {
+      const rot = ROTEIROS_CRIATIVOS[prodId] || ROTEIROS_CRIATIVOS['joelheira-ortopedica'];
+      document.getElementById('modalCriativosTitulo').textContent = '🎬 Roteiro de Anúncio IA: ' + rot.nome;
+      
+      let html = '';
+      roteiroAtualTexto = `🎬 ROTEIRO DE ANÚNCIO (TIKTOK / REELS / META ADS)\nProduto: ${rot.nome}\nFormato: Hook-Story-Offer (Sem Precisar Aparecer)\n\n`;
+
+      rot.cenas.forEach((c, idx) => {
+        html += `
+          <div class="script-scene">
+            <div class="scene-timing">⏱️ Cena ${idx + 1}: ${c.tempo}</div>
+            <div class="scene-row">
+              <span class="scene-lbl">Visual (Cena):</span>
+              <span class="scene-val">${c.visual}</span>
+            </div>
+            <div class="scene-row">
+              <span class="scene-lbl">Voz da IA:</span>
+              <span class="scene-val" style="color: #38bdf8; font-weight: 600;">"${c.fala}"</span>
+            </div>
+            <div class="scene-row">
+              <span class="scene-lbl">Texto na Tela:</span>
+              <span class="scene-val" style="background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 4px; font-family: monospace;">${c.texto}</span>
+            </div>
+          </div>
+        `;
+        roteiroAtualTexto += `[Cena ${idx + 1}: ${c.tempo}]\nVisual: ${c.visual}\nVoz IA: "${c.fala}"\nTexto na Tela: ${c.texto}\n\n`;
+      });
+
+      document.getElementById('modalCriativosConteudo').innerHTML = html;
+      document.getElementById('modalCriativosOverlay').classList.add('active');
+      document.getElementById('modalCriativos').classList.add('active');
+    }
+
+    function fecharModalCriativos() {
+      document.getElementById('modalCriativosOverlay').classList.remove('active');
+      document.getElementById('modalCriativos').classList.remove('active');
+    }
+
+    function copiarRoteiroAtual() {
+      if (!roteiroAtualTexto) return;
+      navigator.clipboard.writeText(roteiroAtualTexto).then(() => {
+        alert("📋 Roteiro completo copiado para a área de transferência! Pode colar em um editor ou ferramenta de voz de IA.");
+      });
+    }
+  </script>
+</body>
+</html>

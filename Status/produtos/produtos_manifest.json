@@ -1,0 +1,32 @@
+[
+  {
+    "id": "joelheira-ortopedica",
+    "nome": "Joelheira Ortopédica Alívio 3D Pro (Par)",
+    "preco": "129,90",
+    "lucro": "85,00",
+    "margem": "65%",
+    "categoria": "Perpétuo (Saúde / Dor Física)",
+    "arquivo": "C:\\Users\\User\\Desktop\\Projetos\\Marquinhos\\Status\\produtos\\joelheira-ortopedica.html",
+    "url_relativa": "produtos/joelheira-ortopedica.html"
+  },
+  {
+    "id": "caneta-depiladora",
+    "nome": "Caneta Depiladora Facial & Sobrancelhas Precision Gold",
+    "preco": "97,00",
+    "lucro": "67,00",
+    "margem": "69%",
+    "categoria": "Perpétuo (Beleza / Praticidade Feminina)",
+    "arquivo": "C:\\Users\\User\\Desktop\\Projetos\\Marquinhos\\Status\\produtos\\caneta-depiladora.html",
+    "url_relativa": "produtos/caneta-depiladora.html"
+  },
+  {
+    "id": "game-stick-4k-retro",
+    "nome": "Game Stick 4K Retrô Pro — 10.000 Jogos + 2 Controles Sem Fio",
+    "preco": "249,00",
+    "lucro": "150,00",
+    "margem": "60%",
+    "categoria": "Sazonal de Alta Explosão (Natal & Fim de Ano 2026)",
+    "arquivo": "C:\\Users\\User\\Desktop\\Projetos\\Marquinhos\\Status\\produtos\\game-stick-4k-retro.html",
+    "url_relativa": "produtos/game-stick-4k-retro.html"
+  }
+]

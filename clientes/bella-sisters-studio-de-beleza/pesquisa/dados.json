@@ -1,0 +1,146 @@
+{
+ "nome": "Bella Sisters - Studio de Beleza",
+ "slug": "bella-sisters-studio-de-beleza",
+ "categoria": "Salão de Beleza",
+ "endereco": "Bella Sisters - Studio de Beleza - Rua Luís Filgueira Souto, 398 - Parque Sao Domingos, São Paulo - SP, 05122-080",
+ "endereco_partes": {
+  "borough": "Parque Sao Domingos",
+  "street": "Rua Luís Filgueira Souto, 398",
+  "city": "São Paulo",
+  "postal_code": "05122-080",
+  "state": "São Paulo",
+  "country": "BR"
+ },
+ "telefone": "(11) 97959-1229",
+ "celular": true,
+ "whatsapp": "https://wa.me/5511979591229",
+ "horarios": {
+  "domingo": [
+   "09:00–17:00"
+  ],
+  "quarta-feira": [
+   "09:00–17:00"
+  ],
+  "quinta-feira": [
+   "09:00–17:00"
+  ],
+  "segunda-feira": [
+   "09:00–17:00"
+  ],
+  "sexta-feira": [
+   "09:00–17:00"
+  ],
+  "sábado": [
+   "09:00–17:00"
+  ],
+  "terça-feira": [
+   "09:00–17:00"
+  ]
+ },
+ "nota": 5.0,
+ "avaliacoes": 208,
+ "por_estrela": {
+  "1": 0,
+  "2": 0,
+  "3": 0,
+  "4": 0,
+  "5": 208
+ },
+ "descricao": "",
+ "comodidades": [
+  {
+   "id": "accessibility",
+   "name": "Acessibilidade",
+   "options": [
+    {
+     "name": "Aro de indução magnética",
+     "enabled": false
+    },
+    {
+     "name": "Assento com acessibilidade para pessoas em cadeira de rodas",
+     "enabled": false
+    },
+    {
+     "name": "Banheiro com acessibilidade para pessoas em cadeira de rodas",
+     "enabled": false
+    },
+    {
+     "name": "Entrada com acessibilidade para pessoas em cadeira de rodas",
+     "enabled": false
+    },
+    {
+     "name": "Estacionamento com acessibilidade para pessoas em cadeira de rodas",
+     "enabled": false
+    }
+   ]
+  }
+ ],
+ "website": "https://www.instagram.com/studio_bellasisters/",
+ "tipo_site": "instagram",
+ "maps": "https://www.google.com/maps/place/Bella+Sisters+-+Studio+de+Beleza/data=!4m7!3m6!1s0x94cef933255e79b7:0x1977526aa81c7a6b!8m2!3d-23.501259!4d-46.7346089!16s%2Fg%2F11h3jd0sgb!19sChIJt3leJTP5zpQRa3ocqGpSdxk?authuser=0&hl=pt-BR&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1",
+ "lat": "-23.501259",
+ "lon": "-46.734609",
+ "plus_code": "F7X8+F5 Parque Sao Domingos, São Paulo - SP",
+ "faixa_preco": "",
+ "dono": {
+  "id": "101738383703972677790",
+  "name": "Bella Sisters - Studio de Beleza (proprietário)",
+  "link": "https://www.google.com/maps/contrib/101738383703972677790"
+ },
+ "reservas": [],
+ "pedido_online": [],
+ "cardapio": {
+  "link": "",
+  "source": ""
+ },
+ "avaliacoes_texto": [
+  {
+   "nome": "Marina Convertino",
+   "nota": 5,
+   "quando": "uma semana atrás",
+   "texto": "Elas são incríveis! Cabelo e maquiagem impecáveis no dia do meu casamento, e elas ainda são gentis e atenciosas. Eu me senti maravilhosa!",
+   "fotos": 0
+  },
+  {
+   "nome": "Denise Yih",
+   "nota": 5,
+   "quando": "um mês atrás",
+   "texto": "Experiência simplesmente impecável!\nMe casei em agosto e escolher esse studio foi uma das melhores escolhas.\nAs meninas são extremamente profissionais e fazer o dia da noiva com elas foi uma ótima experiência, a maquiagem e o cabelo ficaram intactos até o fim e o meu dia foi super tranquilo\nIndico para todas as noivas!!",
+   "fotos": 3
+  },
+  {
+   "nome": "Maiara Moreira",
+   "nota": 5,
+   "quando": "2 anos atrás",
+   "texto": "Fiz cabelo e maquiagem para meu casamento com essas maravilhosas em 2020.\nAtendimento impecável, maquiagem e penteado duraram até o dia seguinte rsrs !! Amo o cuidado e atenção que elas tem aos mínimos detalhes. Já voltei outras vezes para maquiagem de madrinha e sempre me surpreendo com o trabalho delas!! Sucesso meninas!!! Deus as abençoe!",
+   "fotos": 5
+  },
+  {
+   "nome": "Fabi Pereira",
+   "nota": 5,
+   "quando": "um ano atrás",
+   "texto": "Trabalho maravilhoso da Joana e da Jani 💍 meu dia da noiva foi lindo e mais do que eu esperava e sonhava ❤️ maquiagem ficou impecável e meu penteado ficou lindo do jeito q sonhei. Parabéns meninas 👏🏼👏🏼 minha madrinhas também amaram o trabalho de vocês . Foi um dia lindoo, leve, muito distraído que nem percebemos a hora passar rs",
+   "fotos": 1
+  },
+  {
+   "nome": "Gabrielle Coelho",
+   "nota": 5,
+   "quando": "Editado 5 meses atrás",
+   "texto": "Fiz meu cabelo e maquiagem com as meninas. Ambos impecáveis. Fiquei mais de 12h com a make e cabelos basicamente intactos. Mais do que essa entrega, eles são atenciosas, respeitosas, solícitas e ajudam em todo o processo. Recomendo demais!",
+   "fotos": 0
+  }
+ ],
+ "fonte_csv": "e7f3c7f2-126e-4181-bb83-c41789945a59.csv",
+ "fotos_baixadas": [
+  "00-capa-google.jpg",
+  "01-avaliacao.jpg",
+  "02-avaliacao.jpg",
+  "03-avaliacao.jpg",
+  "04-avaliacao.jpg",
+  "05-avaliacao.jpg",
+  "06-avaliacao.jpg",
+  "07-avaliacao.jpg",
+  "08-avaliacao.jpg"
+ ],
+ "mosaico": "C:\\Users\\User\\Desktop\\Projetos\\Marquinhos\\clientes\\bella-sisters-studio-de-beleza\\pesquisa\\fotos\\mosaico.png"
+}

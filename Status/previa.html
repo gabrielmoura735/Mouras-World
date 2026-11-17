@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">Carregando Prévia Express — Moura.AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --bg-surface: #0f141f;
+      --bg-elevated: #161e2e;
+      --primary: #38bdf8;
+      --primary-glow: rgba(56, 189, 248, 0.28);
+      --accent: #10b981;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(56, 189, 248, 0.35);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-main: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      overflow-x: hidden;
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.09) 0%, transparent 40%),
+        radial-gradient(circle at 85% 75%, rgba(16, 185, 129, 0.08) 0%, transparent 45%);
+    }
+
+    /* Top Floating Conversion Banner */
+    .closing-banner {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-glow);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-size: 13px;
+    }
+    .closing-banner-text {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #e2e8f0;
+    }
+    .badge-pulse {
+      background: #38bdf8;
+      color: #000;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      animation: pulseGlow 2s infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 10px rgba(56, 189, 248, 0.8); }
+      50% { box-shadow: 0 0 2px rgba(56, 189, 248, 0.2); }
+    }
+    .btn-approve-top {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 800;
+      text-decoration: none;
+      font-size: 12px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .btn-approve-top:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.55);
+    }
+
+    header.site-header {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .logo-mark {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 900;
+      color: #000;
+      box-shadow: 0 4px 16px var(--primary-glow);
+    }
+    .brand-name { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+    .brand-city { font-size: 12px; color: var(--text-muted); }
+
+    .hero {
+      max-width: 1200px;
+      margin: 40px auto 60px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; margin-top: 20px; }
+      .closing-banner { flex-direction: column; text-align: center; }
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 6px 14px;
+      border-radius: 999px;
+      color: #38bdf8;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+    .hero-title {
+      font-size: clamp(34px, 4.5vw, 54px);
+      font-weight: 900;
+      line-height: 1.12;
+      letter-spacing: -1.2px;
+      margin-bottom: 20px;
+    }
+    .hero-title span.highlight {
+      background: linear-gradient(135deg, #38bdf8 20%, #34d399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 32px;
+      max-width: 580px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 36px;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
+      color: #04101d;
+      padding: 15px 30px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 15px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 25px rgba(56, 189, 248, 0.35);
+      transition: all 0.25s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.5);
+    }
+    .btn-secondary {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 15px 24px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 15px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .hero-visual {
+      position: relative;
+      height: 440px;
+      background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.15) 0%, rgba(15, 23, 42, 0.6) 70%);
+      border: 1px solid var(--border-glow);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+    canvas#meshCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .visual-overlay-card {
+      position: relative;
+      z-index: 2;
+      background: rgba(15, 20, 31, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 24px;
+      border-radius: 16px;
+      width: 85%;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+      animation: floatMotion 5s ease-in-out infinite;
+    }
+    @keyframes floatMotion {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .glass-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.18);
+      color: #34d399;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .stats-bar {
+      max-width: 1200px;
+      margin: 0 auto 70px;
+      padding: 0 24px;
+    }
+    .stats-inner {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px 36px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 32px;
+      font-weight: 900;
+      color: #38bdf8;
+      margin-bottom: 4px;
+      font-family: var(--font-mono);
+    }
+    .stat-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .section-title {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 48px;
+      padding: 0 24px;
+    }
+    .section-title h2 { font-size: 36px; font-weight: 800; letter-spacing: -1px; margin-bottom: 12px; }
+    .section-title p { color: var(--text-muted); font-size: 16px; }
+
+    .services-grid {
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .service-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 30px;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-glow);
+      box-shadow: 0 12px 30px rgba(56, 189, 248, 0.12);
+    }
+    .service-icon { font-size: 36px; margin-bottom: 18px; display: inline-block; }
+    .service-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; color: #fff; }
+    .service-desc { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px; }
+    .service-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .reviews-container {
+      max-width: 1200px;
+      margin: 0 auto 90px;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .review-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .review-stars { color: #fbbf24; font-size: 16px; margin-bottom: 12px; letter-spacing: 2px; }
+    .review-text { font-size: 14px; color: #cbd5e1; font-style: italic; line-height: 1.6; margin-bottom: 20px; }
+    .review-author { display: flex; align-items: center; gap: 12px; }
+    .review-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #000;
+    }
+    .author-name { font-size: 14px; font-weight: 700; color: #fff; }
+    .author-status { font-size: 11px; color: var(--text-muted); }
+
+    .final-cta {
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+    }
+    .final-cta-box {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+      border: 1px solid var(--border-glow);
+      border-radius: 24px;
+      padding: 50px 32px;
+      text-align: center;
+      position: relative;
+    }
+    .final-cta-box h2 { font-size: clamp(26px, 3.5vw, 42px); font-weight: 800; margin-bottom: 16px; }
+    .final-cta-box p { color: var(--text-muted); font-size: 16px; max-width: 600px; margin: 0 auto 30px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    footer a { color: #38bdf8; text-decoration: none; }
+
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #25d366;
+      color: #fff;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      text-decoration: none;
+      z-index: 99;
+      transition: all 0.25s ease;
+    }
+    .floating-whatsapp:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Floating Conversion Banner -->
+  <div class="closing-banner">
+    <div class="closing-banner-text">
+      <span class="badge-pulse">⚡ PRÉVIA EXCLUSIVA</span>
+      <span>Proposta visual para <strong id="topLeadNome">Empresa</strong> • Decisor: <strong id="topSocioNome">Decisor</strong></span>
+    </div>
+    <a id="btnApproveMarquinhos" href="#" target="_blank" class="btn-approve-top">
+      🚀 Quero Colocar Este Site no Ar em 24h
+    </a>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="#" class="logo-container">
+      <div class="logo-mark" id="logoLetter">M</div>
+      <div>
+        <div class="brand-name" id="brandName">Nome da Empresa</div>
+        <div class="brand-city" id="brandCity">Cidade • Categoria</div>
+      </div>
+    </a>
+    <a id="navBtnWhatsapp" href="#" target="_blank" class="btn-secondary" style="padding: 10px 18px; font-size: 13px;">
+      💬 Fale Conosco
+    </a>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div>
+      <div class="hero-badge" id="heroBadge">✦ ATENDIMENTO ESPECIALIZADO & RAPIDEZ</div>
+      <h1 class="hero-title" id="heroTitle">
+        Soluções Sob Medida com <span class="highlight">Excelência e Rapidez</span>
+      </h1>
+      <p class="hero-subtitle" id="heroSubtitle">
+        Atendimento prioritário, agendamento descomplicado e foco total nos seus resultados.
+      </p>
+      <div class="hero-actions">
+        <a id="btnHeroWhatsapp" href="#" target="_blank" class="btn-primary">
+          <span>📲</span> Agendar Atendimento via WhatsApp
+        </a>
+        <a href="#servicos" class="btn-secondary">
+          Conhecer Serviços
+        </a>
+      </div>
+    </div>
+
+    <!-- 3D Spline / Canvas Interactive Element -->
+    <div class="hero-visual">
+      <canvas id="meshCanvas"></canvas>
+      <div class="visual-overlay-card">
+        <div class="glass-pill">● ATENDIMENTO ONLINE DISPONÍVEL</div>
+        <h3 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;" id="cardLeadNome">Empresa</h3>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;" id="cardLeadSub">
+          Pontuação máxima de satisfação dos clientes na região.
+        </p>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px;">
+          <div>
+            <div style="font-size: 11px; color: var(--text-muted);">Google Avaliações</div>
+            <div style="color: #fbbf24; font-weight: 800; font-size: 14px;" id="cardReviews">★★★★★ 4.9 (184)</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 11px; color: var(--text-muted);">Tempo de Resposta</div>
+            <div style="color: #38bdf8; font-weight: 800; font-size: 13px;">Menos de 15 min</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="stats-bar">
+    <div class="stats-inner">
+      <div>
+        <div class="stat-number">4.9 ★</div>
+        <div class="stat-desc" id="statReviews">Avaliação Máxima no Google</div>
+      </div>
+      <div>
+        <div class="stat-number">+1.250</div>
+        <div class="stat-desc">Clientes e Pacientes Atendidos</div>
+      </div>
+      <div>
+        <div class="stat-number">0.4s</div>
+        <div class="stat-desc">Carregamento Instantâneo Mobile</div>
+      </div>
+      <div>
+        <div class="stat-number">100%</div>
+        <div class="stat-desc">Garantia & Satisfação Comprovada</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section id="servicos">
+    <div class="section-title">
+      <h2>Nossos Serviços Especializados</h2>
+      <p>Soluções modernas de alto padrão pensadas exclusivamente para você</p>
+    </div>
+    <div class="services-grid" id="servicesGrid">
+      <!-- Renderizado via JS -->
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section>
+    <div class="section-title">
+      <h2>O Que Dizem Nossos Clientes</h2>
+      <p>Depoimentos reais de quem confia no nosso trabalho</p>
+    </div>
+    <div class="reviews-container" id="reviewsGrid">
+      <!-- Renderizado via JS -->
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <div class="final-cta-box">
+      <h2 id="finalCtaTitle">Pronto para Ter a Melhor Experiência?</h2>
+      <p>Fale direto no WhatsApp. Nossa equipe está a postos para te atender com prioridade.</p>
+      <a id="btnFinalWhatsapp" href="#" target="_blank" class="btn-primary" style="font-size: 16px; padding: 18px 36px;">
+        <span>💬</span> Iniciar Atendimento sem Compromisso
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p id="footerCopy">© 2026 Empresa. Todos os direitos reservados.</p>
+    <p style="margin-top: 8px; font-size: 11px; color: #64748b;">
+      Prévia de Alta Conversão desenvolvida por <a id="footerMarquinhosLink" href="#" target="_blank">Marquinhos (Moura.AI)</a>
+    </p>
+  </footer>
+
+  <a id="btnFloatingWhatsapp" href="#" target="_blank" class="floating-whatsapp" title="Falar no WhatsApp">
+    💬
+  </a>
+
+  <!-- Script de Dados & Renderização Dinâmica -->
+  <script src="leads_data.js"></script>
+  <script>
+    const DEFAULT_WHATSAPP_MARQUINHOS = "5511939318424";
+
+    const NICHOS_DICT = {
+      odontologia: {
+        categoria: "Clínica Odontológica & Saúde Bucal",
+        tagline: "✦ ATENDIMENTO HUMANIZADO & TECNOLOGIA DE PONTA",
+        headline: "Transforme seu Sorriso com Tratamentos Modernos e Conforto Total",
+        subheadline: "Excelência em implantes, alinhadores invisíveis, clareamento e estética dental. Cuidado odontológico de alto padrão.",
+        servicos: [
+          {icone: "✨", titulo: "Implantes & Próteses", desc: "Reabilitação oral definitiva com tecnologia 3D sem dor e com rápida recuperação."},
+          {icone: "💎", titulo: "Alinhadores Invisíveis", desc: "Correção ortodôntica discreta e confortável sem fios metálicos aparentes."},
+          {icone: "🌟", titulo: "Clareamento & Facetas", desc: "Harmonização do sorriso com resinas estéticas e lentes de contato de porcelana importada."},
+          {icone: "🩺", titulo: "Check-up & Prevenção", desc: "Limpeza profunda profilática e diagnóstico precoce com câmera intraoral digital."}
+        ],
+        depoimentos: [
+          {autor: "Mariana Siqueira", texto: "Atendimento impecável! Fiz meu clareamento e o resultado superou todas as expectativas. Ambiente acolhedor e pontual.", tempo: "Há 2 semanas"},
+          {autor: "Carlos Eduardo M.", texto: "Equipe extremamente profissional. Perdi o medo de ir ao dentista depois que conheci o atendimento deles.", tempo: "Há 1 mês"},
+          {autor: "Fernanda Bastos", texto: "Fiz meus implantes e voltei a sorrir com confiança. O Dr. foi super atencioso e o pós-operatório foi tranquilo.", tempo: "Há 3 semanas"}
+        ]
+      },
+      advocacia: {
+        categoria: "Sociedade de Advogados & Assessoria Jurídica",
+        tagline: "✦ SEGURANÇA JURÍDICA & ATUAÇÃO ESTRATÉGICA",
+        headline: "Protegendo Seus Direitos e Fortalecendo Seu Patrimônio",
+        subheadline: "Assessoria jurídica especializada para pessoas físicas e empresas. Soluções ágeis, éticas e personalizadas em todas as instâncias.",
+        servicos: [
+          {icone: "⚖️", titulo: "Direito Empresarial & Contratos", desc: "Blindagem jurídica, conformidade e redução de passivos para sua empresa prosperar."},
+          {icone: "💼", titulo: "Direito Trabalhista & Previdenciário", desc: "Defesa de direitos, planejamento de aposentadoria e acordos judiciais vantajosos."},
+          {icone: "🏛️", titulo: "Direito Civil & Família", desc: "Inventários rápidos, divórcios, partilha de bens e planejamento sucessório patrimonial."},
+          {icone: "🛡️", titulo: "Consultoria Preventiva", desc: "Atuação estratégica para evitar litígios caros e garantir segurança em transações."}
+        ],
+        depoimentos: [
+          {autor: "Rodrigo Mendes", texto: "Excelente escritório. Resolveram uma questão societária complexa da minha empresa com muita agilidade.", tempo: "Há 3 semanas"},
+          {autor: "Patrícia Albuquerque", texto: "Advogados atenciosos e muito competentes. Conduziram meu processo com total clareza em cada etapa.", tempo: "Há 1 mês"},
+          {autor: "Guilherme Prado", texto: "A assessoria mensal deles nos poupou milhares de reais em passivos trabalhistas. Super recomendo!", tempo: "Há 2 meses"}
+        ]
+      },
+      restaurante: {
+        categoria: "Restaurante & Experiência Gastronômica",
+        tagline: "✦ SABOR AUTÊNTICO & AMBIENTE EXCLUSIVO",
+        headline: "Uma Viagem Gastronômica Inesquecível a Cada Prato",
+        subheadline: "Ingredientes frescos selecionados, receitas autorais e atendimento acolhedor. Reserve sua mesa ou faça seu pedido com entrega rápida.",
+        servicos: [
+          {icone: "🍽️", titulo: "Almoço & Jantar Executivo", desc: "Menu completo com opções sofisticadas preparadas diariamente por nossos chefs."},
+          {icone: "🛵", titulo: "Delivery Expresso VIP", desc: "Embalagens térmicas especiais que garantem a temperatura e crocância perfeitas."},
+          {icone: "🍷", titulo: "Carta de Vinhos & Drinks", desc: "Harmonização completa com rótulos selecionados e coquetelaria autoral premium."},
+          {icone: "🎉", titulo: "Eventos & Comemorações", desc: "Espaço reservado e cardápios personalizados para aniversários e reuniões corporativas."}
+        ],
+        depoimentos: [
+          {autor: "Lucas Faria", texto: "A melhor comida da região disparado! O atendimento é rápido e o ambiente é muito agradável para ir com a família.", tempo: "Há 4 dias"},
+          {autor: "Camila Rocha", texto: "Pedimos no delivery e chegou antes do prazo previsto, impecável e delicioso. Viramos clientes fiéis!", tempo: "Há 1 semana"},
+          {autor: "Marcelo Vieira", texto: "Pratos muito bem servidos e sabor surreal. Carta de drinks fantástica. Vale cada centavo!", tempo: "Há 2 semanas"}
+        ]
+      },
+      barbearia: {
+        categoria: "Barbearia Clássica & Centro de Estética Masculina",
+        tagline: "✦ ESTILO, PRECISÃO & ATENDIMENTO SEM FILAS",
+        headline: "Onde o Cuidado Masculino Encontra a Excelência",
+        subheadline: "Cortes contemporâneos, barboterapia com toalha quente e produtos premium. Agende seu horário online em 30 segundos e venha tomar uma cerveja gelada.",
+        servicos: [
+          {icone: "✂️", titulo: "Corte de Cabelo Personalizado", desc: "Técnicas de fade, degradê e tesoura adaptadas ao formato do seu rosto e estilo."},
+          {icone: "🪒", titulo: "Barboterapia com Toalha Quente", desc: "Alinhamento com navalha, esfoliação facial, óleos essenciais e hidratação profunda."},
+          {icone: "🧴", titulo: "Tratamentos Capilares & Barba", desc: "Lavagem com shampoo mentolado, selagem, camuflagem de fios brancos e hidratação."},
+          {icone: "🍻", titulo: "Espaço Lounge & Bebidas", desc: "Ambiente climatizado com café expresso, sinuca e cervejas artesanais selecionadas."}
+        ],
+        depoimentos: [
+          {autor: "Bruno Henrique", texto: "Ambiente de primeira e os barbeiros mandam muito bem no degradê. Não troco por nenhuma outra!", tempo: "Há 1 semana"},
+          {autor: "Thiago Martins", texto: "A barboterapia é relaxamento puro depois de um dia de trabalho. Profissionais pontuais e educados.", tempo: "Há 2 semanas"},
+          {autor: "Gabriel Costa", texto: "Melhor barbearia da cidade. Agendamento prático pelo WhatsApp e corte sempre impecável.", tempo: "Há 3 semanas"}
+        ]
+      },
+      microsaas_clinica: {
+        categoria: "Micro-SaaS & Automação de Agendamentos",
+        tagline: "✦ RECUPERAÇÃO AUTOMÁTICA DE CONSULTAS VIA IA",
+        headline: "Zere os Horários Ociosos e as Faltas na Sua Clínica",
+        subheadline: "Sistema inteligente integrado ao WhatsApp que confirma consultas com antecedência e preenche horários cancelados em até 10 minutos com pacientes da lista de espera.",
+        servicos: [
+          {icone: "📱", titulo: "Confirmação Automática no WhatsApp", desc: "Disparo de lembrete 24h e 12h antes com botões interativos de Sim e Não, sem ocupar a secretária."},
+          {icone: "⚡", titulo: "Reocupação Instantânea de Horários", desc: "Assim que uma consulta é cancelada, a IA avisa os próximos pacientes da lista de espera automaticamente."},
+          {icone: "📊", titulo: "Painel de Faturamento Recuperado", desc: "Dashboard visual com métricas em tempo real de pacientes salvos e receita preservada no mês."},
+          {icone: "🔗", titulo: "Integração sem Trocar de Sistema", desc: "Funciona em conjunto com a sua agenda atual sem exigir treinamentos complexos ou migrações."}
+        ],
+        depoimentos: [
+          {autor: "Dra. Letícia Silveira", texto: "Reduzimos as faltas de 28% para menos de 4% no primeiro mês. O sistema se pagou logo na primeira semana!", tempo: "Há 1 semana"},
+          {autor: "Dr. Fernando Gusmão", texto: "Minhas secretárias agora têm tempo para acolher os pacientes que chegam na recepção. Automação impecável.", tempo: "Há 3 semanas"},
+          {autor: "Dra. Beatriz Prado", texto: "Recuperamos mais de R$ 6.500 no mês passado com a lista de espera automática. Indispensável para qualquer clínica.", tempo: "Há 1 mês"}
+        ]
+      },
+      geral: {
+        categoria: "Serviços Especializados de Alta Performance",
+        tagline: "✦ ATENDIMENTO DE ALTO PADRÃO & RESULTADOS REAIS",
+        headline: "Soluções Sob Medida com Rapidez, Garantia e Confiabilidade",
+        subheadline: "Profissionais altamente capacitados, tecnologia atualizada e compromisso inegociável com a sua satisfação.",
+        servicos: [
+          {icone: "⭐", titulo: "Atendimento Prioritário & Rápido", desc: "Resposta ágil e sem filas para entender exatamente a sua necessidade e entregar soluções."},
+          {icone: "🛡️", titulo: "Garantia Total & Segurança", desc: "Processos certificados com transparência em cada etapa e suporte contínuo garantido."},
+          {icone: "⚡", titulo: "Metodologia & Eficiência", desc: "Prazos cumpridos com rigor e precisão técnica para valorizar o seu tempo e investimento."},
+          {icone: "🤝", titulo: "Consultoria Personalizada", desc: "Diagnóstico sob medida sem custos adicionais para indicar a melhor solução para você."}
+        ],
+        depoimentos: [
+          {autor: "Renata Carvalho", texto: "Empresa séria, pontual e muito transparente. Resolveram tudo dentro do prazo combinado com muita perfeição.", tempo: "Há 1 semana"},
+          {autor: "Daniel Oliveira", texto: "Superou as expectativas. Equipe prestativa e atendimento de primeira linha. Recomendo a todos!", tempo: "Há 3 semanas"},
+          {autor: "Vanessa Pires", texto: "Excelente custo-benefício e muita atenção aos detalhes. Com certeza voltarei a contratar.", tempo: "Há 1 mês"}
+        ]
+      }
+    };
+
+    function parseParams() {
+      const p = new URLSearchParams(window.location.search);
+      return {
+        id: p.get('id'),
+        nome: p.get('nome'),
+        nicho: p.get('nicho'),
+        cidade: p.get('cidade'),
+        socio: p.get('socio'),
+        tel: p.get('tel'),
+        reviews: p.get('reviews')
+      };
+    }
+
+    function carregarLead() {
+      const params = parseParams();
+      let lead = null;
+
+      if (window.STATUS_LEADS_DATA && Array.isArray(window.STATUS_LEADS_DATA)) {
+        if (params.id) {
+          lead = window.STATUS_LEADS_DATA.find(l => String(l.id) === String(params.id));
+        }
+        if (!lead && params.nome) {
+          lead = window.STATUS_LEADS_DATA.find(l => l.nome && l.nome.toLowerCase().includes(params.nome.toLowerCase()));
+        }
+      }
+
+      // Se veio de novos leads salvos no localStorage
+      if (!lead && params.id) {
+        try {
+          const salvos = JSON.parse(localStorage.getItem('moura_novos_leads_hunter_mazzeo') || '[]');
+          lead = salvos.find(l => String(l.id) === String(params.id) || l.nome === params.nome);
+        } catch(e) {}
+      }
+
+      // Se ainda não encontrou, constrói lead a partir dos parâmetros da URL
+      if (!lead) {
+        lead = {
+          nome: params.nome || "Clínica & Empresa Modelo",
+          nicho: params.nicho || "Serviços",
+          cidade: params.cidade || "São Paulo - SP",
+          socio_decisor: params.socio || "Diretoria",
+          telefone: params.tel || "(11) 98765-4321",
+          reviews_count: parseInt(params.reviews || "154")
+        };
+      }
+
+      renderizarPagina(lead);
+    }
+
+    function renderizarPagina(lead) {
+      const whatsappMarquinhos = localStorage.getItem('moura_user_whatsapp') || DEFAULT_WHATSAPP_MARQUINHOS;
+      
+      const nome = lead.nome || "Empresa Modelo";
+      const nicho = (lead.nicho || "geral").toLowerCase();
+      const cidade = lead.cidade || "São Paulo - SP";
+      const socio = lead.socio_decisor || "Diretoria";
+      const reviews = lead.reviews_count || 148;
+
+      let cfg = NICHOS_DICT.geral;
+      if (nicho.includes('odonto') || nicho.includes('dent') || nicho.includes('saude')) cfg = NICHOS_DICT.odontologia;
+      else if (nicho.includes('advoc') || nicho.includes('jurid')) cfg = NICHOS_DICT.advocacia;
+      else if (nicho.includes('restaurante') || nicho.includes('pizz') || nicho.includes('delivery')) cfg = NICHOS_DICT.restaurante;
+      else if (nicho.includes('barbearia') || nicho.includes('barba') || nicho.includes('salao') || nicho.includes('cabelo')) cfg = NICHOS_DICT.barbearia;
+      else if (nicho.includes('saas') || nicho.includes('software') || nicho.includes('agenda') || nicho.includes('cancelamento') || nicho.includes('encaixa')) cfg = NICHOS_DICT.microsaas_clinica;
+
+      document.title = `${nome} — ${cfg.categoria}`;
+      document.getElementById('topLeadNome').textContent = nome;
+      document.getElementById('topSocioNome').textContent = socio;
+      document.getElementById('brandName').textContent = nome;
+      document.getElementById('brandCity').textContent = `${cidade} • ${cfg.categoria}`;
+      document.getElementById('logoLetter').textContent = nome.charAt(0);
+      document.getElementById('heroBadge').textContent = cfg.tagline;
+      document.getElementById('heroSubtitle').textContent = `${cfg.subheadline} Atendimento de excelência em ${cidade}.`;
+      document.getElementById('cardLeadNome').textContent = nome;
+      document.getElementById('cardReviews').textContent = `★★★★★ 4.9 (${reviews})`;
+      document.getElementById('statReviews').textContent = `Nota Máxima no Google (${reviews}+ avaliações)`;
+      document.getElementById('footerCopy').textContent = `© 2026 ${nome}. Todos os direitos reservados. • ${cidade}`;
+
+      // Headline
+      const partes = cfg.headline.split('com');
+      if (partes.length > 1) {
+        document.getElementById('heroTitle').innerHTML = `${partes[0]} com <span class="highlight">${partes[1]}</span>`;
+      } else {
+        document.getElementById('heroTitle').innerHTML = `${cfg.headline} com <span class="highlight">Excelência</span>`;
+      }
+
+      // Link para o WhatsApp do Marquinhos (Fechamento)
+      const msgFechamento = encodeURIComponent(`Olá Marquinhos! Vi a prévia do site que você criou para a ${nome} e quero colocar no ar em 24h!`);
+      const linkMarquinhos = `https://wa.me/${whatsappMarquinhos}?text=${msgFechamento}`;
+      document.getElementById('btnApproveMarquinhos').href = linkMarquinhos;
+      document.getElementById('footerMarquinhosLink').href = linkMarquinhos;
+
+      // Link para o WhatsApp do Lead
+      const telLeadLimpo = (lead.telefone || '').replace(/\D/g, '');
+      let linkLead = linkMarquinhos;
+      if (telLeadLimpo.length >= 10) {
+        const ddi = telLeadLimpo.startsWith('55') ? telLeadLimpo : `55${telLeadLimpo}`;
+        linkLead = `https://wa.me/${ddi}?text=${encodeURIComponent(`Olá! Gostaria de agendar um atendimento na ${nome}.`)}`;
+      }
+      document.getElementById('navBtnWhatsapp').href = linkLead;
+      document.getElementById('btnHeroWhatsapp').href = linkLead;
+      document.getElementById('btnFinalWhatsapp').href = linkLead;
+      document.getElementById('btnFloatingWhatsapp').href = linkLead;
+
+      // Render Serviços
+      const sGrid = document.getElementById('servicesGrid');
+      sGrid.innerHTML = cfg.servicos.map(s => `
+        <div class="service-card">
+          <div class="service-icon">${s.icone}</div>
+          <h3 class="service-title">${s.titulo}</h3>
+          <p class="service-desc">${s.desc}</p>
+          <div class="service-badge">Alta Demanda</div>
+        </div>
+      `).join('');
+
+      // Render Depoimentos
+      const rGrid = document.getElementById('reviewsGrid');
+      rGrid.innerHTML = cfg.depoimentos.map(d => `
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"${d.texto}"</p>
+          <div class="review-author">
+            <div class="review-avatar">${d.autor.charAt(0)}</div>
+            <div>
+              <div class="author-name">${d.autor}</div>
+              <div class="author-status">✓ Cliente Verificado no Google • ${d.tempo}</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Inicialização
+    window.addEventListener('DOMContentLoaded', carregarLead);
+
+    // 3D Canvas Mesh Animation com Física Reativa
+    const canvas = document.getElementById('meshCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+
+    function resize() {
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    let mouse = { x: width / 2, y: height / 2, active: false };
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+      mouse.active = true;
+    });
+    canvas.addEventListener('mouseleave', () => { mouse.active = false; });
+
+    let points = [];
+    const POINT_COUNT = 40;
+    for (let i = 0; i < POINT_COUNT; i++) {
+      points.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.85,
+        vy: (Math.random() - 0.5) * 0.85,
+        radius: Math.random() * 2.2 + 1
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Linhas entre pontos
+      for (let i = 0; i < points.length; i++) {
+        for (let j = i + 1; j < points.length; j++) {
+          const dx = points[i].x - points[j].x;
+          const dy = points[i].y - points[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 115) {
+            ctx.beginPath();
+            ctx.moveTo(points[i].x, points[i].y);
+            ctx.lineTo(points[j].x, points[j].y);
+            ctx.strokeStyle = `rgba(56, 189, 248, ${1 - dist / 115 * 0.75})`;
+            ctx.lineWidth = 0.85;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Reatividade ao cursor do mouse
+      if (mouse.active) {
+        for (let p of points) {
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 130) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = `rgba(168, 85, 247, ${1 - dist / 130})`;
+            ctx.lineWidth = 1.1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Partículas
+      for (let p of points) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#38bdf8';
+        ctx.shadowColor = '#38bdf8';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+      }
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+      for (let p of points) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#38bdf8';
+        ctx.shadowColor = '#38bdf8';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
+</body>
+</html>
+

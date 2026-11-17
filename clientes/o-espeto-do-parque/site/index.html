@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>O Espeto do Parque — Bar e Espetaria em Vila Pirituba, SP</title>
+  <meta name="description" content="Bar especializado em espetinhos, porções e hambúrgueres em Vila Pirituba. Música ao vivo na sexta. 4,7★ em 164 avaliações. Rua Celestino Marinelli, 55.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ---- HEADER ---- */
+    .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 0; transition: background .3s, box-shadow .3s; }
+    .site-header.scrolled { background: var(--escuro); box-shadow: 0 2px 20px rgba(0,0,0,.5); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .logo-nome { font-family: var(--serif); font-size: 1.1rem; font-weight: 800; color: var(--claro); line-height: 1.1; }
+    .logo-nome span { display: block; font-family: var(--sans); font-size: .72rem; font-weight: 400; opacity: .75; letter-spacing: .1em; text-transform: uppercase; }
+    nav { display: flex; align-items: center; gap: 1.4rem; }
+    nav a { color: rgba(var(--claro-rgb),.85); text-decoration: none; font-size: .9rem; font-weight: 600; transition: color .2s; }
+    nav a:hover { color: var(--acento); }
+    .nav-cta { display: none; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--claro); margin: 5px 0; border-radius: 2px; }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: var(--escuro); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: var(--serif); font-size: 1.5rem; color: var(--claro); text-decoration: none; }
+    .mobile-menu .close-btn { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; cursor: pointer; color: var(--claro); font-size: 1.8rem; }
+    @media (max-width: 768px) { nav { display: none; } .hamburger { display: block; } .nav-cta { display: flex; } }
+
+    /* ---- HERO ---- */
+    .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; color: var(--claro); overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background-image: url('assets/hero-espetos-1600.jpg'); background-size: cover; background-position: center; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(28,26,23,.95) 0%, rgba(28,26,23,.4) 55%, rgba(28,26,23,.1) 100%); }
+    .hero-content { position: relative; z-index: 1; padding: 5rem 0 5rem; }
+    .hero-badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(var(--acento-rgb),.18); border: 1px solid rgba(var(--acento-rgb),.4); color: var(--acento); font-size: .78rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; padding: .35em .9em; border-radius: 999px; margin-bottom: 1.2rem; }
+    .hero h1 { font-size: clamp(2.4rem, 7vw, 5rem); font-weight: 800; color: #fff; max-width: 700px; margin-bottom: .6rem; text-shadow: 0 2px 20px rgba(0,0,0,.5); }
+    .hero-sub { font-size: clamp(1rem, 2.2vw, 1.25rem); opacity: .9; max-width: 500px; margin-bottom: 2rem; }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: .8rem; }
+    .hero-musica { display: inline-flex; align-items: center; gap: .5rem; background: rgba(0,0,0,.35); border: 1px solid rgba(var(--acento-rgb),.35); border-radius: 999px; padding: .5em 1em; font-size: .88rem; color: var(--acento); font-weight: 600; margin-top: 1.5rem; }
+
+    /* ---- NÚMEROS ---- */
+    .numeros { background: var(--primaria); color: #fff; padding: 2.5rem 0; }
+    .numeros-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; text-align: center; }
+    .num-valor { font-family: var(--serif); font-size: 2.4rem; font-weight: 800; line-height: 1; }
+    .num-label { font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; opacity: .85; margin-top: .3rem; }
+
+    /* ---- O QUE TEM ---- */
+    .cardapio { background: var(--claro); padding: 5rem 0; }
+    .cardapio-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .card-item { background: #fff; border-radius: var(--raio); overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,.07); transition: transform .25s, box-shadow .25s; }
+    .card-item:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.13); }
+    .card-item-img { height: 190px; overflow: hidden; }
+    .card-item-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .card-item:hover .card-item-img img { transform: scale(1.06); }
+    .card-item-body { padding: 1.3rem 1.4rem 1.5rem; }
+    .card-item-icon { font-size: 1.8rem; margin-bottom: .4rem; }
+    .card-item-body h3 { color: var(--primaria); margin-bottom: .3rem; }
+    .card-item-body p { color: #6a5a4a; font-size: .93rem; margin: 0; }
+
+    /* ---- MÚSICA AO VIVO ---- */
+    .musica { background: var(--escuro); color: var(--claro); padding: 5rem 0; }
+    .musica-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .musica-img { border-radius: var(--raio); overflow: hidden; height: 380px; }
+    .musica-img img { width: 100%; height: 100%; object-fit: cover; }
+    .musica-txt .eyebrow { color: var(--acento); }
+    .musica-txt h2 { color: #fff; }
+    .musica-txt p { opacity: .82; }
+    .musica-txt .dias { display: flex; flex-direction: column; gap: .6rem; margin: 1.5rem 0 2rem; }
+    .musica-txt .dia-item { display: flex; align-items: center; gap: .8rem; padding: .7rem 1rem; background: rgba(255,255,255,.07); border-radius: 10px; font-size: .93rem; }
+    .musica-txt .dia-item .dia-nome { font-weight: 700; color: var(--acento); min-width: 80px; }
+    @media (max-width: 768px) { .musica-layout { grid-template-columns: 1fr; } .musica-img { height: 240px; } }
+
+    /* ---- HORÁRIOS ---- */
+    .horarios { background: var(--claro-2); padding: 5rem 0; }
+    .horarios-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .horarios-card { background: #fff; border-radius: var(--raio); padding: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,.07); }
+    .horarios-card table { width: 100%; border-collapse: collapse; }
+    .horarios-card tr { border-bottom: 1px solid rgba(0,0,0,.07); }
+    .horarios-card tr:last-child { border: none; }
+    .horarios-card td { padding: .7rem .4rem; font-size: .93rem; }
+    .horarios-card td:first-child { font-weight: 700; color: var(--primaria); }
+    .horarios-card td:last-child { text-align: right; color: #6a5a4a; }
+    .destaque-row td { background: rgba(var(--acento-rgb),.08); }
+    .mapa-wrapper { border-radius: var(--raio); overflow: hidden; height: 320px; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+    .mapa-wrapper iframe { width: 100%; height: 100%; border: none; }
+    .endereco-box { margin-top: 1.5rem; display: flex; align-items: flex-start; gap: .8rem; }
+    .endereco-box svg { flex-shrink: 0; margin-top: 2px; color: var(--primaria); }
+    .endereco-box p { margin: 0; font-size: .93rem; color: #6a5a4a; }
+    @media (max-width: 768px) { .horarios-layout { grid-template-columns: 1fr; } .mapa-wrapper { height: 240px; } }
+
+    /* ---- AVALIAÇÕES ---- */
+    .avaliacoes { background: var(--escuro); color: var(--claro); padding: 5rem 0; }
+    .aval-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .aval-card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); border-radius: var(--raio); padding: 1.8rem; }
+    .aval-stars { color: var(--acento); font-size: 1.1rem; letter-spacing: .08em; margin-bottom: .6rem; }
+    .aval-card blockquote { margin: 0 0 1.2rem; font-size: .97rem; opacity: .9; font-style: italic; line-height: 1.65; }
+    .aval-autor { display: flex; align-items: center; gap: .8rem; }
+    .aval-iniciais { width: 40px; height: 40px; border-radius: 50%; background: var(--primaria); display: grid; place-items: center; font-weight: 700; font-size: .9rem; flex-shrink: 0; }
+    .aval-nome { font-weight: 700; font-size: .9rem; }
+    .aval-quando { font-size: .8rem; opacity: .6; }
+
+    /* ---- CTA FINAL ---- */
+    .cta-final { background: linear-gradient(135deg, #2a0808 0%, var(--primaria) 100%); color: #fff; padding: 5rem 0; text-align: center; position: relative; overflow: hidden; }
+    .cta-final::before { content: ''; position: absolute; inset: 0; background: url('assets/ambiente-800.jpg') center/cover; opacity: .15; }
+    .cta-final > * { position: relative; z-index: 1; }
+    .cta-final h2 { color: #fff; font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: .6rem; }
+    .cta-final p { opacity: .88; max-width: 500px; margin: 0 auto 2rem; }
+
+    /* ---- FOOTER ---- */
+    .site-footer { background: var(--escuro); color: rgba(var(--claro-rgb),.5); padding: 2rem 0; text-align: center; font-size: .82rem; border-top: 1px solid rgba(255,255,255,.07); }
+    .footer-redes { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .footer-redes a { color: rgba(var(--claro-rgb),.5); text-decoration: none; transition: color .2s; font-size: .85rem; }
+    .footer-redes a:hover { color: var(--acento); }
+
+    /* ---- WHATSAPP FLUTUANTE ---- */
+    .whatsapp-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 90; width: 56px; height: 56px; background: #25d366; border-radius: 50%; display: grid; place-items: center; box-shadow: 0 4px 20px rgba(37,211,102,.45); transition: transform .2s; }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    .whatsapp-float svg { width: 30px; height: 30px; fill: #fff; }
+
+    /* ---- REVEAL ---- */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="site-header">
+  <div class="wrap header-inner">
+    <a href="#" style="text-decoration:none;">
+      <div class="logo-nome">O Espeto do Parque <span>Bar &amp; Espetaria · Vila Pirituba</span></div>
+    </a>
+    <nav>
+      <a href="#cardapio">O que tem</a>
+      <a href="#musica">Música ao vivo</a>
+      <a href="#horarios">Horários</a>
+      <a href="https://wa.me/5511916122716?text=Oi%2C+vim+pelo+site!" class="btn btn--fire btn--sm" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+    <a href="https://wa.me/5511916122716?text=Oi%2C+vim+pelo+site!" class="btn btn--fire btn--sm nav-cta" target="_blank" rel="noopener">WhatsApp</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MENU MOBILE -->
+<div class="mobile-menu" id="mobile-menu">
+  <button class="close-btn" id="close-menu" aria-label="Fechar">✕</button>
+  <a href="#cardapio" class="mobile-link">O que tem</a>
+  <a href="#musica" class="mobile-link">Música ao vivo</a>
+  <a href="#horarios" class="mobile-link">Horários</a>
+  <a href="https://wa.me/5511916122716?text=Oi%2C+vim+pelo+site!" class="btn btn--fire" target="_blank" rel="noopener">Falar no WhatsApp</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg" data-parallax="0.3"></div>
+  <div class="hero-overlay"></div>
+  <div class="wrap hero-content">
+    <span class="hero-badge">🍢 Espetaria · Bar · Vila Pirituba</span>
+    <h1>Espetinhos, cerveja gelada e música ao vivo</h1>
+    <p class="hero-sub">O barzinho descontraído de Vila Pirituba. Espetos variados, porções caprichadas, hambúrgueres e ambiente agradável. Aberto todos os dias.</p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/5511916122716?text=Oi%2C+vim+pelo+site!+Quero+reservar+uma+mesa." class="btn btn--fire btn--lg" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Reservar mesa
+      </a>
+      <a href="#cardapio" class="btn btn--ghost btn--lg">O que tem</a>
+    </div>
+    <div class="hero-musica">🎵 Música ao vivo toda sexta — venha com a galera</div>
+  </div>
+</section>
+
+<!-- NÚMEROS -->
+<section class="numeros">
+  <div class="wrap numeros-grid">
+    <div>
+      <div class="num-valor"><span class="count" data-target="47" data-decimals="1">0</span>★</div>
+      <div class="num-label">Nota no Google</div>
+    </div>
+    <div>
+      <div class="num-valor"><span class="count" data-target="164">0</span></div>
+      <div class="num-label">Avaliações</div>
+    </div>
+    <div>
+      <div class="num-valor"><span class="count" data-target="140">0</span></div>
+      <div class="num-label">Avaliações 5 estrelas</div>
+    </div>
+    <div>
+      <div class="num-valor">7 dias</div>
+      <div class="num-label">Aberto toda semana</div>
+    </div>
+  </div>
+</section>
+
+<!-- O QUE TEM -->
+<section class="cardapio" id="cardapio">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">O que tem</p>
+      <h2>Muito além de espetinho</h2>
+      <p style="color:#6a5a4a;max-width:520px;">Espetos variados, porções generosas, hambúrgueres artesanais e feijoada aos fins de semana. Tudo bem feito, bem temperado e fresquinho.</p>
+    </div>
+    <div class="cardapio-cards">
+      <div class="card-item reveal">
+        <div class="card-item-img">
+          <img src="assets/espetinho-1000.jpg" alt="Espetinhos O Espeto do Parque" loading="lazy">
+        </div>
+        <div class="card-item-body">
+          <div class="card-item-icon">🍢</div>
+          <h3>Espetinhos variados</h3>
+          <p>Bastante opção de espetos, todos bem temperados e fresquinhos. Perfeitos pra compartilhar com a galera.</p>
+        </div>
+      </div>
+      <div class="card-item reveal">
+        <div class="card-item-img">
+          <img src="assets/ambiente-800.jpg" alt="Porções e hambúrgueres" loading="lazy">
+        </div>
+        <div class="card-item-body">
+          <div class="card-item-icon">🍔</div>
+          <h3>Porções e hambúrgueres</h3>
+          <p>Porções caprichadas e hambúrgueres artesanais pra quem quer algo mais consistente junto com a cerveja.</p>
+        </div>
+      </div>
+      <div class="card-item reveal">
+        <div class="card-item-img">
+          <img src="assets/fachada-1000.jpg" alt="Bar O Espeto do Parque" loading="lazy">
+        </div>
+        <div class="card-item-body">
+          <div class="card-item-icon">🍺</div>
+          <h3>Cerveja sempre gelada</h3>
+          <p>Cerveja gelada que chega rapidinho à mesa. Atendimento ágil e atencioso — do jeito que bar de bairro tem que ser.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÚSICA AO VIVO -->
+<section class="musica" id="musica">
+  <div class="wrap musica-layout">
+    <div class="musica-img reveal">
+      <img src="assets/hero-espetos-1600.jpg" alt="Ambiente O Espeto do Parque" loading="lazy">
+    </div>
+    <div class="musica-txt reveal">
+      <p class="eyebrow">Toda semana</p>
+      <h2>Música ao vivo na sexta</h2>
+      <p>O ambiente fica ainda mais animado nas sextas com música ao vivo. Som na medida certa — dá pra curtir e ainda conversar. Vem com a família ou com a galera do trabalho.</p>
+      <div class="dias">
+        <div class="dia-item">
+          <span class="dia-nome">Sexta</span>
+          <span>🎵 Música ao vivo + cerveja até meia-noite</span>
+        </div>
+        <div class="dia-item">
+          <span class="dia-nome">Sábado</span>
+          <span>Espetos e porções até meia-noite</span>
+        </div>
+        <div class="dia-item">
+          <span class="dia-nome">Domingo</span>
+          <span>Almoço especial, encerra às 18h</span>
+        </div>
+      </div>
+      <a href="https://wa.me/5511916122716?text=Oi%2C+vim+pelo+site!+Quero+reservar+pra+sexta." class="btn btn--fire" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Reservar pra sexta
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HORÁRIOS E LOCALIZAÇÃO -->
+<section class="horarios" id="horarios">
+  <div class="wrap">
+    <div class="reveal" style="margin-bottom:2.5rem;">
+      <p class="eyebrow">Quando e onde</p>
+      <h2>Horários e localização</h2>
+    </div>
+    <div class="horarios-layout">
+      <div class="reveal">
+        <div class="horarios-card">
+          <table>
+            <tr><td>Segunda</td><td>12h às 16h</td></tr>
+            <tr><td>Ter · Qua · Qui</td><td>12h às 23h</td></tr>
+            <tr class="destaque-row"><td>Sexta 🎵</td><td>12h à meia-noite</td></tr>
+            <tr class="destaque-row"><td>Sábado</td><td>12h à meia-noite</td></tr>
+            <tr><td>Domingo</td><td>12h às 18h</td></tr>
+          </table>
+        </div>
+        <div class="endereco-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <p><strong>Rua Celestino Marinelli, 55</strong><br>Vila Pirituba, São Paulo – SP<br>CEP 05126-120</p>
+        </div>
+        <a href="https://wa.me/5511916122716?text=Oi%2C+vim+pelo+site!" class="btn btn--fire" style="margin-top:1.5rem;" target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+          Falar no WhatsApp
+        </a>
+      </div>
+      <div class="reveal">
+        <div class="mapa-wrapper">
+          <iframe
+            src="https://maps.google.com/maps?q=-23.500240,-46.740284&z=16&output=embed"
+            allowfullscreen
+            loading="lazy"
+            title="Localização O Espeto do Parque"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVALIAÇÕES -->
+<section class="avaliacoes" id="avaliacoes">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 1rem;">
+      <p class="eyebrow" style="color:var(--acento)">O que os clientes dizem</p>
+      <h2>4,7 estrelas em 164 avaliações</h2>
+    </div>
+    <div class="aval-cards">
+      <div class="aval-card reveal">
+        <div class="aval-stars">★★★★★</div>
+        <blockquote>"Barzinho especializado em espetinhos, com ambiente descontraído e agradável. Tem bastante opções de espetos, porções e hambúrgueres — tudo bem feito e gostoso. Música ao vivo na sexta-feira."</blockquote>
+        <div class="aval-autor">
+          <div class="aval-iniciais">CC</div>
+          <div>
+            <div class="aval-nome">Cassio Chan</div>
+            <div class="aval-quando">3 meses atrás · 5 estrelas</div>
+          </div>
+        </div>
+      </div>
+      <div class="aval-card reveal">
+        <div class="aval-stars">★★★★★</div>
+        <blockquote>"Comida maravilhosa, bem temperada, tudo fresquinho. Os atendentes são muito atenciosos e se mostram preocupados com o nosso conforto e satisfação! Valeu a pena."</blockquote>
+        <div class="aval-autor">
+          <div class="aval-iniciais">AP</div>
+          <div>
+            <div class="aval-nome">Ana Paula Dos Reis Silva</div>
+            <div class="aval-quando">Um mês atrás · 5 estrelas</div>
+          </div>
+        </div>
+      </div>
+      <div class="aval-card reveal">
+        <div class="aval-stars">★★★★★</div>
+        <blockquote>"Fui com minha família em um dia de música ao vivo e foi ótimo. O som estava na medida certa, deu para conversar tranquilamente durante toda a noite. Ambiente agradável e comida muito boa. Voltaremos!"</blockquote>
+        <div class="aval-autor">
+          <div class="aval-iniciais">DE</div>
+          <div>
+            <div class="aval-nome">Dariplast Empresa</div>
+            <div class="aval-quando">3 meses atrás · 5 estrelas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;" class="reveal">
+      <a href="https://www.google.com/maps/place/O+Espeto+do+Parque/data=!4m7!3m6!1s0x94cef9338b4b8bb7:0xc3cfaa6ce31abda3" class="btn btn--ghost" target="_blank" rel="noopener">Ver todas as avaliações no Google</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Vem tomar uma cerveja!</h2>
+      <p>Rua Celestino Marinelli, 55, Vila Pirituba. Aberto todos os dias a partir das 12h. Manda mensagem e a gente reserva sua mesa.</p>
+      <a href="https://wa.me/5511916122716?text=Oi%2C+vim+pelo+site!+Quero+reservar+uma+mesa." class="btn btn--light btn--lg" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Reservar mesa no WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-redes">
+      <a href="https://instagram.com/oespetodoparque55" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.google.com/maps/place/O+Espeto+do+Parque/data=!4m7!3m6!1s0x94cef9338b4b8bb7:0xc3cfaa6ce31abda3" target="_blank" rel="noopener">Google Maps</a>
+      <a href="https://wa.me/5511916122716" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+    <p>© 2026 O Espeto do Parque. Site por <a href="https://wa.me/5511999999999" style="color:inherit;text-decoration:underline;">Gabriel Moura</a>.</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLUTUANTE -->
+<a href="https://wa.me/5511916122716?text=Oi%2C+vim+pelo+site!" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+</a>
+
+<script src="js/app.js" defer></script>
+<script>
+  const hdr = document.getElementById('site-header');
+  window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+  const ham = document.getElementById('hamburger');
+  const mob = document.getElementById('mobile-menu');
+  const cls = document.getElementById('close-menu');
+  ham?.addEventListener('click', () => mob.classList.add('open'));
+  cls?.addEventListener('click', () => mob.classList.remove('open'));
+  mob?.querySelectorAll('.mobile-link, .btn').forEach(a => a.addEventListener('click', () => mob.classList.remove('open')));
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  function animCount(el) {
+    const target = parseFloat(el.dataset.target);
+    const decimals = parseInt(el.dataset.decimals || '0');
+    const dur = 1800; const step = 16; const steps = dur / step;
+    let cur = 0; const inc = target / steps;
+    const timer = setInterval(() => {
+      cur = Math.min(cur + inc, target);
+      el.textContent = decimals ? cur.toFixed(decimals) : Math.floor(cur);
+      if (cur >= target) clearInterval(timer);
+    }, step);
+  }
+  const countObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { animCount(e.target); countObs.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.count').forEach(el => countObs.observe(el));
+
+  const heroBg = document.querySelector('.hero-bg[data-parallax]');
+  if (heroBg && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    window.addEventListener('scroll', () => { heroBg.style.transform = `translateY(${window.scrollY * 0.3}px)`; }, { passive: true });
+  }
+</script>
+</body>
+</html>

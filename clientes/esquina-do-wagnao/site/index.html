@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Esquina do Wagnão — Restaurante em Vila Pirituba, SP</title>
+  <meta name="description" content="O melhor self-service por quilo de Pirituba. Churrasco, buffet de saladas, frutas e guarnições. Seg–Sáb das 11h. Av. Benedito Andrade, 455, Vila Pirituba.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ---- HEADER ---- */
+    .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 0; transition: background .3s, box-shadow .3s; }
+    .site-header.scrolled { background: var(--escuro); box-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .logo-img { height: 56px; width: 56px; border-radius: 50%; object-fit: cover; }
+    .logo-nome { font-family: var(--serif); font-size: 1.1rem; font-weight: 800; color: var(--claro); line-height: 1.1; }
+    .logo-nome span { display: block; font-family: var(--sans); font-size: .72rem; font-weight: 400; opacity: .75; letter-spacing: .1em; text-transform: uppercase; }
+    nav { display: flex; align-items: center; gap: 1.4rem; }
+    nav a { color: rgba(var(--claro-rgb),.85); text-decoration: none; font-size: .9rem; font-weight: 600; transition: color .2s; }
+    nav a:hover { color: var(--acento); }
+    .nav-cta { display: none; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--claro); margin: 5px 0; border-radius: 2px; transition: .3s; }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: var(--escuro); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: var(--serif); font-size: 1.5rem; color: var(--claro); text-decoration: none; }
+    .mobile-menu .close-btn { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; cursor: pointer; color: var(--claro); font-size: 1.8rem; }
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .hamburger { display: block; }
+      .nav-cta { display: flex; }
+    }
+
+    /* ---- HERO ---- */
+    .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; color: var(--claro); overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background-image: url('assets/hero-churrasco-1600.jpg'); background-size: cover; background-position: center; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(43,29,12,.92) 0%, rgba(43,29,12,.35) 60%, rgba(43,29,12,.1) 100%); }
+    .hero-content { position: relative; z-index: 1; padding: 5rem 0 5rem; }
+    .hero-eyebrow { display: inline-block; background: var(--primaria); color: #fff; font-size: .78rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; padding: .35em .9em; border-radius: 999px; margin-bottom: 1.2rem; }
+    .hero h1 { font-size: clamp(2.4rem, 7vw, 5rem); font-weight: 800; color: #fff; max-width: 700px; margin-bottom: .6rem; text-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .hero-sub { font-size: clamp(1rem, 2.2vw, 1.25rem); opacity: .9; max-width: 480px; margin-bottom: 2rem; }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: .8rem; }
+
+    /* ---- NÚMEROS ---- */
+    .numeros { background: var(--primaria); color: #fff; padding: 2.5rem 0; }
+    .numeros-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2rem; text-align: center; }
+    .num-valor { font-family: var(--serif); font-size: 2.4rem; font-weight: 800; line-height: 1; }
+    .num-label { font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; opacity: .85; margin-top: .3rem; }
+
+    /* ---- CARDÁPIO / OFERTA ---- */
+    .oferta { background: var(--claro); padding: 5rem 0; }
+    .oferta-intro { max-width: 600px; margin-bottom: 3rem; }
+    .oferta-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .oferta-card { background: #fff; border-radius: var(--raio); overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,.07); transition: transform .25s, box-shadow .25s; }
+    .oferta-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.13); }
+    .oferta-card-img { height: 200px; overflow: hidden; }
+    .oferta-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+    .oferta-card:hover .oferta-card-img img { transform: scale(1.06); }
+    .oferta-card-body { padding: 1.4rem 1.4rem 1.6rem; }
+    .oferta-card-icon { font-size: 1.8rem; margin-bottom: .5rem; }
+    .oferta-card-body h3 { color: var(--primaria); margin-bottom: .4rem; }
+    .oferta-card-body p { color: #6a5a4a; font-size: .95rem; margin: 0; }
+
+    /* ---- GALERIA ---- */
+    .galeria { padding: 5rem 0; background: var(--escuro); color: var(--claro); }
+    .galeria-grid { display: grid; grid-template-columns: repeat(12, 1fr); grid-template-rows: 260px 260px; gap: 12px; margin-top: 3rem; }
+    .galeria-item { overflow: hidden; border-radius: 12px; }
+    .galeria-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .galeria-item:hover img { transform: scale(1.06); }
+    .g-span-7 { grid-column: span 7; }
+    .g-span-5 { grid-column: span 5; }
+    .g-span-4 { grid-column: span 4; }
+    .g-span-8 { grid-column: span 8; }
+    @media (max-width: 768px) {
+      .galeria-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .g-span-7, .g-span-5, .g-span-4, .g-span-8 { grid-column: span 1; }
+      .galeria-grid .galeria-item:first-child { grid-column: span 2; }
+    }
+
+    /* ---- HORÁRIOS ---- */
+    .horarios { background: var(--claro-2); padding: 5rem 0; }
+    .horarios-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .horarios-tabela { background: #fff; border-radius: var(--raio); padding: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,.07); }
+    .horarios-tabela table { width: 100%; border-collapse: collapse; }
+    .horarios-tabela tr { border-bottom: 1px solid rgba(0,0,0,.07); }
+    .horarios-tabela tr:last-child { border: none; }
+    .horarios-tabela td { padding: .75rem .5rem; font-size: .95rem; }
+    .horarios-tabela td:first-child { font-weight: 700; color: var(--primaria); }
+    .horarios-tabela td:last-child { text-align: right; color: #6a5a4a; }
+    .horarios-tabela .fechado { color: #bbb; }
+    .mapa-wrapper { border-radius: var(--raio); overflow: hidden; height: 320px; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+    .mapa-wrapper iframe { width: 100%; height: 100%; border: none; }
+    .endereco-box { margin-top: 1.5rem; display: flex; align-items: flex-start; gap: .8rem; }
+    .endereco-box svg { flex-shrink: 0; margin-top: 2px; color: var(--primaria); }
+    .endereco-box p { margin: 0; font-size: .95rem; color: #6a5a4a; }
+    @media (max-width: 768px) {
+      .horarios-layout { grid-template-columns: 1fr; }
+      .mapa-wrapper { height: 240px; }
+    }
+
+    /* ---- AVALIAÇÕES ---- */
+    .avaliacoes { background: var(--escuro); color: var(--claro); padding: 5rem 0; }
+    .aval-stars { color: var(--acento); font-size: 1.1rem; letter-spacing: .08em; margin-bottom: .6rem; }
+    .aval-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .aval-card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); border-radius: var(--raio); padding: 1.8rem; }
+    .aval-card blockquote { margin: 0 0 1.2rem; font-size: 1rem; opacity: .9; font-style: italic; line-height: 1.6; }
+    .aval-autor { display: flex; align-items: center; gap: .8rem; }
+    .aval-iniciais { width: 40px; height: 40px; border-radius: 50%; background: var(--primaria); display: grid; place-items: center; font-weight: 700; font-size: .9rem; flex-shrink: 0; }
+    .aval-nome { font-weight: 700; font-size: .9rem; }
+    .aval-quando { font-size: .8rem; opacity: .6; }
+    .aval-resumo { text-align: center; margin-top: 3rem; }
+    .aval-resumo .grande { font-family: var(--serif); font-size: 3.5rem; font-weight: 800; color: var(--acento); }
+
+    /* ---- CTA FINAL ---- */
+    .cta-final { background: linear-gradient(135deg, var(--primaria) 0%, var(--primaria-2) 100%); color: #fff; padding: 5rem 0; text-align: center; }
+    .cta-final h2 { color: #fff; font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: .6rem; }
+    .cta-final p { opacity: .88; max-width: 500px; margin: 0 auto 2rem; }
+
+    /* ---- FOOTER ---- */
+    .site-footer { background: var(--escuro); color: rgba(var(--claro-rgb),.55); padding: 2rem 0; text-align: center; font-size: .82rem; border-top: 1px solid rgba(255,255,255,.07); }
+    .footer-redes { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+    .footer-redes a { color: rgba(var(--claro-rgb),.55); text-decoration: none; transition: color .2s; font-size: .85rem; }
+    .footer-redes a:hover { color: var(--acento); }
+
+    /* ---- WHATSAPP FLUTUANTE ---- */
+    .whatsapp-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 90; width: 56px; height: 56px; background: #25d366; border-radius: 50%; display: grid; place-items: center; box-shadow: 0 4px 20px rgba(37,211,102,.45); transition: transform .2s, box-shadow .2s; }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 8px 28px rgba(37,211,102,.6); }
+    .whatsapp-float svg { width: 30px; height: 30px; fill: #fff; }
+
+    /* ---- REVEAL / PARALLAX ---- */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="site-header">
+  <div class="wrap header-inner">
+    <a href="#" style="display:flex;align-items:center;gap:.7rem;text-decoration:none;">
+      <img src="assets/logo-400.png" alt="Logo Esquina do Wagnão" class="logo-img">
+      <div class="logo-nome">Esquina do Wagnão <span>Restaurante • Vila Pirituba</span></div>
+    </a>
+    <nav>
+      <a href="#cardapio">O que tem</a>
+      <a href="#horarios">Horários</a>
+      <a href="#avaliacoes">Avaliações</a>
+      <a href="https://wa.me/5511970808926?text=Oi%2C+vim+pelo+site!+Quero+saber+mais+sobre+o+restaurante." class="btn btn--fire btn--sm" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+    <a href="https://wa.me/5511970808926?text=Oi%2C+vim+pelo+site!" class="btn btn--fire btn--sm nav-cta" target="_blank" rel="noopener">WhatsApp</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MENU MOBILE -->
+<div class="mobile-menu" id="mobile-menu">
+  <button class="close-btn" id="close-menu" aria-label="Fechar menu">✕</button>
+  <a href="#cardapio" class="mobile-link">O que tem</a>
+  <a href="#horarios" class="mobile-link">Horários</a>
+  <a href="#avaliacoes" class="mobile-link">Avaliações</a>
+  <a href="https://wa.me/5511970808926?text=Oi%2C+vim+pelo+site!" class="btn btn--fire" target="_blank" rel="noopener">Falar no WhatsApp</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg" data-parallax="0.3"></div>
+  <div class="hero-overlay"></div>
+  <div class="wrap hero-content">
+    <span class="hero-eyebrow">Vila Pirituba, São Paulo</span>
+    <h1>O melhor almoço de Pirituba</h1>
+    <p class="hero-sub">Self-service por quilo, churrasco na brasa e buffet completo com saladas, frutas e guarnições. De segunda a sábado, das 11h.</p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/5511970808926?text=Oi%2C+vim+pelo+site!+Quero+saber+mais." class="btn btn--fire btn--lg" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Falar no WhatsApp
+      </a>
+      <a href="#cardapio" class="btn btn--ghost btn--lg">Ver o cardápio</a>
+    </div>
+  </div>
+</section>
+
+<!-- NÚMEROS -->
+<section class="numeros">
+  <div class="wrap numeros-grid">
+    <div>
+      <div class="num-valor"><span class="count" data-target="46" data-decimals="1">0</span>★</div>
+      <div class="num-label">Nota no Google</div>
+    </div>
+    <div>
+      <div class="num-valor">+<span class="count" data-target="516">0</span></div>
+      <div class="num-label">Avaliações</div>
+    </div>
+    <div>
+      <div class="num-valor">Seg–Sáb</div>
+      <div class="num-label">Dias de funcionamento</div>
+    </div>
+    <div>
+      <div class="num-valor">11h</div>
+      <div class="num-label">Abre todo dia útil</div>
+    </div>
+  </div>
+</section>
+
+<!-- CARDÁPIO / O QUE TEM -->
+<section class="oferta" id="cardapio">
+  <div class="wrap">
+    <div class="oferta-intro reveal">
+      <p class="eyebrow">O que tem</p>
+      <h2>Comida de verdade, do jeito que você gosta</h2>
+      <p style="color:#6a5a4a;">Self-service por quilo com variedade todos os dias. Churrasco na brasa, buffet completo de saladas e guarnições, pratos do dia e muito mais.</p>
+    </div>
+    <div class="oferta-cards">
+      <div class="oferta-card reveal">
+        <div class="oferta-card-img">
+          <img src="assets/prato-800.jpg" alt="Prato self-service Esquina do Wagnão" loading="lazy">
+        </div>
+        <div class="oferta-card-body">
+          <div class="oferta-card-icon">🍽️</div>
+          <h3>Self-service por quilo</h3>
+          <p>Monte o prato como quiser: carnes, guarnições, pratos do dia — tudo no peso. Sempre fresco e renovado.</p>
+        </div>
+      </div>
+      <div class="oferta-card reveal">
+        <div class="oferta-card-img">
+          <img src="assets/buffet-1000.jpg" alt="Buffet de saladas Esquina do Wagnão" loading="lazy">
+        </div>
+        <div class="oferta-card-body">
+          <div class="oferta-card-icon">🥗</div>
+          <h3>Buffet de saladas e frutas</h3>
+          <p>Grande variedade de saladas frescas, frutas da época e acompanhamentos. O que as avaliações mais elogiam.</p>
+        </div>
+      </div>
+      <div class="oferta-card reveal">
+        <div class="oferta-card-img">
+          <img src="assets/saladas-1000.jpg" alt="Churrasco Esquina do Wagnão" loading="lazy">
+        </div>
+        <div class="oferta-card-body">
+          <div class="oferta-card-icon">🔥</div>
+          <h3>Churrasco incluso</h3>
+          <p>Churrasco na brasa todos os dias do almoço. Carne no ponto, temperada e fresquinha, que sai direto pra sua bandeja.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section class="galeria">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow" style="color:var(--acento)">O ambiente</p>
+      <h2>Veja como é por aqui</h2>
+      <p style="opacity:.75;max-width:500px;">Um restaurante de bairro acolhedor, limpo e movimentado. Fotos provisórias — o cliente enviará as originais em breve.</p>
+    </div>
+    <div class="galeria-grid">
+      <div class="galeria-item g-span-7">
+        <img src="assets/hero-churrasco-1600.jpg" alt="Esquina do Wagnão" loading="lazy">
+      </div>
+      <div class="galeria-item g-span-5">
+        <img src="assets/salao-1000.jpg" alt="Salão Esquina do Wagnão" loading="lazy">
+      </div>
+      <div class="galeria-item g-span-4">
+        <img src="assets/saladas-1000.jpg" alt="Buffet de saladas" loading="lazy">
+      </div>
+      <div class="galeria-item g-span-8">
+        <img src="assets/buffet-1000.jpg" alt="Buffet completo" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HORÁRIOS E LOCALIZAÇÃO -->
+<section class="horarios" id="horarios">
+  <div class="wrap">
+    <div class="reveal" style="margin-bottom:2.5rem;">
+      <p class="eyebrow">Quando e onde</p>
+      <h2>Horários e localização</h2>
+    </div>
+    <div class="horarios-layout">
+      <div class="reveal">
+        <div class="horarios-tabela">
+          <table>
+            <tr><td>Segunda a sexta</td><td>11h às 15h45</td></tr>
+            <tr><td>Sábado</td><td>11h às 16h</td></tr>
+            <tr><td>Domingo</td><td class="fechado">Fechado</td></tr>
+          </table>
+        </div>
+        <div class="endereco-box" style="margin-top:1.5rem;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <p><strong>Av. Benedito Andrade, 455</strong><br>Vila Pirituba, São Paulo – SP<br>CEP 02936-000</p>
+        </div>
+        <a href="https://wa.me/5511970808926?text=Oi%2C+vim+pelo+site!+Tenho+uma+d%C3%BAvida." class="btn btn--fire" style="margin-top:1.5rem;" target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+          Falar no WhatsApp
+        </a>
+      </div>
+      <div class="reveal">
+        <div class="mapa-wrapper">
+          <iframe
+            src="https://maps.google.com/maps?q=-23.486997,-46.716362&z=16&output=embed"
+            allowfullscreen
+            loading="lazy"
+            title="Localização Esquina do Wagnão"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVALIAÇÕES -->
+<section class="avaliacoes" id="avaliacoes">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 1rem;">
+      <p class="eyebrow" style="color:var(--acento)">O que os clientes dizem</p>
+      <h2>4,6 estrelas em 516 avaliações</h2>
+    </div>
+    <div class="aval-cards">
+      <div class="aval-card reveal">
+        <div class="aval-stars">★★★★★</div>
+        <blockquote>"Sem dúvidas é o melhor restaurante de Pirituba. Variedades de saladas e diversos tipos de pratos — tinha uma lasanha de berinjela com peito de peru. Atendimento excelente, super recomendo!"</blockquote>
+        <div class="aval-autor">
+          <div class="aval-iniciais">SC</div>
+          <div>
+            <div class="aval-nome">Sergio Cabeleireiro</div>
+            <div class="aval-quando">Cliente há anos · 5 estrelas</div>
+          </div>
+        </div>
+      </div>
+      <div class="aval-card reveal">
+        <div class="aval-stars">★★★★★</div>
+        <blockquote>"Comida típica brasileira! Grande variedade de saladas, frutas, carnes e guarnições. Um lugar que vale muito a visita."</blockquote>
+        <div class="aval-autor">
+          <div class="aval-iniciais">LS</div>
+          <div>
+            <div class="aval-nome">Lethycia Sanchez</div>
+            <div class="aval-quando">5 estrelas no Google</div>
+          </div>
+        </div>
+      </div>
+      <div class="aval-card reveal">
+        <div class="aval-stars">★★★★★</div>
+        <blockquote>"Excelente atendimento, ambiente limpo, grande diversidade incluindo churrasco e preço justo. Um dos melhores da região sem dúvida."</blockquote>
+        <div class="aval-autor">
+          <div class="aval-iniciais">NA</div>
+          <div>
+            <div class="aval-nome">Napoleão Azevedo Neto</div>
+            <div class="aval-quando">5 estrelas no Google</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="aval-resumo reveal">
+      <a href="https://www.google.com/maps/place/Esquina+do+Wagn%C3%A3o/data=!4m7!3m6!1s0x94cef90e8aba99f1:0x3cfcfc89b4a64da3" class="btn btn--ghost" target="_blank" rel="noopener">Ver todas as avaliações no Google</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Vem almoçar hoje?</h2>
+      <p>De segunda a sábado, das 11h. Av. Benedito Andrade, 455, Vila Pirituba. Manda mensagem no WhatsApp — a gente responde na hora.</p>
+      <a href="https://wa.me/5511970808926?text=Oi%2C+vim+pelo+site!+Vou+passar+para+almo%C3%A7ar." class="btn btn--light btn--lg" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Falar no WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-redes">
+      <a href="https://www.google.com/maps/place/Esquina+do+Wagn%C3%A3o/data=!4m7!3m6!1s0x94cef90e8aba99f1:0x3cfcfc89b4a64da3" target="_blank" rel="noopener">Google Maps</a>
+      <a href="https://wa.me/5511970808926" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+    <p>© 2026 Esquina do Wagnão. Site por <a href="https://wa.me/5511999999999" style="color:inherit;text-decoration:underline;">Gabriel Moura</a>.</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLUTUANTE -->
+<a href="https://wa.me/5511970808926?text=Oi%2C+vim+pelo+site!" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+</a>
+
+<script src="js/app.js" defer></script>
+<script>
+  // Header scroll
+  const hdr = document.getElementById('site-header');
+  window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+  // Mobile menu
+  const ham = document.getElementById('hamburger');
+  const mob = document.getElementById('mobile-menu');
+  const cls = document.getElementById('close-menu');
+  ham?.addEventListener('click', () => mob.classList.add('open'));
+  cls?.addEventListener('click', () => mob.classList.remove('open'));
+  mob?.querySelectorAll('.mobile-link, .btn').forEach(a => a.addEventListener('click', () => mob.classList.remove('open')));
+
+  // Reveal on scroll
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Contadores
+  function animCount(el) {
+    const target = parseFloat(el.dataset.target);
+    const decimals = parseInt(el.dataset.decimals || '0');
+    const dur = 1800;
+    const step = 16;
+    const steps = dur / step;
+    let cur = 0;
+    const inc = target / steps;
+    const timer = setInterval(() => {
+      cur = Math.min(cur + inc, target);
+      el.textContent = decimals ? cur.toFixed(decimals) : Math.floor(cur);
+      if (cur >= target) clearInterval(timer);
+    }, step);
+  }
+  const countObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { animCount(e.target); countObs.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.count').forEach(el => countObs.observe(el));
+
+  // Parallax leve no hero
+  const heroBg = document.querySelector('.hero-bg[data-parallax]');
+  if (heroBg && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY * 0.3;
+      heroBg.style.transform = `translateY(${y}px)`;
+    }, { passive: true });
+  }
+</script>
+</body>
+</html>

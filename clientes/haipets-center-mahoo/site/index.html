@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Haipets Center Mahoo — Pet Shop em Vila Pirituba, SP</title>
+  <meta name="description" content="Pet shop completo em Vila Pirituba. Ampla variedade de produtos, ótimos preços, atendimento nota 10 e entrega em casa pelo WhatsApp. 4,7★ em 766 avaliações.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ---- HEADER ---- */
+    .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 0; transition: background .3s, box-shadow .3s; }
+    .site-header.scrolled { background: var(--escuro); box-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .logo-nome { font-family: var(--serif); font-size: 1.1rem; font-weight: 800; color: var(--claro); line-height: 1.1; }
+    .logo-nome span { display: block; font-family: var(--sans); font-size: .72rem; font-weight: 400; opacity: .75; letter-spacing: .1em; text-transform: uppercase; }
+    nav { display: flex; align-items: center; gap: 1.4rem; }
+    nav a { color: rgba(var(--claro-rgb),.85); text-decoration: none; font-size: .9rem; font-weight: 600; transition: color .2s; }
+    nav a:hover { color: var(--acento); }
+    .nav-cta { display: none; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--claro); margin: 5px 0; border-radius: 2px; }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: var(--escuro); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: var(--serif); font-size: 1.5rem; color: var(--claro); text-decoration: none; }
+    .mobile-menu .close-btn { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; cursor: pointer; color: var(--claro); font-size: 1.8rem; }
+    @media (max-width: 768px) { nav { display: none; } .hamburger { display: block; } .nav-cta { display: flex; } }
+
+    /* ---- HERO ---- */
+    .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; color: var(--claro); overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background-image: url('assets/hero-pet-1600.jpg'); background-size: cover; background-position: center; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(31,42,30,.96) 0%, rgba(31,42,30,.5) 55%, rgba(31,42,30,.15) 100%); }
+    .hero-content { position: relative; z-index: 1; padding: 5rem 0; }
+    .hero-badge { display: inline-block; background: var(--primaria); color: #fff; font-size: .78rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; padding: .35em .9em; border-radius: 999px; margin-bottom: 1.2rem; }
+    .hero h1 { font-size: clamp(2.4rem, 7vw, 5rem); font-weight: 800; color: #fff; max-width: 700px; margin-bottom: .6rem; text-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .hero-sub { font-size: clamp(1rem, 2.2vw, 1.25rem); opacity: .9; max-width: 500px; margin-bottom: 2rem; }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: .8rem; }
+
+    /* ---- NÚMEROS ---- */
+    .numeros { background: var(--primaria); color: #fff; padding: 2.5rem 0; }
+    .numeros-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; text-align: center; }
+    .num-valor { font-family: var(--serif); font-size: 2.4rem; font-weight: 800; line-height: 1; }
+    .num-label { font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; opacity: .85; margin-top: .3rem; }
+
+    /* ---- O QUE OFERECE ---- */
+    .servicos { background: var(--claro); padding: 5rem 0; }
+    .servicos-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .serv-card { background: #fff; border-radius: var(--raio); padding: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,.07); transition: transform .25s, box-shadow .25s; }
+    .serv-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.13); }
+    .serv-icon { font-size: 2.4rem; margin-bottom: .8rem; }
+    .serv-card h3 { color: var(--primaria); margin-bottom: .4rem; }
+    .serv-card p { color: #6a5a4a; font-size: .93rem; margin: 0; }
+
+    /* ---- ENTREGA ---- */
+    .entrega { background: var(--escuro); color: var(--claro); padding: 5rem 0; }
+    .entrega-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .entrega-img { border-radius: var(--raio); overflow: hidden; height: 360px; }
+    .entrega-img img { width: 100%; height: 100%; object-fit: cover; }
+    .entrega-txt .eyebrow { color: var(--acento); }
+    .entrega-txt h2 { color: #fff; }
+    .entrega-txt p { opacity: .82; }
+    .entrega-steps { display: flex; flex-direction: column; gap: .8rem; margin: 1.5rem 0 2rem; }
+    .entrega-step { display: flex; align-items: flex-start; gap: .8rem; }
+    .e-num { width: 28px; height: 28px; border-radius: 50%; background: var(--primaria); display: grid; place-items: center; font-weight: 700; font-size: .85rem; flex-shrink: 0; }
+    .e-txt { font-size: .93rem; opacity: .88; padding-top: 2px; }
+    @media (max-width: 768px) { .entrega-layout { grid-template-columns: 1fr; } .entrega-img { height: 240px; } }
+
+    /* ---- HORÁRIOS ---- */
+    .horarios { background: var(--claro-2); padding: 5rem 0; }
+    .horarios-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .horarios-card { background: #fff; border-radius: var(--raio); padding: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,.07); }
+    .horarios-card table { width: 100%; border-collapse: collapse; }
+    .horarios-card tr { border-bottom: 1px solid rgba(0,0,0,.07); }
+    .horarios-card tr:last-child { border: none; }
+    .horarios-card td { padding: .7rem .4rem; font-size: .93rem; }
+    .horarios-card td:first-child { font-weight: 700; color: var(--primaria); }
+    .horarios-card td:last-child { text-align: right; color: #6a5a4a; }
+    .fechado { color: #bbb; }
+    .mapa-wrapper { border-radius: var(--raio); overflow: hidden; height: 300px; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+    .mapa-wrapper iframe { width: 100%; height: 100%; border: none; }
+    .endereco-box { margin-top: 1.5rem; display: flex; align-items: flex-start; gap: .8rem; }
+    .endereco-box svg { flex-shrink: 0; margin-top: 2px; color: var(--primaria); }
+    .endereco-box p { margin: 0; font-size: .93rem; color: #6a5a4a; }
+    @media (max-width: 768px) { .horarios-layout { grid-template-columns: 1fr; } .mapa-wrapper { height: 240px; } }
+
+    /* ---- AVALIAÇÕES ---- */
+    .avaliacoes { background: var(--escuro); color: var(--claro); padding: 5rem 0; }
+    .aval-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .aval-card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); border-radius: var(--raio); padding: 1.8rem; }
+    .aval-stars { color: var(--acento); font-size: 1.1rem; letter-spacing: .08em; margin-bottom: .6rem; }
+    .aval-card blockquote { margin: 0 0 1.2rem; font-size: .97rem; opacity: .9; font-style: italic; line-height: 1.65; }
+    .aval-autor { display: flex; align-items: center; gap: .8rem; }
+    .aval-iniciais { width: 40px; height: 40px; border-radius: 50%; background: var(--primaria); display: grid; place-items: center; font-weight: 700; font-size: .9rem; flex-shrink: 0; }
+    .aval-nome { font-weight: 700; font-size: .9rem; }
+    .aval-quando { font-size: .8rem; opacity: .6; }
+
+    /* ---- CTA FINAL ---- */
+    .cta-final { background: linear-gradient(135deg, var(--primaria) 0%, var(--primaria-2) 100%); color: #fff; padding: 5rem 0; text-align: center; }
+    .cta-final h2 { color: #fff; font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: .6rem; }
+    .cta-final p { opacity: .88; max-width: 500px; margin: 0 auto 2rem; }
+
+    /* ---- FOOTER ---- */
+    .site-footer { background: var(--escuro); color: rgba(var(--claro-rgb),.5); padding: 2rem 0; text-align: center; font-size: .82rem; border-top: 1px solid rgba(255,255,255,.07); }
+    .footer-redes { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1rem; }
+    .footer-redes a { color: rgba(var(--claro-rgb),.5); text-decoration: none; transition: color .2s; font-size: .85rem; }
+    .footer-redes a:hover { color: var(--acento); }
+
+    /* ---- WHATSAPP FLUTUANTE ---- */
+    .whatsapp-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 90; width: 56px; height: 56px; background: #25d366; border-radius: 50%; display: grid; place-items: center; box-shadow: 0 4px 20px rgba(37,211,102,.45); transition: transform .2s; }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    .whatsapp-float svg { width: 30px; height: 30px; fill: #fff; }
+
+    /* ---- REVEAL ---- */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="site-header">
+  <div class="wrap header-inner">
+    <a href="#" style="text-decoration:none;">
+      <div class="logo-nome">Haipets Center Mahoo <span>Pet Shop · Vila Pirituba</span></div>
+    </a>
+    <nav>
+      <a href="#servicos">Produtos</a>
+      <a href="#entrega">Entrega</a>
+      <a href="#horarios">Horários</a>
+      <a href="https://wa.me/5511969206455?text=Oi%2C+vim+pelo+site!" class="btn btn--fire btn--sm" target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+    <a href="https://wa.me/5511969206455?text=Oi%2C+vim+pelo+site!" class="btn btn--fire btn--sm nav-cta" target="_blank" rel="noopener">WhatsApp</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MENU MOBILE -->
+<div class="mobile-menu" id="mobile-menu">
+  <button class="close-btn" id="close-menu" aria-label="Fechar">✕</button>
+  <a href="#servicos" class="mobile-link">Produtos</a>
+  <a href="#entrega" class="mobile-link">Entrega</a>
+  <a href="#horarios" class="mobile-link">Horários</a>
+  <a href="https://wa.me/5511969206455?text=Oi%2C+vim+pelo+site!" class="btn btn--fire" target="_blank" rel="noopener">Falar no WhatsApp</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg" data-parallax="0.3"></div>
+  <div class="hero-overlay"></div>
+  <div class="wrap hero-content">
+    <span class="hero-badge">Vila Pirituba, São Paulo</span>
+    <h1>Tudo pro seu pet em Vila Pirituba</h1>
+    <p class="hero-sub">Ampla variedade de produtos, ótimos preços e atendimento que cuida de você e do seu bichinho. Peça pelo WhatsApp e receba em casa.</p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/5511969206455?text=Oi%2C+vim+pelo+site!+Quero+saber+sobre+os+produtos." class="btn btn--fire btn--lg" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Falar no WhatsApp
+      </a>
+      <a href="#servicos" class="btn btn--ghost btn--lg">Ver produtos</a>
+    </div>
+  </div>
+</section>
+
+<!-- NÚMEROS -->
+<section class="numeros">
+  <div class="wrap numeros-grid">
+    <div>
+      <div class="num-valor"><span class="count" data-target="47" data-decimals="1">0</span>★</div>
+      <div class="num-label">Nota no Google</div>
+    </div>
+    <div>
+      <div class="num-valor">+<span class="count" data-target="766">0</span></div>
+      <div class="num-label">Avaliações</div>
+    </div>
+    <div>
+      <div class="num-valor"><span class="count" data-target="595">0</span></div>
+      <div class="num-label">Avaliações 5 estrelas</div>
+    </div>
+    <div>
+      <div class="num-valor">Seg–Sáb</div>
+      <div class="num-label">Dias de funcionamento</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTOS / SERVIÇOS -->
+<section class="servicos" id="servicos">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">O que tem na loja</p>
+      <h2>Tudo que seu pet precisa</h2>
+      <p style="color:#6a5a4a;max-width:520px;">Ampla variedade de produtos com bons preços. Uma das lojas mais bem avaliadas da região de Vila Pirituba.</p>
+    </div>
+    <div class="servicos-cards">
+      <div class="serv-card reveal">
+        <div class="serv-icon">🛒</div>
+        <h3>Grande variedade</h3>
+        <p>Produtos para cães, gatos e outros pets. Ração, acessórios, higiene, brinquedos e muito mais, tudo em um só lugar.</p>
+      </div>
+      <div class="serv-card reveal">
+        <div class="serv-icon">💰</div>
+        <h3>Bons preços</h3>
+        <p>Preços competitivos que os clientes sempre elogiam nas avaliações. Economia sem abrir mão da qualidade pro seu bichinho.</p>
+      </div>
+      <div class="serv-card reveal">
+        <div class="serv-icon">🏠</div>
+        <h3>Entrega em casa</h3>
+        <p>Compre pelo WhatsApp e receba em casa. Fácil, prático e com o mesmo atendimento cuidadoso da loja.</p>
+      </div>
+      <div class="serv-card reveal">
+        <div class="serv-icon">⭐</div>
+        <h3>Atendimento nota 10</h3>
+        <p>Equipe atenciosa e solicita que tira todas as suas dúvidas. Mais de 766 clientes avaliaram e aprovaram o atendimento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENTREGA EM CASA -->
+<section class="entrega" id="entrega">
+  <div class="wrap entrega-layout">
+    <div class="entrega-img reveal">
+      <img src="assets/hero-pet-1600.jpg" alt="Haipets Center Mahoo" loading="lazy">
+    </div>
+    <div class="entrega-txt reveal">
+      <p class="eyebrow">Sem sair de casa</p>
+      <h2>Peça pelo WhatsApp e receba em casa</h2>
+      <p>Ficou sem ração? Precisa de algum produto com urgência? Mande mensagem e a gente resolve.</p>
+      <div class="entrega-steps">
+        <div class="entrega-step">
+          <div class="e-num">1</div>
+          <div class="e-txt">Mande mensagem no WhatsApp com o que você precisa</div>
+        </div>
+        <div class="entrega-step">
+          <div class="e-num">2</div>
+          <div class="e-txt">A equipe confirma disponibilidade e combina a entrega</div>
+        </div>
+        <div class="entrega-step">
+          <div class="e-num">3</div>
+          <div class="e-txt">Receba em casa com o mesmo cuidado do atendimento presencial</div>
+        </div>
+      </div>
+      <a href="https://wa.me/5511969206455?text=Oi%2C+vim+pelo+site!+Quero+pedir+entrega+em+casa." class="btn btn--fire" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Pedir entrega
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HORÁRIOS -->
+<section class="horarios" id="horarios">
+  <div class="wrap">
+    <div class="reveal" style="margin-bottom:2.5rem;">
+      <p class="eyebrow">Quando visitar</p>
+      <h2>Horários e localização</h2>
+    </div>
+    <div class="horarios-layout">
+      <div class="reveal">
+        <div class="horarios-card">
+          <table>
+            <tr><td>Segunda a quinta</td><td>09h às 19h</td></tr>
+            <tr><td>Sexta</td><td>09h às 15h</td></tr>
+            <tr><td>Sábado</td><td>09h às 18h</td></tr>
+            <tr><td>Domingo</td><td class="fechado">Fechado</td></tr>
+          </table>
+        </div>
+        <div class="endereco-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <p><strong>Av. Mutinga, 701</strong><br>Vila Pirituba, São Paulo – SP<br>CEP 05154-000</p>
+        </div>
+        <a href="https://wa.me/5511969206455?text=Oi%2C+vim+pelo+site!" class="btn btn--fire" style="margin-top:1.5rem;" target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+          Falar no WhatsApp
+        </a>
+      </div>
+      <div class="reveal">
+        <div class="mapa-wrapper">
+          <iframe
+            src="https://maps.google.com/maps?q=-23.488139,-46.733835&z=16&output=embed"
+            allowfullscreen
+            loading="lazy"
+            title="Localização Haipets Center Mahoo"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVALIAÇÕES -->
+<section class="avaliacoes" id="avaliacoes">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 1rem;">
+      <p class="eyebrow" style="color:var(--acento)">O que os clientes dizem</p>
+      <h2>4,7 estrelas em mais de 766 avaliações</h2>
+    </div>
+    <div class="aval-cards">
+      <div class="aval-card reveal">
+        <div class="aval-stars">★★★★★</div>
+        <blockquote>"Ótimo atendimento, ampla variedade de produtos e muito completo. Uma das melhores pet shops da região!"</blockquote>
+        <div class="aval-autor">
+          <div class="aval-iniciais">AT</div>
+          <div>
+            <div class="aval-nome">Alexandre Takara</div>
+            <div class="aval-quando">2 semanas atrás · 5 estrelas</div>
+          </div>
+        </div>
+      </div>
+      <div class="aval-card reveal">
+        <div class="aval-stars">★★★★★</div>
+        <blockquote>"Quero agradecer à vendedora Kyhara, extremamente simpática e atenciosa. Minha cachorinha fez cirurgia e ela me ajudou em tudo, esclareceu dúvidas. Comprei pelo WhatsApp e entregaram em casa. Loja maravilhosa!"</blockquote>
+        <div class="aval-autor">
+          <div class="aval-iniciais">VC</div>
+          <div>
+            <div class="aval-nome">Vitoria Carolina</div>
+            <div class="aval-quando">11 meses atrás · 5 estrelas</div>
+          </div>
+        </div>
+      </div>
+      <div class="aval-card reveal">
+        <div class="aval-stars">★★★★★</div>
+        <blockquote>"Lugar limpo, tudo organizado, bons preços, atendimento ótimo. Virou minha pet shop favorita em Pirituba."</blockquote>
+        <div class="aval-autor">
+          <div class="aval-iniciais">MA</div>
+          <div>
+            <div class="aval-nome">Marcos Appolinario</div>
+            <div class="aval-quando">2 meses atrás · 5 estrelas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;" class="reveal">
+      <a href="https://www.google.com/maps/place/Haipets+Center+Mahoo/data=!4m7!3m6!1s0x94cef938b3f03907:0x6c4363b9abcc071e" class="btn btn--ghost" target="_blank" rel="noopener">Ver todas as avaliações no Google</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Seu pet merece o melhor</h2>
+      <p>Visite a loja na Av. Mutinga, 701, Vila Pirituba, ou peça pelo WhatsApp e receba em casa. Seg–Sáb das 9h.</p>
+      <a href="https://wa.me/5511969206455?text=Oi%2C+vim+pelo+site!+Quero+saber+mais+sobre+os+produtos." class="btn btn--light btn--lg" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Falar no WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-redes">
+      <a href="https://www.instagram.com/mahoopetshop/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.google.com/maps/place/Haipets+Center+Mahoo/data=!4m7!3m6!1s0x94cef938b3f03907:0x6c4363b9abcc071e" target="_blank" rel="noopener">Google Maps</a>
+      <a href="https://wa.me/5511969206455" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+    <p>© 2026 Haipets Center Mahoo. Site por <a href="https://wa.me/5511999999999" style="color:inherit;text-decoration:underline;">Gabriel Moura</a>.</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLUTUANTE -->
+<a href="https://wa.me/5511969206455?text=Oi%2C+vim+pelo+site!" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+</a>
+
+<script src="js/app.js" defer></script>
+<script>
+  const hdr = document.getElementById('site-header');
+  window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+  const ham = document.getElementById('hamburger');
+  const mob = document.getElementById('mobile-menu');
+  const cls = document.getElementById('close-menu');
+  ham?.addEventListener('click', () => mob.classList.add('open'));
+  cls?.addEventListener('click', () => mob.classList.remove('open'));
+  mob?.querySelectorAll('.mobile-link, .btn').forEach(a => a.addEventListener('click', () => mob.classList.remove('open')));
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  function animCount(el) {
+    const target = parseFloat(el.dataset.target), decimals = parseInt(el.dataset.decimals||'0'), dur = 1800, step = 16, steps = dur/step;
+    let cur = 0, inc = target/steps;
+    const t = setInterval(() => { cur = Math.min(cur+inc, target); el.textContent = decimals ? cur.toFixed(decimals) : Math.floor(cur); if(cur>=target) clearInterval(t); }, step);
+  }
+  const cObs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){ animCount(e.target); cObs.unobserve(e.target); } }), { threshold: 0.5 });
+  document.querySelectorAll('.count').forEach(el => cObs.observe(el));
+  const bg = document.querySelector('.hero-bg[data-parallax]');
+  if (bg && window.matchMedia('(prefers-reduced-motion: no-preference)').matches)
+    window.addEventListener('scroll', () => { bg.style.transform = `translateY(${window.scrollY*.3}px)`; }, { passive: true });
+</script>
+</body>
+</html>

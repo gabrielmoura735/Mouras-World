@@ -1,11 +1,28 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "destination": "/loja/index.html" },
+    { "source": "/zap", "destination": "/Status/moura-zap" },
+    { "source": "/vendas", "destination": "/Status/central_vendas" },
+    { "source": "/anuncios", "destination": "/Status/central_anuncios" },
+    { "source": "/lipocavit", "destination": "/Status/lipocavit" },
+    { "source": "/metodo", "destination": "/Status/metodo" },
+    { "source": "/clube", "destination": "/Status/clube" },
+    { "source": "/ghost", "destination": "/Status/ghost_commerce" },
+    { "source": "/status", "destination": "/Status/" },
+    { "source": "/aulas", "destination": "/VIDEOS" },
+    { "source": "/videos", "destination": "/VIDEOS" },
+    { "source": "/churrascaria", "destination": "/Status/sites_vercel/fogao-de-ouro-churrascaria" },
+    { "source": "/salao", "destination": "/Status/sites_vercel/studio-glamour-cabeleireiros" },
+    { "source": "/farmacia", "destination": "/Status/sites_vercel/drogaria-vida-manipulacao" },
+    { "source": "/barbearia", "destination": "/Status/sites_vercel/dom-rafael-barbearia-vip" },
+    { "source": "/pizzaria", "destination": "/Status/sites_vercel/pizzaria-bella-napoli" },
     { "source": "/loja", "destination": "/loja/index.html" },
-    { "source": "/css/(.*)", "destination": "/loja/css/$1" },
-    { "source": "/js/(.*)", "destination": "/loja/js/$1" },
-    { "source": "/assets/(.*)", "destination": "/loja/assets/$1" },
-    { "source": "/(.*)", "destination": "/loja/$1" }
+    { "source": "/loja/(.*)", "destination": "/loja/$1" },
+    { "source": "/preview/bella-sisters", "destination": "/clientes/bella-sisters-studio-de-beleza/site/index.html" },
+    { "source": "/preview/esquina-do-wagnao", "destination": "/clientes/esquina-do-wagnao/site/index.html" },
+    { "source": "/preview/espeto-do-parque", "destination": "/clientes/o-espeto-do-parque/site/index.html" },
+    { "source": "/preview/lane-salgados", "destination": "/clientes/lane-salgados/site/index.html" },
+    { "source": "/preview/haipets", "destination": "/clientes/haipets-center-mahoo/site/index.html" },
+    { "source": "/", "destination": "/Status/" }
   ]
 }

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central de Anúncios & Criativos IA — Moura.AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #06090e;
+      --card-bg: #0c131f;
+      --border: rgba(255, 255, 255, 0.08);
+      --primary: #38bdf8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --purple: #a855f7;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding: 30px 20px 80px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    .filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .ads-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+    }
+    .ad-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      transition: all 0.25s;
+    }
+    .ad-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .ad-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .badge-alta {
+      background: rgba(16, 185, 129, 0.18);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .badge-media {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+    .badge-baixa {
+      background: rgba(148, 163, 184, 0.18);
+      color: #cbd5e1;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+    }
+    .ad-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .ad-target {
+      font-size: 12px;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .ad-box {
+      background: #06090e;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .ad-box strong {
+      color: #fff;
+      display: block;
+      margin-bottom: 4px;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .copy-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .copy-btn:hover {
+      background: #0284c7;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div>
+        <h1>Central de Anúncios & Criativos IA</h1>
+        <div class="sub">Roteiros calibrados por probabilidade de conversão para Meta Ads e TikTok</div>
+      </div>
+      <div>
+        <a href="index.html" style="color: var(--primary); text-decoration: none; font-weight: 700; font-size: 14px;">← Voltar ao Painel Status</a>
+      </div>
+    </header>
+
+    <div class="filters">
+      <button class="filter-btn active" onclick="filtrar('todos')">Todos os Anúncios</button>
+      <button class="filter-btn" onclick="filtrar('alta')">🔥 Alta Conversão (Direto ao Ponto)</button>
+      <button class="filter-btn" onclick="filtrar('media')">⚡ Média Conversão (Autoridade / Educativo)</button>
+      <button class="filter-btn" onclick="filtrar('baixa')">💡 Baixa Conversão (Awareness / Marca)</button>
+    </div>
+
+    <div class="ads-grid" id="adsGrid">
+      
+      <!-- ANÚNCIO 1: ALTA CONVERSÃO -->
+      <div class="ad-card" data-tipo="alta">
+        <span class="ad-badge badge-alta">🔥 Alta Conversão (CTR 4.2%+)</span>
+        <div class="ad-title">Criei a Prévia do seu Site sem Custos</div>
+        <div class="ad-target">Público: Donos de Restaurantes, Clínicas, Barbearias e Lojas Locais</div>
+        <div class="ad-box">
+          <strong>Hook (0 a 3s):</strong>
+          "Se você é dono de empresa e ainda não tem uma página moderna com botão pro seu WhatsApp, você tá dando dinheiro pro seu vizinho de graça."
+        </div>
+        <div class="ad-box">
+          <strong>Story / Proposta (4 a 15s):</strong>
+          "Eu montei uma ferramenta com inteligência artificial que cria um site profissional de 1 página em menos de 24 horas, já integrado com notas 5 estrelas do Google."
+        </div>
+        <div class="ad-box">
+          <strong>Offer / CTA (16 a 25s):</strong>
+          "Clica no botão 'Saiba Mais' agora e me manda o nome do seu negócio no WhatsApp. Eu monto uma prévia gratuita pra você ver no celular antes de pagar qualquer coisa!"
+        </div>
+        <button class="copy-btn" onclick="copiarTexto(this)">📋 Copiar Roteiro Completo</button>
+      </div>
+
+      <!-- ANÚNCIO 2: ALTA CONVERSÃO (MICRO-SAAS CLÍNICAS) -->
+      <div class="ad-card" data-tipo="alta">
+        <span class="ad-badge badge-alta">🔥 Alta Conversão (B2B Focado)</span>
+        <div class="ad-title">Zere as Faltas na Sua Clínica com WhatsApp</div>
+        <div class="ad-target">Público: Médicos, Dentistas, Nutricionistas e Clínicas Estéticas</div>
+        <div class="ad-box">
+          <strong>Hook (0 a 3s):</strong>
+          "Quantos mil reais a sua clínica perdeu esse mês só com paciente que desmarcou de última hora e deixou a cadeira vazia?"
+        </div>
+        <div class="ad-box">
+          <strong>Story / Proposta (4 a 15s):</strong>
+          "O Encaixa Aí confirma a consulta 24h antes e, se o paciente cancelar, nossa IA preenche o horário com a lista de espera em menos de 10 minutos."
+        </div>
+        <div class="ad-box">
+          <strong>Offer / CTA (16 a 25s):</strong>
+          "Toque no botão e teste 7 dias grátis na sua clínica sem trocar de sistema."
+        </div>
+        <button class="copy-btn" onclick="copiarTexto(this)">📋 Copiar Roteiro Completo</button>
+      </div>
+
+      <!-- ANÚNCIO 3: MÉDIA CONVERSÃO (CARDÁPIO DIGITAL) -->
+      <div class="ad-card" data-tipo="media">
+        <span class="ad-badge badge-media">⚡ Média Conversão (Economia Direta)</span>
+        <div class="ad-title">Pare de Pagar Mensalidade de R$ 250 em Cardápio</div>
+        <div class="ad-target">Público: Pizzarias, Lanchonetes e Hamburguerias</div>
+        <div class="ad-box">
+          <strong>Hook (0 a 3s):</strong>
+          "Pizzaiolo, você sabia que tá jogando quase R$ 3.000 por ano no lixo pagando taxa de cardápio digital todo mês?"
+        </div>
+        <div class="ad-box">
+          <strong>Story / Proposta (4 a 15s):</strong>
+          "Com o nosso Cardápio Próprio, o cliente escolhe a pizza, os adicionais e o pedido chega mastigado no seu WhatsApp. Sem comissão por pedido."
+        </div>
+        <div class="ad-box">
+          <strong>Offer / CTA (16 a 25s):</strong>
+          "Mande uma mensagem agora e veja como fica o cardápio da sua pizzaria rodando no celular."
+        </div>
+        <button class="copy-btn" onclick="copiarTexto(this)">📋 Copiar Roteiro Completo</button>
+      </div>
+
+      <!-- ANÚNCIO 4: BAIXA CONVERSÃO (INSTITUCIONAL / BRANDING) -->
+      <div class="ad-card" data-tipo="baixa">
+        <span class="ad-badge badge-baixa">💡 Baixa Conversão (Institucional)</span>
+        <div class="ad-title">A Importância de uma Presença Digital em 2026</div>
+        <div class="ad-target">Público Amplo / Empreendedores Gerais</div>
+        <div class="ad-box">
+          <strong>Hook (0 a 3s):</strong>
+          "Você compraria de uma empresa que não tem site nem nota no Google quando você pesquisa?"
+        </div>
+        <div class="ad-box">
+          <strong>Story / Proposta (4 a 15s):</strong>
+          "Hoje mais de 90% das pessoas pesquisam na internet antes de fechar qualquer serviço. Ter um site rápido é questão de sobrevivência no mercado."
+        </div>
+        <div class="ad-box">
+          <strong>Offer / CTA (16 a 25s):</strong>
+          "Conheça as soluções da Moura.AI e posicione sua marca no topo."
+        </div>
+        <button class="copy-btn" onclick="copiarTexto(this)">📋 Copiar Roteiro Completo</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function filtrar(tipo) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const cards = document.querySelectorAll('.ad-card');
+      cards.forEach(card => {
+        if (tipo === 'todos' || card.getAttribute('data-tipo') === tipo) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function copiarTexto(btn) {
+      const card = btn.closest('.ad-card');
+      const boxes = card.querySelectorAll('.ad-box');
+      let texto = card.querySelector('.ad-title').innerText + "\\n\\n";
+      boxes.forEach(b => texto += b.innerText + "\\n\\n");
+      texto += "Link de Contato: https://wa.me/5511939318424";
+
+      navigator.clipboard.writeText(texto).then(() => {
+        const original = btn.innerText;
+        btn.innerText = "✅ Roteiro Copiado!";
+        btn.style.background = "#10b981";
+        setTimeout(() => {
+          btn.innerText = original;
+          btn.style.background = "";
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
+

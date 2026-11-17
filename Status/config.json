@@ -1,0 +1,40 @@
+{
+  "versao": "2.0.0",
+  "modo_operacao": "semi-automatico",
+  "nichos_alvo": [
+    "delivery",
+    "alimentacao",
+    "lanchonete",
+    "churrascaria",
+    "barbearia",
+    "clinica",
+    "servicos_locais",
+    "empresas_grandes"
+  ],
+  "localidades": [
+    "Jaraguá, São Paulo - SP",
+    "Pirituba, São Paulo - SP",
+    "Freguesia do Ó, São Paulo - SP",
+    "Lapa, São Paulo - SP",
+    "Zona Oeste, São Paulo - SP"
+  ],
+  "supabase": {
+    "url": "",
+    "anon_key": "",
+    "tabela_leads": "leads_prospeccao",
+    "tabela_interacoes": "historico_interacoes",
+    "sincronizacao_automatica": true
+  },
+  "notificacoes": {
+    "whatsapp_habilitado": false,
+    "whatsapp_numero_destino": "",
+    "webhook_url": ""
+  },
+  "criterios_prospeccao": {
+    "identificar_sem_google_maps": true,
+    "identificar_sem_site": true,
+    "identificar_sem_instagram": true,
+    "priorizar_gaps_urgentes": true
+  }
+}
+

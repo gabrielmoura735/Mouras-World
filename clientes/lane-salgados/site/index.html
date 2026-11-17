@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lane Salgados — Salgadinhos de Festa em Cambuci, SP</title>
+  <meta name="description" content="Salgadinhos de festa fritos na hora, entregues quentinhos. Encomenda pelo WhatsApp. 4,8★ em 62 avaliações. Atende Cambuci e região de São Paulo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ---- HEADER ---- */
+    .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1rem 0; transition: background .3s, box-shadow .3s; }
+    .site-header.scrolled { background: var(--escuro); box-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .logo-nome { font-family: var(--serif); font-size: 1.15rem; font-weight: 800; color: var(--claro); line-height: 1.1; }
+    .logo-nome span { display: block; font-family: var(--sans); font-size: .72rem; font-weight: 400; opacity: .75; letter-spacing: .1em; text-transform: uppercase; }
+    nav { display: flex; align-items: center; gap: 1.4rem; }
+    nav a { color: rgba(var(--claro-rgb),.85); text-decoration: none; font-size: .9rem; font-weight: 600; transition: color .2s; }
+    nav a:hover { color: var(--acento); }
+    .nav-cta { display: none; }
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--claro); margin: 5px 0; border-radius: 2px; }
+    .mobile-menu { display: none; position: fixed; inset: 0; background: var(--escuro); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: var(--serif); font-size: 1.5rem; color: var(--claro); text-decoration: none; }
+    .mobile-menu .close-btn { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; cursor: pointer; color: var(--claro); font-size: 1.8rem; }
+    @media (max-width: 768px) { nav { display: none; } .hamburger { display: block; } .nav-cta { display: flex; } }
+
+    /* ---- HERO ---- */
+    .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; color: var(--claro); overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background-image: url('assets/hero-salgados-1600.jpg'); background-size: cover; background-position: center; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(43,29,12,.96) 0%, rgba(43,29,12,.45) 55%, rgba(43,29,12,.1) 100%); }
+    .hero-content { position: relative; z-index: 1; padding: 5rem 0; }
+    .hero-badge { display: inline-block; background: var(--primaria); color: #fff; font-size: .78rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; padding: .35em .9em; border-radius: 999px; margin-bottom: 1.2rem; }
+    .hero h1 { font-size: clamp(2.4rem, 7vw, 5rem); font-weight: 800; color: #fff; max-width: 700px; margin-bottom: .6rem; text-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .hero-sub { font-size: clamp(1rem, 2.2vw, 1.25rem); opacity: .9; max-width: 500px; margin-bottom: 2rem; }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: .8rem; }
+    .hero-badges { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.8rem; }
+    .hero-pill { display: inline-flex; align-items: center; gap: .4rem; background: rgba(0,0,0,.35); border: 1px solid rgba(var(--acento-rgb),.3); border-radius: 999px; padding: .4em .9em; font-size: .85rem; color: var(--acento); font-weight: 600; }
+
+    /* ---- NÚMEROS ---- */
+    .numeros { background: var(--primaria); color: #fff; padding: 2.5rem 0; }
+    .numeros-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; text-align: center; }
+    .num-valor { font-family: var(--serif); font-size: 2.4rem; font-weight: 800; line-height: 1; }
+    .num-label { font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; opacity: .85; margin-top: .3rem; }
+
+    /* ---- COMO PEDIR ---- */
+    .como-pedir { background: var(--claro); padding: 5rem 0; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .step { text-align: center; padding: 2rem 1.5rem; background: #fff; border-radius: var(--raio); box-shadow: 0 4px 24px rgba(0,0,0,.07); }
+    .step-num { width: 56px; height: 56px; border-radius: 50%; background: var(--primaria); color: #fff; font-family: var(--serif); font-size: 1.5rem; font-weight: 800; display: grid; place-items: center; margin: 0 auto 1rem; }
+    .step h3 { color: var(--primaria); margin-bottom: .4rem; }
+    .step p { color: #6a5a4a; font-size: .93rem; margin: 0; }
+
+    /* ---- GALERIA DE SALGADOS ---- */
+    .galeria { background: var(--escuro); color: var(--claro); padding: 5rem 0; }
+    .galeria-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 2.5rem; }
+    .galeria-grid .g-full { grid-column: span 2; }
+    .galeria-item { overflow: hidden; border-radius: 12px; height: 240px; }
+    .galeria-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .galeria-item:hover img { transform: scale(1.05); }
+    @media (max-width: 600px) {
+      .galeria-grid { grid-template-columns: 1fr; }
+      .galeria-grid .g-full { grid-column: span 1; }
+      .galeria-item { height: 200px; }
+    }
+
+    /* ---- HORÁRIOS ---- */
+    .horarios { background: var(--claro-2); padding: 5rem 0; }
+    .horarios-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .horarios-card { background: #fff; border-radius: var(--raio); padding: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,.07); }
+    .horarios-card table { width: 100%; border-collapse: collapse; }
+    .horarios-card tr { border-bottom: 1px solid rgba(0,0,0,.07); }
+    .horarios-card tr:last-child { border: none; }
+    .horarios-card td { padding: .7rem .4rem; font-size: .93rem; }
+    .horarios-card td:first-child { font-weight: 700; color: var(--primaria); }
+    .horarios-card td:last-child { text-align: right; color: #6a5a4a; }
+    .mapa-wrapper { border-radius: var(--raio); overflow: hidden; height: 300px; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+    .mapa-wrapper iframe { width: 100%; height: 100%; border: none; }
+    .endereco-box { margin-top: 1.5rem; display: flex; align-items: flex-start; gap: .8rem; }
+    .endereco-box svg { flex-shrink: 0; margin-top: 2px; color: var(--primaria); }
+    .endereco-box p { margin: 0; font-size: .93rem; color: #6a5a4a; }
+    @media (max-width: 768px) { .horarios-layout { grid-template-columns: 1fr; } .mapa-wrapper { height: 240px; } }
+
+    /* ---- AVALIAÇÕES ---- */
+    .avaliacoes { background: var(--escuro); color: var(--claro); padding: 5rem 0; }
+    .aval-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
+    .aval-card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); border-radius: var(--raio); padding: 1.8rem; }
+    .aval-stars { color: var(--acento); font-size: 1.1rem; letter-spacing: .08em; margin-bottom: .6rem; }
+    .aval-card blockquote { margin: 0 0 1.2rem; font-size: .97rem; opacity: .9; font-style: italic; line-height: 1.65; }
+    .aval-autor { display: flex; align-items: center; gap: .8rem; }
+    .aval-iniciais { width: 40px; height: 40px; border-radius: 50%; background: var(--primaria); display: grid; place-items: center; font-weight: 700; font-size: .9rem; flex-shrink: 0; }
+    .aval-nome { font-weight: 700; font-size: .9rem; }
+    .aval-quando { font-size: .8rem; opacity: .6; }
+
+    /* ---- CTA FINAL ---- */
+    .cta-final { background: linear-gradient(135deg, var(--primaria) 0%, var(--primaria-2) 100%); color: #fff; padding: 5rem 0; text-align: center; }
+    .cta-final h2 { color: #fff; font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: .6rem; }
+    .cta-final p { opacity: .88; max-width: 500px; margin: 0 auto 2rem; }
+
+    /* ---- FOOTER ---- */
+    .site-footer { background: var(--escuro); color: rgba(var(--claro-rgb),.5); padding: 2rem 0; text-align: center; font-size: .82rem; border-top: 1px solid rgba(255,255,255,.07); }
+
+    /* ---- WHATSAPP FLUTUANTE ---- */
+    .whatsapp-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 90; width: 56px; height: 56px; background: #25d366; border-radius: 50%; display: grid; place-items: center; box-shadow: 0 4px 20px rgba(37,211,102,.45); transition: transform .2s; }
+    .whatsapp-float:hover { transform: scale(1.1); }
+    .whatsapp-float svg { width: 30px; height: 30px; fill: #fff; }
+
+    /* ---- REVEAL ---- */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="site-header">
+  <div class="wrap header-inner">
+    <a href="#" style="text-decoration:none;">
+      <div class="logo-nome">Lane Salgados <span>Salgadinhos de festa · Cambuci</span></div>
+    </a>
+    <nav>
+      <a href="#como-pedir">Como pedir</a>
+      <a href="#horarios">Horários</a>
+      <a href="#avaliacoes">Avaliações</a>
+      <a href="https://wa.me/5511945079072?text=Oi%2C+vim+pelo+site!+Quero+fazer+um+pedido." class="btn btn--fire btn--sm" target="_blank" rel="noopener">Pedir agora</a>
+    </nav>
+    <a href="https://wa.me/5511945079072?text=Oi%2C+quero+pedir+salgados!" class="btn btn--fire btn--sm nav-cta" target="_blank" rel="noopener">Pedir</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- MENU MOBILE -->
+<div class="mobile-menu" id="mobile-menu">
+  <button class="close-btn" id="close-menu" aria-label="Fechar">✕</button>
+  <a href="#como-pedir" class="mobile-link">Como pedir</a>
+  <a href="#horarios" class="mobile-link">Horários</a>
+  <a href="#avaliacoes" class="mobile-link">Avaliações</a>
+  <a href="https://wa.me/5511945079072?text=Oi%2C+vim+pelo+site!+Quero+fazer+um+pedido." class="btn btn--fire" target="_blank" rel="noopener">Pedir agora</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg" data-parallax="0.3"></div>
+  <div class="hero-overlay"></div>
+  <div class="wrap hero-content">
+    <span class="hero-badge">Cambuci, São Paulo</span>
+    <h1>Salgadinhos fritos na hora pra sua festa</h1>
+    <p class="hero-sub">Encomende pelo WhatsApp e receba quentinhos, recém fritos. Saborosos, crocantes e no tamanho certo pra animar qualquer festa.</p>
+    <div class="hero-ctas">
+      <a href="https://wa.me/5511945079072?text=Oi%2C+vim+pelo+site!+Quero+fazer+um+pedido." class="btn btn--fire btn--lg" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Fazer pedido no WhatsApp
+      </a>
+      <a href="#como-pedir" class="btn btn--ghost btn--lg">Como funciona</a>
+    </div>
+    <div class="hero-badges">
+      <span class="hero-pill">🔥 Frito na hora</span>
+      <span class="hero-pill">🛵 Entrega quentinha</span>
+      <span class="hero-pill">💳 PIX ou cartão</span>
+    </div>
+  </div>
+</section>
+
+<!-- NÚMEROS -->
+<section class="numeros">
+  <div class="wrap numeros-grid">
+    <div>
+      <div class="num-valor"><span class="count" data-target="48" data-decimals="1">0</span>★</div>
+      <div class="num-label">Nota no Google</div>
+    </div>
+    <div>
+      <div class="num-valor"><span class="count" data-target="62">0</span></div>
+      <div class="num-label">Avaliações</div>
+    </div>
+    <div>
+      <div class="num-valor"><span class="count" data-target="59">0</span></div>
+      <div class="num-label">Avaliações 5 estrelas</div>
+    </div>
+    <div>
+      <div class="num-valor">7 dias</div>
+      <div class="num-label">Aberto toda semana</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO PEDIR -->
+<section class="como-pedir" id="como-pedir">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">Simples assim</p>
+      <h2>Como fazer seu pedido</h2>
+      <p style="color:#6a5a4a;max-width:520px;">Sem app, sem cadastro. Um WhatsApp e os salgados chegam quentinhos na sua porta.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h3>Mande mensagem</h3>
+        <p>Fale o que você quer e a quantidade pelo WhatsApp. A Lane responde rápido e confirma o pedido.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <h3>Combine a entrega</h3>
+        <p>Acerte o endereço e o horário. Os salgados são fritos na hora do pedido — chegam fresquinhos.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <h3>Receba e pague</h3>
+        <p>Receba em casa e pague na entrega: PIX ou cartão. Sem adiantamento, sem surpresa.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem;" class="reveal">
+      <a href="https://wa.me/5511945079072?text=Oi%2C+vim+pelo+site!+Quero+fazer+um+pedido." class="btn btn--fire btn--lg" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Pedir agora
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section class="galeria">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow" style="color:var(--acento)">Os salgados</p>
+      <h2>Veja como saem do forno</h2>
+      <p style="opacity:.75;max-width:500px;">Fotos provisórias — a Lane enviará as fotos originais dos salgados em breve.</p>
+    </div>
+    <div class="galeria-grid">
+      <div class="galeria-item g-full">
+        <img src="assets/hero-salgados-1600.jpg" alt="Lane Salgados" loading="lazy">
+      </div>
+      <div class="galeria-item">
+        <img src="assets/salgados-01.jpg" alt="Salgadinhos Lane" loading="lazy">
+      </div>
+      <div class="galeria-item">
+        <img src="assets/salgados-02.jpg" alt="Salgadinhos fritos" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HORÁRIOS -->
+<section class="horarios" id="horarios">
+  <div class="wrap">
+    <div class="reveal" style="margin-bottom:2.5rem;">
+      <p class="eyebrow">Atendimento</p>
+      <h2>Horários e localização</h2>
+    </div>
+    <div class="horarios-layout">
+      <div class="reveal">
+        <div class="horarios-card">
+          <table>
+            <tr><td>Segunda a sábado</td><td>08h às 21h</td></tr>
+            <tr><td>Domingo</td><td>10h às 21h</td></tr>
+          </table>
+        </div>
+        <div class="endereco-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <p><strong>R. Estéfano, 108</strong><br>Cambuci, São Paulo – SP<br>CEP 01521-030</p>
+        </div>
+        <a href="https://wa.me/5511945079072?text=Oi%2C+vim+pelo+site!+Quero+fazer+um+pedido." class="btn btn--fire" style="margin-top:1.5rem;" target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+          Falar no WhatsApp
+        </a>
+      </div>
+      <div class="reveal">
+        <div class="mapa-wrapper">
+          <iframe
+            src="https://maps.google.com/maps?q=-23.561763,-46.618328&z=16&output=embed"
+            allowfullscreen
+            loading="lazy"
+            title="Localização Lane Salgados"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVALIAÇÕES -->
+<section class="avaliacoes" id="avaliacoes">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 1rem;">
+      <p class="eyebrow" style="color:var(--acento)">O que os clientes dizem</p>
+      <h2>4,8 estrelas — quase todas de 5</h2>
+      <p style="opacity:.75;margin-top:.5rem;">59 de 5 estrelas. Zero avaliações de 2 ou 3 estrelas.</p>
+    </div>
+    <div class="aval-cards">
+      <div class="aval-card reveal">
+        <div class="aval-stars">★★★★★</div>
+        <blockquote>"Salgadinhos de festa maravilhosos, fritos na hora! Atendimento super agradável. Recomendo muito!"</blockquote>
+        <div class="aval-autor">
+          <div class="aval-iniciais">MN</div>
+          <div>
+            <div class="aval-nome">Mara Nunes</div>
+            <div class="aval-quando">4 meses atrás · 5 estrelas</div>
+          </div>
+        </div>
+      </div>
+      <div class="aval-card reveal">
+        <div class="aval-stars">★★★★★</div>
+        <blockquote>"Ótima experiência de compra, prático pelo WhatsApp. Fechei o pedido e chegou dentro do horário, salgados chegaram quentinhos, recém fritos. Bem saborosos e leves. Pagamento facilitado após o recebimento."</blockquote>
+        <div class="aval-autor">
+          <div class="aval-iniciais">JV</div>
+          <div>
+            <div class="aval-nome">Juliana Vergotti</div>
+            <div class="aval-quando">8 meses atrás · 5 estrelas</div>
+          </div>
+        </div>
+      </div>
+      <div class="aval-card reveal">
+        <div class="aval-stars">★★★★★</div>
+        <blockquote>"Salgados excelentes. Saborosos e no tamanho ideal. Peço sempre e recomendo."</blockquote>
+        <div class="aval-autor">
+          <div class="aval-iniciais">ER</div>
+          <div>
+            <div class="aval-nome">Ellen Rodrigues</div>
+            <div class="aval-quando">2 meses atrás · 5 estrelas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;" class="reveal">
+      <a href="https://www.google.com/maps/place/Lane+Salgados+-+Salgadinhos+de+festa+-+Pronta+entrega/data=!4m7!3m6!1s0x94ce59b5eba3cb01:0x31e3a0ceef6a443d" class="btn btn--ghost" target="_blank" rel="noopener">Ver todas no Google</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Vai ter festinha?</h2>
+      <p>Mande mensagem agora. Os salgados saem fresquinhos e chegam quentinhos pra sua festa. Atendemos todos os dias.</p>
+      <a href="https://wa.me/5511945079072?text=Oi%2C+vim+pelo+site!+Quero+pedir+salgados+para+minha+festa." class="btn btn--light btn--lg" target="_blank" rel="noopener">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        Fazer pedido agora
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Lane Salgados. Site por <a href="https://wa.me/5511999999999" style="color:inherit;text-decoration:underline;">Gabriel Moura</a>.</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLUTUANTE -->
+<a href="https://wa.me/5511945079072?text=Oi%2C+vim+pelo+site!" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.123 1.528 5.853L0 24l6.335-1.508A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.011-1.37l-.36-.213-3.761.896.924-3.651-.234-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+</a>
+
+<script src="js/app.js" defer></script>
+<script>
+  const hdr = document.getElementById('site-header');
+  window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+  const ham = document.getElementById('hamburger');
+  const mob = document.getElementById('mobile-menu');
+  const cls = document.getElementById('close-menu');
+  ham?.addEventListener('click', () => mob.classList.add('open'));
+  cls?.addEventListener('click', () => mob.classList.remove('open'));
+  mob?.querySelectorAll('.mobile-link, .btn').forEach(a => a.addEventListener('click', () => mob.classList.remove('open')));
+  const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  function animCount(el) {
+    const target = parseFloat(el.dataset.target), decimals = parseInt(el.dataset.decimals||'0'), dur = 1800, step = 16, steps = dur/step;
+    let cur = 0, inc = target/steps;
+    const t = setInterval(() => { cur = Math.min(cur+inc, target); el.textContent = decimals ? cur.toFixed(decimals) : Math.floor(cur); if(cur>=target) clearInterval(t); }, step);
+  }
+  const cObs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){ animCount(e.target); cObs.unobserve(e.target); } }), { threshold: 0.5 });
+  document.querySelectorAll('.count').forEach(el => cObs.observe(el));
+  const bg = document.querySelector('.hero-bg[data-parallax]');
+  if (bg && window.matchMedia('(prefers-reduced-motion: no-preference)').matches)
+    window.addEventListener('scroll', () => { bg.style.transform = `translateY(${window.scrollY*.3}px)`; }, { passive: true });
+</script>
+</body>
+</html>

@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acervo de Aulas & Vídeos — Moura.AI (24 Aulas)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111827;
+      --border: #1f2937;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.25);
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --youtube: #ef4444;
+      --success: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 30px 20px 60px;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.35);
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 2px;
+    }
+    .nav-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(56, 189, 248, 0.05);
+    }
+    .notice-card {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(16, 185, 129, 0.05));
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .notice-icon {
+      font-size: 32px;
+    }
+    .notice-text h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .notice-text p {
+      font-size: 13px;
+      color: #d1d5db;
+      line-height: 1.5;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .kpi-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .kpi-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .kpi-value {
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .video-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .video-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.25s ease;
+    }
+    .video-card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .badge-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+    .badge-yt {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .badge-status {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .video-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.4;
+    }
+    .author-name {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .video-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .btn-yt {
+      background: var(--youtube);
+      color: #fff;
+    }
+    .btn-yt:hover {
+      background: #dc2626;
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+    }
+    .content-box {
+      background: #0b1120;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 16px;
+    }
+    .content-box h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .content-box ul {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .content-box li {
+      font-size: 13px;
+      color: #d1d5db;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .content-box li::before {
+      content: "•";
+      color: var(--accent);
+      font-size: 16px;
+      line-height: 1;
+    }
+    .system-links {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid #1e293b;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      align-items: center;
+    }
+    .code-tag {
+      background: #1e293b;
+      color: #7dd3fc;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 12px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="brand-icon">🎬</div>
+        <div>
+          <h1>Acervo de Vídeos & Aulas Gravadas</h1>
+          <div class="subtitle">Memória Permanente & Inteligência Estratégica — Moura.AI</div>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <a href="Status/index.html" class="btn btn-outline">🎯 Painel Central (Status)</a>
+        <a href="mouras-world/index.html" class="btn btn-outline">🌐 Meu Site Pessoal</a>
+      </div>
+    </header>
+
+    <div class="notice-card">
+      <div class="notice-icon">🧠</div>
+      <div class="notice-text">
+        <h3>Memória Ativa e Permanente (24 Aulas Catalogadas)</h3>
+        <p>Todos os vídeos enviados por você ficam gravados nesta central e na memória do sistema. Cada aula foi transcrita, analisada e transformada em inteligência prática de negócios para o ecossistema Moura.AI.</p>
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Total de Vídeos no Acervo</div>
+        <div class="kpi-value">24 Aulas</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Palavras Transcritas</div>
+        <div class="kpi-value">+105.000</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Canais / Especialistas</div>
+        <div class="kpi-value">18 Autores</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">WhatsApp de Conversão</div>
+        <div class="kpi-value" style="font-size:18px;color:#34d399">(11) 93931-8424</div>
+      </div>
+    </div>
+
+    <div class="video-feed">
+
+      <!-- VÍDEO 3: THIAGO HORA -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">YouTube Vídeo / Live</span>
+              <span class="badge badge-status">✅ 23.014 Palavras Analisadas</span>
+            </div>
+            <div class="video-title">A Nova Onda do Digital Que Pode Mudar Sua Vida (Evento Cansei Dessa Vida - Aula 1)</div>
+            <div class="author-name">Por Thiago Hora (Hora de Negócios) & Rian</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/live/2RCO2AVv_Mc" target="_blank" class="btn btn-yt">▶ Assistir Aula 1</a>
+            <a href="https://www.youtube.com/watch?v=juOq2eACL84" target="_blank" class="btn btn-outline" style="font-size:12px">Próxima Aula</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação no Sistema</h4>
+          <ul>
+            <li><strong>Método P.O.C.:</strong> Produto Vencedor + Oferta Irresistível + Conversão Automática.</li>
+            <li><strong>Ghost Commerce Sem Estoque:</strong> Venda de produtos físicos sem estoque, com fornecedores no Brasil via plataforma Kairós (margens de até 70%).</li>
+            <li><strong>Os 4 Critérios do Produto:</strong> Ticket menor que R$119, fácil entendimento, comprovado no Meta Ads e efeito visual 'UAU'.</li>
+            <li><strong>Mix Fim de Ano:</strong> Produto perpétuo (Joelheira Alívio 3D a R$129) + Sazonal de Natal (Game Stick 4K a R$249).</li>
+            <li><strong>Regra 98% vs 2%:</strong> O comprador toma decisão pela emoção na página de vendas e não pesquisando preços.</li>
+          </ul>
+          <div class="system-links">
+            <span>Implementado em:</span>
+            <span class="code-tag">Status/gerador_loja_produto.py</span>
+            <span class="code-tag">Status/produtos/</span>
+            <span class="code-tag">Status/gerador_infoproduto.py</span>
+            <span class="code-tag">Status/gerador_criativos_ia.py</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 2: VAGNER MAZZEO (GROK BOT) -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">YouTube Vídeo</span>
+              <span class="badge badge-status">✅ 100% Implementado</span>
+            </div>
+            <div class="video-title">Estou prospectando clientes com Grok Bot e Claude Code</div>
+            <div class="author-name">Por Vagner Mazzeo (Mazzeo IA)</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=MOluZHvWLqY" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação no Sistema</h4>
+          <ul>
+            <li><strong>Antecipação de Valor:</strong> Construa a prévia funcional da empresa antes de abordar e envie o link direto na copy.</li>
+            <li><strong>Padrão Visual MotionSites + Spline 3D:</strong> Dark mode neon, micro-animações, notas 4.9 no Google e botão do WhatsApp ativo.</li>
+            <li><strong>Faixa Superior Flutuante:</strong> CTA direto mandando o empresário para o WhatsApp do Marquinhos para fechar em 24h.</li>
+            <li><strong>Disparos Automáticos:</strong> Exportação de fila para robôs com delays seguros anti-bloqueio.</li>
+          </ul>
+          <div class="system-links">
+            <span>Implementado em:</span>
+            <span class="code-tag">Status/gerador_site_express.py</span>
+            <span class="code-tag">Status/previa.html</span>
+            <span class="code-tag">Status/grok_bot_queue.json</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 1: VAGNER MAZZEO (ABACUS AI) -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">YouTube Vídeo</span>
+              <span class="badge badge-status">✅ 100% Implementado</span>
+            </div>
+            <div class="video-title">Estou prospectando clientes com Abacus AI (poderoso)</div>
+            <div class="author-name">Por Vagner Mazzeo (Mazzeo IA)</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=hNYKdsTg3do" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação no Sistema</h4>
+          <ul>
+            <li><strong>Contato com o Decisor:</strong> Puxar CNPJ na Receita Federal para abordar diretamente o proprietário/sócio administrador.</li>
+            <li><strong>Raio-X Técnico em 6 Pontos:</strong> Auditoria de Google Maps, Velocidade Celular, Website, Pixel do Meta, GTM e Tráfego Pago.</li>
+            <li><strong>Cada Furo é um Serviço:</strong> Transformar as falhas técnicas da empresa em propostas de fechamento sob medida.</li>
+            <li><strong>Tríplice Abordagem:</strong> WhatsApp 1-clique, E-mail Gmail e Script de Ligação rápida de 30s.</li>
+          </ul>
+          <div class="system-links">
+            <span>Implementado em:</span>
+            <span class="code-tag">Status/agente_cacador.py</span>
+            <span class="code-tag">Status/auditor_presenca.py</span>
+            <span class="code-tag">Status/gerador_abordagem.py</span>
+            <span class="code-tag">Status/index.html</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 04: Nerds de Negócios -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 04</span>
+              <span class="badge badge-status">✅ Transcrito (1,849 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">IA Pessoal & Automação</span>
+            </div>
+            <div class="video-title">CRIEI UM JARVIS PRA MIM E CANCELEI TODAS AS MINHAS IAs!</div>
+            <div class="author-name">Por Nerds de Negócios</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=gGFQU2CsAqk" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Cancelamento de assinaturas pagas unificando modelos gratuitos num sistema pessoal estilo JARVIS.</li><li>Arquitetura de agentes locais especializados por tarefa, sem custo mensal recorrente.</li><li>Aplicação no Moura.AI: transformar a máquina do Marquinhos em central de comando inteligente permanente.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 05: Daniel Penin -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 05</span>
+              <span class="badge badge-status">✅ Transcrito (4,323 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Monetização com IA No-Code</span>
+            </div>
+            <div class="video-title">Eu Criei uma I.A do ZERO e Ganhei Dinheiro Assim</div>
+            <div class="author-name">Por Daniel Penin</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=hqIkH7SdBBI" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Criação de solução de IA sem programação empacotada para resolver dores específicas de empresas.</li><li>Foco na dor do cliente: cobrar pela solução e não pela tecnologia em si.</li><li>Aplicação no Moura.AI: empacotar agentes de atendimento e qualificação para venda B2B.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 06: LABS -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 06</span>
+              <span class="badge badge-status">✅ Transcrito (4,092 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Engenharia de Agentes Autônomos</span>
+            </div>
+            <div class="video-title">Agentes de IA em 18 minutos (O que 95% não entendem)</div>
+            <div class="author-name">Por LABS</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=EzcXGtjNm5E" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Diferença entre chatbot e agente: percepção, raciocínio, ferramentas e tomada de decisão em loop.</li><li>Construção de pipelines com LangChain/CrewAI para tarefas operacionais 24/7.</li><li>Aplicação no Moura.AI: autonomia para o Agente Caçador prospectar e auditar sem intervenção manual.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 07: Just Explained -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 07</span>
+              <span class="badge badge-status">✅ Transcrito (3,327 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Fundamentos de Linguagens & Stack</span>
+            </div>
+            <div class="video-title">Every Programming Language Explained in 16 Minutes</div>
+            <div class="author-name">Por Just Explained</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=uerEG_yigco" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Visão comparativa de linguagens de programação e quando utilizar cada uma no mercado moderno.</li><li>Python para automação e manipulação de dados; JavaScript para interfaces web interativas.</li><li>Aplicação no Moura.AI: arquitetura híbrida Python (backend/scraping) + Vanilla JS (dashboards leves sem build).</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 08: Sandeco -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 08</span>
+              <span class="badge badge-status">✅ Transcrito (2,085 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">VS Code Sala de Guerra & Maestro</span>
+            </div>
+            <div class="video-title">Transforme o seu VS Code em uma Sala de Guerra com o Sandeco Maestro!</div>
+            <div class="author-name">Por Sandeco</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=S-uPfrFrO6U" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Configuração do VS Code como ambiente avançado integrado a múltiplos agentes e extensões de IA.</li><li>Fluxos ágeis de codificação com feedback em tempo real e automação de testes locais.</li><li>Aplicação no Moura.AI: agilidade máxima no desenvolvimento de novos módulos e páginas de venda.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 09: TechKevin -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 09</span>
+              <span class="badge badge-status">✅ Transcrito (2,419 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Lovable Grátis & No-Code Fullstack</span>
+            </div>
+            <div class="video-title">How To Use Unlimited Lovable For Free.. (Better Then Replit)</div>
+            <div class="author-name">Por TechKevin</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=uWT23-4g6A4" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Método de uso contínuo e gratuito do Lovable para geração de aplicações web completas com banco de dados.</li><li>Geração de MVPs funcionais em menos de 10 minutos para validação rápida de mercado.</li><li>Aplicação no Moura.AI: prototipagem ultrarrápida de micro-SaaS para clientes locais sem custo de servidor.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 10: Sandeco -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 10</span>
+              <span class="badge badge-status">✅ Transcrito (1,644 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Google Antigravity & Produtividade IA</span>
+            </div>
+            <div class="video-title">Antigravity Ficou AINDA MELHOR: O Upgrade Grátis que Você Precisa Instalar Agora</div>
+            <div class="author-name">Por Sandeco</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=AsIusJoJHpg" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Upgrades e recursos integrados no Antigravity para desenvolvimento assistido por agentes.</li><li>Automação de tarefas repetitivas e workflows de desenvolvimento acelerado.</li><li>Aplicação no Moura.AI: uso do próprio ambiente Antigravity como motor de aceleração dos projetos.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 11: Leonardo Amoyr -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 11</span>
+              <span class="badge badge-status">✅ Transcrito (10,330 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Renda Passiva em Dólar com Blogs Evergreen</span>
+            </div>
+            <div class="video-title">Crie um SITE que Gera RENDA EXTRA em DÓLAR</div>
+            <div class="author-name">Por Leonardo Amoyr</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=vTB5HPfek5c" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Criação de blog WordPress profissional voltado para monetização em dólar com AdCash (sem burocracia do AdSense).</li><li>Recebimento direto via PayPal ou Wise para conversão favorável de dólar para real.</li><li>Conteúdo Evergreen com IA: artigos estruturados em método/etapas e imagens livres de direitos.</li><li>Aplicação no Moura.AI: criação de rede de blogs verticais para renda passiva em moeda forte.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 12: Dev Completo -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 12</span>
+              <span class="badge badge-status">✅ Transcrito (10,217 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Formação Acelerada em Python 2026</span>
+            </div>
+            <div class="video-title">Curso de Python em 1 HORA: Completo para Iniciantes (2026)</div>
+            <div class="author-name">Por Dev Completo</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=CsDToeKl_4Y" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Domínio prático de Python: automações, consumo de APIs, scraping e estruturas de dados essenciais.</li><li>Boas práticas de código limpo e arquitetura modular para manutenção de sistemas.</li><li>Aplicação no Moura.AI: base técnica para refatorar e enriquecer os geradores de sites e crawlers.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 13: mano deyvin -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 13</span>
+              <span class="badge badge-status">✅ Transcrito (3,053 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Claude Code Otimizado & Grátis</span>
+            </div>
+            <div class="video-title">claude code grátis pra sempre</div>
+            <div class="author-name">Por mano deyvin</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=wkurHT85g3g" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Técnicas de uso inteligente do Claude Code via CLI com créditos gratuitos e modelos compatíveis.</li><li>Economia em custos operacionais com IA substituindo planos caros por abordagens gratuitas.</li><li>Aplicação no Moura.AI: corte de despesas fixas com ferramentas, mantendo capacidade operacional máxima.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 14: Eli Rigobeli - IA -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 14</span>
+              <span class="badge badge-status">✅ Transcrito (3,424 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Antigravity Ilimitado sem Travamentos</span>
+            </div>
+            <div class="video-title">Google Antigravity SEM LIMITES: como usar IA grátis sem travar</div>
+            <div class="author-name">Por Eli Rigobeli - IA</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=mx_K2qAFz5w" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Gerenciamento de contexto e rotação de chaves gratuitas para evitar atingir rate limits.</li><li>Uso otimizado de modelos Flash para tarefas intensivas sem perda de qualidade de raciocínio.</li><li>Aplicação no Moura.AI: operação contínua de agentes em background para mineração e análise 24/7.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 15: O Milionário -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 15</span>
+              <span class="badge badge-status">✅ Transcrito (5,826 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">3 Apps Lucrativos com IA para Comércio Local</span>
+            </div>
+            <div class="video-title">3 Formas de Ganhar R$1000 Essa Semana com Apps de IA Sendo Adolescente</div>
+            <div class="author-name">Por O Milionário</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=VaIxzC8ZYeo" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>App 1: Cardápio Digital para Pizzarias/Restaurantes com pedido direto no WhatsApp (Economia vs concorrentes que cobram R$250/mês).</li><li>App 2: Sistema de Agendamento com Painel Admin para Barbearias e Salões.</li><li>App 3: E-commerce Próprio com Stripe sem taxas de marketplace (setup R$2.000 a R$4.000).</li><li>Contorno das 3 maiores objeções: bugs pós-entrega, sites grátis com taxas ocultas e idade do prestador.</li><li>Aplicação no Moura.AI: novos serviços prontos para o Marquinhos vender para negócios de bairro com recorrência.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 16: Julian Goldie SEO -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 16</span>
+              <span class="badge badge-status">✅ Transcrito (1,616 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Antigravity + Automação Avançada de SEO</span>
+            </div>
+            <div class="video-title">NEW AntiGravity Integration is ABSURD! 🤯</div>
+            <div class="author-name">Por Julian Goldie SEO</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=hSMU4JxdZtI" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Integração de fluxos de SEO técnico com agentes de IA para ranqueamento no Google.</li><li>Criação de clusters de conteúdo e backlinks estruturados para dominar palavras-chave locais.</li><li>Aplicação no Moura.AI: diferencial premium para os sites dos clientes B2B do Marquinhos.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 17: Caio Martins -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 17</span>
+              <span class="badge badge-status">✅ Transcrito (7,388 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Micro-SaaS R$2k/Dia com Agentes Autônomos</span>
+            </div>
+            <div class="video-title">ELE FAZ R$2K/DIA COM MICRO SAAS E VAMOS COPIAR EM 20 MINUTOS</div>
+            <div class="author-name">Por Caio Martins</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=6fx2bkSzNoc" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Mineração de dores reais na Biblioteca de Anúncios do Meta usando prompts para agentes de pesquisa.</li><li>Micro-SaaS validado: Confirmação de consultas e reocupação automática de horários cancelados via WhatsApp.</li><li>Monetização recorrente: assinaturas mensais de R$97 a R$247 ou anuidade à vista com desconto (R$1.997).</li><li>Funis de aquisição: Tráfego direto, Freemium, Free Trial de 7 dias e Funil Comercial (SDR + Closer).</li><li>Aplicação no Moura.AI: criação do produto 'Encaixa Aí' para clínicas e estéticas da região.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 18: Victor Peixoto -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 18</span>
+              <span class="badge badge-status">✅ Transcrito (2,791 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Prospecção B2B Infinita no Maps & Instagram</span>
+            </div>
+            <div class="video-title">Como Gerar Leads Ilimitados Para Prospecção Utilizando ChatGPT</div>
+            <div class="author-name">Por Victor Peixoto</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=Lo_lYsxWhR0" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Extração ágil de listas no Google Maps e Instagram usando extensões de Infinity Scroll.</li><li>Prompt mestre para organizar dados no ChatGPT: decrescente por avaliações, filtro sem telefone e sem duplicatas.</li><li>Construção de cadência comercial: ligação fria, abordagem personalizada no WhatsApp e follow-up estratégico.</li><li>Aplicação no Moura.AI: upgrade direto no `agente_cacador.py` e novas listas qualificadas no Painel B2B.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 19: Matheus Tilli -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 19</span>
+              <span class="badge badge-status">✅ Transcrito (2,973 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">JARVIS Pessoal com Código Gratuito</span>
+            </div>
+            <div class="video-title">Como MONTEI meu próprio JARVIS com IA (código GRÁTIS)</div>
+            <div class="author-name">Por Matheus Tilli</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=Q_X7uAiGAvE" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Implementação de assistente virtual interativo conectado a rotinas de trabalho e automações.</li><li>Atendimento inicial automático e roteamento de tarefas operacionais para a IA.</li><li>Aplicação no Moura.AI: centralização dos comandos do sistema em interface ágil de conversação.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 20: Rafa Voss | IA na Prática -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 20</span>
+              <span class="badge badge-status">✅ Transcrito (2,823 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Grok Bot — Segredos & Disparos Seguros</span>
+            </div>
+            <div class="video-title">Conheça o NOVO GROKBOT e suas novidades! (5 segredos!)</div>
+            <div class="author-name">Por Rafa Voss | IA na Prática</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=EDAYtAUBasc" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Táticas avançadas de disparo multicanal respeitando delays e intervalos de segurança anti-bloqueio.</li><li>Personalização dinâmica de mensagens para aumentar taxa de abertura e resposta no WhatsApp/Instagram.</li><li>Aplicação no Moura.AI: calibração da fila `Status/grok_bot_queue.json` com máxima taxa de conversão.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 21: IA na Prática | Thiago Skiante -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 21</span>
+              <span class="badge badge-status">✅ Transcrito (3,208 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Automação no Instagram com Grok Bot</span>
+            </div>
+            <div class="video-title">Conectei meu Instagram ao Grok Bot e Olha No Que Deu... (Cuidado!)</div>
+            <div class="author-name">Por IA na Prática | Thiago Skiante</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=DZXrcI952yA" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Fluxo de captação orgânica no Instagram: automação de DMs, respostas a comentários e filtros de intenção.</li><li>Cuidados essenciais para preservação de perfis contra sanções de spam.</li><li>Aplicação no Moura.AI: funil Instagram -> WhatsApp `(11) 93931-8424` para fechamento de contratos.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 22: 001 Community -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 22</span>
+              <span class="badge badge-status">✅ Transcrito (7,711 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">ODR (Organic Direct Response) — Case R$46k em 27 Dias</span>
+            </div>
+            <div class="video-title">Ele posta 1.000 vídeos de IA Todo Santo Dia. Quer saber como ele faz dinheiro?</div>
+            <div class="author-name">Por 001 Community</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=guCY_djZJiE" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>O mercado ODR: venda de produtos de alta comissão (R$200 a R$1.000 por venda) via vídeos orgânicos sem anúncios.</li><li>Case real Levi: 150 páginas no Facebook, 1.000 vídeos/dia com IA, escala de R$7.000/dia nos picos.</li><li>Estratégia de hooks polêmicos e quebras de padrão para atingir milhões de visualizações sem gastar 1 centavo.</li><li>Aplicação no Moura.AI: motor de geração massiva de vídeos curtos com IA para venda orgânica de produtos e infoprodutos.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 23: Hashtag Programação -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 23</span>
+              <span class="badge badge-status">✅ Transcrito (3,884 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Agentes Locais com Ollama & Python</span>
+            </div>
+            <div class="video-title">Crie um agente de IA local em 16 minutos</div>
+            <div class="author-name">Por Hashtag Programação</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=urJfNeR7P78" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Criação de agentes de inteligência artificial 100% locais rodando com Ollama e modelos open source.</li><li>Privacidade total de dados corporativos e custo zero absoluto de tokens para análises em lote.</li><li>Aplicação no Moura.AI: execução local de enriquecimento de CNPJs e análises pesadas em background.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- VÍDEO 24: Tico Santos - Webvip Academy -->
+      <div class="video-card">
+        <div class="card-header">
+          <div>
+            <div class="badge-row">
+              <span class="badge badge-yt">Aula 24</span>
+              <span class="badge badge-status">✅ Transcrito (2,585 palavras)</span>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;border:1px solid rgba(56,189,248,0.3)">Claude Code Grátis & Alternativas Eficientes</span>
+            </div>
+            <div class="video-title">CLAUDE CODE GRÁTIS e SEM LIMITES? Testei TODOS os métodos 😱</div>
+            <div class="author-name">Por Tico Santos - Webvip Academy</div>
+          </div>
+          <div class="video-actions">
+            <a href="https://www.youtube.com/watch?v=L5l4f1yGi0s" target="_blank" class="btn btn-yt">▶ Assistir no YouTube</a>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <h4>💡 Principais Lições & Aplicação Prática</h4>
+          <ul>
+            <li>Benchmarking de métodos de acesso ao Claude Code sem custos e estratégias de contingência.</li><li>Integração de modelos alternativos rápidos para tarefas repetitivas de programação.</li><li>Aplicação no Moura.AI: garantia de que o ambiente de desenvolvimento nunca fique inoperante por cotas.</li>
+          </ul>
+          <div class="system-links">
+            <span>Memória do Sistema:</span>
+            <span class="code-tag">VIDEOS.md</span>
+            <span class="code-tag">.agents/memory/videos.md</span>
+            <span class="code-tag">Moura.AI Vault</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      <p>Moura.AI — Ecossistema de Inteligência & Monetização Digital • WhatsApp: (11) 93931-8424</p>
+    </footer>
+  </div>
+
+</body>
+</html>

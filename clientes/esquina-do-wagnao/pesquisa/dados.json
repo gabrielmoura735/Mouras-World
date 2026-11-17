@@ -1,0 +1,134 @@
+{
+ "nome": "Esquina do Wagnão",
+ "slug": "esquina-do-wagnao",
+ "categoria": "Restaurante self-service",
+ "endereco": "Esquina do Wagnão - Av. Benedito Andrade, 455 - Vila Pirituba, São Paulo - SP, 02936-000",
+ "endereco_partes": {
+  "borough": "Vila Pirituba",
+  "street": "Av. Benedito Andrade, 455",
+  "city": "São Paulo",
+  "postal_code": "02936-000",
+  "state": "São Paulo",
+  "country": "BR"
+ },
+ "telefone": "(11) 97080-8926",
+ "celular": true,
+ "whatsapp": "https://wa.me/5511970808926",
+ "horarios": {
+  "domingo": [
+   "Fechado"
+  ],
+  "quarta-feira": [
+   "11:00–15:45"
+  ],
+  "quinta-feira": [
+   "11:00–15:45"
+  ],
+  "segunda-feira": [
+   "11:00–15:45"
+  ],
+  "sexta-feira": [
+   "11:00–15:45"
+  ],
+  "sábado": [
+   "11:00–16:00"
+  ],
+  "terça-feira": [
+   "11:00–15:45"
+  ]
+ },
+ "nota": 4.6,
+ "avaliacoes": 516,
+ "por_estrela": {
+  "1": 4,
+  "2": 12,
+  "3": 20,
+  "4": 121,
+  "5": 359
+ },
+ "descricao": "",
+ "comodidades": [
+  {
+   "id": "accessibility",
+   "name": "Acessibilidade",
+   "options": [
+    {
+     "name": "Assento com acessibilidade para pessoas em cadeira de rodas",
+     "enabled": true
+    },
+    {
+     "name": "Estacionamento com acessibilidade para pessoas em cadeira de rodas",
+     "enabled": false
+    }
+   ]
+  }
+ ],
+ "website": "",
+ "tipo_site": "nenhum",
+ "maps": "https://www.google.com/maps/place/Esquina+do+Wagn%C3%A3o/data=!4m7!3m6!1s0x94cef90e8aba99f1:0x3cfcfc89b4a64da3!8m2!3d-23.4869965!4d-46.7163618!16s%2Fg%2F1ptvsnr38!19sChIJ8Zm6ig75zpQRo02mtIn8_Dw?authuser=0&hl=pt-BR&g_ep=EgoyMDI2MTExMC4wIJJjKgBIAVAD&rclk=1",
+ "lat": "-23.486997",
+ "lon": "-46.716362",
+ "plus_code": "G77M+6F Vila Pirituba, São Paulo - SP",
+ "faixa_preco": "",
+ "dono": {
+  "id": "105637247490664926962",
+  "name": "Esquina do Wagnão (proprietário)",
+  "link": "https://www.google.com/maps/contrib/105637247490664926962"
+ },
+ "reservas": [],
+ "pedido_online": [],
+ "cardapio": {
+  "link": "",
+  "source": ""
+ },
+ "avaliacoes_texto": [
+  {
+   "nome": "Sergio Cabeleireiro ArtCabelo (Serginho Casa Branca)",
+   "nota": 5,
+   "quando": "7 anos atrás",
+   "texto": "Embora dispense comentários, sem duvidas é o melhor  restaurante de Pirituba❤ na minha opinião!!\nVariedades  de saladas e diversos tipos de pratos exp ou dia tinha uma lasanha de berinjela com peito de Peru👏👏😍 atendimento excelente super recomendo!!",
+   "fotos": 9
+  },
+  {
+   "nome": "sonia chaim",
+   "nota": 3,
+   "quando": "4 meses atrás",
+   "texto": "Constrangedor atendente vir a mesa conferir sua comanda... não confiando em outra atendente como no cliente que vai pagar 50 na refeição e será que vai deixar de pagar 5\nNa sobremesa?",
+   "fotos": 0
+  },
+  {
+   "nome": "Jose Davi Manechini",
+   "nota": 4,
+   "quando": "7 meses atrás",
+   "texto": "Local fica próximo ao trabalho, faço a opção por kilo, tem uma boa variedade no buffet, a carne sempre atende ao meu paladar, bem passado, aos sábados apesar da folga vou almoçar se estou próximo",
+   "fotos": 0
+  },
+  {
+   "nome": "Lethycia Sanchez",
+   "nota": 5,
+   "quando": "Editado um ano atrás",
+   "texto": "Comida típica Brasileira! Grande variedade de saladas, frutas, carnes e guarnições.",
+   "fotos": 3
+  },
+  {
+   "nome": "Napoleão Azevedo Neto",
+   "nota": 5,
+   "quando": "7 anos atrás",
+   "texto": "Excelente atendimento, ambiente limpo, grande diversidade incluindo churrasco, preço justo",
+   "fotos": 1
+  }
+ ],
+ "fonte_csv": "0dc5ae4a-85d7-475e-b0b9-d83695431364.csv",
+ "fotos_baixadas": [
+  "00-capa-google.jpg",
+  "01-avaliacao.jpg",
+  "02-avaliacao.jpg",
+  "03-avaliacao.jpg",
+  "04-avaliacao.jpg",
+  "05-avaliacao.jpg",
+  "06-avaliacao.jpg",
+  "07-avaliacao.jpg",
+  "08-avaliacao.jpg"
+ ],
+ "mosaico": "C:\\Users\\User\\Desktop\\Projetos\\Marquinhos\\clientes\\esquina-do-wagnao\\pesquisa\\fotos\\mosaico.png"
+}
