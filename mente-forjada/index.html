@@ -57,10 +57,18 @@
                 <span class="desktop-only" id="audio-status-label">Foco Zen</span>
             </button>
 
+
+
             <!-- Frase na Tela de Bloqueio & Despertar Diário -->
-            <button id="btn-open-lockscreen-modal" class="btn-icon-ambient" title="Frase na Tela de Bloqueio & Despertar Diário">
+            <button id="btn-open-lockscreen-modal" class="btn-icon-ambient" title="Frase na Tela de Bloqueio & Despertar Diário" onclick="document.getElementById('modal-lockscreen-setup').style.display='flex'">
                 <i class="ph-bold ph-device-mobile"></i>
                 <span class="desktop-only" data-i18n="nav_lockscreen">Tela de Bloqueio</span>
+            </button>
+
+            <!-- Comunidade & Feedbacks -->
+            <button id="btn-open-community-modal" class="btn-icon-ambient" title="Mural da Comunidade" onclick="document.getElementById('modal-community').style.display='flex'; renderCommunityFeed();">
+                <i class="ph-bold ph-heart"></i>
+                <span class="desktop-only">Comunidade</span>
             </button>
 
             <!-- Configurações da Conta/App -->
@@ -340,23 +348,84 @@
         </section>
 
         <!-- ABA 3: VISUALIZAÇÃO (IMAGENS) -->
-        <section id="tab-visuals" class="tab-pane" style="display: none; padding: 0; height: calc(100vh - 70px); overflow: hidden; position: relative;">
-            <div id="visual-image-container" style="width: 100%; height: 100%; background: #000; background-size: cover; background-repeat: no-repeat; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center; position: relative; border: none; outline: none;">
-                <!-- Overlay Escuro -->
-                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1;"></div>
-                
-                <div style="position: relative; z-index: 2; width: 100%; max-width: 800px;">
-                    <div style="margin-bottom: 30px;">
-                        <i class="ph-bold ph-quotes" style="font-size: 3rem; color: var(--accent-color); opacity: 0.8;"></i>
-                    </div>
-                    <p id="visual-quote" style="font-size: clamp(1.5rem, 4vw, 2.5rem); font-family: var(--font-primary); font-weight: 700; color: #fff; line-height: 1.4; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);"></p>
-                    <p id="visual-author" style="font-size: clamp(1rem, 2vw, 1.2rem); color: var(--accent-color); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; text-shadow: 1px 1px 2px rgba(0,0,0,0.8);"></p>
+        <!-- ABA VISUAIS: CRIADOR DE CARDS PARA INSTAGRAM -->
+        <section id="tab-visuals" class="tab-pane">
+            <div class="pane-title-bar" style="padding: 24px 24px 0;">
+                <div>
+                    <h2>Criador de Cards Visuais</h2>
+                    <p>Escolha um princípio, selecione o tema e baixe como imagem para compartilhar.</p>
                 </div>
             </div>
-            <div style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 3; display: flex; gap: 15px;">
-                <button class="btn-primary" onclick="generateNextVisual()" title="Sortear nova imagem e frase">
-                    <i class="ph-bold ph-arrows-clockwise"></i> Próxima Visão
-                </button>
+            <div class="visual-creator">
+                <!-- Painel de controles -->
+                <div class="visual-controls-panel">
+                    <h3><i class="ph-bold ph-sliders"></i> Configurar Card</h3>
+
+                    <div>
+                        <label style="display: block; margin-bottom: 8px; font-size: 0.85rem; color: var(--text-muted);">Princípio</label>
+                        <select id="visual-principle-select" class="visual-quote-select">
+                            <!-- Opções injetadas via JS -->
+                        </select>
+                    </div>
+
+                    <div>
+                        <label style="display: block; margin-bottom: 10px; font-size: 0.85rem; color: var(--text-muted);">Tema Visual</label>
+                        <div class="visual-theme-grid">
+                            <button class="btn-visual-theme active" data-vtheme="gold">🌟 Ouro Forjado</button>
+                            <button class="btn-visual-theme" data-vtheme="obsidian">🌑 Obsidiana</button>
+                            <button class="btn-visual-theme" data-vtheme="crimson">🔥 Chama Rubra</button>
+                            <button class="btn-visual-theme" data-vtheme="emerald">🌿 Esmeralda</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-random-visual" id="btn-visual-random">
+                        <i class="ph-bold ph-shuffle"></i> Princípio Aleatório
+                    </button>
+
+                    <button class="btn-download-visual" id="btn-visual-download">
+                        <i class="ph-bold ph-download-simple"></i> Baixar Card (PNG)
+                    </button>
+                </div>
+
+                <!-- Preview do card -->
+                <div class="visual-preview-wrapper">
+                    <div class="visual-card-output vtheme-gold" id="visual-card-preview">
+                        <span class="visual-card-brand">Mente Forjada</span>
+                        <div class="visual-card-accent-line"></div>
+                        <p class="visual-card-quote" id="vcq-text">"Carregando princípio..."</p>
+                        <span class="visual-card-author" id="vcq-author">— O Mestre</span>
+                    </div>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); text-align: center;">
+                        <i class="ph ph-info"></i> O download gera uma imagem 1:1 ideal para Instagram e stories.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABA MURAL: PUBLICAÇÕES DA COMUNIDADE -->
+        <section id="tab-mural" class="tab-pane">
+            <div class="mural-section">
+                <div class="pane-title-bar">
+                    <div>
+                        <h2>Mural da Comunidade</h2>
+                        <p>Compartilhe reflexões, conquistas ou máximas forjadas com quem está na mesma jornada.</p>
+                    </div>
+                </div>
+
+                <!-- Caixa de publicação -->
+                <div class="mural-compose">
+                    <input type="text" id="mural-name-input" placeholder="Seu nome (opcional, ex: Guerreiro da Forja)"
+                        style="background: var(--bg-surface); border: 1px solid var(--border-metal); border-radius: 10px; color: var(--text-steel); padding: 10px 14px; font-family: var(--font-sans); font-size: 0.9rem; outline: none; width: 100%; box-sizing: border-box;">
+                    <textarea id="mural-text-input" placeholder="Compartilhe uma reflexão, conquista ou princípio forjado hoje..."></textarea>
+                    <button class="btn-post-mural" id="btn-post-mural">
+                        <i class="ph-bold ph-paper-plane-tilt"></i> Publicar no Mural
+                    </button>
+                </div>
+
+                <!-- Feed de publicações -->
+                <div class="mural-feed" id="mural-feed">
+                    <!-- Posts injetados via JS -->
+                </div>
             </div>
         </section>
 
@@ -455,6 +524,14 @@
         <button class="nav-tab-btn" data-target="tab-forge">
             <i class="ph ph-hammer"></i>
             <span>A Forja</span>
+        </button>
+        <button class="nav-tab-btn" data-target="tab-visuals">
+            <i class="ph ph-image-square"></i>
+            <span>Visuais</span>
+        </button>
+        <button class="nav-tab-btn" data-target="tab-mural">
+            <i class="ph ph-users"></i>
+            <span>Mural</span>
         </button>
         <button class="nav-tab-btn" data-target="tab-sanctuary">
             <i class="ph ph-notebook"></i>
@@ -607,7 +684,7 @@
     <!-- MODAL DE CONFIGURAÇÃO: FRASE NA TELA DE BLOQUEIO DO CELULAR -->
     <div id="modal-lockscreen-setup" class="app-modal-overlay" style="display: none;">
         <div class="app-modal-box lockscreen-modal-box">
-            <button class="btn-modal-close" id="btn-close-lockscreen-modal" aria-label="Fechar">
+            <button class="btn-modal-close" id="btn-close-lockscreen-modal" aria-label="Fechar" onclick="document.getElementById('modal-lockscreen-setup').style.display='none'">
                 <i class="ph-bold ph-x"></i>
             </button>
             
@@ -638,24 +715,46 @@
                     </div>
                 </div>
 
-                <!-- Opção 2: Wallpaper HD 9:16 para Bloqueio -->
-                <div class="lockscreen-option-card">
-                    <div class="opt-badge"><i class="ph-fill ph-image"></i> VISUAL PERMANENTE</div>
-                    <h4>2. Papel de Parede HD (9:16)</h4>
-                    <p>Gere um papel de parede nobre com o princípio de hoje formatado sob medida (1080x2400) com espaço para o relógio nativo do celular.</p>
-                    
-                    <div class="wallpaper-theme-select">
-                        <span class="theme-select-title">Estilo da Tela:</span>
-                        <div class="theme-pill-group">
-                            <button class="theme-pill-btn active" data-wtheme="gold">👑 Ouro & Aço</button>
-                            <button class="theme-pill-btn" data-wtheme="dark">🌑 Obsidiana</button>
-                            <button class="theme-pill-btn" data-wtheme="crimson">🔥 Carmim</button>
-                        </div>
+                <!-- SELETOR GLOBAL DE FRASE PARA OS WALLPAPERS -->
+                <div class="lockscreen-option-card" style="border: 1px solid var(--gold-pure);">
+                    <div class="opt-badge" style="background: var(--gold-pure); color: #000;"><i class="ph-fill ph-pencil"></i> PERSONALIZAR</div>
+                    <h4>Escolha a Frase (Para os Wallpapers Abaixo)</h4>
+                    <p>Selecione exatamente qual mandamento você quer colocar no papel de parede.</p>
+                    <select id="wallpaper-phrase-select" style="width: 100%; padding: 10px; background: var(--surface-light); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px; font-family: inherit; margin-top: 10px; margin-bottom: 15px;">
+                        <option value="random">🌟 Frase Aleatória Surpresa</option>
+                        <!-- Populated by JS -->
+                    </select>
+
+                    <label style="font-size: 0.85rem; color: var(--text-muted);"><i class="ph-bold ph-palette"></i> Tema Visual do Card:</label>
+                    <div class="card-theme-selector" style="margin-top: 5px;">
+                        <button class="theme-btn theme-gold active" data-theme="gold" title="Nobre (Dourado)"></button>
+                        <button class="theme-btn theme-crimson" data-theme="crimson" title="Sangue (Vermelho)"></button>
+                        <button class="theme-btn theme-dark" data-theme="dark" title="Sombra (Platina)"></button>
                     </div>
+                </div>
+
+                <!-- Opção 2: Wallpaper Celular -->
+                <div class="lockscreen-option-card">
+                    <div class="opt-badge"><i class="ph-fill ph-device-mobile"></i> CELULAR</div>
+                    <h4>Papel de Parede Celular (9:16)</h4>
+                    <p>Tamanho sob medida (1080x2400) com espaço para o relógio nativo do celular.</p>
 
                     <div class="opt-actions">
                         <button id="btn-generate-lockscreen-wallpaper" class="btn-gold-action">
-                            <i class="ph-bold ph-download-simple"></i> Baixar Wallpaper 9:16 (HD)
+                            <i class="ph-bold ph-download-simple"></i> Baixar para Celular
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Opção 3: Wallpaper Computador -->
+                <div class="lockscreen-option-card">
+                    <div class="opt-badge"><i class="ph-fill ph-monitor"></i> COMPUTADOR</div>
+                    <h4>Papel de Parede Desktop (16:9)</h4>
+                    <p>Gere um fundo de tela perfeito para o computador ou nova aba (1920x1080).</p>
+
+                    <div class="opt-actions">
+                        <button id="btn-generate-desktop-wallpaper" class="btn-gold-action">
+                            <i class="ph-bold ph-download-simple"></i> Baixar para Desktop
                         </button>
                     </div>
                 </div>
@@ -716,10 +815,39 @@
                 </div>
 
                 <div class="form-group-modal">
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">Não é obrigatório.</p>
                     <label for="profile-birthdate">Data de Nascimento (Opcional):</label>
-                    <input type="date" id="profile-birthdate" style="width: 100%; padding: 10px; background: var(--surface-light); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px; font-family: inherit;">
+                    <div style="display: flex; gap: 10px;">
+                        <input type="date" id="profile-birthdate" style="flex: 1; padding: 10px; background: var(--surface-light); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px; font-family: inherit;">
+                        <button type="button" onclick="document.getElementById('profile-birthdate').value = ''" class="btn-icon-ambient" title="Limpar Data" style="padding: 0 15px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--surface-light); color: var(--text-muted); cursor: pointer;">
+                            <i class="ph-bold ph-eraser"></i> Limpar
+                        </button>
+                    </div>
                 </div>
+
+                <div class="form-group-modal" style="margin-top: 20px;">
+                    <label for="select-ui-theme">Tema da Interface:</label>
+                    <select id="select-ui-theme" class="settings-select" style="width: 100%; padding: 12px; background: #000000; border: 1px solid var(--border-color); color: #ffffff; border-radius: 8px; font-family: inherit;">
+                        <option value="escuro" style="background: #000000; color: #ffffff;">Escuro (Padrão)</option>
+                        <option value="claro" style="background: #000000; color: #ffffff;">Claro</option>
+                        <optgroup label="Outras Cores" style="background: #000000; color: #ffffff;">
+                            <option value="esmeralda" style="background: #000000; color: #ffffff;">Esmeralda (Verde)</option>
+                            <option value="carmim" style="background: #000000; color: #ffffff;">Carmim (Vermelho)</option>
+                            <option value="oceano" style="background: #000000; color: #ffffff;">Oceano (Azul)</option>
+                            <option value="ametista" style="background: #000000; color: #ffffff;">Ametista (Roxo)</option>
+                            <option value="obsidiana" style="background: #000000; color: #ffffff;">Obsidiana (Preto Puro)</option>
+                            <option value="ambar" style="background: #000000; color: #ffffff;">Âmbar (Laranja)</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+
             </div>
+
+
+
+
+
 
             <!-- PRIVACIDADE E SEGURANÇA -->
             <div style="margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color);">
@@ -729,12 +857,18 @@
                 </p>
             </div>
             
+
             <div class="form-group-modal">
                 <label for="select-ui-lang" data-i18n="settings_ui_lang">Idioma do Site (Interface)</label>
-                <select id="select-ui-lang" class="settings-select" style="width: 100%; padding: 12px; background: var(--surface-light); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 8px; font-family: inherit;">
-                    <option value="pt-BR">Português (Brasil)</option>
-                    <option value="en-US">English</option>
-                    <option value="es-ES">Español</option>
+                <select id="select-ui-lang" class="settings-select" style="width: 100%; padding: 12px; background: #000000; border: 1px solid var(--border-color); color: #ffffff; border-radius: 8px; font-family: inherit;">
+                    <option value="pt-BR" style="background: #000000; color: #ffffff;">Português (Brasil)</option>
+                    <option value="en-US" style="background: #000000; color: #ffffff;">English</option>
+                    <option value="es-ES" style="background: #000000; color: #ffffff;">Español</option>
+                    <option value="fr-FR" style="background: #000000; color: #ffffff;">Français (Francês)</option>
+                    <option value="de-DE" style="background: #000000; color: #ffffff;">Deutsch (Alemão)</option>
+                    <option value="it-IT" style="background: #000000; color: #ffffff;">Italiano</option>
+                    <option value="ja-JP" style="background: #000000; color: #ffffff;">日本語 (Japonês)</option>
+                    <option value="zh-CN" style="background: #000000; color: #ffffff;">中文 (Chinês)</option>
                 </select>
             </div>
 
@@ -814,6 +948,71 @@
         <span id="toast-text">Ação executada com sucesso!</span>
     </div>
 
+    <!-- Modal da Comunidade & Feedback -->
+    <div class="app-modal-overlay" id="modal-community" style="display: none;">
+        <div class="app-modal-box" style="max-width: 600px; max-height: 90vh; overflow-y: auto;">
+            <button class="btn-modal-close" onclick="document.getElementById('modal-community').style.display='none'">
+                <i class="ph-bold ph-x"></i>
+            </button>
+            <div class="settings-modal-header" style="text-align: center; margin-bottom: 20px;">
+                <h2><i class="ph-bold ph-heart"></i> Comunidade & Mural</h2>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">
+                    Bem-vindo ao mural de depoimentos do Mente Forjada. Deixe sua sugestão e espalhe a energia boa com seus amigos!
+                </p>
+            </div>
+
+            <div class="community-composer" style="margin-bottom: 25px; background: var(--bg-card-hover); padding: 15px; border-radius: 12px; border: 1px solid var(--border-subtle);">
+                <textarea id="community-post-text" placeholder="O que você está achando do Mente Forjada? Deixe seu relato, sugestão ou insight..." style="width: 100%; height: 80px; background: var(--bg-void); border: 1px solid var(--border-metal); color: var(--text-primary); border-radius: 8px; padding: 10px; font-family: inherit; resize: none; margin-bottom: 15px;"></textarea>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <div style="display: flex; gap: 15px; align-items: center;">
+                        <select id="community-post-tag" style="background: var(--bg-void); border: 1px solid var(--border-metal); color: var(--text-primary); border-radius: 6px; padding: 6px 10px; font-size: 0.85rem; font-family: inherit; cursor: pointer;">
+                            <option value="Relato">📖 Relato</option>
+                            <option value="Motivação">🔥 Motivação</option>
+                            <option value="Dúvida">❓ Dúvida</option>
+                            <option value="Sugestão">💡 Sugestão</option>
+                            <option value="Agradecimento">🙏 Agradecimento</option>
+                        </select>
+
+                        <label style="display: flex; align-items: center; gap: 5px; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer;">
+                            <input type="checkbox" id="community-post-anon" style="cursor: pointer; accent-color: var(--gold-pure);">
+                            Postar Anonimamente
+                        </label>
+                    </div>
+
+                    <button onclick="publishCommunityPost()" class="btn-gold-action" style="padding: 8px 20px; font-size: 0.9rem;">
+                        <i class="ph-bold ph-paper-plane-tilt"></i> Publicar
+                    </button>
+                </div>
+            </div>
+
+            <div class="community-toolbar" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid var(--border-subtle);">
+                <div style="font-size: 0.9rem; color: var(--text-primary); font-weight: bold;">
+                    <i class="ph-bold ph-chats"></i> Mural
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <select id="community-filter-tag" onchange="renderCommunityFeed()" style="background: var(--bg-void); border: 1px solid var(--border-metal); color: var(--text-secondary); border-radius: 6px; padding: 4px 8px; font-size: 0.8rem; cursor: pointer;">
+                        <option value="all">Todas as Tags</option>
+                        <option value="Relato">Relatos</option>
+                        <option value="Motivação">Motivação</option>
+                        <option value="Dúvida">Dúvidas</option>
+                        <option value="Sugestão">Sugestões</option>
+                        <option value="Agradecimento">Agradecimentos</option>
+                    </select>
+
+                    <select id="community-sort" onchange="renderCommunityFeed()" style="background: var(--bg-void); border: 1px solid var(--border-metal); color: var(--text-secondary); border-radius: 6px; padding: 4px 8px; font-size: 0.8rem; cursor: pointer;">
+                        <option value="recent">Mais Recentes</option>
+                        <option value="likes">Mais Curtidos</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="community-feed" class="community-feed" style="display: flex; flex-direction: column; gap: 15px;">
+                <!-- Feed gerado via JS -->
+            </div>
+        </div>
+    </div>
+
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
@@ -822,6 +1021,8 @@
     <script src="app.js?v=1790204380931"></script>
     <script src="more_principles.js?v=2"></script>
     <script src="features.js?v=3"></script>
+    <script src="community.js"></script>
+    <script src="mf-extras.js"></script>
     <script>
         // Registro do Service Worker para suporte Offline e Notificações no Lockscreen
         if ('serviceWorker' in navigator) {

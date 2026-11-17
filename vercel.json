@@ -23,6 +23,12 @@
     { "source": "/preview/espeto-do-parque", "destination": "/clientes/o-espeto-do-parque/site/index.html" },
     { "source": "/preview/lane-salgados", "destination": "/clientes/lane-salgados/site/index.html" },
     { "source": "/preview/haipets", "destination": "/clientes/haipets-center-mahoo/site/index.html" },
+    { "source": "/agentes-ia", "destination": "/Status/agentes-ia/index.html" },
+    { "source": "/agentes-ia/(.*)", "destination": "/Status/agentes-ia/$1" },
+    { "source": "/finance-agents", "destination": "/Status/finance-agents/index.html" },
+    { "source": "/finance-agents/(.*)", "destination": "/Status/finance-agents/$1" },
+    { "source": "/mente-forjada", "destination": "/mente-forjada/index.html" },
+    { "source": "/mente-forjada/(.*)", "destination": "/mente-forjada/$1" },
     { "source": "/", "destination": "/Status/" }
   ]
 }

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentes do Dia a Dia | Gabriel Moura — IA para Finanças & Vida</title>
+<meta name="description" content="Agentes de IA para organizar suas finanças, encontrar voos baratos, acompanhar imóveis, automatizar afiliados e muito mais.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #030507;
+  --surface:  #080c10;
+  --card:     #0e1318;
+  --border:   rgba(255,255,255,0.07);
+  --accent:   #0ea5e9;
+  --accent2:  #38bdf8;
+  --green:    #22c55e;
+  --gold:     #f59e0b;
+  --purple:   #a855f7;
+  --text:     #f1f5f9;
+  --muted:    #64748b;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(3,5,7,0.88);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.nav-cta {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.nav-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(14,165,233,0.4);
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 24px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14,165,233,0.14) 0%, transparent 70%);
+  top: -120px; left: 50%; transform: translateX(-50%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(14,165,233,0.12);
+  border: 1px solid rgba(14,165,233,0.3);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent2);
+  margin-bottom: 28px;
+}
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  max-width: 820px;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--muted);
+  max-width: 580px;
+  margin: 0 auto 40px;
+}
+.hero-btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 16px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-block;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(14,165,233,0.4);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.2s;
+  display: inline-block;
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,0.3); }
+
+/* SECTION */
+section { padding: 80px 24px; }
+.section-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--accent2);
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.section-sub {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 540px;
+  margin-bottom: 48px;
+}
+.container { max-width: 1100px; margin: 0 auto; }
+
+/* DASHBOARD MOCK */
+.dashboard-preview {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 760px;
+  margin: 48px auto 0;
+}
+@media (max-width: 600px) { .dashboard-preview { grid-template-columns: 1fr; } }
+
+.dash-tile {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.dash-tile:hover {
+  transform: translateY(-3px);
+  border-color: rgba(14,165,233,0.3);
+}
+.dash-tile-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.ti-blue   { background: rgba(14,165,233,0.15); }
+.ti-green  { background: rgba(34,197,94,0.15); }
+.ti-gold   { background: rgba(245,158,11,0.15); }
+.ti-purple { background: rgba(168,85,247,0.15); }
+.dash-tile-info h4 { font-size: 0.82rem; color: var(--muted); margin-bottom: 4px; }
+.dash-tile-info strong { font-size: 1.3rem; font-weight: 800; }
+.txt-green  { color: var(--green); }
+.txt-gold   { color: var(--gold); }
+.txt-blue   { color: var(--accent2); }
+.txt-purple { color: var(--purple); }
+
+/* AGENTES GRID */
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.agent-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.25s, border-color 0.25s;
+}
+.agent-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(14,165,233,0.3);
+}
+.agent-icon {
+  font-size: 2rem;
+  width: 56px; height: 56px;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(14,165,233,0.1);
+}
+.agent-card h3 { font-weight: 700; font-size: 1.05rem; }
+.agent-card p  { color: var(--muted); font-size: 0.9rem; flex: 1; }
+.agent-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.status-active { color: var(--green); }
+.status-active::before { content: '●'; animation: blink 1.5s ease-in-out infinite; }
+.status-soon { color: var(--muted); }
+.status-soon::before { content: '○'; }
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+
+/* AFILIADOS */
+.affiliates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+.affiliate-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.affiliate-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(245,158,11,0.3);
+}
+.affiliate-logo {
+  font-size: 2.2rem;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(245,158,11,0.1);
+}
+.affiliate-card h4 { font-weight: 700; font-size: 0.95rem; }
+.affiliate-card p  { color: var(--muted); font-size: 0.8rem; }
+.affiliate-products {
+  display: inline-block;
+  background: rgba(245,158,11,0.1);
+  border: 1px solid rgba(245,158,11,0.3);
+  color: var(--gold);
+  border-radius: 100px;
+  padding: 3px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* CTA FINAL */
+.cta-section {
+  background: linear-gradient(135deg, rgba(14,165,233,0.1), rgba(56,189,248,0.06));
+  border-top: 1px solid rgba(14,165,233,0.2);
+  border-bottom: 1px solid rgba(14,165,233,0.2);
+  text-align: center;
+  padding: 80px 24px;
+}
+.cta-section h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+.cta-section p { color: var(--muted); margin-bottom: 36px; font-size: 1.05rem; }
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #25d366;
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 18px 40px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(37,211,102,0.4);
+}
+
+footer {
+  padding: 32px 24px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+/* SCROLL REVEAL */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">🧠 Agentes do Dia a Dia</span>
+  <a href="https://wa.me/5511939318424?text=Oi%20Gabriel!%20Vi%20o%20site%20de%20agentes%20e%20quero%20saber%20mais." class="nav-cta" target="_blank">Falar comigo</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-badge">🤖 IA no seu bolso</div>
+    <h1>Agentes que cuidam da sua <em>vida financeira</em> enquanto você vive.</h1>
+    <p>IA que monitora seus gastos, encontra voos baratos, acompanha imóveis, automatiza afiliados e muito mais — tudo conectado, tudo automático.</p>
+    <div class="hero-btns">
+      <a href="#agentes" class="btn-primary">Ver os agentes</a>
+      <a href="https://wa.me/5511939318424?text=Oi%20Gabriel!%20Quero%20um%20agente%20de%20IA%20personalizado." class="btn-secondary" target="_blank">Quero o meu →</a>
+    </div>
+
+    <!-- Dashboard mock -->
+    <div class="dashboard-preview reveal">
+      <div class="dash-tile">
+        <div class="dash-tile-icon ti-green">💰</div>
+        <div class="dash-tile-info">
+          <h4>Saldo do mês</h4>
+          <strong class="txt-green">+R$ 2.840</strong>
+        </div>
+      </div>
+      <div class="dash-tile">
+        <div class="dash-tile-icon ti-blue">✈️</div>
+        <div class="dash-tile-info">
+          <h4>Milhas acumuladas</h4>
+          <strong class="txt-blue">12.500 pts</strong>
+        </div>
+      </div>
+      <div class="dash-tile">
+        <div class="dash-tile-icon ti-gold">🛒</div>
+        <div class="dash-tile-info">
+          <h4>Comissões afiliado</h4>
+          <strong class="txt-gold">R$ 540</strong>
+        </div>
+      </div>
+      <div class="dash-tile">
+        <div class="dash-tile-icon ti-purple">🏠</div>
+        <div class="dash-tile-info">
+          <h4>Imóveis no radar</h4>
+          <strong class="txt-purple">3 alertas</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTES -->
+<section id="agentes" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="container">
+    <p class="section-label reveal">Os agentes</p>
+    <h2 class="section-title reveal">Um assistente para cada área da sua vida</h2>
+    <p class="section-sub reveal">Cada agente resolve uma coisa específica. Você configura uma vez e ele age sozinho.</p>
+    <div class="agents-grid">
+
+      <div class="agent-card reveal">
+        <div class="agent-icon">💸</div>
+        <h3>Agente de Finanças</h3>
+        <p>Monitora seus gastos, categoriza automaticamente e te avisa quando vai estourar o orçamento. Integra com banco via Open Finance.</p>
+        <span class="agent-status status-active">em desenvolvimento</span>
+      </div>
+
+      <div class="agent-card reveal">
+        <div class="agent-icon">✈️</div>
+        <h3>Agente de Viagens & Milhas</h3>
+        <p>Rastreia passagens abaixo do preço que você definiu, acompanha expiração de milhas e te avisa quando vale trocar.</p>
+        <span class="agent-status status-active">em desenvolvimento</span>
+      </div>
+
+      <div class="agent-card reveal">
+        <div class="agent-icon">🏠</div>
+        <h3>Agente de Imóveis</h3>
+        <p>Monitora OLX, Zap e Viva Real por imóveis no seu perfil (preço, bairro, m²) e te manda alerta em tempo real.</p>
+        <span class="agent-status status-active">em desenvolvimento</span>
+      </div>
+
+      <div class="agent-card reveal">
+        <div class="agent-icon">🛒</div>
+        <h3>Agente de Compras</h3>
+        <p>Rastreia queda de preço nos produtos que você quer comprar no Mercado Livre, Shopee e Amazon. Avisa na hora certa.</p>
+        <span class="agent-status status-active">em desenvolvimento</span>
+      </div>
+
+      <div class="agent-card reveal">
+        <div class="agent-icon">📱</div>
+        <h3>Agente de Afiliados</h3>
+        <p>Publica automaticamente posts dos seus produtos de afiliado no Instagram e TikTok — até 90 produtos de Shopee, Mercado Livre e Kaiross.</p>
+        <span class="agent-status status-active">em desenvolvimento</span>
+      </div>
+
+      <div class="agent-card reveal">
+        <div class="agent-icon">📄</div>
+        <h3>Agente de Contas</h3>
+        <p>Digitaliza e organiza suas contas, boletos e faturas. Te lembra de pagar antes do vencimento e guarda o histórico.</p>
+        <span class="agent-status status-soon">em breve</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- AFILIADOS -->
+<section>
+  <div class="container">
+    <p class="section-label reveal">Afiliados automáticos</p>
+    <h2 class="section-title reveal">90 produtos publicando por você</h2>
+    <p class="section-sub reveal">O agente cria os criativos, escreve a legenda e publica nos seus perfis — sem você tocar no celular.</p>
+    <div class="affiliates-grid">
+      <div class="affiliate-card reveal">
+        <div class="affiliate-logo">🛒</div>
+        <h4>Shopee</h4>
+        <p>Produtos com alta comissão e boa avaliação.</p>
+        <span class="affiliate-products">30 produtos</span>
+      </div>
+      <div class="affiliate-card reveal">
+        <div class="affiliate-logo">🏪</div>
+        <h4>Mercado Livre</h4>
+        <p>Itens em promoção e tendência do momento.</p>
+        <span class="affiliate-products">30 produtos</span>
+      </div>
+      <div class="affiliate-card reveal">
+        <div class="affiliate-logo">🎯</div>
+        <h4>Kaiross</h4>
+        <p>Infoprodutos com as melhores comissões do mercado.</p>
+        <span class="affiliate-products">30 produtos</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px;" class="reveal">
+      <div>
+        <div style="font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--gold);">90</div>
+        <div style="color: var(--muted); font-size: 0.9rem;">produtos monitorados</div>
+      </div>
+      <div>
+        <div style="font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--accent2);">24h</div>
+        <div style="color: var(--muted); font-size: 0.9rem;">publicando sozinho</div>
+      </div>
+      <div>
+        <div style="font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--green);">R$ 0</div>
+        <div style="color: var(--muted); font-size: 0.9rem;">custo de operação</div>
+      </div>
+      <div>
+        <div style="font-family: 'Syne', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--purple);">2 redes</div>
+        <div style="color: var(--muted); font-size: 0.9rem;">Instagram + TikTok</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<div class="cta-section reveal">
+  <h2>Quer um agente personalizado para você?</h2>
+  <p>Me chama no WhatsApp. A gente conversa sobre o que você precisa e monto o agente certo.</p>
+  <a href="https://wa.me/5511939318424?text=Oi%20Gabriel!%20Quero%20um%20agente%20de%20IA%20personalizado%20para%20mim." class="btn-whatsapp" target="_blank">
+    💬 Falar no WhatsApp
+  </a>
+</div>
+
+<footer>
+  <p>© 2026 Gabriel Moura — Agentes de IA para Vida & Finanças · São Paulo</p>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
