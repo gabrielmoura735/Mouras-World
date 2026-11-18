@@ -132,7 +132,7 @@ footer{text-align:center;padding:28px 24px;border-top:1px solid var(--border);co
 </div>
 
 <section class="hero">
-  <img class="hero-img" src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1600&q=80&fit=crop" alt="Barbearia Barbearia Alabama" loading="eager">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1600&q=80&fit=crop" alt="Barbearia Alabama" loading="eager">
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-badge">Arte Masculina</div>
@@ -159,10 +159,12 @@ footer{text-align:center;padding:28px 24px;border-top:1px solid var(--border);co
   <div class="section-label"><h2>Galeria</h2></div>
   <div class="carousel-wrap">
     <div class="carousel-track" id="carTrack">
-      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1200&q=80&fit=crop" alt="Corte masculino" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1521490683712-35a1cb235d1c?w=1200&q=80&fit=crop" alt="Barba e cabelo" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1200&q=80&fit=crop" alt="Interior barbearia" loading="lazy">
-      <img src="https://images.unsplash.com/photo-1534297635766-a262cdcb8ee4?w=1200&q=80&fit=crop" alt="Estilo masculino" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1200&q=80&fit=crop" alt="Cadeira de barbearia premium" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=1200&q=80&fit=crop" alt="Corte degradê em andamento" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=1200&q=80&fit=crop" alt="Barba feita com navalha" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1200&q=80&fit=crop" alt="Barbeiro trabalhando" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1587909209111-5097ee578ec3?w=1200&q=80&fit=crop" alt="Ferramentas de barbearia" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=1200&q=80&fit=crop" alt="Ambiente da barbearia" loading="lazy">
     </div>
     <button class="car-btn car-prev" onclick="carMove(-1)">‹</button>
     <button class="car-btn car-next" onclick="carMove(1)">›</button>
@@ -217,12 +219,12 @@ footer{text-align:center;padding:28px 24px;border-top:1px solid var(--border);co
 <div class="section">
   <div class="section-label"><h2>Nosso Trabalho</h2></div>
   <div class="gallery-grid">
-    <img class="gal-img" src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400&h=400&fit=crop&q=80" alt="Corte" loading="lazy">
-    <img class="gal-img" src="https://images.unsplash.com/photo-1521490683712-35a1cb235d1c?w=400&h=400&fit=crop&q=80" alt="Barba" loading="lazy">
-    <img class="gal-img" src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=400&h=400&fit=crop&q=80" alt="Barbearia" loading="lazy">
+    <img class="gal-img" src="https://images.unsplash.com/photo-1521490683712-35a1cb235d1c?w=400&h=400&fit=crop&q=80" alt="Corte estilizado" loading="lazy">
+    <img class="gal-img" src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=400&h=400&fit=crop&q=80" alt="Interior" loading="lazy">
     <img class="gal-img" src="https://images.unsplash.com/photo-1534297635766-a262cdcb8ee4?w=400&h=400&fit=crop&q=80" alt="Estilo" loading="lazy">
     <img class="gal-img" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&h=400&fit=crop&q=80" alt="Profissional" loading="lazy">
     <img class="gal-img" src="https://images.unsplash.com/photo-1512864084360-7c0c4d7d3022?w=400&h=400&fit=crop&q=80" alt="Detalhe" loading="lazy">
+    <img class="gal-img" src="https://images.unsplash.com/photo-1596728325488-58c87691e9af?w=400&h=400&fit=crop&q=80" alt="Acabamento" loading="lazy">
   </div>
 </div>
 
@@ -257,14 +259,19 @@ footer{text-align:center;padding:28px 24px;border-top:1px solid var(--border);co
 </a>
 
 <script>
-let carIdx=0;
+let carIdx=0,autoTimer;
 const carTrack=document.getElementById('carTrack');
 const carDots=document.getElementById('carDots');
 const carTotal=carTrack.children.length;
-for(let i=0;i<carTotal;i++){const d=document.createElement('div');d.className='car-dot'+(i===0?' active':'');d.onclick=()=>carGoto(i);carDots.appendChild(d);}
-function carGoto(n){carIdx=Math.max(0,Math.min(n,carTotal-1));carTrack.style.transform=`translateX(-${carIdx*100}%)`;document.querySelectorAll('.car-dot').forEach((d,i)=>d.classList.toggle('active',i===carIdx));}
-function carMove(dir){carGoto(carIdx+dir)}
-setInterval(()=>carGoto((carIdx+1)%carTotal),4500);
+for(let i=0;i<carTotal;i++){const d=document.createElement('div');d.className='car-dot'+(i===0?' active':'');d.onclick=()=>{carGoto(i);resetAuto()};carDots.appendChild(d);}
+function carGoto(n){carIdx=((n%carTotal)+carTotal)%carTotal;carTrack.style.transform=`translateX(-${carIdx*100}%)`;document.querySelectorAll('.car-dot').forEach((d,i)=>d.classList.toggle('active',i===carIdx));}
+function carMove(dir){carGoto(carIdx+dir);resetAuto()}
+function resetAuto(){clearInterval(autoTimer);autoTimer=setInterval(()=>carGoto(carIdx+1),5500)}
+resetAuto();
+// Swipe touch
+let tx=0;
+carTrack.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+carTrack.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40){carMove(dx<0?1:-1)}},{passive:true});
 </script>
 </body>
 </html>
