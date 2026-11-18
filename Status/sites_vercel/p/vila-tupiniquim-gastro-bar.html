@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vila Tupiniquim Gastro Bar</title>
+<meta name="description" content="A melhor churrascaria da região. Cortes nobres, rodízio completo, ambiente aconchegante. Reserve sua mesa agora.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0500;
+  --bg2: #150800;
+  --surface: #1f0e00;
+  --surface2: #2a1200;
+  --fire: #E65C00;
+  --amber: #F9A825;
+  --gold: #FFD54F;
+  --muted: #9A7A5A;
+  --text: #FDF3E3;
+  --dim: #7A5A3A;
+  --border: rgba(230,92,0,.2);
+  --border2: rgba(249,168,37,.3);
+  --glow: 0 0 32px rgba(230,92,0,.3);
+  --radius: 14px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.6}
+
+/* STICKY CTA */
+.sticky-bar{position:sticky;top:0;z-index:999;background:rgba(13,5,0,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.sticky-brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--amber)}
+.sticky-cta{background:linear-gradient(135deg,#E65C00,#F9A825);color:#fff;padding:9px 18px;border-radius:8px;font-size:.82rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:opacity .2s;display:flex;align-items:center;gap:7px}
+.sticky-cta:hover{opacity:.88}
+
+/* HERO */
+.hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top, rgba(13,5,0,.97) 0%, rgba(13,5,0,.55) 55%, rgba(13,5,0,.2) 100%)}
+.hero-content{position:relative;z-index:2;padding:0 24px 64px;max-width:780px;margin:0 auto;width:100%;text-align:center}
+.hero-badge{display:inline-block;background:rgba(230,92,0,.2);border:1px solid var(--border2);border-radius:100px;padding:6px 16px;font-size:.75rem;font-weight:700;color:var(--amber);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;backdrop-filter:blur(8px)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,7vw,4rem);font-weight:800;line-height:1.1;margin-bottom:16px;text-shadow:0 2px 24px rgba(0,0,0,.8)}
+.hero h1 em{font-style:normal;color:var(--amber)}
+.hero-sub{font-size:1.05rem;color:rgba(253,243,227,.7);max-width:480px;margin:0 auto 32px}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-fire{background:linear-gradient(135deg,#E65C00,#F9A825);color:#fff;padding:14px 28px;border-radius:9999px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .22s;box-shadow:0 4px 20px rgba(230,92,0,.5);display:inline-flex;align-items:center;gap:8px}
+.btn-fire:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(230,92,0,.6)}
+.btn-outline{background:transparent;color:var(--text);border:1.5px solid rgba(253,243,227,.35);padding:13px 28px;border-radius:9999px;font-weight:600;font-size:.95rem;text-decoration:none;transition:all .22s;display:inline-flex;align-items:center;gap:8px}
+.btn-outline:hover{border-color:var(--amber);color:var(--amber)}
+
+/* STATS */
+.stats-strip{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:28px 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px}
+.stat{text-align:center;padding:8px 12px;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:800;color:var(--amber);line-height:1}
+.stat-label{font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:4px}
+
+/* SECTION */
+.section{padding:72px 24px;max-width:1100px;margin:0 auto}
+.section-label{display:flex;align-items:center;gap:12px;margin-bottom:36px}
+.section-label h2{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;white-space:nowrap}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.section-sub{color:var(--muted);font-size:.95rem;margin-top:-24px;margin-bottom:36px}
+
+/* CAROUSEL */
+.carousel-wrap{position:relative;overflow:hidden;border-radius:var(--radius);aspect-ratio:16/9;background:var(--surface)}
+.carousel-track{display:flex;transition:transform .5s cubic-bezier(.77,0,.18,1);height:100%}
+.carousel-track img{flex-shrink:0;width:100%;height:100%;object-fit:cover}
+.car-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(13,5,0,.7);border:1px solid var(--border2);color:var(--amber);width:44px;height:44px;border-radius:50%;font-size:1.2rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;z-index:2}
+.car-btn:hover{background:var(--fire);border-color:var(--fire);color:#fff}
+.car-prev{left:14px}
+.car-next{right:14px}
+.car-dots{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:7px}
+.car-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:all .2s}
+.car-dot.active{background:var(--amber);width:22px;border-radius:4px}
+
+/* MENU */
+.menu-tabs{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.tab{background:var(--surface);border:1px solid var(--border);border-radius:9999px;padding:9px 20px;font-size:.85rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s}
+.tab.active{background:linear-gradient(135deg,#E65C00,#F9A825);border-color:transparent;color:#fff}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.menu-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .22s}
+.menu-card:hover{transform:translateY(-3px);box-shadow:var(--glow);border-color:var(--border2)}
+.menu-img{width:100%;height:170px;object-fit:cover}
+.menu-info{padding:16px}
+.menu-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:4px}
+.menu-desc{font-size:.82rem;color:var(--muted);line-height:1.5}
+.menu-price{margin-top:10px;font-weight:700;color:var(--amber);font-size:.95rem}
+.menu-pane{display:none}
+.menu-pane.active{display:block}
+
+/* VIDEO */
+.video-wrap{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--surface);aspect-ratio:16/9;cursor:pointer;border:1px solid var(--border)}
+.video-thumb{width:100%;height:100%;object-fit:cover}
+.video-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:background .2s}
+.video-overlay:hover{background:rgba(0,0,0,.35)}
+.play-btn{width:72px;height:72px;background:linear-gradient(135deg,#E65C00,#F9A825);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;box-shadow:0 0 32px rgba(230,92,0,.5);transition:transform .2s}
+.video-overlay:hover .play-btn{transform:scale(1.08)}
+.video-caption{font-family:'Playfair Display',serif;font-size:1.1rem;color:#fff;text-align:center}
+
+/* DEPOIMENTOS */
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.review-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:border-color .2s}
+.review-card:hover{border-color:var(--border2)}
+.review-stars{color:var(--amber);font-size:1rem;margin-bottom:12px}
+.review-text{font-size:.88rem;color:var(--muted);line-height:1.65;font-style:italic;margin-bottom:16px}
+.review-author{display:flex;align-items:center;gap:10px}
+.review-avatar{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid var(--border2)}
+.review-name{font-weight:700;font-size:.85rem}
+.review-date{font-size:.72rem;color:var(--dim);margin-top:1px}
+
+/* INFO */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.info-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+.info-icon{font-size:1.6rem;margin-bottom:12px}
+.info-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:8px;color:var(--amber)}
+.info-body{font-size:.85rem;color:var(--muted);line-height:1.6}
+
+/* CTA FINAL */
+.cta-final{background:linear-gradient(135deg,var(--surface) 0%,#2a1200 100%);border:1px solid var(--border2);border-radius:20px;padding:52px 32px;text-align:center;margin:0 24px;position:relative;overflow:hidden}
+.cta-final::before{content:'🔥';position:absolute;font-size:120px;opacity:.05;top:-20px;right:-20px}
+.cta-final h2{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,5vw,2.4rem);font-weight:800;margin-bottom:12px}
+.cta-final p{color:var(--muted);max-width:440px;margin:0 auto 28px;font-size:.95rem}
+.cta-wpp{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;padding:16px 36px;border-radius:9999px;font-weight:700;font-size:1rem;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .22s;box-shadow:0 4px 20px rgba(37,211,102,.4)}
+.cta-wpp:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.5)}
+
+/* FLOATING WPP */
+.fab{position:fixed;bottom:24px;right:24px;z-index:999;background:linear-gradient(135deg,#25D366,#128C7E);width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,.5);text-decoration:none;transition:all .22s}
+.fab:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(37,211,102,.6)}
+
+/* FOOTER */
+footer{text-align:center;padding:28px 24px;border-top:1px solid var(--border);color:var(--dim);font-size:.78rem}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .stats-strip{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:none}
+  .stat:nth-child(3){border-top:1px solid var(--border)}
+  .sticky-bar{padding:8px 16px}
+}
+</style>
+</head>
+<body>
+<div style="background:#101010;color:#e8e8e8;text-align:center;padding:8px 14px;font-size:.72rem;letter-spacing:.6px;font-family:'Inter',system-ui,sans-serif;border-bottom:1px solid rgba(255,255,255,.12)">PRÉVIA DE DEMONSTRAÇÃO — site ainda não publicado</div>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar">
+  <div class="sticky-brand">🔥 Vila Tupiniquim Gastro Bar</div>
+  <a href="https://wa.me/5511939318424?text=Ol%C3%A1!%20Vi%20a%20pr%C3%A9via%20do%20site%20da%20Vila%20Tupiniquim%20Gastro%20Bar%20e%20quero%20saber%20mais." target="_blank" class="sticky-cta">📲 Quero meu site</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=1600&q=80&fit=crop" alt="Churrasco na brasa" loading="eager">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⭐ 4.9 no Google · 312 Avaliações</div>
+    <h1>Cortes Nobres<br><em>Feitos na Brasa</em></h1>
+    <p class="hero-sub">Rodízio completo, churrasco artesanal e os melhores cortes da região — tudo em um ambiente que te faz sentir em casa.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/5511939318424?text=Ol%C3%A1!%20Vi%20a%20pr%C3%A9via%20do%20site%20da%20Vila%20Tupiniquim%20Gastro%20Bar%20e%20quero%20saber%20mais." target="_blank" class="btn-fire">📲 Reservar Mesa</a>
+      <a href="#cardapio" class="btn-outline">🍖 Ver Cardápio</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat"><div class="stat-num">4,5★</div><div class="stat-label">Nota no Google</div></div>
+  <div class="stat"><div class="stat-num">1818</div><div class="stat-label">Avaliações</div></div>
+  <div class="stat"><div class="stat-num">Chácara Santo Antônio</div><div class="stat-label">São Paulo</div></div>
+  <div class="stat"><div class="stat-num">7 dias</div><div class="stat-label">Pra ficar no ar</div></div>
+</div>
+
+
+<!-- GALERIA -->
+<div class="section">
+  <div class="section-label"><h2>Nossa Galeria</h2></div>
+  <div class="carousel-wrap">
+    <div class="carousel-track" id="carTrack">
+      <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=1200&q=80&fit=crop" alt="Churrasco na brasa" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=1200&q=80&fit=crop" alt="Picanha grelhada" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=1200&q=80&fit=crop" alt="Costela no fogo" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=1200&q=80&fit=crop" alt="Espeto de carne" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1570275239925-4af0aa93a0dc?w=1200&q=80&fit=crop" alt="Ambiente do restaurante" loading="lazy">
+    </div>
+    <button class="car-btn car-prev" onclick="carMove(-1)">‹</button>
+    <button class="car-btn car-next" onclick="carMove(1)">›</button>
+    <div class="car-dots" id="carDots"></div>
+  </div>
+</div>
+
+<!-- CARDÁPIO -->
+<div class="section" id="cardapio">
+  <div class="section-label"><h2>Cardápio</h2></div>
+  <div class="menu-tabs">
+    <div class="tab active" onclick="showTab(this,'tab-carnes')">🥩 Carnes</div>
+    <div class="tab" onclick="showTab(this,'tab-acomp')">🥗 Acompanhamentos</div>
+    <div class="tab" onclick="showTab(this,'tab-bebidas')">🍺 Bebidas</div>
+  </div>
+  <div class="menu-pane active" id="tab-carnes">
+    <div class="menu-grid">
+      <div class="menu-card">
+        <img class="menu-img" src="https://images.unsplash.com/photo-1558030006-450675393462?w=600&q=80&fit=crop" alt="Picanha" loading="lazy">
+        <div class="menu-info"><div class="menu-title">Picanha na Brasa</div><div class="menu-desc">Corte premium grelhado no ponto certo, temperado com sal grosso e alho.</div><div class="menu-price">Rodízio incluso</div></div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-img" src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80&fit=crop" alt="Costela" loading="lazy">
+        <div class="menu-info"><div class="menu-title">Costela de Ripa</div><div class="menu-desc">Lenta, cozida por horas na brasa de lenha, desfiando na mordida.</div><div class="menu-price">Rodízio incluso</div></div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-img" src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=600&q=80&fit=crop" alt="Cordeiro" loading="lazy">
+        <div class="menu-info"><div class="menu-title">Paleta de Cordeiro</div><div class="menu-desc">Cordeiro especial, temperado com ervas finas e azeite importado.</div><div class="menu-price">Rodízio incluso</div></div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-img" src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&q=80&fit=crop" alt="Linguiça" loading="lazy">
+        <div class="menu-info"><div class="menu-title">Linguiça Artesanal</div><div class="menu-desc">Feita na casa, com tempero especial da nossa chef. Irresistível.</div><div class="menu-price">Rodízio incluso</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="menu-pane" id="tab-acomp">
+    <div class="menu-grid">
+      <div class="menu-card">
+        <img class="menu-img" src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&q=80&fit=crop" alt="Farofa" loading="lazy">
+        <div class="menu-info"><div class="menu-title">Farofa da Casa</div><div class="menu-desc">Farofa crocante com bacon, ovos e alho — a favorita dos clientes.</div><div class="menu-price">Incluso no rodízio</div></div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-img" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80&fit=crop" alt="Salada" loading="lazy">
+        <div class="menu-info"><div class="menu-title">Buffet de Saladas</div><div class="menu-desc">Mais de 15 opções de saladas frescas, legumes e acompanhamentos.</div><div class="menu-price">Incluso no rodízio</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="menu-pane" id="tab-bebidas">
+    <div class="menu-grid">
+      <div class="menu-card">
+        <img class="menu-img" src="https://images.unsplash.com/photo-1608270586620-248524c67de9?w=600&q=80&fit=crop" alt="Cerveja" loading="lazy">
+        <div class="menu-info"><div class="menu-title">Chopp Gelado</div><div class="menu-desc">Chopp artesanal e as melhores marcas, sempre a 1°C.</div><div class="menu-price">A partir de R$ 12</div></div>
+      </div>
+      <div class="menu-card">
+        <img class="menu-img" src="https://images.unsplash.com/photo-1543418219-44e30b057fea?w=600&q=80&fit=crop" alt="Caipirinha" loading="lazy">
+        <div class="menu-info"><div class="menu-title">Caipirinha da Casa</div><div class="menu-desc">Feita na hora, com limão taiti, açúcar e cachaça artesanal.</div><div class="menu-price">R$ 22</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VÍDEO -->
+<div class="section">
+  <div class="section-label"><h2>Veja a Experiência</h2></div>
+  <div class="video-wrap" onclick="openVideo()">
+    <img class="video-thumb" src="https://images.unsplash.com/photo-1570275239925-4af0aa93a0dc?w=1200&q=80&fit=crop" alt="Restaurante Vila Tupiniquim Gastro Bar" loading="lazy">
+    <div class="video-overlay">
+      <div class="play-btn">▶</div>
+      <div class="video-caption">Um pedaço de cada história — assista</div>
+    </div>
+  </div>
+</div>
+
+<!-- AVALIAÇÃO REAL GOOGLE -->
+<div class="section">
+  <div class="section-label"><h2>Reputação no Google</h2></div>
+  <div style="text-align:center;padding:24px 0">
+    <div style="font-size:3.6rem;font-weight:800;line-height:1;color:var(--gold,var(--warm,var(--amber,#C9A84C)))">4,5<span style="font-size:1.6rem">★</span></div>
+    <div style="margin-top:10px;font-size:1.05rem;opacity:.85">1818 avaliações reais no Google</div>
+    <div style="margin-top:4px;font-size:.82rem;opacity:.55">Chácara Santo Antônio · São Paulo</div>
+  </div>
+</div>
+
+<!-- INFO -->
+<div class="section">
+  <div class="section-label"><h2>Informações</h2></div>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-icon">⏰</div>
+      <div class="info-title">Horários</div>
+      <div class="info-body">Terça a Sexta: 12h às 15h e 19h às 23h<br>Sábado e Domingo: 12h às 23h (corrido)<br><strong style="color:var(--amber)">Segunda: Fechado</strong></div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">📍</div>
+      <div class="info-title">Localização</div>
+      <div class="info-body">Rua das Acácias, 482<br>Jaraguá, São Paulo — SP<br><a href="#" style="color:var(--amber)">📌 Ver no Google Maps</a></div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">🍖</div>
+      <div class="info-title">Rodízio</div>
+      <div class="info-body">Adulto: R$ 89,90<br>Criança (5–12 anos): R$ 44,90<br>Criança até 4 anos: Grátis<br>+ Buffet de saladas incluso</div>
+    </div>
+    <div class="info-card">
+      <div class="info-icon">🎉</div>
+      <div class="info-title">Eventos</div>
+      <div class="info-body">Aniversários, confraternizações e festas corporativas. Cardápio especial e área reservada para grupos a partir de 15 pessoas.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<div class="cta-final">
+  <h2>Reserve sua Mesa<br><em style="color:var(--amber)">Agora mesmo</em></h2>
+  <p>Clique abaixo e fale diretamente conosco pelo WhatsApp. Confirmamos sua reserva em minutos!</p>
+  <a href="https://wa.me/5511939318424?text=Ol%C3%A1!%20Vi%20a%20pr%C3%A9via%20do%20site%20da%20Vila%20Tupiniquim%20Gastro%20Bar%20e%20quero%20saber%20mais." target="_blank" class="cta-wpp">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Reservar no WhatsApp
+  </a>
+</div>
+
+<br>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Vila Tupiniquim Gastro Bar</strong> · Chácara Santo Antônio, São Paulo<br>
+  <span style="font-size:.7rem;opacity:.5">Prévia de demonstração</span>
+</footer>
+
+<!-- FAB -->
+<a href="https://wa.me/5511939318424?text=Ol%C3%A1!%20Vi%20a%20pr%C3%A9via%20do%20site%20da%20Vila%20Tupiniquim%20Gastro%20Bar%20e%20quero%20saber%20mais." target="_blank" class="fab" title="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// CAROUSEL
+let carIdx = 0;
+const carTrack = document.getElementById('carTrack');
+const carDots = document.getElementById('carDots');
+const carTotal = carTrack.children.length;
+
+for(let i=0;i<carTotal;i++){
+  const d=document.createElement('div');
+  d.className='car-dot'+(i===0?' active':'');
+  d.onclick=()=>carGoto(i);
+  carDots.appendChild(d);
+}
+
+function carGoto(n){
+  carIdx=Math.max(0,Math.min(n,carTotal-1));
+  carTrack.style.transform=`translateX(-${carIdx*100}%)`;
+  document.querySelectorAll('.car-dot').forEach((d,i)=>d.classList.toggle('active',i===carIdx));
+}
+function carMove(dir){carGoto(carIdx+dir)}
+setInterval(()=>carGoto((carIdx+1)%carTotal),4000);
+
+// MENU TABS
+function showTab(el,id){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.menu-pane').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+// VIDEO
+function openVideo(){
+  window.open('https://www.youtube.com/results?search_query=churrasco+na+brasa+ponto+perfeito','_blank');
+}
+</script>
+</body>
+</html>
