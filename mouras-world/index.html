@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouras-World</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <!-- Tailwind CSS CDN — paleta roxa oficial (identidade/design-guide.md) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#0A0612',
+              card: '#120B1E',
+              surface: '#1A1030',
+              border: '#241A3A',
+              primary: '#7C3AED',
+              primaryHover: '#5B21B6',
+              accent: '#C084FC',
+              accentGlow: '#A855F7'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Syne', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0A0612;
+      color: #F1F0F5;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, .font-display {
+      font-family: 'Syne', 'Inter', sans-serif;
+    }
+    .brand-gradient-text {
+      background: linear-gradient(135deg, #A855F7 0%, #7C3AED 50%, #5B21B6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .accent-gradient-text {
+      background: linear-gradient(135deg, #E9D5FF 0%, #C084FC 50%, #7C3AED 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .glass-card {
+      background: rgba(18, 11, 30, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(124, 58, 237, 0.2);
+    }
+    .glass-card-hover:hover {
+      border-color: rgba(168, 85, 247, 0.5);
+      transform: translateY(-3px);
+      transition: all 0.25s ease;
+    }
+    .badge-glow {
+      box-shadow: 0 0 15px rgba(124, 58, 237, 0.3);
+    }
+    .accent-glow {
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
+    }
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+    .animate-spin-slow { animation: spin-slow 18s linear infinite; }
+  </style>
+  <link rel="stylesheet" href="assets/anim.css">
+</head>
+<body class="selection:bg-purple-500 selection:text-white">
+
+  <!-- BARRA DE AVISO SUPERIOR / STATUS -->
+  <div class="bg-brand-card border-b border-brand-border py-1.5 px-4 text-[11px] text-slate-400">
+    <div class="max-w-7xl mx-auto flex items-center justify-center sm:justify-between gap-2">
+      <span class="flex items-center gap-1.5">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <strong class="text-white font-semibold">Mouras-World</strong>
+        <span class="hidden sm:inline">· Sistemas operando 24/7</span>
+      </span>
+      <span class="hidden md:inline text-brand-accent font-medium italic">"Você é uma fera, avança!"</span>
+      <a href="termos.html" class="hidden sm:inline underline hover:text-white transition">Termos</a>
+    </div>
+  </div>
+
+  <!-- CABEÇALHO / NAVBAR -->
+  <header class="sticky top-0 z-50 glass-card border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
+
+      <!-- LOGO OFICIAL: PLANETA MOURAS-WORLD -->
+      <a href="#" class="flex items-center gap-2.5 group shrink-0">
+        <img src="assets/logo.png" alt="Mouras-World" class="w-9 h-9 rounded-lg object-cover group-hover:scale-105 transition-transform duration-300">
+        <div class="leading-none">
+          <span class="text-sm font-black tracking-wide text-white">
+            MOURAS<span class="text-brand-primary">-WORLD</span>
+          </span>
+          <span class="text-[8px] uppercase tracking-[0.2em] text-brand-accent block font-semibold mt-0.5">Web & Software House</span>
+        </div>
+      </a>
+
+      <!-- MENU DESKTOP -->
+      <nav class="hidden lg:flex items-center gap-5 text-[13px] font-medium text-slate-300">
+        <a href="comunidade/index.html" class="text-brand-accent font-semibold hover:text-purple-300 transition">✦ Comunidade</a>
+        <a href="academy/index.html" class="hover:text-brand-primary transition">Academy</a>
+        <a href="criar/index.html" class="hover:text-brand-primary transition">Criar</a>
+        <a href="laboratorio/index.html" class="hover:text-brand-primary transition">Laboratório</a>
+        <a href="ia/index.html" class="hover:text-brand-primary transition">Moura.ai</a>
+        <a href="planos/index.html" class="hover:text-brand-primary transition">Planos</a>
+        <a href="portal/index.html" class="hover:text-brand-accent transition">Portal</a>
+      </nav>
+
+      <!-- BOTÃO DE AÇÃO RÁPIDA -->
+      <div class="hidden sm:flex items-center shrink-0">
+        <a href="#contato-rapido" class="px-4 py-2 rounded-lg font-bold text-[13px] bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:from-purple-500 hover:to-brand-primary transition-all duration-300 shadow-md hover:shadow-purple-500/20 flex items-center gap-1.5">
+          <span>Iniciar Projeto</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative pt-16 pb-24 overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(124,58,237,0.18),rgba(255,255,255,0))]"></div>
+    <div class="absolute -top-32 -right-32 w-96 h-96 bg-brand-accentGlow/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+
+      <!-- LOGO PLANETA EM DESTAQUE -->
+      <div class="flex justify-center mb-6">
+        <div class="relative">
+          <div class="absolute inset-0 bg-brand-accentGlow/30 rounded-full blur-3xl scale-110"></div>
+          <img src="assets/logo.png" alt="Mouras-World" class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-3xl object-cover shadow-2xl shadow-brand-primary/40">
+        </div>
+      </div>
+
+      <!-- SELO DE QUALIDADE -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-card border border-brand-primary/40 text-xs font-semibold text-brand-accent mb-8 badge-glow">
+        <span class="w-2 h-2 rounded-full bg-brand-primary animate-ping"></span>
+        Engenharia Digital & Tecnologia de Alto Padrão
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight sm:leading-none mb-6">
+        Construímos <span class="brand-gradient-text">Sites de Elite</span> e <span class="accent-gradient-text">Plataformas SaaS</span> que Geram Lucro Real.
+      </h1>
+
+      <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
+        A <strong>Mouras-World</strong> transforma a presença digital do seu negócio com sites ultra-rápidos, automações seguras e monitoramento inteligente 24/7.
+      </p>
+
+      <!-- BOTÕES CTA -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
+        <a href="#solucoes" class="w-full sm:w-auto px-8 py-4 rounded-xl font-extrabold text-base bg-gradient-to-r from-brand-primary via-purple-500 to-purple-700 text-white hover:opacity-95 shadow-xl hover:shadow-brand-primary/30 transition-all flex items-center justify-center gap-3">
+          <span>Ver Demonstrações Ao Vivo</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </a>
+        <a href="../Status/index.html" class="w-full sm:w-auto px-8 py-4 rounded-xl font-extrabold text-base bg-gradient-to-r from-brand-accentGlow to-purple-600 text-white hover:opacity-95 shadow-xl hover:shadow-brand-accentGlow/30 transition-all flex items-center justify-center gap-2">
+          <span>🎯 Caçador de Empresas com IA</span>
+        </a>
+        <a href="#contato-rapido" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-base bg-brand-card border border-brand-border text-white hover:border-brand-accent/50 hover:text-brand-accent transition-all flex items-center justify-center gap-2">
+          <span>Falar Conosco</span>
+        </a>
+      </div>
+
+      <!-- MÉTRICAS DE CONFIANÇA -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-8 border-t border-brand-border/60">
+        <div class="p-4 rounded-xl bg-brand-card/50 border border-brand-border">
+          <div class="text-2xl sm:text-3xl font-extrabold text-brand-primary">100%</div>
+          <div class="text-xs text-slate-400 mt-1">Aprovação por Etapas</div>
+        </div>
+        <div class="p-4 rounded-xl bg-brand-card/50 border border-brand-border">
+          <div class="text-2xl sm:text-3xl font-extrabold text-brand-accent">24/7</div>
+          <div class="text-xs text-slate-400 mt-1">Monitoramento Ativo</div>
+        </div>
+        <div class="p-4 rounded-xl bg-brand-card/50 border border-brand-border">
+          <div class="text-2xl sm:text-3xl font-extrabold text-white">5</div>
+          <div class="text-xs text-slate-400 mt-1">Esquadrões Especializados</div>
+        </div>
+        <div class="p-4 rounded-xl bg-brand-card/50 border border-brand-border">
+          <div class="text-2xl sm:text-3xl font-extrabold text-brand-accent">Zero</div>
+          <div class="text-xs text-slate-400 mt-1">Risco Jurídico (Termos Blindados)</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO: VITRINE DE PROJETOS E SAAS (2 SITES + 2 SAAS FUNCIONAIS) -->
+  <section id="solucoes" class="py-20 bg-brand-dark relative border-t border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Engenharia Sob Medida</h2>
+        <h3 class="text-3xl sm:text-5xl font-black text-white">
+          Explore Nossas <span class="brand-gradient-text">Criações Reais</span>
+        </h3>
+        <p class="text-slate-400 mt-4 text-base">
+          Desenvolvemos modelos prontos para operação imediata e softwares SaaS focados em automação e receita.
+        </p>
+      </div>
+
+      <!-- GRID DOS 4 PROJETOS: 2 SITES E 2 SAAS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- SITE 1: BARBEARIA & ESTÉTICA PREMIUM -->
+        <div class="glass-card rounded-2xl p-6 glass-card-hover flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 text-brand-primary border border-brand-primary/30">
+                Site Modelo 01 • Barbearia & Estética
+              </span>
+              <span class="text-xs text-slate-400">Alta Conversão</span>
+            </div>
+            <h4 class="text-2xl font-bold text-white mb-2">Barber World VIP</h4>
+            <p class="text-sm text-slate-300 mb-6">
+              Landing page focada em agendamento imediato via WhatsApp, exibição de tabela de serviços, galeria de cortes e depoimentos de clientes.
+            </p>
+            <div class="bg-brand-surface/80 rounded-xl p-4 border border-brand-border mb-6">
+              <div class="text-xs font-semibold text-slate-400 mb-2">Recursos Inclusos:</div>
+              <ul class="text-xs text-slate-300 space-y-1.5">
+                <li class="flex items-center gap-2">✓ Botão de Agendamento direto com mensagem pré-formatada</li>
+                <li class="flex items-center gap-2">✓ Cardápio digital de serviços e valores</li>
+                <li class="flex items-center gap-2">✓ Totalmente adaptado para navegação rápida no celular</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <a href="sites/barbearia/index.html" class="w-full py-3 px-4 rounded-xl font-bold text-sm bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 transition flex items-center justify-center gap-2">
+              <span>Abrir Demonstração do Site</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- SITE 2: CLÍNICA & SAÚDE INTEGRADA -->
+        <div class="glass-card rounded-2xl p-6 glass-card-hover flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 text-brand-accent border border-brand-accent/30">
+                Site Modelo 02 • Clínicas & Saúde
+              </span>
+              <span class="text-xs text-slate-400">Institucional & Autoridade</span>
+            </div>
+            <h4 class="text-2xl font-bold text-white mb-2">Moura Health & Odonto</h4>
+            <p class="text-sm text-slate-300 mb-6">
+              Site institucional de alto nível para médicos, dentistas e clínicas integradas. Transmite credibilidade máxima e facilita a triagem de pacientes.
+            </p>
+            <div class="bg-brand-surface/80 rounded-xl p-4 border border-brand-border mb-6">
+              <div class="text-xs font-semibold text-slate-400 mb-2">Recursos Inclusos:</div>
+              <ul class="text-xs text-slate-300 space-y-1.5">
+                <li class="flex items-center gap-2">✓ Apresentação do corpo clínico com fotos e CRM/CRO</li>
+                <li class="flex items-center gap-2">✓ Formulário de pré-agendamento e dúvidas frequentes</li>
+                <li class="flex items-center gap-2">✓ Integração com mapa de localização e horários de atendimento</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <a href="sites/clinica/index.html" class="w-full py-3 px-4 rounded-xl font-bold text-sm bg-gradient-to-r from-brand-accent to-purple-600 text-white hover:opacity-90 transition flex items-center justify-center gap-2">
+              <span>Abrir Demonstração do Site</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- SAAS 1: LEADFLOW (MINI-CRM E GESTÃO DE PROSPECÇÃO) -->
+        <div class="glass-card rounded-2xl p-6 glass-card-hover flex flex-col justify-between border-brand-primary/30">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">
+                SaaS Produto 01 • Gestão & Vendas
+              </span>
+              <span class="text-xs text-brand-primary font-semibold">Plataforma Interativa</span>
+            </div>
+            <h4 class="text-2xl font-bold text-white mb-2">Mouras LeadFlow CRM</h4>
+            <p class="text-sm text-slate-300 mb-6">
+              Painel inteligente para organizar clientes prospectados no Instagram e WhatsApp, acompanhar fases de negociação e disparar contratos.
+            </p>
+            <div class="bg-brand-surface/80 rounded-xl p-4 border border-brand-border mb-6">
+              <div class="text-xs font-semibold text-slate-400 mb-2">Funcionalidades do Software:</div>
+              <ul class="text-xs text-slate-300 space-y-1.5">
+                <li class="flex items-center gap-2">✓ Kanban de Vendas: Novo Lead, Em Contato, Proposta e Fechado</li>
+                <li class="flex items-center gap-2">✓ Cadastro rápido de empresas e valor estimado do contrato</li>
+                <li class="flex items-center gap-2">✓ Alerta automático de acompanhamento</li>
+              </ul>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <a href="../Status/index.html" class="w-full py-3 px-4 rounded-xl font-extrabold text-sm bg-gradient-to-r from-brand-accent to-purple-600 text-white hover:opacity-95 transition flex items-center justify-center gap-2">
+              <span>🎯 Abrir Caçador B2B com IA (Status)</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+            <a href="saas/leadflow/index.html" class="w-full py-2.5 px-4 rounded-xl font-bold text-xs bg-brand-surface text-slate-300 hover:text-white transition flex items-center justify-center gap-2">
+              <span>Abrir Painel Kanban Local</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- SAAS 2: BIOLINK PRO (HUB DE CONVERSÃO & LINKS) -->
+        <div class="glass-card rounded-2xl p-6 glass-card-hover flex flex-col justify-between border-brand-accent/30">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">
+                SaaS Produto 02 • Automação de Links
+              </span>
+              <span class="text-xs text-brand-accent font-semibold">Plataforma Interativa</span>
+            </div>
+            <h4 class="text-2xl font-bold text-white mb-2">Mouras BioLink Pro</h4>
+            <p class="text-sm text-slate-300 mb-6">
+              Micro-SaaS para criar páginas de links na bio do Instagram com alta velocidade de carregamento, botões de pagamento e catálogo interativo.
+            </p>
+            <div class="bg-brand-surface/80 rounded-xl p-4 border border-brand-border mb-6">
+              <div class="text-xs font-semibold text-slate-400 mb-2">Funcionalidades do Software:</div>
+              <ul class="text-xs text-slate-300 space-y-1.5">
+                <li class="flex items-center gap-2">✓ Criador visual de botões de contato e redes sociais</li>
+                <li class="flex items-center gap-2">✓ Contador de visualizações e cliques em tempo real</li>
+                <li class="flex items-center gap-2">✓ Totalmente customizável com cores da marca do cliente</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <a href="saas/biolink/index.html" class="w-full py-3 px-4 rounded-xl font-bold text-sm bg-gradient-to-r from-brand-accent to-purple-600 text-white hover:opacity-90 transition flex items-center justify-center gap-2">
+              <span>Acessar Painel do BioLink</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO: EXPLORE A PLATAFORMA (LOCAIS) -->
+  <section id="plataforma" class="py-20 bg-brand-card border-t border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Um ecossistema, vários lugares</h2>
+        <h3 class="text-3xl sm:text-5xl font-black text-white">Explore a <span class="brand-gradient-text">Plataforma</span></h3>
+        <p class="text-slate-400 mt-4 text-base">Cada espaço da Mouras-World com um propósito. Comece pela Comunidade — ela é o coração.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <a href="comunidade/index.html" class="glass-card rounded-2xl p-6 glass-card-hover block border-brand-primary/40">
+          <div class="text-3xl mb-3">✦</div>
+          <h4 class="text-lg font-bold text-white mb-1">Comunidade</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Grátis pra quem precisa, planos pra quem quer mais. Todo mundo colaborando.</p>
+          <span class="text-brand-accent text-sm font-semibold mt-3 inline-block">Entrar →</span>
+        </a>
+        <a href="academy/index.html" class="glass-card rounded-2xl p-6 glass-card-hover block">
+          <div class="text-3xl mb-3">🎓</div>
+          <h4 class="text-lg font-bold text-white mb-1">Academy</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Trilhas por nível, módulos, vídeos e cursos publicados pelos próprios membros.</p>
+          <span class="text-brand-accent text-sm font-semibold mt-3 inline-block">Aprender →</span>
+        </a>
+        <a href="ia/index.html" class="glass-card rounded-2xl p-6 glass-card-hover block">
+          <div class="text-3xl mb-3">🤖</div>
+          <h4 class="text-lg font-bold text-white mb-1">Moura.ai</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Agentes de IA e automações pra criar, prospectar e analisar. Em desenvolvimento.</p>
+          <span class="text-brand-accent text-sm font-semibold mt-3 inline-block">Conhecer →</span>
+        </a>
+        <a href="planos/index.html" class="glass-card rounded-2xl p-6 glass-card-hover block">
+          <div class="text-3xl mb-3">💎</div>
+          <h4 class="text-lg font-bold text-white mb-1">Planos</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Gratuito vitalício ou planos exclusivos (6 meses, 1 ano, vitalício).</p>
+          <span class="text-brand-accent text-sm font-semibold mt-3 inline-block">Ver planos →</span>
+        </a>
+        <a href="talentos/index.html" class="glass-card rounded-2xl p-6 glass-card-hover block">
+          <div class="text-3xl mb-3">🚀</div>
+          <h4 class="text-lg font-bold text-white mb-1">Talentos</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Faça parte do time. Esquadrões em formação, colaboração por nível.</p>
+          <span class="text-brand-accent text-sm font-semibold mt-3 inline-block">Participar →</span>
+        </a>
+        <a href="portal/index.html" class="glass-card rounded-2xl p-6 glass-card-hover block">
+          <div class="text-3xl mb-3">📊</div>
+          <h4 class="text-lg font-bold text-white mb-1">Portal do Membro</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Sua área: tudo num lugar só — criar, planos, links, trilhas e suas IAs. (Prévia)</p>
+          <span class="text-brand-accent text-sm font-semibold mt-3 inline-block">Espiar →</span>
+        </a>
+        <a href="criar/index.html" class="glass-card rounded-2xl p-6 glass-card-hover block border-brand-primary/40">
+          <div class="text-3xl mb-3">✦</div>
+          <h4 class="text-lg font-bold text-white mb-1">Estúdio do Membro</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Crie seus cursos, vídeos e módulos de graça — customizados do seu jeito.</p>
+          <span class="text-brand-accent text-sm font-semibold mt-3 inline-block">Criar →</span>
+        </a>
+        <a href="laboratorio/index.html" class="glass-card rounded-2xl p-6 glass-card-hover block border-brand-primary/40">
+          <div class="text-3xl mb-3">🔬</div>
+          <h4 class="text-lg font-bold text-white mb-1">Laboratório Moura.ai</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Construa a IA com a comunidade, passo a passo. Um ajudando o outro, cada um somando seu bot.</p>
+          <span class="text-brand-accent text-sm font-semibold mt-3 inline-block">Ajudar →</span>
+        </a>
+        <a href="assista/index.html" class="glass-card rounded-2xl p-6 glass-card-hover block">
+          <div class="text-3xl mb-3">▶️</div>
+          <h4 class="text-lg font-bold text-white mb-1">Como funciona</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Um explicador de 1 minuto: entenda tudo que o site e os cursos oferecem.</p>
+          <span class="text-brand-accent text-sm font-semibold mt-3 inline-block">Assistir →</span>
+        </a>
+        <a href="aprender/index.html" class="glass-card rounded-2xl p-6 glass-card-hover block">
+          <div class="text-3xl mb-3">🤖</div>
+          <h4 class="text-lg font-bold text-white mb-1">Aprender com um Bot</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Aprenda a programar ao lado de um bot, passo a passo — do iniciante ao intermediário.</p>
+          <span class="text-brand-accent text-sm font-semibold mt-3 inline-block">Aprender →</span>
+        </a>
+        <a href="conectores/index.html" class="glass-card rounded-2xl p-6 glass-card-hover block">
+          <div class="text-3xl mb-3">🔌</div>
+          <h4 class="text-lg font-bold text-white mb-1">Conectores</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Plugue Instagram, WhatsApp, TikTok e mais. Cole a API e deixe os bots venderem por você.</p>
+          <span class="text-brand-accent text-sm font-semibold mt-3 inline-block">Conectar →</span>
+        </a>
+        <a href="mercado/index.html" class="glass-card rounded-2xl p-6 glass-card-hover block">
+          <div class="text-3xl mb-3">🛍️</div>
+          <h4 class="text-lg font-bold text-white mb-1">Mercado & Afiliação</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Afilie qualquer loja, gere vídeos por IA e venda direto das suas redes.</p>
+          <span class="text-brand-accent text-sm font-semibold mt-3 inline-block">Vender →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO: OS 5 ESQUADRÕES DE ELITE -->
+  <section id="esquadroes" class="py-20 bg-brand-card border-t border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-xs uppercase tracking-widest text-brand-primary font-bold mb-2">Organização & Força de Trabalho</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">
+          Nossos <span class="brand-gradient-text">5 Esquadrões de Elite</span>
+        </h3>
+        <p class="text-slate-400 mt-4 text-base">
+          Uma estrutura simétrica e disciplinada de profissionais focados em entregar excelência e preparar o terreno para a <strong>Moura.ai</strong>.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+
+        <!-- ESQUADRÃO 1 -->
+        <div class="glass-card rounded-xl p-5 border-t-2 border-t-brand-primary">
+          <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-brand-primary flex items-center justify-center font-bold text-sm mb-3">01</div>
+          <h4 class="text-base font-bold text-white mb-1">Comercial & Vendas</h4>
+          <span class="text-xs text-brand-primary font-medium block mb-2">Prospecção</span>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Prospecção diária de empresas no Instagram, WhatsApp e apresentação de propostas personalizadas.
+          </p>
+        </div>
+
+        <!-- ESQUADRÃO 2 -->
+        <div class="glass-card rounded-xl p-5 border-t-2 border-t-brand-accent">
+          <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-brand-accent flex items-center justify-center font-bold text-sm mb-3">02</div>
+          <h4 class="text-base font-bold text-white mb-1">Desenvolvimento</h4>
+          <span class="text-xs text-brand-accent font-medium block mb-2">Engenharia</span>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Construção de código limpo, rápido e seguro usando React, Next.js, Tailwind e integração com Supabase.
+          </p>
+        </div>
+
+        <!-- ESQUADRÃO 3 -->
+        <div class="glass-card rounded-xl p-5 border-t-2 border-t-purple-500">
+          <div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm mb-3">03</div>
+          <h4 class="text-base font-bold text-white mb-1">Design & Identidade</h4>
+          <span class="text-xs text-purple-400 font-medium block mb-2">Design</span>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Criação de layouts anti-slop, identidade visual marcante e interfaces que encantam o cliente final.
+          </p>
+        </div>
+
+        <!-- ESQUADRÃO 4 -->
+        <div class="glass-card rounded-xl p-5 border-t-2 border-t-violet-500">
+          <div class="w-8 h-8 rounded-lg bg-violet-500/20 text-violet-300 flex items-center justify-center font-bold text-sm mb-3">04</div>
+          <h4 class="text-base font-bold text-white mb-1">Suporte & Sucesso</h4>
+          <span class="text-xs text-violet-300 font-medium block mb-2">Atendimento</span>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Atendimento 100% humanizado, acolhimento de dúvidas, coleta de feedbacks e revisões contratuais.
+          </p>
+        </div>
+
+        <!-- ESQUADRÃO 5 -->
+        <div class="glass-card rounded-xl p-5 border-t-2 border-t-fuchsia-500">
+          <div class="w-8 h-8 rounded-lg bg-fuchsia-500/20 text-fuchsia-300 flex items-center justify-center font-bold text-sm mb-3">05</div>
+          <h4 class="text-base font-bold text-white mb-1">Inovação & Moura.ai</h4>
+          <span class="text-xs text-fuchsia-300 font-medium block mb-2">Pesquisa</span>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Pesquisa e arquitetura da inteligência proprietária Moura.ai, automações de atendimento e novos sistemas.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO: MODELOS DE INVESTIMENTO E MONETIZAÇÃO -->
+  <section id="planos" class="py-20 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Transparência Total</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">
+          Formatos de <span class="brand-gradient-text">Pagamento Flexíveis</span>
+        </h3>
+        <p class="text-slate-400 mt-4 text-base">
+          Criamos soluções acessíveis para comércios locais e plataformas robustas para empresas em crescimento.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+
+        <!-- PLANO 1: MICRO-DIÁRIO -->
+        <div class="glass-card rounded-2xl p-6 border-brand-border flex flex-col justify-between">
+          <div>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-surface text-slate-300">Acessível</span>
+            <h4 class="text-xl font-bold text-white mt-4">Micro-Diário</h4>
+            <div class="my-6">
+              <span class="text-3xl font-extrabold text-white">R$ 5 a R$ 27</span>
+              <span class="text-xs text-slate-400 block mt-1">por dia (conforme os módulos ativos)</span>
+            </div>
+            <ul class="text-xs text-slate-300 space-y-2.5 mb-6">
+              <li class="flex items-center gap-2 text-brand-accent">✓ Ideal para pequenos comércios locais</li>
+              <li class="flex items-center gap-2">✓ Hospedagem e certificado de segurança inclusos</li>
+              <li class="flex items-center gap-2">✓ Botão de WhatsApp sempre ativo</li>
+              <li class="flex items-center gap-2">✓ Cancelamento flexível a qualquer momento</li>
+            </ul>
+          </div>
+          <a href="#contato-rapido" class="w-full py-3 rounded-xl text-center text-sm font-bold bg-brand-surface text-white hover:bg-brand-primary/30 transition">
+            Contratar Formato Diário
+          </a>
+        </div>
+
+        <!-- PLANO 2: MENSALIDADE PRO (DESTAQUE) -->
+        <div class="glass-card rounded-2xl p-6 border-brand-primary/60 relative flex flex-col justify-between badge-glow">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-brand-primary text-white text-[11px] font-extrabold uppercase tracking-wider">
+            Mais Escolhido
+          </div>
+          <div>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/20 text-brand-accent">Previsibilidade</span>
+            <h4 class="text-xl font-bold text-white mt-4">Mensalidade Pro</h4>
+            <div class="my-6">
+              <span class="text-4xl font-black brand-gradient-text">R$ 300</span>
+              <span class="text-xs text-slate-400 block mt-1">por mês com tudo garantido</span>
+            </div>
+            <ul class="text-xs text-slate-300 space-y-2.5 mb-6">
+              <li class="flex items-center gap-2 text-brand-accent">✓ Monitoramento 24/7 contra quedas e cópias</li>
+              <li class="flex items-center gap-2 text-brand-accent">✓ Atualizações periódicas de textos e fotos</li>
+              <li class="flex items-center gap-2 text-brand-accent">✓ Suporte prioritário com os esquadrões</li>
+              <li class="flex items-center gap-2 text-brand-accent">✓ Relatórios de estabilidade na nuvem</li>
+            </ul>
+          </div>
+          <a href="#contato-rapido" class="w-full py-3 rounded-xl text-center text-sm font-bold bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 transition shadow-lg">
+            Escolher Plano Mensal
+          </a>
+        </div>
+
+        <!-- PLANO 3: SOB MEDIDA / VITALÍCIO -->
+        <div class="glass-card rounded-2xl p-6 border-brand-border flex flex-col justify-between">
+          <div>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-brand-accent">Personalizado</span>
+            <h4 class="text-xl font-bold text-white mt-4">Vitalício & Sob Medida</h4>
+            <div class="my-6">
+              <span class="text-3xl font-extrabold text-brand-accent">Sob Consulta</span>
+              <span class="text-xs text-slate-400 block mt-1">pagamento único com contrato formal</span>
+            </div>
+            <ul class="text-xs text-slate-300 space-y-2.5 mb-6">
+              <li class="flex items-center gap-2">✓ Código fonte 100% entregue ao cliente</li>
+              <li class="flex items-center gap-2">✓ Contrato formal com assinatura digital</li>
+              <li class="flex items-center gap-2">✓ Painel administrativo customizado</li>
+              <li class="flex items-center gap-2">✓ Oportunidade de parceria do zero ao avançado</li>
+            </ul>
+          </div>
+          <a href="#contato-rapido" class="w-full py-3 rounded-xl text-center text-sm font-bold bg-brand-surface text-white hover:bg-brand-primary/30 transition">
+            Solicitar Orçamento
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SEÇÃO: TRABALHE CONOSCO (RECRUTAMENTO DE TALENTOS) -->
+  <section id="recrutamento" class="py-20 bg-brand-card border-t border-brand-border">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-12">
+        <span class="px-3 py-1 rounded-full text-xs font-bold bg-brand-primary/10 text-brand-primary border border-brand-primary/30">
+          Carreiras & Crescimento
+        </span>
+        <h3 class="text-3xl sm:text-4xl font-black text-white mt-4">
+          Faça Parte da <span class="brand-gradient-text">Mouras-World</span>
+        </h3>
+        <p class="text-slate-400 mt-3 text-sm max-w-xl mx-auto">
+          Buscamos talentos com dedicação, respeito humano e foco em resultados para integrar nossos 5 esquadrões de trabalho.
+        </p>
+      </div>
+
+      <div class="glass-card rounded-2xl p-6 sm:p-10 border-brand-border">
+        <form id="recruitment-form" onsubmit="event.preventDefault(); alert('Candidatura enviada com sucesso! Os líderes da Mouras-World entrarão em contato para a chamada de alinhamento.'); this.reset();" class="space-y-6">
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-2">Seu Nome Completo</label>
+              <input type="text" required placeholder="Digite seu nome" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary transition">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-2">WhatsApp para Contato</label>
+              <input type="tel" required placeholder="(DDD) 99999-9999" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary transition">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-2">Qual Esquadrão você deseja integrar?</label>
+            <select required class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary transition">
+              <option value="">Selecione uma área de atuação...</option>
+              <option value="vendas">Esquadrão Comercial & Vendas (Prospecção)</option>
+              <option value="dev">Esquadrão de Desenvolvimento (Programação)</option>
+              <option value="design">Esquadrão de Design & Identidade Visual</option>
+              <option value="suporte">Esquadrão de Suporte & Atendimento ao Cliente</option>
+              <option value="ia">Esquadrão de Inovação & Pesquisa Moura.ai</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-2">Qual é o seu maior sonho profissional e por que quer estar na Mouras-World?</label>
+            <textarea rows="4" required placeholder="Conte brevemente sobre sua motivação, seus objetivos e como pretende somar com a equipe..." class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary transition"></textarea>
+          </div>
+
+          <div class="text-xs text-slate-400 flex items-start gap-2">
+            <input type="checkbox" required class="mt-0.5 rounded border-brand-border bg-brand-surface text-brand-primary focus:ring-brand-primary">
+            <span>Declaro que estou ciente da jornada ética de trabalho (máx. 9h diárias, fins de semana livres e foco em cooperação mútua).</span>
+          </div>
+
+          <button type="submit" class="w-full py-4 rounded-xl font-bold text-sm bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 transition shadow-lg">
+            Enviar Candidatura para Avaliação
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FORMULÁRIO RÁPIDO: INICIAR PROJETO (CONTATO) -->
+  <section id="contato-rapido" class="py-20 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h3 class="text-3xl font-black text-white mb-4">Pronto para Elevar Seu Negócio?</h3>
+      <p class="text-slate-400 text-sm mb-8">
+        Preencha os dados abaixo para que nossos especialistas iniciem a análise gratuita da presença digital da sua empresa.
+      </p>
+
+      <div class="glass-card rounded-2xl p-6 sm:p-8 text-left border-brand-accent/40">
+        <form onsubmit="event.preventDefault(); alert('Solicitação registrada! Um especialista da Mouras-World entrará em contato via WhatsApp com o esboço do seu projeto.'); this.reset();" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Nome ou Nome da Empresa</label>
+            <input type="text" required placeholder="Ex.: Barbearia Imperial / Dr. Carlos" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-accent">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Seu WhatsApp</label>
+            <input type="tel" required placeholder="(DDD) 99999-9999" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-accent">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Tipo de Solução Desejada</label>
+            <select required class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-accent">
+              <option value="landing">Landing Page de Vendas Rápidas</option>
+              <option value="institucional">Site Institucional para Empresa/Clínica</option>
+              <option value="saas">Software SaaS ou Automação Personalizada</option>
+              <option value="outro">Outro Modelo Específico</option>
+            </select>
+          </div>
+          <button type="submit" class="w-full py-4 rounded-xl font-bold text-sm bg-gradient-to-r from-brand-accent to-purple-600 text-white hover:opacity-90 transition">
+            Solicitar Proposta e Demonstração
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- RODAPÉ COMPLETO -->
+  <footer class="bg-brand-card border-t border-brand-border py-12 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <img src="assets/logo.png" alt="Mouras-World" class="w-9 h-9 rounded-lg object-cover">
+          <span class="text-white font-black text-lg">MOURAS-WORLD</span>
+        </div>
+        <p class="leading-relaxed mb-4">
+          Engenharia de software, desenvolvimento de sites modernos e sistemas autônomos. Construído com seriedade, ética e excelência técnica.
+        </p>
+        <span class="text-brand-accent font-semibold italic">"Você é uma fera, avança!"</span>
+      </div>
+      <div>
+        <div class="text-white font-bold mb-3">Modelos de Sites</div>
+        <ul class="space-y-2">
+          <li><a href="sites/barbearia/index.html" class="hover:text-white transition">Barbearia & Estética</a></li>
+          <li><a href="sites/clinica/index.html" class="hover:text-white transition">Clínicas & Consultórios</a></li>
+          <li><a href="#solucoes" class="hover:text-white transition">Comércio e Restaurantes</a></li>
+          <li><a href="#solucoes" class="hover:text-white transition">E-commerce e Lojas</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-white font-bold mb-3">SaaS & Automação</div>
+        <ul class="space-y-2">
+          <li><a href="saas/leadflow/index.html" class="hover:text-white transition">LeadFlow CRM</a></li>
+          <li><a href="saas/biolink/index.html" class="hover:text-white transition">BioLink Pro</a></li>
+          <li><a href="#esquadroes" class="hover:text-white transition">Projeto Moura.ai</a></li>
+          <li><a href="#planos" class="hover:text-white transition">Planos Diários e Mensais</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-white font-bold mb-3">Segurança & Legal</div>
+        <ul class="space-y-2">
+          <li><a href="termos.html" class="hover:text-white transition">Termos de Serviço Blindados</a></li>
+          <li><a href="termos.html#antidifamacao" class="hover:text-white transition">Cláusula Anti-Difamação</a></li>
+          <li><a href="termos.html#aprovacao" class="hover:text-white transition">Aprovação por Etapas</a></li>
+          <li><a href="termos.html#privacidade" class="hover:text-white transition">Privacidade & LGPD</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 border-t border-brand-border/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>© 2026 Mouras-World. Todos os direitos reservados.</div>
+      <div class="text-slate-500">Desenvolvido com padrão Clean Code.</div>
+    </div>
+  </footer>
+
+  <!-- BARRA DE NAVEGAÇÃO FIXA MOBILE (ESTILO APP) -->
+  <div class="sm:hidden fixed bottom-0 left-0 right-0 glass-card border-t border-brand-border py-2 px-4 flex items-center justify-around z-50">
+    <a href="comunidade/index.html" class="flex flex-col items-center text-[10px] text-brand-accent font-semibold">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21l2.3-7.4-6-4.6h7.6z"/></svg>
+      <span>Comunidade</span>
+    </a>
+    <a href="academy/index.html" class="flex flex-col items-center text-[10px] text-slate-300 hover:text-brand-primary">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.42A12 12 0 0112 20.5 12 12 0 015.84 10.58L12 14z"/></svg>
+      <span>Academy</span>
+    </a>
+    <a href="ia/index.html" class="flex flex-col items-center text-[10px] text-slate-300 hover:text-brand-primary">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      <span>Moura.ai</span>
+    </a>
+    <a href="#contato-rapido" class="flex flex-col items-center text-[10px] text-slate-300 hover:text-brand-primary">
+      <svg class="w-5 h-5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+      <span>Projeto</span>
+    </a>
+  </div>
+
+  <script src="assets/anim.js"></script>
+</body>
+</html>

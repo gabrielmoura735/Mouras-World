@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aprender com um Bot | Mouras-World</title>
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode:'class', theme:{ extend:{
+      colors:{ brand:{ dark:'#0A0612', card:'#120B1E', surface:'#1A1030', border:'#241A3A', primary:'#7C3AED', primaryHover:'#5B21B6', accent:'#C084FC', accentGlow:'#A855F7' }},
+      fontFamily:{ sans:['Inter','system-ui','sans-serif'], display:['Syne','Inter','sans-serif'] }
+    }}}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/anim.css">
+  <style>
+    body { background-color:#0A0612; color:#F1F0F5; font-family:'Inter',sans-serif; overflow-x:hidden; }
+    h1,h2,h3,h4,.font-display { font-family:'Syne','Inter',sans-serif; }
+    .brand-gradient-text { background:linear-gradient(135deg,#A855F7 0%,#7C3AED 50%,#5B21B6 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .glass-card { background:rgba(18,11,30,0.75); backdrop-filter:blur(12px); border:1px solid rgba(124,58,237,0.2); }
+    .glass-card-hover:hover { border-color:rgba(168,85,247,0.5); transform:translateY(-3px); transition:all .25s ease; }
+    .badge-glow { box-shadow:0 0 15px rgba(124,58,237,0.3); }
+    .mono { font-family:'JetBrains Mono',monospace; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .float { animation:float 5s ease-in-out infinite; }
+    @keyframes pop { 0%{transform:scale(.9);opacity:0} 100%{transform:scale(1);opacity:1} }
+    .pop { animation:pop .3s ease; }
+    .bot-msg { animation:pop .35s ease; }
+    @keyframes blink { 50%{opacity:.4} }
+    .typing span { animation:blink 1s infinite; } .typing span:nth-child(2){animation-delay:.2s} .typing span:nth-child(3){animation-delay:.4s}
+    textarea { font-family:'JetBrains Mono',monospace; }
+    textarea:focus { outline:none; border-color:#7C3AED; box-shadow:0 0 0 3px rgba(124,58,237,0.2); }
+    .reveal { opacity:0; transform:translateY(24px); transition:all .6s ease; } .reveal.in { opacity:1; transform:none; }
+  </style>
+</head>
+<body class="selection:bg-purple-500 selection:text-white">
+
+  <div class="bg-gradient-to-r from-brand-primary to-purple-700 text-white text-[11px] font-bold text-center py-1.5 px-4">
+    🤖 APRENDA AO LADO DE UM BOT — do iniciante ao intermediário, passo a passo. E de graça.
+  </div>
+
+  <!-- NAV -->
+  <header class="sticky top-0 z-50 glass-card border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2.5 group shrink-0">
+        <img src="../assets/logo.png" alt="Mouras-World" class="w-9 h-9 rounded-lg object-cover group-hover:scale-105 transition-transform duration-300">
+        <div class="leading-none">
+          <span class="text-sm font-black tracking-wide text-white">MOURAS<span class="text-brand-primary">-WORLD</span></span>
+          <span class="text-[8px] uppercase tracking-[0.2em] text-brand-accent block font-semibold mt-0.5">Aprender com Bot</span>
+        </div>
+      </a>
+      <nav class="hidden lg:flex items-center gap-6 text-[13px] font-medium text-slate-300">
+        <a href="../academy/index.html" class="hover:text-brand-primary transition">Academy</a>
+        <a href="../criar/index.html" class="hover:text-brand-primary transition">Estúdio</a>
+        <a href="../comunidade/index.html" class="hover:text-brand-accent transition">Comunidade</a>
+      </nav>
+      <a href="#aula" class="hidden sm:flex px-4 py-2 rounded-lg font-bold text-[13px] bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 transition shadow-md items-center">Começar aula</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative pt-12 pb-8 overflow-hidden text-center">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(124,58,237,0.18),rgba(255,255,255,0))]"></div>
+    <div class="max-w-3xl mx-auto px-4 relative z-10">
+      <div class="flex justify-center mb-3">
+        <div class="relative float">
+          <div class="absolute inset-0 bg-brand-accentGlow/30 rounded-full blur-3xl scale-110"></div>
+          <img src="../assets/bots/bot-tutor.png" alt="Mimo, o bot tutor" class="relative w-28 h-28 rounded-2xl object-cover shadow-2xl shadow-brand-primary/40">
+        </div>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight mb-4">
+        Aprenda a programar <span class="brand-gradient-text">ao lado de um bot</span>.
+      </h1>
+      <p class="text-lg text-slate-300 max-w-2xl mx-auto">O Mimo, seu bot-tutor, te guia passo a passo. Você escreve o código, ele roda na hora aqui do lado. Do zero ao intermediário.</p>
+    </div>
+  </section>
+
+  <!-- TRILHA DE AULAS -->
+  <section class="pb-6">
+    <div class="max-w-5xl mx-auto px-4">
+      <div id="lessonTabs" class="flex flex-wrap gap-2 justify-center"></div>
+    </div>
+  </section>
+
+  <!-- AULA (bot + editor) -->
+  <section id="aula" class="pb-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- BOT TUTOR -->
+        <div class="glass-card rounded-2xl flex flex-col" style="min-height:460px">
+          <div class="flex items-center gap-3 p-4 border-b border-brand-border">
+            <img src="../assets/bots/bot-tutor.png" alt="Mimo" class="w-10 h-10 rounded-full object-cover">
+
+            <div><div class="font-bold text-white text-sm">Mimo <span class="text-brand-accent">· seu tutor</span></div><div id="lessonName" class="text-[11px] text-slate-400">Carregando...</div></div>
+            <div class="ml-auto text-[11px] text-slate-400">Passo <span id="stepNum" class="text-brand-accent font-bold">1</span>/<span id="stepTotal">1</span></div>
+          </div>
+          <div id="chat" class="flex-1 p-4 space-y-3 overflow-y-auto" style="max-height:340px"></div>
+          <div class="p-4 border-t border-brand-border space-y-2">
+            <button id="showBtn" class="w-full py-2.5 rounded-xl text-sm font-bold bg-brand-primary/20 text-brand-accent border border-brand-primary/40 hover:bg-brand-primary/30 transition flex items-center justify-center gap-2">👀 Ver o Mimo fazer</button>
+            <div class="flex gap-2">
+              <button id="hintBtn" class="px-3 py-2.5 rounded-xl text-xs font-bold bg-brand-surface border border-brand-border text-slate-300 hover:text-brand-accent transition">💡 Dica</button>
+              <button id="checkBtn" class="flex-1 py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 transition shadow">Conferir meu código ✓</button>
+              <button id="nextBtn" class="hidden flex-1 py-2.5 rounded-xl text-sm font-bold bg-emerald-600 text-white hover:bg-emerald-500 transition shadow">Próximo passo →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- EDITOR + PREVIEW -->
+        <div class="space-y-4">
+          <div class="glass-card rounded-2xl overflow-hidden">
+            <div class="flex items-center justify-between px-4 py-2 border-b border-brand-border">
+              <div class="flex items-center gap-2 text-xs text-slate-400"><span class="w-2.5 h-2.5 rounded-full bg-red-400/70"></span><span class="w-2.5 h-2.5 rounded-full bg-amber-400/70"></span><span class="w-2.5 h-2.5 rounded-full bg-emerald-400/70"></span><span class="ml-2 mono">seu-codigo.html</span></div>
+              <button id="runBtn" class="text-xs font-bold text-brand-accent hover:text-white transition">▶ Rodar</button>
+            </div>
+            <textarea id="code" spellcheck="false" class="w-full h-56 bg-[#0b0712] text-slate-100 text-sm p-4 resize-none border-0" style="border:1px solid transparent"></textarea>
+          </div>
+          <div class="glass-card rounded-2xl overflow-hidden">
+            <div class="px-4 py-2 border-b border-brand-border text-xs text-slate-400 flex items-center justify-between"><span>Prévia ao vivo</span><span class="text-[10px] text-emerald-300">roda de verdade ✓</span></div>
+            <iframe id="preview" class="w-full h-48 bg-white" title="Prévia"></iframe>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-brand-dark border-t border-brand-border py-10 text-xs text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2"><img src="../assets/logo.png" alt="" class="w-8 h-8 rounded-lg object-cover"><span class="text-white font-black">MOURAS-WORLD</span></a>
+      <div>© 2026 Mouras-World · Aprender com Bot</div>
+      <a href="../academy/index.html" class="hover:text-white transition">← Academy</a>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      var $ = function(id){ return document.getElementById(id); };
+      // -------- currículo (iniciante -> intermediário) --------
+      var lessons = [
+        { id:'html', nivel:'Iniciante', nome:'HTML — a estrutura', emoji:'🌐', steps:[
+          { bot:'Oi! Eu sou o Mimo 👋. Nessa aula eu <strong>faço na sua frente</strong> e você repete. Clica em "👀 Ver o Mimo fazer" que eu crio o primeiro título — um &lt;h1&gt;.', teach:'Olha: eu abro com &lt;h1&gt;, escrevo o texto, e fecho com &lt;/h1&gt;. Tudo em HTML abre e fecha assim.', solve:'<h1>Olá mundo</h1>', check:function(c){ return /<h1>[\s\S]*<\/h1>/i.test(c); }, hint:'Use <h1> pra abrir e </h1> pra fechar. Ex.: <h1>Olá mundo</h1>', ok:'Isso! <h1> é o maior título da página. Agora é sua vez — mexe no texto ou segue! 🎉', start:'' },
+          { bot:'Agora um parágrafo de texto normal. Clica em "👀 Ver o Mimo fazer" e observa onde eu coloco o &lt;p&gt;.', teach:'Mantenho o título e, logo embaixo, abro &lt;p&gt;, escrevo a frase e fecho &lt;/p&gt;.', solve:'<h1>Olá mundo</h1>\n<p>Esse é meu primeiro site.</p>', check:function(c){ return /<h1>[\s\S]*<\/h1>/i.test(c) && /<p>[\s\S]*<\/p>/i.test(c); }, hint:'<p> é de "parágrafo". Mantém o <h1> e adiciona o <p> embaixo.', ok:'Boa! <p> é pra textos normais. Você já tem título + texto. 👏' },
+          { bot:'Vamos deixar uma palavra em negrito. Vê como eu envolvo só a palavra com &lt;strong&gt;.', teach:'Pra negrito, eu envolvo apenas a palavra "primeiro" com &lt;strong&gt; e &lt;/strong&gt; — o resto da frase continua igual.', solve:'<h1>Olá mundo</h1>\n<p>Esse é meu <strong>primeiro</strong> site.</p>', check:function(c){ return /<strong>[\s\S]*<\/strong>/i.test(c); }, hint:'Envolva a palavra: <strong>primeiro</strong>', ok:'Perfeito! <strong> deixa em negrito. Você terminou o básico de HTML! 🥳' }
+        ]},
+        { id:'css', nivel:'Iniciante', nome:'CSS — o estilo', emoji:'🎨', steps:[
+          { bot:'Agora vamos pintar! Clica em "👀 Ver o Mimo fazer" e repara no &lt;style&gt; que eu adiciono em cima.', teach:'Eu abro &lt;style&gt;, digo que o h1 tem color: purple, e fecho &lt;/style&gt;. É aí que mora toda a parte visual.', solve:'<style>h1{color:purple}</style>\n<h1>Olá mundo</h1>\n<p>Meu primeiro site com estilo.</p>', check:function(c){ return /<style>[\s\S]*color\s*:\s*(purple|#7c3aed|#?[0-9a-f]{3,6})[\s\S]*<\/style>/i.test(c); }, hint:'Ex.: <style>h1{color:purple}</style>', ok:'Olha que lindo, título roxo! CSS controla as cores e o visual. 🎨', start:'<h1>Olá mundo</h1>\n<p>Meu primeiro site com estilo.</p>' },
+          { bot:'Vamos aumentar o texto. Vê como eu acrescento o tamanho dentro das chaves do h1.', teach:'Dentro das chaves do h1 eu adiciono font-size:48px, separando do color com ponto e vírgula.', solve:'<style>h1{color:purple; font-size:48px}</style>\n<h1>Olá mundo</h1>\n<p>Meu primeiro site com estilo.</p>', check:function(c){ return /font-size\s*:/i.test(c); }, hint:'Adicione font-size:48px dentro das chaves do h1.', ok:'Mandou bem! font-size muda o tamanho. Você está estilizando de verdade. ✨' }
+        ]},
+        { id:'js', nivel:'Intermediário', nome:'JavaScript — a ação', emoji:'💻', steps:[
+          { bot:'Agora o código ganha vida! Clica em "👀 Ver o Mimo fazer" — eu crio um botão que reage ao clique.', teach:'Eu faço um &lt;button&gt; e, no onclick, coloco a ação: alert(\'Oi!\'). Clicar no botão na prévia dispara isso.', solve:'<button onclick="alert(\'Oi!\')">Clique</button>', check:function(c){ return /<button[\s\S]*onclick\s*=/i.test(c); }, hint:'Ex.: <button onclick="alert(\'Oi!\')">Clique</button> — depois clique no botão na prévia.', ok:'Isso é JavaScript! onclick executa uma ação ao clicar. 🚀', start:'' },
+          { bot:'Vamos guardar e usar uma informação. Observa eu criar uma variável e escrever na página.', teach:'Guardo um valor na variável "nome" e uso document.write pra escrever "Oi, " + o nome na tela.', solve:'<script>var nome="dev"; document.write("Oi, "+nome)<\/script>', check:function(c){ return /<script>[\s\S]*document\.write[\s\S]*<\/script>/i.test(c); }, hint:'Use var pra guardar e document.write pra escrever na página.', ok:'Show! Você usou variável + função. Isso é lógica de programação. 🧠' },
+          { bot:'Último desafio: um loop que repete. Vê o for rodando 3 vezes sozinho.', teach:'O for começa em 1, vai até 3, e a cada volta escreve uma linha. É assim que o computador repete tarefas sem a gente copiar e colar.', solve:'<script>for(var i=1;i<=3;i++){document.write("linha "+i+"<br>")}<\/script>', check:function(c){ return /for\s*\([\s\S]*\)/i.test(c) && /document\.write/i.test(c); }, hint:'for(var i=1;i<=3;i++){ ... } repete o que está dentro.', ok:'ÉPICO! Você fez um loop. Do zero ao intermediário — parabéns, dev! 🏆' }
+        ]}
+      ];
+
+      var PROG_KEY='mw_aprender_prog';
+      function loadProg(){ try{ return JSON.parse(localStorage.getItem(PROG_KEY)||'{}'); }catch(e){ return {}; } }
+      function saveProg(p){ try{ localStorage.setItem(PROG_KEY, JSON.stringify(p)); }catch(e){} }
+
+      var curLesson=0, curStep=0;
+
+      function renderTabs(){
+        var prog=loadProg(); var wrap=$('lessonTabs'); wrap.innerHTML='';
+        lessons.forEach(function(l,i){
+          var done = prog[l.id]==='done';
+          var b=document.createElement('button');
+          b.className='px-4 py-2 rounded-xl text-sm font-bold border transition '+(i===curLesson?'bg-brand-primary/20 border-brand-primary/50 text-white':'bg-brand-surface border-brand-border text-slate-300 hover:border-brand-primary/40');
+          b.innerHTML=l.emoji+' '+l.nome+' <span class="text-[10px] font-semibold '+(l.nivel==='Intermediário'?'text-fuchsia-300':'text-emerald-300')+'">· '+l.nivel+'</span>'+(done?' ✓':'');
+          b.addEventListener('click',function(){ curLesson=i; curStep=0; loadStep(true); });
+          wrap.appendChild(b);
+        });
+      }
+
+      function botSay(txt){
+        var c=$('chat'); var d=document.createElement('div');
+        d.className='bot-msg flex gap-2';
+        d.innerHTML='<img src="../assets/bots/bot-tutor.png" alt="Mimo" class="w-7 h-7 shrink-0 rounded-full object-cover"><div class="glass-card rounded-2xl rounded-tl-sm px-3 py-2 text-sm text-slate-200 max-w-[85%]">'+txt+'</div>';
+        c.appendChild(d); c.scrollTop=c.scrollHeight;
+      }
+      function userSay(txt){
+        var c=$('chat'); var d=document.createElement('div');
+        d.className='bot-msg flex gap-2 justify-end';
+        d.innerHTML='<div class="rounded-2xl rounded-tr-sm px-3 py-2 text-sm text-white max-w-[85%] bg-brand-primary/30 border border-brand-primary/30">'+txt+'</div>';
+        c.appendChild(d); c.scrollTop=c.scrollHeight;
+      }
+
+      function run(){ try{ $('preview').srcdoc = $('code').value; }catch(e){} }
+
+      function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+      function loadStep(reset){
+        var L=lessons[curLesson], S=L.steps[curStep];
+        $('lessonName').textContent=L.emoji+' '+L.nome+' · '+L.nivel;
+        $('stepNum').textContent=(curStep+1); $('stepTotal').textContent=L.steps.length;
+        if(reset){ $('chat').innerHTML=''; botSay('Aula: <strong class="text-white">'+esc(L.nome)+'</strong> ('+L.nivel+'). Vamos nessa! 💜'); }
+        botSay(S.bot);
+        if(typeof S.start==='string'){ $('code').value=S.start; run(); }
+        $('checkBtn').classList.remove('hidden'); $('nextBtn').classList.add('hidden');
+        renderTabs();
+      }
+
+      $('runBtn').addEventListener('click', run);
+      $('code').addEventListener('input', function(){ /* roda ao vivo */ clearTimeout(window.__t); window.__t=setTimeout(run,400); });
+
+      $('hintBtn').addEventListener('click', function(){ botSay('💡 <em>'+esc(lessons[curLesson].steps[curStep].hint)+'</em>'); });
+
+      // ---- Mimo ensina de verdade: digita a solução na frente do aluno ----
+      var typing=false;
+      function setBusy(b){ typing=b; ['showBtn','checkBtn','nextBtn','hintBtn'].forEach(function(id){ var el=$(id); if(el){ el.disabled=b; el.style.opacity=b?'0.55':''; } }); }
+      function mimoFaz(){
+        if(typing) return;
+        var S=lessons[curLesson].steps[curStep];
+        var target=S.solve||'';
+        if(!target){ botSay('Esse passo é livre — tenta você, e clica em Conferir. 😉'); return; }
+        botSay('✍️ '+(S.teach||'Vou fazer na sua frente, repara:'));
+        setBusy(true);
+        var el=$('code'); el.value=''; var i=0;
+        (function tick(){
+          if(i<=target.length){ el.value=target.slice(0,i); el.scrollTop=el.scrollHeight; run(); i++; setTimeout(tick, 22); }
+          else { setBusy(false); botSay('Pronto! Olha rodando na prévia ✨. Agora clica em <strong>Conferir</strong> que eu valido — ou mexe você mesmo pra testar.'); }
+        })();
+      }
+      $('showBtn').addEventListener('click', mimoFaz);
+
+      $('checkBtn').addEventListener('click', function(){
+        var S=lessons[curLesson].steps[curStep]; run();
+        if(S.check($('code').value)){
+          userSay('Conferir ✓');
+          botSay('✅ '+S.ok);
+          $('checkBtn').classList.add('hidden'); $('nextBtn').classList.remove('hidden');
+          if(curStep===lessons[curLesson].steps.length-1){
+            var p=loadProg(); p[lessons[curLesson].id]='done'; saveProg(p); renderTabs();
+            $('nextBtn').textContent = (curLesson<lessons.length-1)?'Próxima aula →':'Concluir 🏆';
+          }
+        } else {
+          userSay('Conferir ✓');
+          botSay('Quase! Ainda não encontrei o que pedi. Clica em 💡 Dica se precisar — sem pressa, a gente aprende errando. 🙂');
+        }
+      });
+
+      $('nextBtn').addEventListener('click', function(){
+        var L=lessons[curLesson];
+        if(curStep < L.steps.length-1){ curStep++; loadStep(false); }
+        else if(curLesson < lessons.length-1){ curLesson++; curStep=0; loadStep(true); }
+        else { $('chat').innerHTML=''; botSay('🏆 Você terminou a trilha do iniciante ao intermediário! Agora é praticar no <a href="../criar/index.html" class="text-brand-accent underline">Estúdio</a> e mostrar na <a href="../comunidade/index.html" class="text-brand-accent underline">Comunidade</a>. Orgulho de você! 💜'); $('nextBtn').classList.add('hidden'); }
+      });
+
+      renderTabs(); loadStep(true);
+    })();
+  </script>
+
+  <script src="../assets/anim.js"></script>
+</body>
+</html>

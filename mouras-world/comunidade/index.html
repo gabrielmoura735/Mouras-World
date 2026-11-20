@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comunidade | Mouras-World</title>
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {
+        colors: { brand: {
+          dark: '#0A0612', card: '#120B1E', surface: '#1A1030', border: '#241A3A',
+          primary: '#7C3AED', primaryHover: '#5B21B6', accent: '#C084FC', accentGlow: '#A855F7'
+        }},
+        fontFamily: { sans: ['Inter','system-ui','sans-serif'], display: ['Syne','Inter','sans-serif'] }
+      }}
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/anim.css">
+  <style>
+    body { background-color:#0A0612; color:#F1F0F5; font-family:'Inter',sans-serif; overflow-x:hidden; }
+    h1,h2,h3,h4,.font-display { font-family:'Syne','Inter',sans-serif; }
+    .brand-gradient-text { background:linear-gradient(135deg,#A855F7 0%,#7C3AED 50%,#5B21B6 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .accent-gradient-text { background:linear-gradient(135deg,#E9D5FF 0%,#C084FC 50%,#7C3AED 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .glass-card { background:rgba(18,11,30,0.75); backdrop-filter:blur(12px); border:1px solid rgba(124,58,237,0.2); }
+    .glass-card-hover:hover { border-color:rgba(168,85,247,0.5); transform:translateY(-3px); transition:all .25s ease; }
+    .badge-glow { box-shadow:0 0 15px rgba(124,58,237,0.3); }
+  </style>
+</head>
+<body class="selection:bg-purple-500 selection:text-white">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 glass-card border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2.5 group shrink-0">
+        <img src="../assets/logo.png" alt="Mouras-World" class="w-9 h-9 rounded-lg object-cover group-hover:scale-105 transition-transform duration-300">
+        <div class="leading-none">
+          <span class="text-sm font-black tracking-wide text-white">MOURAS<span class="text-brand-primary">-WORLD</span></span>
+          <span class="text-[8px] uppercase tracking-[0.2em] text-brand-accent block font-semibold mt-0.5">Comunidade</span>
+        </div>
+      </a>
+      <nav class="hidden lg:flex items-center gap-6 text-[13px] font-medium text-slate-300">
+        <a href="../index.html" class="hover:text-brand-primary transition">Início</a>
+        <a href="#acesso" class="hover:text-brand-primary transition">Como entrar</a>
+        <a href="#niveis" class="hover:text-brand-primary transition">Níveis</a>
+        <a href="#dentro" class="hover:text-brand-primary transition">O que tem dentro</a>
+        <a href="#mural" class="hover:text-brand-primary transition">Mural</a>
+        <a href="../index.html#planos" class="hover:text-brand-accent transition">Planos</a>
+      </nav>
+      <a href="#entrar" class="hidden sm:flex px-4 py-2 rounded-lg font-bold text-[13px] bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:from-purple-500 hover:to-brand-primary transition-all shadow-md items-center gap-1.5">
+        Entrar na Comunidade
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative pt-16 pb-20 overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(124,58,237,0.18),rgba(255,255,255,0))]"></div>
+    <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+      <div class="flex justify-center mb-6">
+        <div class="relative">
+          <div class="absolute inset-0 bg-brand-accentGlow/30 rounded-full blur-3xl scale-110"></div>
+          <img src="../assets/bots/bot-base.png" alt="Mascote Mouras-World" class="relative w-24 h-24 rounded-2xl object-cover shadow-2xl shadow-brand-primary/40">
+        </div>
+      </div>
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-card border border-brand-primary/40 text-xs font-semibold text-brand-accent mb-6 badge-glow">
+        <span class="w-2 h-2 rounded-full bg-brand-primary animate-ping"></span>
+        O coração da Mouras-World
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight mb-6">
+        Uma comunidade onde <span class="brand-gradient-text">ninguém fica de fora</span> por falta de dinheiro.
+      </h1>
+      <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+        Entre para aprender, colaborar e crescer. <strong class="text-white">Grátis de verdade</strong> para quem não tem condições. Planos exclusivos para quem quer ir além — mentoria, parcerias e acesso completo.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#entrar" class="w-full sm:w-auto px-8 py-4 rounded-xl font-extrabold bg-gradient-to-r from-brand-primary via-purple-500 to-purple-700 text-white hover:opacity-95 shadow-xl transition-all">
+          Entrar Grátis
+        </a>
+        <a href="#acesso" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold bg-brand-card border border-brand-border text-white hover:border-brand-accent/50 hover:text-brand-accent transition-all">
+          Ver como funciona
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- OS DOIS CAMINHOS DE ACESSO -->
+  <section id="acesso" class="py-20 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Dois caminhos, um só objetivo</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Como entrar na comunidade</h3>
+        <p class="text-slate-400 mt-4">Escolha o caminho que faz sentido pra você agora. Todo mundo colabora pelo crescimento coletivo.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- GRATUITO -->
+        <div class="glass-card rounded-2xl p-8 glass-card-hover flex flex-col">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 w-fit">Para quem precisa</span>
+          <h4 class="text-2xl font-black text-white mt-5">Acesso Gratuito</h4>
+          <div class="my-4">
+            <span class="text-4xl font-black brand-gradient-text">R$ 0</span>
+            <span class="text-sm text-slate-400 block mt-1">vitalício · sem cartão, sem pegadinha</span>
+          </div>
+          <ul class="text-sm text-slate-300 space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Participar da comunidade e conversar com outros membros</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Aprender com os cursos publicados na plataforma</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Trilhas de desenvolvimento por nível</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Colaborar em projetos e encontrar parcerias</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Usar os recursos básicos das IAs e automações</li>
+          </ul>
+          <a href="#entrar" class="w-full py-3 rounded-xl text-center font-bold bg-brand-surface text-white hover:bg-brand-primary/30 transition">Entrar grátis</a>
+        </div>
+
+        <!-- PAGO -->
+        <div class="glass-card rounded-2xl p-8 glass-card-hover flex flex-col border-brand-primary/50 badge-glow relative">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-brand-primary text-white text-[11px] font-extrabold uppercase tracking-wider">Acesso completo</div>
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/20 text-brand-accent border border-brand-primary/30 w-fit">Para quem quer ir além</span>
+          <h4 class="text-2xl font-black text-white mt-5">Planos Exclusivos</h4>
+          <div class="my-4">
+            <span class="text-2xl font-black text-white">6 meses · 1 ano · vitalício</span>
+            <span class="text-sm text-slate-400 block mt-1">valores a definir — falaremos juntos</span>
+          </div>
+          <ul class="text-sm text-slate-300 space-y-3 mb-8 flex-1">
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Tudo do gratuito, sem limites</li>
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Módulos exclusivos, treinamentos e trilhas aprofundadas</li>
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Metas e objetivos acompanhados de perto</li>
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Mentoria e conversa direta com o Gabriel</li>
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Oportunidades de parceria para ganhar dinheiro junto</li>
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Acesso prioritário às IAs e ao conteúdo ao vivo</li>
+          </ul>
+          <a href="#entrar" class="w-full py-3 rounded-xl text-center font-bold bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 transition shadow-lg">Quero um plano</a>
+        </div>
+      </div>
+      <p class="text-center text-sm text-slate-500 mt-8 max-w-2xl mx-auto italic">
+        "Sou humilde demais pra cobrar de quem não tem condição. Quem pode e quer mais, apoia — e a gente cresce junto." — Gabriel Moura
+      </p>
+    </div>
+  </section>
+
+  <!-- NÍVEIS DE MEMBRO -->
+  <section id="niveis" class="py-20 bg-brand-card border-t border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <h2 class="text-xs uppercase tracking-widest text-brand-primary font-bold mb-2">Todos se ajudando</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Níveis de membro</h3>
+        <p class="text-slate-400 mt-4">O nível não é barreira — é um mapa de evolução. Profissionais ajudam iniciantes; iniciantes trazem energia nova.</p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
+        <div class="glass-card rounded-xl p-4 text-center"><div class="text-2xl mb-2">🌱</div><div class="text-sm font-bold text-white">Iniciante</div><div class="text-[11px] text-slate-400 mt-1">começando do zero</div></div>
+        <div class="glass-card rounded-xl p-4 text-center"><div class="text-2xl mb-2">📘</div><div class="text-sm font-bold text-white">Médio</div><div class="text-[11px] text-slate-400 mt-1">já tem base</div></div>
+        <div class="glass-card rounded-xl p-4 text-center"><div class="text-2xl mb-2">🛠️</div><div class="text-sm font-bold text-white">Intermediário</div><div class="text-[11px] text-slate-400 mt-1">toca projetos com apoio</div></div>
+        <div class="glass-card rounded-xl p-4 text-center"><div class="text-2xl mb-2">🚀</div><div class="text-sm font-bold text-white">Avançado</div><div class="text-[11px] text-slate-400 mt-1">autônomo, entrega só</div></div>
+        <div class="glass-card rounded-xl p-4 text-center"><div class="text-2xl mb-2">🔥</div><div class="text-sm font-bold text-white">Desafiador</div><div class="text-[11px] text-slate-400 mt-1">projetos complexos</div></div>
+        <div class="glass-card rounded-xl p-4 text-center"><div class="text-2xl mb-2">👑</div><div class="text-sm font-bold text-white">Profissional</div><div class="text-[11px] text-slate-400 mt-1">nível de mercado, mentora</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O QUE TEM DENTRO -->
+  <section id="dentro" class="py-20 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Por dentro da plataforma</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">O que tem dentro</h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-card rounded-2xl p-6 glass-card-hover">
+          <div class="text-3xl mb-3">🎓</div>
+          <h4 class="text-lg font-bold text-white mb-2">Cursos dos membros</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Quem sabe, ensina. Os próprios membros publicam cursos de graça dentro do site. A comunidade se alimenta sozinha.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 glass-card-hover">
+          <div class="text-3xl mb-3">🤖</div>
+          <h4 class="text-lg font-bold text-white mb-2">IAs e automações</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">As ferramentas da Mouras-World — prospecção, criação e análise — disponíveis para os membros usarem.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 glass-card-hover">
+          <div class="text-3xl mb-3">📡</div>
+          <h4 class="text-lg font-bold text-white mb-2">Conteúdo ao vivo</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Transmissões, aulas e sessões em tempo real, conectando toda a comunidade.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 glass-card-hover">
+          <div class="text-3xl mb-3">🎯</div>
+          <h4 class="text-lg font-bold text-white mb-2">Metas e objetivos</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Definição de metas acompanhadas, pra cada um evoluir com direção — não no escuro.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 glass-card-hover">
+          <div class="text-3xl mb-3">🤝</div>
+          <h4 class="text-lg font-bold text-white mb-2">Parcerias reais</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Oportunidades de fazer projetos e ganhar dinheiro junto, do iniciante ao profissional.</p>
+        </div>
+        <div class="glass-card rounded-2xl p-6 glass-card-hover">
+          <div class="text-3xl mb-3">💬</div>
+          <h4 class="text-lg font-bold text-white mb-2">Mentoria direta</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">Nos planos, conversa direta com o Gabriel sobre seus projetos e caminhos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MURAL DA COMUNIDADE -->
+  <section id="mural" class="py-20 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">O dia a dia de todo mundo</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Mural da Comunidade</h3>
+        <p class="text-slate-400 mt-4">Poste suas fotos, vídeos, documentários, stories e <strong class="text-white">metas batidas</strong>. Aqui a gente comemora junto cada passo.</p>
+      </div>
+
+      <!-- criar post -->
+      <div class="glass-card rounded-2xl p-5 mb-8 border-brand-primary/40">
+        <div class="flex gap-2 flex-wrap mb-3" id="postTypes"></div>
+        <textarea id="postText" rows="2" placeholder="Conta pra galera o que rolou hoje..." class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm resize-none focus:outline-none focus:border-brand-primary"></textarea>
+        <div class="flex items-center justify-between mt-3 gap-3">
+          <input id="postName" type="text" placeholder="Seu nome (opcional)" class="flex-1 px-4 py-2.5 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary">
+          <button id="postBtn" class="px-5 py-2.5 rounded-xl font-bold text-sm bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 transition shadow">Postar</button>
+        </div>
+      </div>
+
+      <div id="feed" class="space-y-4"></div>
+    </div>
+  </section>
+
+  <!-- ENTRAR -->
+  <section id="entrar" class="py-20 bg-brand-card border-t border-brand-border">
+    <div class="max-w-2xl mx-auto px-4 text-center">
+      <h3 class="text-3xl sm:text-4xl font-black text-white mb-4">Bora fazer parte?</h3>
+      <p class="text-slate-400 mb-8">Deixe seu contato que te explicamos como entrar — grátis ou em um plano. Sem compromisso.</p>
+      <div class="glass-card rounded-2xl p-6 sm:p-8 text-left border-brand-primary/40">
+        <form onsubmit="event.preventDefault(); alert('Recebemos seu interesse! Em breve entramos em contato pra te dar as boas-vindas à comunidade.'); this.reset();" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Seu nome</label>
+            <input type="text" required placeholder="Como quer ser chamado(a)" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">WhatsApp ou e-mail</label>
+            <input type="text" required placeholder="Pra gente te dar as boas-vindas" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Qual caminho combina com você?</label>
+            <select required class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary">
+              <option value="gratis">Quero entrar grátis</option>
+              <option value="plano">Tenho condições e quero um plano completo</option>
+              <option value="duvida">Ainda tenho dúvidas, quero conversar</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Onde você está hoje?</label>
+            <select required class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary">
+              <option value="iniciante">Iniciante — começando do zero</option>
+              <option value="medio">Médio — já tenho alguma base</option>
+              <option value="intermediario">Intermediário</option>
+              <option value="avancado">Avançado</option>
+              <option value="profissional">Profissional</option>
+            </select>
+          </div>
+          <button type="submit" class="w-full py-4 rounded-xl font-bold bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 transition shadow-lg">
+            Quero fazer parte
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer class="bg-brand-dark border-t border-brand-border py-10 text-xs text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2">
+        <img src="../assets/logo.png" alt="Mouras-World" class="w-8 h-8 rounded-lg object-cover">
+        <span class="text-white font-black">MOURAS-WORLD</span>
+      </a>
+      <div>© 2026 Mouras-World · Comunidade</div>
+      <a href="../index.html" class="hover:text-white transition">← Voltar ao início</a>
+    </div>
+  </footer>
+
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] hidden"><div class="glass-card rounded-xl px-5 py-3 border border-brand-primary/50 badge-glow flex items-center gap-3"><span class="text-xl">🎉</span><span class="text-sm font-semibold text-white">Post publicado no mural!</span></div></div>
+
+  <script src="../assets/anim.js"></script>
+  <script>
+    (function(){
+      var $=function(id){return document.getElementById(id);};
+      var KEY='mw_comunidade_mural';
+      var types=[
+        {id:'story', label:'📸 Story', emoji:'📸'},
+        {id:'foto', label:'🖼️ Foto', emoji:'🖼️'},
+        {id:'video', label:'🎬 Vídeo', emoji:'🎬'},
+        {id:'doc', label:'🎥 Documentário', emoji:'🎥'},
+        {id:'meta', label:'🏆 Meta batida', emoji:'🏆'}
+      ];
+      var cur='story';
+      function load(){ try{ var v=JSON.parse(localStorage.getItem(KEY)); return Array.isArray(v)?v:null; }catch(e){ return null; } }
+      function save(l){ try{ localStorage.setItem(KEY,JSON.stringify(l)); }catch(e){} }
+      var seed=[
+        {type:'meta', name:'Ana', text:'Fechei meu primeiro cliente de site hoje! 🙌 Comecei aqui do zero faz 2 meses.', t:Date.now()-3600000},
+        {type:'story', name:'Rafa', text:'Estudando a trilha de HTML de madrugada. Bora que bora 💜', t:Date.now()-7200000}
+      ];
+      function getFeed(){ var v=load(); if(v===null){ save(seed); return seed.slice(); } return v; }
+      function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+      function timeAgo(t){ var m=Math.round((Date.now()-t)/60000); if(m<1)return'agora'; if(m<60)return m+'min'; var h=Math.round(m/60); if(h<24)return h+'h'; return Math.round(h/24)+'d'; }
+      function tMeta(id){ return types.filter(function(x){return x.id===id;})[0]||types[0]; }
+
+      function renderTypes(){
+        var w=$('postTypes'); w.innerHTML='';
+        types.forEach(function(t){
+          var b=document.createElement('button');
+          b.className='px-3 py-1.5 rounded-lg text-xs font-bold transition border '+(t.id===cur?'bg-brand-primary/20 border-brand-primary/50 text-white':'bg-brand-surface border-brand-border text-slate-300 hover:border-brand-primary/40');
+          b.textContent=t.label;
+          b.addEventListener('click',function(){ cur=t.id; renderTypes(); });
+          w.appendChild(b);
+        });
+      }
+      function renderFeed(){
+        var list=getFeed(); var f=$('feed'); f.innerHTML='';
+        list.forEach(function(p,idx){
+          var tm=tMeta(p.type); var isMeta=p.type==='meta';
+          var el=document.createElement('div');
+          el.className='glass-card rounded-2xl p-4 '+(isMeta?'border-amber-500/40':'');
+          el.innerHTML=
+            '<div class="flex items-center gap-2 mb-2">'+
+              '<div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-primary to-brand-accent flex items-center justify-center font-black text-white text-xs">'+esc((p.name||'M')[0].toUpperCase())+'</div>'+
+              '<div class="text-sm font-bold text-white">'+esc(p.name||'Membro')+'</div>'+
+              '<span class="text-[10px] px-2 py-0.5 rounded-full '+(isMeta?'bg-amber-500/10 text-amber-300 border border-amber-500/30':'bg-purple-500/15 text-brand-accent border border-brand-primary/30')+'">'+tm.emoji+' '+tm.label.split(' ').slice(1).join(' ')+'</span>'+
+              '<span class="text-[11px] text-slate-500 ml-auto">'+timeAgo(p.t)+'</span>'+
+            '</div>'+
+            '<p class="text-sm text-slate-200">'+esc(p.text)+'</p>'+
+            (p.type==='foto'||p.type==='video'||p.type==='doc'?'<div class="mt-3 aspect-video rounded-xl bg-gradient-to-br from-brand-surface to-brand-dark flex items-center justify-center text-3xl text-slate-600">'+tm.emoji+'</div>':'')+
+            '<div class="flex items-center gap-4 mt-3 text-xs text-slate-400">'+
+              '<button class="likeBtn hover:text-brand-accent transition" data-i="'+idx+'">💜 <span>'+(p.likes||0)+'</span></button>'+
+              '<span>💬 comentar</span>'+
+              (!p.seed?'<button class="rmBtn ml-auto hover:text-red-400 transition" data-i="'+idx+'">remover</button>':'')+
+            '</div>';
+          el.querySelector('.likeBtn').addEventListener('click',function(){ var l=getFeed(); l[idx].likes=(l[idx].likes||0)+1; save(l); renderFeed(); });
+          var rm=el.querySelector('.rmBtn'); if(rm){ rm.addEventListener('click',function(){ var l=getFeed(); l.splice(idx,1); save(l); renderFeed(); }); }
+          f.appendChild(el);
+        });
+      }
+      $('postBtn').addEventListener('click',function(){
+        var txt=$('postText').value.trim();
+        if(!txt){ $('postText').focus(); $('postText').style.borderColor='#ef4444'; setTimeout(function(){ $('postText').style.borderColor=''; },1500); return; }
+        var l=getFeed(); l.unshift({ type:cur, name:$('postName').value.trim()||'Membro', text:txt, t:Date.now(), likes:0 }); save(l);
+        $('postText').value=''; renderFeed();
+        var t=$('toast'); t.classList.remove('hidden'); setTimeout(function(){ t.classList.add('hidden'); },2600);
+      });
+      renderTypes(); renderFeed();
+    })();
+  </script>
+
+</body>
+</html>

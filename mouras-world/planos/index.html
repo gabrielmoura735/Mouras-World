@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planos | Mouras-World</title>
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {
+        colors: { brand: {
+          dark: '#0A0612', card: '#120B1E', surface: '#1A1030', border: '#241A3A',
+          primary: '#7C3AED', primaryHover: '#5B21B6', accent: '#C084FC', accentGlow: '#A855F7'
+        }},
+        fontFamily: { sans: ['Inter','system-ui','sans-serif'], display: ['Syne','Inter','sans-serif'] }
+      }}
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/anim.css">
+  <style>
+    body { background-color:#0A0612; color:#F1F0F5; font-family:'Inter',sans-serif; overflow-x:hidden; }
+    h1,h2,h3,h4,.font-display { font-family:'Syne','Inter',sans-serif; }
+    .brand-gradient-text { background:linear-gradient(135deg,#A855F7 0%,#7C3AED 50%,#5B21B6 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .accent-gradient-text { background:linear-gradient(135deg,#E9D5FF 0%,#C084FC 50%,#7C3AED 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .glass-card { background:rgba(18,11,30,0.75); backdrop-filter:blur(12px); border:1px solid rgba(124,58,237,0.2); }
+    .glass-card-hover:hover { border-color:rgba(168,85,247,0.5); transform:translateY(-3px); transition:all .25s ease; }
+    .badge-glow { box-shadow:0 0 15px rgba(124,58,237,0.3); }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+    .float { animation: float 6s ease-in-out infinite; }
+    .reveal { opacity:0; transform:translateY(24px); transition:all .6s ease; }
+    .reveal.in { opacity:1; transform:none; }
+    details > summary { list-style:none; cursor:pointer; }
+    details > summary::-webkit-details-marker { display:none; }
+    details[open] .faq-plus { transform:rotate(45deg); }
+  </style>
+</head>
+<body class="selection:bg-purple-500 selection:text-white">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 glass-card border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2.5 group shrink-0">
+        <img src="../assets/logo.png" alt="Mouras-World" class="w-9 h-9 rounded-lg object-cover group-hover:scale-105 transition-transform duration-300">
+        <div class="leading-none">
+          <span class="text-sm font-black tracking-wide text-white">MOURAS<span class="text-brand-primary">-WORLD</span></span>
+          <span class="text-[8px] uppercase tracking-[0.2em] text-brand-accent block font-semibold mt-0.5">Planos</span>
+        </div>
+      </a>
+      <nav class="hidden lg:flex items-center gap-6 text-[13px] font-medium text-slate-300">
+        <a href="../index.html" class="hover:text-brand-primary transition">Início</a>
+        <a href="../comunidade/index.html" class="hover:text-brand-primary transition">Comunidade</a>
+        <a href="index.html" class="text-brand-accent font-semibold">Planos</a>
+        <a href="../academy/index.html" class="hover:text-brand-accent transition">Academy</a>
+      </nav>
+      <a href="#planos" class="hidden sm:flex px-4 py-2 rounded-lg font-bold text-[13px] bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:from-purple-500 hover:to-brand-primary transition-all shadow-md items-center gap-1.5">Ver planos</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative pt-16 pb-20 overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(124,58,237,0.18),rgba(255,255,255,0))]"></div>
+    <div class="absolute -top-24 -left-24 w-80 h-80 bg-brand-primary/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-20 -right-24 w-80 h-80 bg-brand-accentGlow/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+      <div class="flex justify-center mb-6">
+        <div class="relative float">
+          <div class="absolute inset-0 bg-brand-accentGlow/30 rounded-full blur-3xl scale-110"></div>
+          <img src="../assets/logo.png" alt="Mouras-World" class="relative w-20 h-20 rounded-2xl object-cover shadow-2xl shadow-brand-primary/40">
+        </div>
+      </div>
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-card border border-brand-primary/40 text-xs font-semibold text-brand-accent mb-6 badge-glow">
+        <span class="w-2 h-2 rounded-full bg-brand-primary animate-ping"></span>
+        Transparência total
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight mb-6">
+        Planos para quem <span class="brand-gradient-text">quer ir além.</span>
+      </h1>
+      <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+        É <strong class="text-white">grátis de verdade</strong> para quem não tem condições. Para quem pode e quer o acesso completo — mentoria, parcerias e tudo por dentro — existem planos exclusivos. <strong class="text-white">Ninguém fica de fora.</strong>
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#planos" class="w-full sm:w-auto px-8 py-4 rounded-xl font-extrabold bg-gradient-to-r from-brand-primary via-purple-500 to-purple-700 text-white hover:opacity-95 shadow-xl transition-all">Ver os planos</a>
+        <a href="../comunidade/index.html" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold bg-brand-card border border-brand-border text-white hover:border-brand-accent/50 hover:text-brand-accent transition-all">Conhecer a comunidade</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section id="planos" class="py-20 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Escolha seu caminho</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Os planos</h3>
+        <p class="text-slate-400 mt-4">Os valores dos planos pagos serão definidos junto com você. Por enquanto, veja o que cada um entrega.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- GRATUITO -->
+        <div class="glass-card rounded-2xl p-6 glass-card-hover flex flex-col reveal">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 w-fit">Para quem precisa</span>
+          <h4 class="text-xl font-black text-white mt-4">Gratuito</h4>
+          <div class="my-4">
+            <span class="text-3xl font-black brand-gradient-text">R$ 0</span>
+            <span class="text-xs text-slate-400 block mt-1">vitalício · sem pegadinha</span>
+          </div>
+          <ul class="text-sm text-slate-300 space-y-2.5 mb-6 flex-1">
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Comunidade e conversas</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Cursos publicados por membros</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Trilhas por nível</li>
+            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Recursos básicos das IAs</li>
+          </ul>
+          <a href="../comunidade/index.html#entrar" class="w-full py-3 rounded-xl text-center font-bold bg-brand-surface text-white hover:bg-brand-primary/30 transition">Entrar grátis</a>
+        </div>
+        <!-- 6 MESES -->
+        <div class="glass-card rounded-2xl p-6 glass-card-hover flex flex-col reveal">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/20 text-brand-accent border border-brand-primary/30 w-fit">Semestral</span>
+          <h4 class="text-xl font-black text-white mt-4">6 Meses</h4>
+          <div class="my-4">
+            <span class="text-3xl font-black text-white">a definir</span>
+            <span class="text-xs text-slate-400 block mt-1">acesso completo por 6 meses</span>
+          </div>
+          <ul class="text-sm text-slate-300 space-y-2.5 mb-6 flex-1">
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Tudo do gratuito, sem limites</li>
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Módulos exclusivos</li>
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Metas acompanhadas</li>
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> IAs prioritárias e ao vivo</li>
+          </ul>
+          <a href="#falar" class="w-full py-3 rounded-xl text-center font-bold bg-brand-surface text-white hover:bg-brand-primary/30 transition">Quero este</a>
+        </div>
+        <!-- 1 ANO -->
+        <div class="glass-card rounded-2xl p-6 glass-card-hover flex flex-col border-brand-primary/50 badge-glow relative reveal">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-brand-primary text-white text-[11px] font-extrabold uppercase tracking-wider whitespace-nowrap">Melhor custo</div>
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/20 text-brand-accent border border-brand-primary/30 w-fit">Anual</span>
+          <h4 class="text-xl font-black text-white mt-4">1 Ano</h4>
+          <div class="my-4">
+            <span class="text-3xl font-black brand-gradient-text">a definir</span>
+            <span class="text-xs text-slate-400 block mt-1">melhor valor proporcional</span>
+          </div>
+          <ul class="text-sm text-slate-300 space-y-2.5 mb-6 flex-1">
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Tudo do semestral</li>
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Mentoria direta com o Gabriel</li>
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Oportunidades de parceria</li>
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Acompanhamento de perto</li>
+          </ul>
+          <a href="#falar" class="w-full py-3 rounded-xl text-center font-bold bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 transition shadow-lg">Quero este</a>
+        </div>
+        <!-- VITALÍCIO -->
+        <div class="glass-card rounded-2xl p-6 glass-card-hover flex flex-col reveal">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 text-brand-accent border border-brand-accent/30 w-fit">Para sempre</span>
+          <h4 class="text-xl font-black text-white mt-4">Vitalício</h4>
+          <div class="my-4">
+            <span class="text-3xl font-black text-white">sob consulta</span>
+            <span class="text-xs text-slate-400 block mt-1">pagamento único</span>
+          </div>
+          <ul class="text-sm text-slate-300 space-y-2.5 mb-6 flex-1">
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Acesso completo para sempre</li>
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Mentoria e parcerias</li>
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Prioridade máxima</li>
+            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Sem renovação, sem mensalidade</li>
+          </ul>
+          <a href="#falar" class="w-full py-3 rounded-xl text-center font-bold bg-brand-surface text-white hover:bg-brand-primary/30 transition">Quero este</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARATIVO -->
+  <section class="py-20 bg-brand-card border-t border-brand-border">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-primary font-bold mb-2">Lado a lado</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Gratuito x Pago</h3>
+      </div>
+      <div class="glass-card rounded-2xl overflow-hidden reveal">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-brand-border">
+              <th class="text-left p-4 text-slate-400 font-semibold">Recurso</th>
+              <th class="p-4 text-emerald-300 font-bold text-center">Gratuito</th>
+              <th class="p-4 text-brand-accent font-bold text-center">Pago</th>
+            </tr>
+          </thead>
+          <tbody class="text-slate-300">
+            <tr class="border-b border-brand-border/50"><td class="p-4">Comunidade e conversas</td><td class="text-center text-emerald-400">✓</td><td class="text-center text-brand-accent">✓</td></tr>
+            <tr class="border-b border-brand-border/50"><td class="p-4">Cursos dos membros</td><td class="text-center text-emerald-400">✓</td><td class="text-center text-brand-accent">✓</td></tr>
+            <tr class="border-b border-brand-border/50"><td class="p-4">Trilhas por nível</td><td class="text-center text-emerald-400">✓</td><td class="text-center text-brand-accent">✓</td></tr>
+            <tr class="border-b border-brand-border/50"><td class="p-4">Módulos exclusivos</td><td class="text-center text-slate-600">—</td><td class="text-center text-brand-accent">✓</td></tr>
+            <tr class="border-b border-brand-border/50"><td class="p-4">Metas acompanhadas</td><td class="text-center text-slate-600">—</td><td class="text-center text-brand-accent">✓</td></tr>
+            <tr class="border-b border-brand-border/50"><td class="p-4">Mentoria direta com o Gabriel</td><td class="text-center text-slate-600">—</td><td class="text-center text-brand-accent">✓</td></tr>
+            <tr class="border-b border-brand-border/50"><td class="p-4">Oportunidades de parceria</td><td class="text-center text-slate-600">—</td><td class="text-center text-brand-accent">✓</td></tr>
+            <tr><td class="p-4">IAs prioritárias e ao vivo</td><td class="text-center text-slate-600">básico</td><td class="text-center text-brand-accent">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="falar" class="py-20 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-3xl mx-auto px-4">
+      <div class="text-center mb-12 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Dúvidas</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Perguntas frequentes</h3>
+      </div>
+      <div class="space-y-4">
+        <details class="glass-card rounded-xl p-5 reveal">
+          <summary class="flex items-center justify-between text-white font-bold">É grátis mesmo? <span class="faq-plus text-brand-accent text-xl transition-transform">+</span></summary>
+          <p class="text-sm text-slate-400 mt-3 leading-relaxed">É sim. Quem não tem condições financeiras entra de graça, vitalício, sem cartão e sem pegadinha. Isso é um valor da Mouras-World, não uma estratégia de venda.</p>
+        </details>
+        <details class="glass-card rounded-xl p-5 reveal">
+          <summary class="flex items-center justify-between text-white font-bold">Como defino meu plano? <span class="faq-plus text-brand-accent text-xl transition-transform">+</span></summary>
+          <p class="text-sm text-slate-400 mt-3 leading-relaxed">A gente conversa. Os valores dos planos pagos ainda estão sendo definidos — você escolhe entre 6 meses, 1 ano ou vitalício conforme o que faz sentido pra você.</p>
+        </details>
+        <details class="glass-card rounded-xl p-5 reveal">
+          <summary class="flex items-center justify-between text-white font-bold">Posso trocar depois? <span class="faq-plus text-brand-accent text-xl transition-transform">+</span></summary>
+          <p class="text-sm text-slate-400 mt-3 leading-relaxed">Pode. Começou no gratuito e quis evoluir pra um plano? Sem problema. Estava num plano e quer mudar a duração? Também dá — é só falar com a gente.</p>
+        </details>
+        <details class="glass-card rounded-xl p-5 reveal">
+          <summary class="flex items-center justify-between text-white font-bold">O que é mentoria direta? <span class="faq-plus text-brand-accent text-xl transition-transform">+</span></summary>
+          <p class="text-sm text-slate-400 mt-3 leading-relaxed">É conversa direta com o Gabriel sobre seus projetos, metas e caminhos — além de oportunidades reais de parceria para fazer projetos e ganhar dinheiro junto.</p>
+        </details>
+      </div>
+      <div class="text-center mt-12 reveal">
+        <a href="../comunidade/index.html#entrar" class="inline-block px-8 py-4 rounded-xl font-extrabold bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 shadow-xl transition-all">Quero fazer parte</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer class="bg-brand-dark border-t border-brand-border py-10 text-xs text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2">
+        <img src="../assets/logo.png" alt="Mouras-World" class="w-8 h-8 rounded-lg object-cover">
+        <span class="text-white font-black">MOURAS-WORLD</span>
+      </a>
+      <div>© 2026 Mouras-World · Planos</div>
+      <a href="../index.html" class="hover:text-white transition">← Voltar ao início</a>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+
+  <script src="../assets/anim.js"></script>
+</body>
+</html>

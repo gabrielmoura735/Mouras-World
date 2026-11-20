@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academy | Mouras-World</title>
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {
+        colors: { brand: {
+          dark: '#0A0612', card: '#120B1E', surface: '#1A1030', border: '#241A3A',
+          primary: '#7C3AED', primaryHover: '#5B21B6', accent: '#C084FC', accentGlow: '#A855F7'
+        }},
+        fontFamily: { sans: ['Inter','system-ui','sans-serif'], display: ['Syne','Inter','sans-serif'] }
+      }}
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/anim.css">
+  <style>
+    body { background-color:#0A0612; color:#F1F0F5; font-family:'Inter',sans-serif; overflow-x:hidden; }
+    h1,h2,h3,h4,.font-display { font-family:'Syne','Inter',sans-serif; }
+    .brand-gradient-text { background:linear-gradient(135deg,#A855F7 0%,#7C3AED 50%,#5B21B6 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .accent-gradient-text { background:linear-gradient(135deg,#E9D5FF 0%,#C084FC 50%,#7C3AED 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .glass-card { background:rgba(18,11,30,0.75); backdrop-filter:blur(12px); border:1px solid rgba(124,58,237,0.2); }
+    .glass-card-hover:hover { border-color:rgba(168,85,247,0.5); transform:translateY(-3px); transition:all .25s ease; }
+    .badge-glow { box-shadow:0 0 15px rgba(124,58,237,0.3); }
+    @keyframes float { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-12px); } }
+    .float { animation: float 6s ease-in-out infinite; }
+    .reveal { opacity:0; transform:translateY(24px); transition:all .6s ease; }
+    .reveal.in { opacity:1; transform:none; }
+    .progress-track { background:rgba(124,58,237,0.15); border-radius:9999px; height:6px; overflow:hidden; }
+    .progress-fill { height:100%; background:linear-gradient(90deg,#7C3AED,#C084FC); border-radius:9999px; }
+    .play-btn { transition: all .25s ease; }
+    .video-card:hover .play-btn { transform: scale(1.12); box-shadow:0 0 30px rgba(168,85,247,0.5); }
+  </style>
+</head>
+<body class="selection:bg-purple-500 selection:text-white">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 glass-card border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2.5 group shrink-0">
+        <img src="../assets/logo.png" alt="Mouras-World" class="w-9 h-9 rounded-lg object-cover group-hover:scale-105 transition-transform duration-300">
+        <div class="leading-none">
+          <span class="text-sm font-black tracking-wide text-white">MOURAS<span class="text-brand-primary">-WORLD</span></span>
+          <span class="text-[8px] uppercase tracking-[0.2em] text-brand-accent block font-semibold mt-0.5">Academy</span>
+        </div>
+      </a>
+      <nav class="hidden lg:flex items-center gap-6 text-[13px] font-medium text-slate-300">
+        <a href="../index.html" class="hover:text-brand-primary transition">Início</a>
+        <a href="../assista/index.html" class="hover:text-brand-primary transition">Como funciona</a>
+        <a href="#trilhas" class="hover:text-brand-primary transition">Trilhas</a>
+        <a href="#modulos" class="hover:text-brand-primary transition">Módulos</a>
+        <a href="../criar/index.html" class="hover:text-brand-accent transition">Criar curso</a>
+      </nav>
+      <a href="#comecar" class="hidden sm:flex px-4 py-2 rounded-lg font-bold text-[13px] bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:from-purple-500 hover:to-brand-primary transition-all shadow-md items-center gap-1.5">
+        Começar a aprender
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative pt-16 pb-20 overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(124,58,237,0.18),rgba(255,255,255,0))]"></div>
+    <div class="absolute -top-20 -left-24 w-96 h-96 bg-brand-accentGlow/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-32 -right-24 w-80 h-80 bg-brand-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+      <div class="flex justify-center mb-6">
+        <div class="relative float">
+          <div class="absolute inset-0 bg-brand-accentGlow/30 rounded-full blur-3xl scale-110"></div>
+          <img src="../assets/bots/bot-professor.png" alt="Bot professor" class="relative w-24 h-24 rounded-2xl object-cover shadow-2xl shadow-brand-primary/40">
+        </div>
+      </div>
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-card border border-brand-primary/40 text-xs font-semibold text-brand-accent mb-6 badge-glow">
+        <span class="w-2 h-2 rounded-full bg-brand-primary animate-ping"></span>
+        Aprenda · Ensine · Evolua
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight mb-6">
+        A Academy onde <span class="brand-gradient-text">quem sabe, ensina</span> — e quem quer, <span class="accent-gradient-text">aprende</span>.
+      </h1>
+      <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+        Cursos, trilhas e aulas ao vivo — boa parte <strong class="text-white">publicada pelos próprios membros</strong>, de graça. Todo mundo colaborando pelo crescimento de todos.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#comecar" class="w-full sm:w-auto px-8 py-4 rounded-xl font-extrabold bg-gradient-to-r from-brand-primary via-purple-500 to-purple-700 text-white hover:opacity-95 shadow-xl transition-all">
+          Começar a aprender
+        </a>
+        <a href="../criar/index.html" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold bg-brand-card border border-brand-border text-white hover:border-brand-accent/50 hover:text-brand-accent transition-all">
+          Criar / publicar meu curso
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRILHAS POR NÍVEL -->
+  <section id="trilhas" class="py-20 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Do zero ao profissional</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Trilhas por nível</h3>
+        <p class="text-slate-400 mt-4">Cada trilha te leva um passo além. Evolua no seu ritmo — sempre com a comunidade junto.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">🌱</div>
+          <h4 class="text-lg font-bold text-white mb-1">Iniciante</h4>
+          <p class="text-sm text-slate-400 mb-4">Primeiros passos no mundo digital, sem enrolação.</p>
+          <div class="progress-track"><div class="progress-fill" style="width:15%"></div></div>
+          <div class="text-[11px] text-slate-500 mt-2">Comece aqui</div>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">📘</div>
+          <h4 class="text-lg font-bold text-white mb-1">Médio</h4>
+          <p class="text-sm text-slate-400 mb-4">Consolidando a base e ganhando autonomia.</p>
+          <div class="progress-track"><div class="progress-fill" style="width:35%"></div></div>
+          <div class="text-[11px] text-slate-500 mt-2">Em desenvolvimento</div>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">🛠️</div>
+          <h4 class="text-lg font-bold text-white mb-1">Intermediário</h4>
+          <p class="text-sm text-slate-400 mb-4">Tocando projetos reais com apoio da comunidade.</p>
+          <div class="progress-track"><div class="progress-fill" style="width:55%"></div></div>
+          <div class="text-[11px] text-slate-500 mt-2">Mão na massa</div>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">🚀</div>
+          <h4 class="text-lg font-bold text-white mb-1">Avançado</h4>
+          <p class="text-sm text-slate-400 mb-4">Autônomo, entregando projetos do início ao fim.</p>
+          <div class="progress-track"><div class="progress-fill" style="width:75%"></div></div>
+          <div class="text-[11px] text-slate-500 mt-2">Voando alto</div>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">🔥</div>
+          <h4 class="text-lg font-bold text-white mb-1">Desafiador</h4>
+          <p class="text-sm text-slate-400 mb-4">Encarando os projetos mais complexos de frente.</p>
+          <div class="progress-track"><div class="progress-fill" style="width:90%"></div></div>
+          <div class="text-[11px] text-slate-500 mt-2">Nível hard</div>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">👑</div>
+          <h4 class="text-lg font-bold text-white mb-1">Profissional</h4>
+          <p class="text-sm text-slate-400 mb-4">Nível de mercado — e agora também mentor de outros.</p>
+          <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+          <div class="text-[11px] text-slate-500 mt-2">Topo da jornada</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MÓDULOS -->
+  <section id="modulos" class="py-20 bg-brand-card border-t border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-primary font-bold mb-2">O que você vai aprender</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Módulos da Academy</h3>
+        <p class="text-slate-400 mt-4">Conteúdo organizado por tema, do básico ao avançado. Sempre crescendo com novos cursos dos membros.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">🌐</div>
+          <h4 class="text-lg font-bold text-white mb-2">Fundamentos da Web</h4>
+          <p class="text-sm text-slate-400 mb-4">Como a internet funciona, HTML, CSS e seu primeiro site no ar.</p>
+          <div class="text-[11px] text-brand-accent font-semibold">8 aulas · 3h</div>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">🎨</div>
+          <h4 class="text-lg font-bold text-white mb-2">Design & Identidade</h4>
+          <p class="text-sm text-slate-400 mb-4">Cores, tipografia e layouts que encantam o cliente final.</p>
+          <div class="text-[11px] text-brand-accent font-semibold">10 aulas · 4h</div>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">💻</div>
+          <h4 class="text-lg font-bold text-white mb-2">Programação</h4>
+          <p class="text-sm text-slate-400 mb-4">JavaScript, React e Next.js para construir de verdade.</p>
+          <div class="text-[11px] text-brand-accent font-semibold">14 aulas · 7h</div>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">📈</div>
+          <h4 class="text-lg font-bold text-white mb-2">Negócios & Vendas</h4>
+          <p class="text-sm text-slate-400 mb-4">Prospecção, propostas e como fechar clientes com respeito.</p>
+          <div class="text-[11px] text-brand-accent font-semibold">9 aulas · 4h</div>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">🤖</div>
+          <h4 class="text-lg font-bold text-white mb-2">IA & Automação</h4>
+          <p class="text-sm text-slate-400 mb-4">Usar as IAs da Mouras-World pra trabalhar mais rápido.</p>
+          <div class="text-[11px] text-brand-accent font-semibold">6 aulas · 3h</div>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="text-3xl mb-3">🧭</div>
+          <h4 class="text-lg font-bold text-white mb-2">Carreira & Mentoria</h4>
+          <p class="text-sm text-slate-400 mb-4">Metas, portfólio e os próximos passos da sua jornada.</p>
+          <div class="text-[11px] text-brand-accent font-semibold">7 aulas · 3h</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VÍDEOS EM DESTAQUE -->
+  <section id="videos" class="py-20 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Pra assistir</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Vídeos em destaque</h3>
+        <p class="text-slate-400 mt-4">Comece pelo explicador "Como funciona" — depois, novas aulas toda semana.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <a href="../assista/index.html" class="video-card glass-card glass-card-hover rounded-2xl overflow-hidden reveal block">
+          <div class="relative aspect-video bg-gradient-to-br from-brand-primary/30 to-brand-dark flex items-center justify-center">
+            <span class="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">Assista agora</span>
+            <div class="play-btn w-16 h-16 rounded-full bg-brand-primary/90 flex items-center justify-center shadow-lg badge-glow">
+              <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <span class="absolute bottom-3 right-3 text-[11px] font-semibold text-white bg-black/50 px-2 py-0.5 rounded">1:00</span>
+          </div>
+          <div class="p-5">
+            <h4 class="text-base font-bold text-white mb-1">Como funciona a Mouras-World</h4>
+            <p class="text-xs text-slate-400">Entenda em 1 minuto o que o site e os cursos oferecem pra você.</p>
+          </div>
+        </a>
+        <div class="video-card glass-card glass-card-hover rounded-2xl overflow-hidden reveal">
+          <div class="relative aspect-video bg-gradient-to-br from-brand-surface to-brand-dark flex items-center justify-center">
+            <span class="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-brand-primary/20 text-brand-accent border border-brand-primary/30">Em breve</span>
+            <div class="play-btn w-16 h-16 rounded-full bg-brand-primary/90 flex items-center justify-center shadow-lg">
+              <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <span class="absolute bottom-3 right-3 text-[11px] font-semibold text-white bg-black/50 px-2 py-0.5 rounded">18:05</span>
+          </div>
+          <div class="p-5">
+            <h4 class="text-base font-bold text-white mb-1">Como prospectar sem ser chato</h4>
+            <p class="text-xs text-slate-400">A abordagem que respeita o cliente e funciona.</p>
+          </div>
+        </div>
+        <div class="video-card glass-card glass-card-hover rounded-2xl overflow-hidden reveal">
+          <div class="relative aspect-video bg-gradient-to-br from-brand-surface to-brand-dark flex items-center justify-center">
+            <span class="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-brand-primary/20 text-brand-accent border border-brand-primary/30">Em breve</span>
+            <div class="play-btn w-16 h-16 rounded-full bg-brand-primary/90 flex items-center justify-center shadow-lg">
+              <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <span class="absolute bottom-3 right-3 text-[11px] font-semibold text-white bg-black/50 px-2 py-0.5 rounded">09:22</span>
+          </div>
+          <div class="p-5">
+            <h4 class="text-base font-bold text-white mb-1">IA na prática: automatize sua rotina</h4>
+            <p class="text-xs text-slate-400">Ferramentas da Mouras-World em ação.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMAÇÃO AO VIVO -->
+  <section id="aovivo" class="py-20 bg-brand-card border-t border-brand-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-primary font-bold mb-2">Agenda da semana</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Programação ao vivo</h3>
+        <p class="text-slate-400 mt-4">Sessões em tempo real pra tirar dúvidas, aprender junto e colar com a galera.</p>
+      </div>
+      <div class="glass-card rounded-2xl overflow-hidden reveal">
+        <div class="hidden sm:grid grid-cols-12 gap-4 px-6 py-3 text-[11px] uppercase tracking-wider text-slate-400 font-bold border-b border-brand-border">
+          <div class="col-span-2">Dia</div>
+          <div class="col-span-2">Horário</div>
+          <div class="col-span-6">Tema</div>
+          <div class="col-span-2">Nível</div>
+        </div>
+        <div class="divide-y divide-brand-border">
+          <div class="grid grid-cols-2 sm:grid-cols-12 gap-2 sm:gap-4 px-6 py-4 items-center hover:bg-brand-primary/5 transition">
+            <div class="sm:col-span-2 font-bold text-white">Segunda</div>
+            <div class="sm:col-span-2 text-brand-accent font-semibold">20h00</div>
+            <div class="col-span-2 sm:col-span-6 text-sm text-slate-300">Seu primeiro site no ar</div>
+            <div class="sm:col-span-2"><span class="text-[11px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">Iniciante</span></div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-12 gap-2 sm:gap-4 px-6 py-4 items-center hover:bg-brand-primary/5 transition">
+            <div class="sm:col-span-2 font-bold text-white">Terça</div>
+            <div class="sm:col-span-2 text-brand-accent font-semibold">20h00</div>
+            <div class="col-span-2 sm:col-span-6 text-sm text-slate-300">Design que vende: na prática</div>
+            <div class="sm:col-span-2"><span class="text-[11px] px-2 py-0.5 rounded-full bg-purple-500/10 text-brand-accent border border-brand-primary/30">Médio</span></div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-12 gap-2 sm:gap-4 px-6 py-4 items-center hover:bg-brand-primary/5 transition">
+            <div class="sm:col-span-2 font-bold text-white">Quarta</div>
+            <div class="sm:col-span-2 text-brand-accent font-semibold">19h30</div>
+            <div class="col-span-2 sm:col-span-6 text-sm text-slate-300">Programando com React do zero</div>
+            <div class="sm:col-span-2"><span class="text-[11px] px-2 py-0.5 rounded-full bg-purple-500/10 text-brand-accent border border-brand-primary/30">Intermediário</span></div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-12 gap-2 sm:gap-4 px-6 py-4 items-center hover:bg-brand-primary/5 transition">
+            <div class="sm:col-span-2 font-bold text-white">Quinta</div>
+            <div class="sm:col-span-2 text-brand-accent font-semibold">20h30</div>
+            <div class="col-span-2 sm:col-span-6 text-sm text-slate-300">IA & automações da Mouras-World</div>
+            <div class="sm:col-span-2"><span class="text-[11px] px-2 py-0.5 rounded-full bg-fuchsia-500/10 text-fuchsia-300 border border-fuchsia-500/30">Avançado</span></div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-12 gap-2 sm:gap-4 px-6 py-4 items-center hover:bg-brand-primary/5 transition">
+            <div class="sm:col-span-2 font-bold text-white">Sexta</div>
+            <div class="sm:col-span-2 text-brand-accent font-semibold">20h00</div>
+            <div class="col-span-2 sm:col-span-6 text-sm text-slate-300">Mentoria aberta: tire suas dúvidas</div>
+            <div class="sm:col-span-2"><span class="text-[11px] px-2 py-0.5 rounded-full bg-brand-surface text-slate-300 border border-brand-border">Todos</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICAR SEU CURSO -->
+  <section id="publicar" class="py-20 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="glass-card rounded-3xl p-8 sm:p-12 text-center border-brand-primary/40 badge-glow reveal relative overflow-hidden">
+        <div class="absolute -top-16 -right-16 w-64 h-64 bg-brand-accentGlow/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="text-4xl mb-4">🎓</div>
+        <h3 class="text-2xl sm:text-3xl font-black text-white mb-4 relative z-10">Você sabe algo? Então ensine.</h3>
+        <p class="text-slate-300 max-w-xl mx-auto mb-8 relative z-10">
+          Qualquer membro pode <strong class="text-white">publicar um curso, vídeo ou módulo de graça</strong> dentro da Academy — no Estúdio do Membro você monta tudo do seu jeito. Compartilhe o que sabe, construa sua reputação e ajude quem está começando.
+        </p>
+        <a href="../criar/index.html" class="inline-block px-8 py-4 rounded-xl font-extrabold bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 shadow-lg transition relative z-10">
+          Abrir o Estúdio do Membro ✦
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMEÇAR -->
+  <section id="comecar" class="py-20 bg-brand-card border-t border-brand-border">
+    <div class="max-w-2xl mx-auto px-4 text-center">
+      <h3 class="text-3xl sm:text-4xl font-black text-white mb-4 reveal">Bora começar a aprender?</h3>
+      <p class="text-slate-400 mb-8 reveal">Entre na comunidade e tenha acesso às trilhas, módulos e aulas ao vivo. Grátis pra quem precisa.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal">
+        <a href="../comunidade/index.html#entrar" class="w-full sm:w-auto px-8 py-4 rounded-xl font-extrabold bg-gradient-to-r from-brand-primary via-purple-500 to-purple-700 text-white hover:opacity-95 shadow-xl transition-all">
+          Entrar na comunidade
+        </a>
+        <a href="../comunidade/index.html" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold bg-brand-surface border border-brand-border text-white hover:border-brand-accent/50 hover:text-brand-accent transition-all">
+          Conhecer a comunidade
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer class="bg-brand-dark border-t border-brand-border py-10 text-xs text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2">
+        <img src="../assets/logo.png" alt="Mouras-World" class="w-8 h-8 rounded-lg object-cover">
+        <span class="text-white font-black">MOURAS-WORLD</span>
+      </a>
+      <div>© 2026 Mouras-World · Academy</div>
+      <a href="../index.html" class="hover:text-white transition">← Voltar ao início</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('in'); obs.unobserve(entry.target); }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function (e) { obs.observe(e); });
+    })();
+  </script>
+
+  <script src="../assets/anim.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+/* ============================================================
+   Mouras-World — animações compartilhadas (anim.css)
+   Incluído em todas as páginas pra dar vida consistente ao site.
+   Seguro: nunca esconde conteúdo acima da dobra.
+   ============================================================ */
+
+/* entrada ao rolar (aplicada via anim.js só abaixo da dobra) */
+.anim-prep { opacity: 0; transform: translateY(22px); }
+.anim-in {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+/* flutuar suave */
+@keyframes mwFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+[data-float] { animation: mwFloat 5s ease-in-out infinite; }
+
+/* brilho passando em botões primários */
+@keyframes mwShine { to { left: 160%; } }
+.btn-shine { position: relative; overflow: hidden; }
+.btn-shine::after {
+  content: ''; position: absolute; top: 0; left: -60%;
+  width: 40%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.28), transparent);
+  transform: skewX(-20deg); animation: mwShine 4s infinite;
+}
+
+/* leve brilho pulsante */
+@keyframes mwGlow { 0%,100% { box-shadow: 0 0 0 0 rgba(124,58,237,.0); } 50% { box-shadow: 0 0 22px 0 rgba(124,58,237,.35); } }
+.mw-glow { animation: mwGlow 3s ease-in-out infinite; }
+
+/* blobs de fundo girando devagar */
+@keyframes mwDriftA { 0%,100% { transform: translate(0,0); } 50% { transform: translate(36px,26px); } }
+@keyframes mwDriftB { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-36px,-26px); } }
+.mw-blob-a { animation: mwDriftA 13s ease-in-out infinite; }
+.mw-blob-b { animation: mwDriftB 15s ease-in-out infinite; }
+
+/* hover de elevação (cards de seção ganham automaticamente via anim.js) */
+.mw-lift { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.mw-lift:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(124,58,237,.22); border-color: rgba(168,85,247,.5); }
+
+/* respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .anim-prep { opacity: 1; transform: none; }
+  [data-float], .mw-glow, .mw-blob-a, .mw-blob-b { animation: none; }
+  .btn-shine::after { display: none; }
+  .mw-lift { transition: none; }
+}

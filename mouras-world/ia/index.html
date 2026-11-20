@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moura.ai | Mouras-World</title>
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {
+        colors: { brand: {
+          dark: '#0A0612', card: '#120B1E', surface: '#1A1030', border: '#241A3A',
+          primary: '#7C3AED', primaryHover: '#5B21B6', accent: '#C084FC', accentGlow: '#A855F7'
+        }},
+        fontFamily: { sans: ['Inter','system-ui','sans-serif'], display: ['Syne','Inter','sans-serif'] }
+      }}
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/anim.css">
+  <style>
+    body { background-color:#0A0612; color:#F1F0F5; font-family:'Inter',sans-serif; overflow-x:hidden; }
+    h1,h2,h3,h4,.font-display { font-family:'Syne','Inter',sans-serif; }
+    .brand-gradient-text { background:linear-gradient(135deg,#A855F7 0%,#7C3AED 50%,#5B21B6 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .accent-gradient-text { background:linear-gradient(135deg,#E9D5FF 0%,#C084FC 50%,#7C3AED 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .glass-card { background:rgba(18,11,30,0.75); backdrop-filter:blur(12px); border:1px solid rgba(124,58,237,0.2); }
+    .glass-card-hover:hover { border-color:rgba(168,85,247,0.5); transform:translateY(-3px); transition:all .25s ease; }
+    .badge-glow { box-shadow:0 0 15px rgba(124,58,237,0.3); }
+    @keyframes float { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-14px) } }
+    .float { animation:float 6s ease-in-out infinite; }
+    @keyframes pulse-glow { 0%,100%{ box-shadow:0 0 30px rgba(124,58,237,0.25) } 50%{ box-shadow:0 0 60px rgba(168,85,247,0.55) } }
+    .pulse-glow { animation:pulse-glow 3.5s ease-in-out infinite; }
+    @keyframes spin-slow { to { transform:rotate(360deg) } }
+    .spin-slow { animation:spin-slow 24s linear infinite; }
+    .reveal { opacity:0; transform:translateY(24px); transition:all .6s ease; }
+    .reveal.in { opacity:1; transform:none; }
+    .blob { position:absolute; border-radius:9999px; filter:blur(80px); pointer-events:none; z-index:0; }
+  </style>
+</head>
+<body class="selection:bg-purple-500 selection:text-white">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 glass-card border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2.5 group shrink-0">
+        <img src="../assets/logo.png" alt="Mouras-World" class="w-9 h-9 rounded-lg object-cover group-hover:scale-105 transition-transform duration-300">
+        <div class="leading-none">
+          <span class="text-sm font-black tracking-wide text-white">MOURAS<span class="text-brand-primary">-WORLD</span></span>
+          <span class="text-[8px] uppercase tracking-[0.2em] text-brand-accent block font-semibold mt-0.5">Moura.ai</span>
+        </div>
+      </a>
+      <nav class="hidden lg:flex items-center gap-6 text-[13px] font-medium text-slate-300">
+        <a href="../index.html" class="hover:text-brand-primary transition">Início</a>
+        <a href="../comunidade/index.html" class="hover:text-brand-primary transition">Comunidade</a>
+        <a href="#central" class="hover:text-brand-primary transition">Central de IAs</a>
+        <a href="#agentes" class="hover:text-brand-primary transition">Agentes</a>
+        <a href="../conectores/index.html" class="hover:text-brand-primary transition">Conectores</a>
+        <a href="../laboratorio/index.html" class="text-brand-accent font-semibold hover:text-purple-300 transition">🔬 Laboratório</a>
+      </nav>
+      <a href="../comunidade/index.html#entrar" class="hidden sm:flex px-4 py-2 rounded-lg font-bold text-[13px] bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:from-purple-500 hover:to-brand-primary transition-all shadow-md items-center gap-1.5">
+        Entrar na Comunidade
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative pt-16 pb-20 overflow-hidden">
+    <div class="blob w-96 h-96 bg-brand-primary/20 -top-24 -left-24"></div>
+    <div class="blob w-96 h-96 bg-brand-accentGlow/15 top-10 -right-24"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(124,58,237,0.18),rgba(255,255,255,0))]"></div>
+    <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+      <div class="flex justify-center mb-6">
+        <div class="relative float">
+          <div class="absolute inset-0 bg-brand-accentGlow/30 rounded-full blur-3xl scale-110"></div>
+          <img src="../assets/logo.png" alt="Moura.ai" class="relative w-24 h-24 rounded-3xl object-cover shadow-2xl shadow-brand-primary/40">
+        </div>
+      </div>
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-card border border-brand-primary/40 text-xs font-semibold text-brand-accent mb-6 badge-glow">
+        <span class="w-2 h-2 rounded-full bg-brand-primary animate-ping"></span>
+        Em desenvolvimento
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight mb-6">
+        <span class="brand-gradient-text">Moura.ai</span> — a inteligência que <span class="accent-gradient-text">trabalha com você</span>.
+      </h1>
+      <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+        Uma camada de agentes especializados pra <strong class="text-white">criar, automatizar e analisar</strong> dentro da plataforma. Ainda estamos construindo — e a evolução é medida por resultados reais, não por promessa.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#agentes" class="w-full sm:w-auto px-8 py-4 rounded-xl font-extrabold bg-gradient-to-r from-brand-primary via-purple-500 to-purple-700 text-white hover:opacity-95 shadow-xl transition-all">
+          Conhecer os agentes
+        </a>
+        <a href="../laboratorio/index.html" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold bg-brand-card border border-brand-primary/50 text-white hover:border-brand-accent hover:text-brand-accent transition-all badge-glow">
+          🤝 Construir junto no Laboratório
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CENTRAL DE IAS -->
+  <section id="central" class="py-20 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Todas num lugar só</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Central de IAs</h3>
+        <p class="text-slate-400 mt-4">Grok, ChatGPT, Claude, Gemini e mais — conectadas dentro da plataforma, pra quem entrou grátis ou de um plano. Use todas num só lugar, sem ficar pulando de site.</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="glass-card glass-card-hover rounded-2xl p-5 text-center"><div class="text-3xl mb-2">💬</div><div class="font-bold text-white text-sm">ChatGPT</div><div class="text-[11px] text-slate-400 mt-1">Texto & ideias</div><span class="text-[10px] mt-2 inline-block px-2 py-0.5 rounded-full bg-brand-surface text-slate-400 border border-brand-border">Conectar conta</span></div>
+        <div class="glass-card glass-card-hover rounded-2xl p-5 text-center"><div class="text-3xl mb-2">🧠</div><div class="font-bold text-white text-sm">Claude</div><div class="text-[11px] text-slate-400 mt-1">Código & análise</div><span class="text-[10px] mt-2 inline-block px-2 py-0.5 rounded-full bg-brand-surface text-slate-400 border border-brand-border">Conectar conta</span></div>
+        <div class="glass-card glass-card-hover rounded-2xl p-5 text-center"><div class="text-3xl mb-2">⚡</div><div class="font-bold text-white text-sm">Grok</div><div class="text-[11px] text-slate-400 mt-1">Tempo real</div><span class="text-[10px] mt-2 inline-block px-2 py-0.5 rounded-full bg-brand-surface text-slate-400 border border-brand-border">Conectar conta</span></div>
+        <div class="glass-card glass-card-hover rounded-2xl p-5 text-center"><div class="text-3xl mb-2">✦</div><div class="font-bold text-white text-sm">Gemini</div><div class="text-[11px] text-slate-400 mt-1">Multimídia</div><span class="text-[10px] mt-2 inline-block px-2 py-0.5 rounded-full bg-brand-surface text-slate-400 border border-brand-border">Conectar conta</span></div>
+        <div class="glass-card glass-card-hover rounded-2xl p-5 text-center"><div class="text-3xl mb-2">👩‍💻</div><div class="font-bold text-white text-sm">Claude Code</div><div class="text-[11px] text-slate-400 mt-1">Programar</div><span class="text-[10px] mt-2 inline-block px-2 py-0.5 rounded-full bg-brand-surface text-slate-400 border border-brand-border">Conectar conta</span></div>
+        <div class="glass-card glass-card-hover rounded-2xl p-5 text-center"><div class="text-3xl mb-2">🎨</div><div class="font-bold text-white text-sm">Gerador de imagem</div><div class="text-[11px] text-slate-400 mt-1">Arte por IA</div><span class="text-[10px] mt-2 inline-block px-2 py-0.5 rounded-full bg-brand-surface text-slate-400 border border-brand-border">Em breve</span></div>
+        <div class="glass-card glass-card-hover rounded-2xl p-5 text-center"><div class="text-3xl mb-2">🎬</div><div class="font-bold text-white text-sm">Gerador de vídeo</div><div class="text-[11px] text-slate-400 mt-1">Vídeos por IA</div><span class="text-[10px] mt-2 inline-block px-2 py-0.5 rounded-full bg-brand-surface text-slate-400 border border-brand-border">Em breve</span></div>
+        <div class="glass-card glass-card-hover rounded-2xl p-5 text-center"><div class="text-3xl mb-2">🔊</div><div class="font-bold text-white text-sm">Voz / narração</div><div class="text-[11px] text-slate-400 mt-1">Áudio por IA</div><span class="text-[10px] mt-2 inline-block px-2 py-0.5 rounded-full bg-brand-surface text-slate-400 border border-brand-border">Em breve</span></div>
+      </div>
+      <p class="text-[11px] text-slate-500 text-center mt-6 max-w-2xl mx-auto">Prévia: cada IA é um serviço de terceiros com sua própria conta/chave. Aqui elas ficam reunidas num painel só. O acesso grátis dentro da plataforma será definido conforme os custos de cada uma.</p>
+    </div>
+  </section>
+
+  <!-- AGENTES -->
+  <section id="agentes" class="py-20 bg-brand-card border-t border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Time de inteligências</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Agentes especializados</h3>
+        <p class="text-slate-400 mt-4">Cada agente domina uma função. Juntos, coordenam o trabalho — com você sempre no comando das decisões.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="flex items-center justify-between mb-3"><div class="text-3xl">💻</div><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">ativo</span></div>
+          <h4 class="text-lg font-bold text-white mb-1">Desenvolvedor</h4>
+          <p class="text-sm text-slate-400">Cria sites, sistemas e integrações com código limpo e rápido.</p>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="flex items-center justify-between mb-3"><div class="text-3xl">🎨</div><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">ativo</span></div>
+          <h4 class="text-lg font-bold text-white mb-1">Designer</h4>
+          <p class="text-sm text-slate-400">Gera layouts e identidade visual marcante, no padrão da marca.</p>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="flex items-center justify-between mb-3"><div class="text-3xl">📊</div><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/15 text-brand-accent border border-brand-primary/30">em breve</span></div>
+          <h4 class="text-lg font-bold text-white mb-1">Analista de Negócios</h4>
+          <p class="text-sm text-slate-400">Lê dados, acha oportunidades e ajuda a decidir com clareza.</p>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="flex items-center justify-between mb-3"><div class="text-3xl">⚙️</div><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">ativo</span></div>
+          <h4 class="text-lg font-bold text-white mb-1">Automação</h4>
+          <p class="text-sm text-slate-400">Monta fluxos e bots que fazem o trabalho repetitivo por você.</p>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="flex items-center justify-between mb-3"><div class="text-3xl">🔎</div><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/15 text-brand-accent border border-brand-primary/30">em breve</span></div>
+          <h4 class="text-lg font-bold text-white mb-1">Pesquisa</h4>
+          <p class="text-sm text-slate-400">Investiga mercados, concorrência e tendências sob demanda.</p>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="flex items-center justify-between mb-3"><div class="text-3xl">🎯</div><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">ativo</span></div>
+          <h4 class="text-lg font-bold text-white mb-1">Vendas</h4>
+          <p class="text-sm text-slate-400">Prospecta, qualifica e prepara propostas personalizadas.</p>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="flex items-center justify-between mb-3"><div class="text-3xl">💬</div><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/15 text-brand-accent border border-brand-primary/30">em breve</span></div>
+          <h4 class="text-lg font-bold text-white mb-1">Suporte</h4>
+          <p class="text-sm text-slate-400">Atende dúvidas e acompanha clientes com atenção humana.</p>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="flex items-center justify-between mb-3"><div class="text-3xl">💰</div><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/15 text-brand-accent border border-brand-primary/30">em breve</span></div>
+          <h4 class="text-lg font-bold text-white mb-1">Financeiro</h4>
+          <p class="text-sm text-slate-400">Organiza custos, receitas e projeções de forma simples.</p>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="flex items-center justify-between mb-3"><div class="text-3xl">📋</div><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/15 text-brand-accent border border-brand-primary/30">em breve</span></div>
+          <h4 class="text-lg font-bold text-white mb-1">Gerente de Projeto</h4>
+          <p class="text-sm text-slate-400">Coordena tarefas, prazos e entregas entre os outros agentes.</p>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="flex items-center justify-between mb-3"><div class="text-3xl">✅</div><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/15 text-brand-accent border border-brand-primary/30">em breve</span></div>
+          <h4 class="text-lg font-bold text-white mb-1">Qualidade</h4>
+          <p class="text-sm text-slate-400">Testa, revisa e garante que tudo funciona antes de entregar.</p>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="flex items-center justify-between mb-3"><div class="text-3xl">🎓</div><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/15 text-brand-accent border border-brand-primary/30">em breve</span></div>
+          <h4 class="text-lg font-bold text-white mb-1">Educação</h4>
+          <p class="text-sm text-slate-400">Cria trilhas e explica conteúdos pros membros da comunidade.</p>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-6 reveal">
+          <div class="flex items-center justify-between mb-3"><div class="text-3xl">🧭</div><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/15 text-brand-accent border border-brand-primary/30">em breve</span></div>
+          <h4 class="text-lg font-bold text-white mb-1">Operações</h4>
+          <p class="text-sm text-slate-400">Mantém os processos rodando e cuida da rotina do dia a dia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AUTOMAÇÕES -->
+  <section id="automacoes" class="py-20 bg-brand-card border-t border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-primary font-bold mb-2">Trabalho no automático</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Automações</h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="glass-card glass-card-hover rounded-2xl p-7 reveal pulse-glow">
+          <div class="text-3xl mb-3">🛰️</div>
+          <h4 class="text-lg font-bold text-white mb-2">Prospecção (MazyOS)</h4>
+          <p class="text-sm text-slate-400">Encontra e qualifica empresas no Google Maps, filtra os melhores leads e prepara a lista de contato.</p>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-7 reveal">
+          <div class="text-3xl mb-3">🧱</div>
+          <h4 class="text-lg font-bold text-white mb-2">Criação de sites</h4>
+          <p class="text-sm text-slate-400">Gera prévias de sites por nicho em minutos, prontas pra enviar ao cliente.</p>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-7 reveal">
+          <div class="text-3xl mb-3">📈</div>
+          <h4 class="text-lg font-bold text-white mb-2">Análise de dados</h4>
+          <p class="text-sm text-slate-400">Transforma planilhas e relatórios em insights claros e decisões práticas.</p>
+        </div>
+        <div class="glass-card glass-card-hover rounded-2xl p-7 reveal">
+          <div class="text-3xl mb-3">🤝</div>
+          <h4 class="text-lg font-bold text-white mb-2">Atendimento</h4>
+          <p class="text-sm text-slate-400">Responde dúvidas comuns e organiza conversas, sempre com revisão humana.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEGURANÇA -->
+  <section class="py-16 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="glass-card rounded-2xl p-8 reveal">
+        <div class="text-center mb-8">
+          <h3 class="text-2xl font-black text-white">Segurança em primeiro lugar</h3>
+          <p class="text-slate-400 mt-2 text-sm">A IA ajuda, mas nunca decide o que é crítico sozinha.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div class="p-4"><div class="text-2xl mb-2">🔐</div><div class="text-sm font-bold text-white">Permissões controladas</div></div>
+          <div class="p-4"><div class="text-2xl mb-2">🙋</div><div class="text-sm font-bold text-white">Aprovação humana</div></div>
+          <div class="p-4"><div class="text-2xl mb-2">📜</div><div class="text-sm font-bold text-white">Registro de atividades</div></div>
+          <div class="p-4"><div class="text-2xl mb-2">💸</div><div class="text-sm font-bold text-white">Controle de custos</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section id="roadmap" class="py-20 bg-brand-card border-t border-brand-border">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Pra onde vamos</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Roadmap da Moura.ai</h3>
+        <p class="text-slate-400 mt-4">Um passo de cada vez, construindo o que funciona de verdade.</p>
+      </div>
+      <div class="space-y-6">
+        <div class="glass-card rounded-2xl p-6 flex gap-5 items-start reveal">
+          <div class="shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-primary to-purple-700 flex items-center justify-center font-black text-white">v0.1</div>
+          <div>
+            <h4 class="text-lg font-bold text-white mb-1">MVP — 1 a 2 agentes</h4>
+            <p class="text-sm text-slate-400">Desenvolvedor e Vendas em funcionamento, resolvendo tarefas reais do dia a dia.</p>
+          </div>
+        </div>
+        <div class="glass-card rounded-2xl p-6 flex gap-5 items-start reveal">
+          <div class="shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-accentGlow to-purple-600 flex items-center justify-center font-black text-white">v0.5</div>
+          <div>
+            <h4 class="text-lg font-bold text-white mb-1">5 agentes + integrações</h4>
+            <p class="text-sm text-slate-400">Mais agentes ativos, conectados às ferramentas da plataforma e à comunidade.</p>
+          </div>
+        </div>
+        <div class="glass-card rounded-2xl p-6 flex gap-5 items-start reveal">
+          <div class="shrink-0 w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-accent to-brand-primary flex items-center justify-center font-black text-white">v1.0</div>
+          <div>
+            <h4 class="text-lg font-bold text-white mb-1">Plataforma completa</h4>
+            <p class="text-sm text-slate-400">Os 12 agentes coordenados, com memória, monitoramento e aprovação humana nas ações críticas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer class="bg-brand-dark border-t border-brand-border py-10 text-xs text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2">
+        <img src="../assets/logo.png" alt="Mouras-World" class="w-8 h-8 rounded-lg object-cover">
+        <span class="text-white font-black">MOURAS-WORLD</span>
+      </a>
+      <div>© 2026 Mouras-World · Moura.ai</div>
+      <a href="../index.html" class="hover:text-white transition">← Voltar ao início</a>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+    })();
+  </script>
+
+  <script src="../assets/anim.js"></script>
+</body>
+</html>

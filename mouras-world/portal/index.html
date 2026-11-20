@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal do Membro | Mouras-World</title>
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {
+        colors: { brand: {
+          dark: '#0A0612', card: '#120B1E', surface: '#1A1030', border: '#241A3A',
+          primary: '#7C3AED', primaryHover: '#5B21B6', accent: '#C084FC', accentGlow: '#A855F7'
+        }},
+        fontFamily: { sans: ['Inter','system-ui','sans-serif'], display: ['Syne','Inter','sans-serif'] }
+      }}
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/anim.css">
+  <style>
+    body { background-color:#0A0612; color:#F1F0F5; font-family:'Inter',sans-serif; overflow-x:hidden; }
+    h1,h2,h3,h4,.font-display { font-family:'Syne','Inter',sans-serif; }
+    .brand-gradient-text { background:linear-gradient(135deg,#A855F7 0%,#7C3AED 50%,#5B21B6 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .accent-gradient-text { background:linear-gradient(135deg,#E9D5FF 0%,#C084FC 50%,#7C3AED 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .glass-card { background:rgba(18,11,30,0.75); backdrop-filter:blur(12px); border:1px solid rgba(124,58,237,0.2); }
+    .glass-card-hover:hover { border-color:rgba(168,85,247,0.5); transform:translateY(-3px); transition:all .25s ease; }
+    .badge-glow { box-shadow:0 0 15px rgba(124,58,237,0.3); }
+    @keyframes float { 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-14px) } }
+    .float { animation:float 6s ease-in-out infinite; }
+    .reveal { opacity:0; transform:translateY(24px); transition:all .6s ease; }
+    .reveal.in { opacity:1; transform:none; }
+    .blob { position:absolute; border-radius:9999px; filter:blur(80px); pointer-events:none; z-index:0; }
+    @keyframes grow { from { width:0 } }
+    .bar-fill { animation:grow 1.2s ease-out; }
+  </style>
+</head>
+<body class="selection:bg-purple-500 selection:text-white">
+
+  <!-- RIBBON PRÉVIA -->
+  <div class="bg-gradient-to-r from-brand-primary to-purple-700 text-white text-[11px] font-bold text-center py-1.5 px-4">
+    ✦ PRÉVIA — esta é uma demonstração visual do Portal do Membro. Ainda não é a área real.
+  </div>
+
+  <!-- TOP APP BAR -->
+  <header class="sticky top-0 z-50 glass-card border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2.5 group shrink-0">
+        <img src="../assets/logo.png" alt="Mouras-World" class="w-9 h-9 rounded-lg object-cover group-hover:scale-105 transition-transform duration-300">
+        <div class="leading-none">
+          <span class="text-sm font-black tracking-wide text-white">MOURAS<span class="text-brand-primary">-WORLD</span></span>
+          <span class="text-[8px] uppercase tracking-[0.2em] text-brand-accent block font-semibold mt-0.5">Portal do Membro</span>
+        </div>
+      </a>
+      <div class="flex items-center gap-3">
+        <span class="hidden sm:inline px-3 py-1 rounded-full text-[11px] font-bold bg-purple-500/20 text-brand-accent border border-brand-primary/30">Nível: Intermediário 🛠️</span>
+        <a href="../conta/index.html" class="flex items-center gap-2 group" title="Minha Conta">
+          <span class="hidden sm:inline text-sm font-semibold text-white group-hover:text-brand-accent transition">Olá, Membro 👋</span>
+          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-brand-primary to-brand-accent flex items-center justify-center font-black text-white text-sm group-hover:scale-105 transition">M</div>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex gap-8">
+
+    <!-- SIDEBAR -->
+    <aside class="hidden lg:block w-56 shrink-0">
+      <nav class="glass-card rounded-2xl p-3 sticky top-24 space-y-1 text-sm">
+        <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-brand-primary/20 text-white font-semibold"><span>🏠</span> Início</a>
+        <a href="../criar/index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:bg-brand-surface transition"><span>✦</span> Criar conteúdo</a>
+        <a href="../laboratorio/index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:bg-brand-surface transition"><span>🔬</span> Laboratório IA</a>
+        <a href="../academy/index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:bg-brand-surface transition"><span>🧭</span> Academy</a>
+        <a href="../ia/index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:bg-brand-surface transition"><span>🤖</span> Minhas IAs</a>
+        <a href="../comunidade/index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:bg-brand-surface transition"><span>💬</span> Comunidade</a>
+        <a href="../planos/index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:bg-brand-surface transition"><span>💎</span> Planos</a>
+        <a href="../conta/index.html" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:bg-brand-surface transition"><span>👤</span> Minha Conta</a>
+        <a href="#tudo" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-300 hover:bg-brand-surface transition"><span>🗺️</span> Tudo num lugar</a>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="flex-1 min-w-0 space-y-8">
+
+      <!-- WELCOME -->
+      <div class="relative overflow-hidden glass-card rounded-2xl p-6 sm:p-8 reveal">
+        <div class="blob w-64 h-64 bg-brand-primary/20 -top-20 -right-10"></div>
+        <div class="relative z-10 flex items-center justify-between gap-4 flex-wrap">
+          <div>
+            <h1 class="text-2xl sm:text-3xl font-black text-white">Bem-vindo de volta 👋</h1>
+            <p class="text-slate-400 mt-1 text-sm">Você está a <strong class="text-brand-accent">120 pontos</strong> de subir pro nível Avançado. Bora!</p>
+          </div>
+          <img src="../assets/logo.png" alt="" class="w-16 h-16 rounded-2xl object-cover float">
+        </div>
+      </div>
+
+      <!-- AÇÕES DE CRIAÇÃO -->
+      <div class="reveal">
+        <h2 class="text-xl font-black text-white mb-1">Crie e construa — de graça 🚀</h2>
+        <p class="text-sm text-slate-400 mb-4">Membro grátis ou de plano, você publica e constrói sem custo nenhum.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <a href="../criar/index.html" class="glass-card glass-card-hover rounded-2xl p-5 border-brand-primary/40 flex items-center gap-4">
+            <div class="text-3xl">🎓</div>
+            <div><div class="font-bold text-white">Criar um curso</div><div class="text-xs text-slate-400">Monte módulos e aulas do seu jeito</div></div>
+          </a>
+          <a href="../criar/index.html" class="glass-card glass-card-hover rounded-2xl p-5 border-brand-primary/40 flex items-center gap-4">
+            <div class="text-3xl">🎬</div>
+            <div><div class="font-bold text-white">Postar um vídeo</div><div class="text-xs text-slate-400">Compartilhe o que você sabe</div></div>
+          </a>
+          <a href="../laboratorio/index.html" class="glass-card glass-card-hover rounded-2xl p-5 border-brand-primary/40 flex items-center gap-4">
+            <div class="text-3xl">🔬</div>
+            <div><div class="font-bold text-white">Construir a Moura.ai</div><div class="text-xs text-slate-400">Ajude a criar as IAs, passo a passo</div></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- STAT TILES -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="glass-card rounded-2xl p-5 reveal"><div class="text-3xl font-black brand-gradient-text">7</div><div class="text-xs text-slate-400 mt-1">Cursos concluídos</div></div>
+        <div class="glass-card rounded-2xl p-5 reveal"><div class="text-3xl font-black text-white">48h</div><div class="text-xs text-slate-400 mt-1">Horas estudadas</div></div>
+        <div class="glass-card rounded-2xl p-5 reveal"><div class="text-3xl font-black text-brand-accent">3</div><div class="text-xs text-slate-400 mt-1">Parcerias ativas</div></div>
+        <div class="glass-card rounded-2xl p-5 reveal"><div class="text-3xl font-black brand-gradient-text">1.880</div><div class="text-xs text-slate-400 mt-1">Pontos de nível</div></div>
+      </div>
+
+      <!-- CONTINUE -->
+      <div class="reveal">
+        <h2 class="text-xl font-black text-white mb-4">Continue de onde parou</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="glass-card glass-card-hover rounded-2xl p-5">
+            <div class="text-2xl mb-2">🧱</div>
+            <h3 class="font-bold text-white mb-1">Criando seu primeiro site</h3>
+            <p class="text-xs text-slate-400 mb-4">Trilha · Iniciante</p>
+            <div class="h-2 rounded-full bg-brand-surface overflow-hidden"><div class="h-full bg-gradient-to-r from-brand-primary to-brand-accent bar-fill" style="width:75%"></div></div>
+            <div class="text-[11px] text-slate-400 mt-2">75% concluído</div>
+          </div>
+          <div class="glass-card glass-card-hover rounded-2xl p-5">
+            <div class="text-2xl mb-2">🎯</div>
+            <h3 class="font-bold text-white mb-1">Prospecção que converte</h3>
+            <p class="text-xs text-slate-400 mb-4">Trilha · Intermediário</p>
+            <div class="h-2 rounded-full bg-brand-surface overflow-hidden"><div class="h-full bg-gradient-to-r from-brand-primary to-brand-accent bar-fill" style="width:40%"></div></div>
+            <div class="text-[11px] text-slate-400 mt-2">40% concluído</div>
+          </div>
+          <div class="glass-card glass-card-hover rounded-2xl p-5">
+            <div class="text-2xl mb-2">🤖</div>
+            <h3 class="font-bold text-white mb-1">Automações com a Moura.ai</h3>
+            <p class="text-xs text-slate-400 mb-4">Trilha · Avançado</p>
+            <div class="h-2 rounded-full bg-brand-surface overflow-hidden"><div class="h-full bg-gradient-to-r from-brand-primary to-brand-accent bar-fill" style="width:15%"></div></div>
+            <div class="text-[11px] text-slate-400 mt-2">15% concluído</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- AO VIVO -->
+        <div class="reveal">
+          <h2 class="text-xl font-black text-white mb-4">Próximas ao vivo 📡</h2>
+          <div class="glass-card rounded-2xl divide-y divide-brand-border">
+            <div class="p-4 flex items-center justify-between gap-3">
+              <div><div class="font-semibold text-white text-sm">Montando uma landing que vende</div><div class="text-xs text-slate-400">Seg · 20h</div></div>
+              <button class="px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-primary/20 text-brand-accent hover:bg-brand-primary/30 transition">Lembrar</button>
+            </div>
+            <div class="p-4 flex items-center justify-between gap-3">
+              <div><div class="font-semibold text-white text-sm">Fechando o primeiro cliente</div><div class="text-xs text-slate-400">Qua · 20h</div></div>
+              <button class="px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-primary/20 text-brand-accent hover:bg-brand-primary/30 transition">Lembrar</button>
+            </div>
+            <div class="p-4 flex items-center justify-between gap-3">
+              <div><div class="font-semibold text-white text-sm">Tira-dúvidas da comunidade</div><div class="text-xs text-slate-400">Sex · 19h</div></div>
+              <button class="px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-primary/20 text-brand-accent hover:bg-brand-primary/30 transition">Lembrar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- COMUNIDADE FEED -->
+        <div class="reveal">
+          <h2 class="text-xl font-black text-white mb-4">Da comunidade 💬</h2>
+          <div class="glass-card rounded-2xl p-4 space-y-4">
+            <div class="flex gap-3">
+              <div class="w-9 h-9 rounded-full bg-gradient-to-br from-brand-primary to-brand-accent flex items-center justify-center font-black text-white text-sm shrink-0">J</div>
+              <div><div class="text-sm"><strong class="text-white">João</strong> <span class="text-slate-500 text-xs">· Avançado</span></div><p class="text-sm text-slate-400">Fechei meu segundo site essa semana usando a trilha de prospecção! 🚀</p></div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-9 h-9 rounded-full bg-gradient-to-br from-brand-accent to-brand-primary flex items-center justify-center font-black text-white text-sm shrink-0">A</div>
+              <div><div class="text-sm"><strong class="text-white">Ana</strong> <span class="text-slate-500 text-xs">· Intermediário</span></div><p class="text-sm text-slate-400">Alguém topa fazer um projeto em parceria? Tô com uma ideia boa.</p></div>
+            </div>
+            <div class="flex gap-3">
+              <div class="w-9 h-9 rounded-full bg-gradient-to-br from-purple-600 to-brand-accent flex items-center justify-center font-black text-white text-sm shrink-0">R</div>
+              <div><div class="text-sm"><strong class="text-white">Rafa</strong> <span class="text-slate-500 text-xs">· Iniciante</span></div><p class="text-sm text-slate-400">Entrei grátis e já aprendi mais em uma semana do que em meses. Obrigado! 🙏</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUAS IAS -->
+      <div class="reveal">
+        <h2 class="text-xl font-black text-white mb-4">Suas IAs 🤖</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <a href="../ia/index.html" class="glass-card glass-card-hover rounded-2xl p-6 text-center">
+            <div class="text-3xl mb-2">🧱</div><div class="font-bold text-white">Criar site</div><div class="text-xs text-slate-400 mt-1">Gere uma prévia em minutos</div>
+          </a>
+          <a href="../ia/index.html" class="glass-card glass-card-hover rounded-2xl p-6 text-center">
+            <div class="text-3xl mb-2">🛰️</div><div class="font-bold text-white">Prospectar</div><div class="text-xs text-slate-400 mt-1">Encontre e qualifique leads</div>
+          </a>
+          <a href="../ia/index.html" class="glass-card glass-card-hover rounded-2xl p-6 text-center">
+            <div class="text-3xl mb-2">📈</div><div class="font-bold text-white">Analisar</div><div class="text-xs text-slate-400 mt-1">Dados viram decisões</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- PLANOS (resumo) -->
+      <div class="reveal" id="planos">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-xl font-black text-white">Seu plano 💎</h2>
+          <a href="../planos/index.html" class="text-xs font-bold text-brand-accent hover:text-white transition">Ver detalhes →</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="glass-card rounded-2xl p-5 border-emerald-500/30">
+            <div class="flex items-center justify-between"><span class="font-bold text-white">Gratuito</span><span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">Seu atual</span></div>
+            <div class="text-2xl font-black brand-gradient-text my-2">R$ 0</div>
+            <p class="text-[11px] text-slate-400">Vitalício pra quem precisa. Comunidade, cursos e trilhas.</p>
+          </div>
+          <div class="glass-card rounded-2xl p-5">
+            <span class="font-bold text-white">6 Meses</span>
+            <div class="text-2xl font-black text-white my-2">a definir</div>
+            <p class="text-[11px] text-slate-400">Acesso completo + módulos exclusivos.</p>
+          </div>
+          <div class="glass-card rounded-2xl p-5 border-brand-primary/50 badge-glow">
+            <div class="flex items-center justify-between"><span class="font-bold text-white">1 Ano</span><span class="text-[10px] px-2 py-0.5 rounded-full bg-brand-primary/20 text-brand-accent border border-brand-primary/30">Melhor custo</span></div>
+            <div class="text-2xl font-black brand-gradient-text my-2">a definir</div>
+            <p class="text-[11px] text-slate-400">Tudo + mentoria direta e parcerias.</p>
+          </div>
+          <div class="glass-card rounded-2xl p-5">
+            <span class="font-bold text-white">Vitalício</span>
+            <div class="text-2xl font-black text-white my-2">sob consulta</div>
+            <p class="text-[11px] text-slate-400">Pagamento único, prioridade máxima.</p>
+          </div>
+        </div>
+        <p class="text-[11px] text-slate-500 mt-3 italic">Quem não tem condições usa tudo de graça, pra sempre. Quem pode e quer mais, apoia — e a gente cresce junto.</p>
+      </div>
+
+      <!-- TUDO NUM LUGAR SÓ -->
+      <div class="reveal" id="tudo">
+        <h2 class="text-xl font-black text-white mb-1">Tudo num lugar só 🗺️</h2>
+        <p class="text-sm text-slate-400 mb-4">Todos os espaços da plataforma, na palma da mão.</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <a href="../comunidade/index.html" class="glass-card glass-card-hover rounded-2xl p-5"><div class="text-2xl mb-2">💬</div><div class="font-bold text-white text-sm">Comunidade</div><div class="text-[11px] text-slate-400">O coração de tudo</div></a>
+          <a href="../academy/index.html" class="glass-card glass-card-hover rounded-2xl p-5"><div class="text-2xl mb-2">🎓</div><div class="font-bold text-white text-sm">Academy</div><div class="text-[11px] text-slate-400">Cursos e trilhas</div></a>
+          <a href="../criar/index.html" class="glass-card glass-card-hover rounded-2xl p-5"><div class="text-2xl mb-2">✦</div><div class="font-bold text-white text-sm">Estúdio</div><div class="text-[11px] text-slate-400">Crie conteúdo grátis</div></a>
+          <a href="../laboratorio/index.html" class="glass-card glass-card-hover rounded-2xl p-5"><div class="text-2xl mb-2">🔬</div><div class="font-bold text-white text-sm">Laboratório</div><div class="text-[11px] text-slate-400">Construir a Moura.ai</div></a>
+          <a href="../aprender/index.html" class="glass-card glass-card-hover rounded-2xl p-5"><div class="text-2xl mb-2">🤖</div><div class="font-bold text-white text-sm">Aprender com Bot</div><div class="text-[11px] text-slate-400">Programar passo a passo</div></a>
+          <a href="../conectores/index.html" class="glass-card glass-card-hover rounded-2xl p-5"><div class="text-2xl mb-2">🔌</div><div class="font-bold text-white text-sm">Conectores</div><div class="text-[11px] text-slate-400">Redes + API dos bots</div></a>
+          <a href="../mercado/index.html" class="glass-card glass-card-hover rounded-2xl p-5"><div class="text-2xl mb-2">🛍️</div><div class="font-bold text-white text-sm">Mercado</div><div class="text-[11px] text-slate-400">Afiliação e vendas</div></a>
+          <a href="../assista/index.html" class="glass-card glass-card-hover rounded-2xl p-5"><div class="text-2xl mb-2">▶️</div><div class="font-bold text-white text-sm">Como funciona</div><div class="text-[11px] text-slate-400">Explicador em 1 min</div></a>
+          <a href="../ia/index.html" class="glass-card glass-card-hover rounded-2xl p-5"><div class="text-2xl mb-2">🧠</div><div class="font-bold text-white text-sm">Moura.ai</div><div class="text-[11px] text-slate-400">Central de IAs</div></a>
+          <a href="../talentos/index.html" class="glass-card glass-card-hover rounded-2xl p-5"><div class="text-2xl mb-2">🧑‍🚀</div><div class="font-bold text-white text-sm">Talentos</div><div class="text-[11px] text-slate-400">Esquadrões e projetos</div></a>
+          <a href="../planos/index.html" class="glass-card glass-card-hover rounded-2xl p-5"><div class="text-2xl mb-2">💎</div><div class="font-bold text-white text-sm">Planos</div><div class="text-[11px] text-slate-400">Grátis ou completo</div></a>
+          <a href="../conta/index.html" class="glass-card glass-card-hover rounded-2xl p-5"><div class="text-2xl mb-2">👤</div><div class="font-bold text-white text-sm">Minha Conta</div><div class="text-[11px] text-slate-400">Seus dados, só seus</div></a>
+          <a href="../index.html" class="glass-card glass-card-hover rounded-2xl p-5"><div class="text-2xl mb-2">🌐</div><div class="font-bold text-white text-sm">Site principal</div><div class="text-[11px] text-slate-400">Página inicial</div></a>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- RODAPÉ -->
+  <footer class="bg-brand-dark border-t border-brand-border py-8 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <span>Prévia do Portal do Membro · Mouras-World</span>
+      <a href="../index.html" class="hover:text-white transition">← Voltar ao site</a>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+    })();
+  </script>
+
+  <script src="../assets/anim.js"></script>
+</body>
+</html>

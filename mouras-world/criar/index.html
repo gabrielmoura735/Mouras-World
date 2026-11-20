@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estúdio do Membro | Mouras-World</title>
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: {
+        colors: { brand: {
+          dark: '#0A0612', card: '#120B1E', surface: '#1A1030', border: '#241A3A',
+          primary: '#7C3AED', primaryHover: '#5B21B6', accent: '#C084FC', accentGlow: '#A855F7'
+        }},
+        fontFamily: { sans: ['Inter','system-ui','sans-serif'], display: ['Syne','Inter','sans-serif'] }
+      }}
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/anim.css">
+  <style>
+    body { background-color:#0A0612; color:#F1F0F5; font-family:'Inter',sans-serif; overflow-x:hidden; }
+    h1,h2,h3,h4,.font-display { font-family:'Syne','Inter',sans-serif; }
+    .brand-gradient-text { background:linear-gradient(135deg,#A855F7 0%,#7C3AED 50%,#5B21B6 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .accent-gradient-text { background:linear-gradient(135deg,#E9D5FF 0%,#C084FC 50%,#7C3AED 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .glass-card { background:rgba(18,11,30,0.75); backdrop-filter:blur(12px); border:1px solid rgba(124,58,237,0.2); }
+    .glass-card-hover:hover { border-color:rgba(168,85,247,0.5); transform:translateY(-3px); transition:all .25s ease; }
+    .badge-glow { box-shadow:0 0 15px rgba(124,58,237,0.3); }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+    .float { animation:float 6s ease-in-out infinite; }
+    .reveal { opacity:0; transform:translateY(24px); transition:all .6s ease; }
+    .reveal.in { opacity:1; transform:none; }
+    .blob { position:absolute; border-radius:9999px; filter:blur(80px); pointer-events:none; z-index:0; }
+    input,textarea,select { transition:border-color .2s ease, box-shadow .2s ease; }
+    input:focus,textarea:focus,select:focus { outline:none; border-color:#7C3AED; box-shadow:0 0 0 3px rgba(124,58,237,0.2); }
+    .type-btn.active { border-color:#7C3AED; background:rgba(124,58,237,0.15); box-shadow:0 0 15px rgba(124,58,237,0.3); }
+    .swatch.active { outline:3px solid #fff; outline-offset:2px; transform:scale(1.1); }
+    .swatch { transition:transform .15s ease; }
+    @keyframes pop { 0%{transform:scale(.9);opacity:0} 100%{transform:scale(1);opacity:1} }
+    .pop { animation:pop .3s ease; }
+    .mod-row { animation:pop .25s ease; }
+  </style>
+</head>
+<body class="selection:bg-purple-500 selection:text-white">
+
+  <!-- RIBBON -->
+  <div class="bg-gradient-to-r from-brand-primary to-purple-700 text-white text-[11px] font-bold text-center py-1.5 px-4">
+    ✦ 100% GRÁTIS PARA TODO MEMBRO — crie seus cursos, vídeos e módulos sem pagar nada, do seu jeito.
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 glass-card border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2.5 group shrink-0">
+        <img src="../assets/logo.png" alt="Mouras-World" class="w-9 h-9 rounded-lg object-cover group-hover:scale-105 transition-transform duration-300">
+        <div class="leading-none">
+          <span class="text-sm font-black tracking-wide text-white">MOURAS<span class="text-brand-primary">-WORLD</span></span>
+          <span class="text-[8px] uppercase tracking-[0.2em] text-brand-accent block font-semibold mt-0.5">Estúdio do Membro</span>
+        </div>
+      </a>
+      <nav class="hidden lg:flex items-center gap-6 text-[13px] font-medium text-slate-300">
+        <a href="../portal/index.html" class="hover:text-brand-primary transition">Portal</a>
+        <a href="../academy/index.html" class="hover:text-brand-primary transition">Academy</a>
+        <a href="../comunidade/index.html" class="hover:text-brand-primary transition">Comunidade</a>
+        <a href="#meus" class="hover:text-brand-accent transition">Meus conteúdos</a>
+      </nav>
+      <a href="#criar" class="hidden sm:flex px-4 py-2 rounded-lg font-bold text-[13px] bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:from-purple-500 hover:to-brand-primary transition-all shadow-md items-center gap-1.5">
+        Criar agora
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative pt-14 pb-12 overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(124,58,237,0.18),rgba(255,255,255,0))]"></div>
+    <div class="blob w-96 h-96 bg-brand-primary/15 -top-20 -left-24"></div>
+    <div class="blob w-80 h-80 bg-brand-accentGlow/10 top-10 -right-24"></div>
+    <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
+      <div class="flex justify-center mb-5">
+        <div class="relative float">
+          <div class="absolute inset-0 bg-brand-accentGlow/30 rounded-full blur-3xl scale-110"></div>
+          <img src="../assets/bots/bot-criador.png" alt="Bot criador" class="relative w-24 h-24 rounded-2xl object-cover shadow-2xl shadow-brand-primary/40">
+        </div>
+      </div>
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-card border border-brand-primary/40 text-xs font-semibold text-brand-accent mb-5 badge-glow">
+        <span class="w-2 h-2 rounded-full bg-brand-primary animate-ping"></span>
+        Quem sabe, ensina — e aqui ensinar é de graça
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight mb-5">
+        Crie seu <span class="brand-gradient-text">curso, vídeo ou módulo</span> do seu jeito.
+      </h1>
+      <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-2 leading-relaxed">
+        Seja membro <strong class="text-white">grátis</strong> ou de um plano, você publica quanto quiser — <strong class="text-white">sem custo nenhum</strong>. Monte os módulos, customize as cores e o conteúdo e compartilhe com a comunidade.
+      </p>
+    </div>
+  </section>
+
+  <!-- CRIADOR -->
+  <section id="criar" class="pb-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+
+        <!-- FORM (editor) -->
+        <div class="lg:col-span-3 space-y-6">
+
+          <!-- TIPO -->
+          <div class="glass-card rounded-2xl p-6">
+            <h2 class="text-lg font-black text-white mb-1">1. O que você quer criar?</h2>
+            <p class="text-xs text-slate-400 mb-4">Escolha o formato. Dá pra criar quantos quiser, sempre de graça.</p>
+            <div class="grid grid-cols-3 gap-3" id="typeButtons">
+              <button type="button" data-type="curso" class="type-btn active glass-card rounded-xl p-4 text-center border border-brand-border hover:border-brand-primary/60 transition">
+                <div class="text-2xl mb-1">🎓</div><div class="text-sm font-bold text-white">Curso</div>
+              </button>
+              <button type="button" data-type="video" class="type-btn glass-card rounded-xl p-4 text-center border border-brand-border hover:border-brand-primary/60 transition">
+                <div class="text-2xl mb-1">🎬</div><div class="text-sm font-bold text-white">Vídeo</div>
+              </button>
+              <button type="button" data-type="modulo" class="type-btn glass-card rounded-xl p-4 text-center border border-brand-border hover:border-brand-primary/60 transition">
+                <div class="text-2xl mb-1">🧩</div><div class="text-sm font-bold text-white">Módulo</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- BÁSICO -->
+          <div class="glass-card rounded-2xl p-6 space-y-4">
+            <h2 class="text-lg font-black text-white mb-1">2. Informações</h2>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Título</label>
+              <input id="fTitle" type="text" placeholder="Ex.: Seu primeiro site no ar em 1 hora" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Descrição curta</label>
+              <textarea id="fDesc" rows="3" placeholder="Conte em poucas linhas o que a pessoa vai aprender." class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm resize-none"></textarea>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Nível</label>
+                <select id="fLevel" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm">
+                  <option value="Iniciante">🌱 Iniciante</option>
+                  <option value="Médio">📘 Médio</option>
+                  <option value="Intermediário">🛠️ Intermediário</option>
+                  <option value="Avançado">🚀 Avançado</option>
+                  <option value="Desafiador">🔥 Desafiador</option>
+                  <option value="Profissional">👑 Profissional</option>
+                  <option value="Todos">✨ Todos os níveis</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-300 mb-1">Ícone / capa</label>
+                <select id="fEmoji" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm">
+                  <option>🎓</option><option>🎬</option><option>🧩</option><option>🌐</option><option>🎨</option>
+                  <option>💻</option><option>📈</option><option>🤖</option><option>🧭</option><option>🔥</option>
+                  <option>🚀</option><option>💡</option><option>📱</option><option>🛠️</option><option>🌱</option>
+                </select>
+              </div>
+            </div>
+            <!-- campo só pra vídeo -->
+            <div id="videoField" class="hidden">
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Link do vídeo (YouTube, etc.)</label>
+              <input id="fVideo" type="text" placeholder="Cole o link do seu vídeo (opcional por enquanto)" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm">
+            </div>
+          </div>
+
+          <!-- CUSTOMIZAÇÃO -->
+          <div class="glass-card rounded-2xl p-6">
+            <h2 class="text-lg font-black text-white mb-1">3. Customize</h2>
+            <p class="text-xs text-slate-400 mb-4">Escolha a cor de destaque do seu conteúdo. Fica do seu jeito.</p>
+            <div class="flex items-center gap-3" id="swatches">
+              <button type="button" data-color="#7C3AED" class="swatch active w-9 h-9 rounded-full" style="background:#7C3AED"></button>
+              <button type="button" data-color="#C084FC" class="swatch w-9 h-9 rounded-full" style="background:#C084FC"></button>
+              <button type="button" data-color="#A855F7" class="swatch w-9 h-9 rounded-full" style="background:#A855F7"></button>
+              <button type="button" data-color="#6366F1" class="swatch w-9 h-9 rounded-full" style="background:#6366F1"></button>
+              <button type="button" data-color="#D946EF" class="swatch w-9 h-9 rounded-full" style="background:#D946EF"></button>
+            </div>
+          </div>
+
+          <!-- MÓDULOS / AULAS -->
+          <div class="glass-card rounded-2xl p-6" id="modulosBlock">
+            <div class="flex items-center justify-between mb-1">
+              <h2 class="text-lg font-black text-white">4. <span id="modLabel">Módulos e aulas</span></h2>
+              <button type="button" id="addMod" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-primary/20 text-brand-accent hover:bg-brand-primary/30 transition">+ Adicionar</button>
+            </div>
+            <p class="text-xs text-slate-400 mb-4">Monte a estrutura do seu conteúdo, item por item. Adicione quantos quiser.</p>
+            <div id="modList" class="space-y-3"></div>
+          </div>
+
+          <!-- PUBLICAR -->
+          <div class="flex flex-col sm:flex-row gap-3">
+            <button type="button" id="publishBtn" class="flex-1 py-4 rounded-xl font-extrabold bg-gradient-to-r from-brand-primary via-purple-500 to-purple-700 text-white hover:opacity-95 shadow-xl transition-all">
+              Publicar de graça ✦
+            </button>
+            <button type="button" id="resetBtn" class="sm:w-auto px-6 py-4 rounded-xl font-bold bg-brand-surface border border-brand-border text-white hover:border-brand-accent/50 transition">
+              Limpar
+            </button>
+          </div>
+          <p class="text-[11px] text-slate-500 text-center">
+            Por enquanto seus conteúdos ficam salvos aqui no seu navegador (prévia). Quando a plataforma entrar no ar de verdade, a publicação será para toda a comunidade.
+          </p>
+        </div>
+
+        <!-- PREVIEW -->
+        <div class="lg:col-span-2">
+          <div class="sticky top-24 space-y-4">
+            <div class="text-xs uppercase tracking-widest text-brand-accent font-bold">Prévia ao vivo</div>
+            <div id="previewCard" class="glass-card rounded-2xl overflow-hidden" style="border-color:rgba(124,58,237,0.4)">
+              <div id="pvCover" class="relative aspect-video flex items-center justify-center text-5xl" style="background:linear-gradient(135deg,rgba(124,58,237,0.35),rgba(10,6,18,0.9))">
+                <span id="pvEmoji">🎓</span>
+                <span id="pvType" class="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full bg-black/40 text-white border border-white/20">Curso</span>
+                <span id="pvLevel" class="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full" style="background:rgba(124,58,237,0.3);color:#E9D5FF">Iniciante</span>
+              </div>
+              <div class="p-5">
+                <h3 id="pvTitle" class="text-lg font-black text-white mb-1">Título do seu conteúdo</h3>
+                <p id="pvDesc" class="text-sm text-slate-400 mb-4">A descrição que você escrever aparece aqui, pra comunidade saber o que vai aprender.</p>
+                <div class="flex items-center gap-2 text-[11px] font-semibold mb-4">
+                  <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">Grátis</span>
+                  <span id="pvCount" class="px-2 py-0.5 rounded-full border" style="color:#C084FC;border-color:rgba(124,58,237,0.4)">0 itens</span>
+                  <span class="text-slate-500">· por você</span>
+                </div>
+                <div id="pvMods" class="space-y-1.5 text-sm text-slate-300"></div>
+              </div>
+            </div>
+            <div class="glass-card rounded-2xl p-4 text-center">
+              <div class="text-2xl mb-1">💜</div>
+              <p class="text-xs text-slate-400">Ensinar o que você sabe faz a comunidade inteira crescer. E não custa nada.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MEUS CONTEÚDOS -->
+  <section id="meus" class="py-16 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-1">Sua biblioteca</h2>
+          <h3 class="text-2xl sm:text-3xl font-black text-white">Meus conteúdos</h3>
+        </div>
+        <a href="#criar" class="hidden sm:flex px-4 py-2 rounded-lg font-bold text-[13px] bg-brand-primary/20 text-brand-accent hover:bg-brand-primary/30 transition items-center">+ Criar novo</a>
+      </div>
+      <div id="emptyState" class="glass-card rounded-2xl p-10 text-center">
+        <div class="text-4xl mb-3">🗂️</div>
+        <p class="text-slate-400 text-sm">Você ainda não publicou nada. Que tal começar agora? É de graça. 🙂</p>
+      </div>
+      <div id="myGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 hidden"></div>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer class="bg-brand-dark border-t border-brand-border py-10 text-xs text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2">
+        <img src="../assets/logo.png" alt="Mouras-World" class="w-8 h-8 rounded-lg object-cover">
+        <span class="text-white font-black">MOURAS-WORLD</span>
+      </a>
+      <div>© 2026 Mouras-World · Estúdio do Membro</div>
+      <a href="../portal/index.html" class="hover:text-white transition">← Voltar ao portal</a>
+    </div>
+  </footer>
+
+  <!-- TOAST -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] hidden">
+    <div class="pop glass-card rounded-xl px-5 py-3 border border-brand-primary/50 badge-glow flex items-center gap-3">
+      <span class="text-xl">🎉</span>
+      <span class="text-sm font-semibold text-white">Conteúdo publicado de graça! Já está na sua biblioteca.</span>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      var STORAGE_KEY = 'mw_estudio_conteudos';
+      var state = { type:'curso', color:'#7C3AED', mods:[] };
+      var typeNames = { curso:'Curso', video:'Vídeo', modulo:'Módulo' };
+      var modLabels = { curso:'Aulas do curso', video:'Capítulos do vídeo', modulo:'Tópicos do módulo' };
+
+      var $ = function(id){ return document.getElementById(id); };
+
+      // ---- storage helpers (safe) ----
+      function load(){ try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch(e){ return []; } }
+      function save(list){ try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); } catch(e){} }
+
+      // ---- type selector ----
+      document.querySelectorAll('.type-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          document.querySelectorAll('.type-btn').forEach(function(b){ b.classList.remove('active'); });
+          btn.classList.add('active');
+          state.type = btn.getAttribute('data-type');
+          $('videoField').classList.toggle('hidden', state.type !== 'video');
+          $('modLabel').textContent = modLabels[state.type];
+          renderPreview();
+        });
+      });
+
+      // ---- color swatches ----
+      document.querySelectorAll('.swatch').forEach(function(sw){
+        sw.addEventListener('click', function(){
+          document.querySelectorAll('.swatch').forEach(function(s){ s.classList.remove('active'); });
+          sw.classList.add('active');
+          state.color = sw.getAttribute('data-color');
+          renderPreview();
+        });
+      });
+
+      // ---- modules ----
+      function renderMods(){
+        var list = $('modList');
+        list.innerHTML = '';
+        if(state.mods.length === 0){
+          list.innerHTML = '<p class="text-xs text-slate-500 italic">Nenhum item ainda. Clique em "+ Adicionar" pra montar seu conteúdo.</p>';
+        }
+        state.mods.forEach(function(m, i){
+          var row = document.createElement('div');
+          row.className = 'mod-row flex items-center gap-2';
+          row.innerHTML =
+            '<span class="w-7 h-7 shrink-0 rounded-lg bg-brand-surface flex items-center justify-center text-xs font-bold" style="color:'+state.color+'">'+(i+1)+'</span>'+
+            '<input type="text" class="modInput flex-1 px-3 py-2 rounded-lg bg-brand-surface border border-brand-border text-white text-sm" placeholder="Título do item '+(i+1)+'" value="'+ (m||'').replace(/"/g,'&quot;') +'">'+
+            '<button type="button" class="delMod w-8 h-8 rounded-lg bg-brand-surface text-slate-400 hover:text-red-400 hover:bg-red-500/10 transition text-sm">✕</button>';
+          var input = row.querySelector('.modInput');
+          input.addEventListener('input', function(){ state.mods[i] = input.value; renderPreview(); });
+          row.querySelector('.delMod').addEventListener('click', function(){ state.mods.splice(i,1); renderMods(); renderPreview(); });
+          list.appendChild(row);
+        });
+      }
+      $('addMod').addEventListener('click', function(){ state.mods.push(''); renderMods(); renderPreview(); });
+
+      // ---- live preview ----
+      function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+      function renderPreview(){
+        var title = $('fTitle').value.trim();
+        var desc = $('fDesc').value.trim();
+        var level = $('fLevel').value;
+        var emoji = $('fEmoji').value;
+        $('pvEmoji').textContent = emoji;
+        $('pvType').textContent = typeNames[state.type];
+        $('pvLevel').textContent = level;
+        $('pvLevel').style.background = 'rgba('+hexToRgb(state.color)+',0.3)';
+        $('pvTitle').textContent = title || 'Título do seu conteúdo';
+        $('pvDesc').textContent = desc || 'A descrição que você escrever aparece aqui, pra comunidade saber o que vai aprender.';
+        $('pvCover').style.background = 'linear-gradient(135deg,rgba('+hexToRgb(state.color)+',0.4),rgba(10,6,18,0.9))';
+        $('previewCard').style.borderColor = 'rgba('+hexToRgb(state.color)+',0.5)';
+        var filled = state.mods.filter(function(m){ return m && m.trim(); });
+        $('pvCount').textContent = filled.length + (filled.length === 1 ? ' item' : ' itens');
+        $('pvCount').style.color = state.color;
+        var pv = $('pvMods'); pv.innerHTML = '';
+        filled.slice(0,6).forEach(function(m,i){
+          pv.innerHTML += '<div class="flex items-center gap-2"><span style="color:'+state.color+'">•</span> '+esc(m)+'</div>';
+        });
+      }
+      function hexToRgb(hex){
+        var h = hex.replace('#',''); var n = parseInt(h,16);
+        return ((n>>16)&255)+','+((n>>8)&255)+','+(n&255);
+      }
+      ['fTitle','fDesc','fLevel','fEmoji'].forEach(function(id){
+        $(id).addEventListener('input', renderPreview);
+      });
+
+      // ---- my content grid ----
+      function renderMine(){
+        var list = load();
+        var grid = $('myGrid'), empty = $('emptyState');
+        if(list.length === 0){ grid.classList.add('hidden'); empty.classList.remove('hidden'); return; }
+        empty.classList.add('hidden'); grid.classList.remove('hidden');
+        grid.innerHTML = '';
+        list.forEach(function(item, idx){
+          var card = document.createElement('div');
+          card.className = 'glass-card glass-card-hover rounded-2xl overflow-hidden pop';
+          card.style.borderColor = 'rgba('+hexToRgb(item.color||'#7C3AED')+',0.4)';
+          var filled = (item.mods||[]).filter(function(m){ return m && m.trim(); });
+          card.innerHTML =
+            '<div class="relative aspect-video flex items-center justify-center text-4xl" style="background:linear-gradient(135deg,rgba('+hexToRgb(item.color||'#7C3AED')+',0.4),rgba(10,6,18,0.9))">'+
+              '<span>'+(item.emoji||'🎓')+'</span>'+
+              '<span class="absolute top-2 left-2 text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-black/40 text-white border border-white/20">'+esc(typeNames[item.type]||'Curso')+'</span>'+
+            '</div>'+
+            '<div class="p-4">'+
+              '<h4 class="font-bold text-white text-sm mb-1">'+esc(item.title||'Sem título')+'</h4>'+
+              '<p class="text-xs text-slate-400 mb-3 line-clamp-2">'+esc(item.desc||'')+'</p>'+
+              '<div class="flex items-center justify-between">'+
+                '<div class="flex items-center gap-1.5 text-[10px] font-semibold">'+
+                  '<span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">Grátis</span>'+
+                  '<span class="text-slate-500">'+esc(item.level||'')+' · '+filled.length+' itens</span>'+
+                '</div>'+
+                '<button type="button" data-idx="'+idx+'" class="delItem text-slate-500 hover:text-red-400 text-xs transition">remover</button>'+
+              '</div>'+
+            '</div>';
+          card.querySelector('.delItem').addEventListener('click', function(){
+            var l = load(); l.splice(idx,1); save(l); renderMine();
+          });
+          grid.appendChild(card);
+        });
+      }
+
+      // ---- publish ----
+      $('publishBtn').addEventListener('click', function(){
+        var title = $('fTitle').value.trim();
+        if(!title){ $('fTitle').focus(); $('fTitle').style.borderColor = '#ef4444'; setTimeout(function(){ $('fTitle').style.borderColor=''; },1500); return; }
+        var item = {
+          type: state.type, color: state.color,
+          title: title, desc: $('fDesc').value.trim(),
+          level: $('fLevel').value, emoji: $('fEmoji').value,
+          video: $('fVideo') ? $('fVideo').value.trim() : '',
+          mods: state.mods.filter(function(m){ return m && m.trim(); }),
+          createdAt: Date.now()
+        };
+        var list = load(); list.unshift(item); save(list);
+        renderMine();
+        var t = $('toast'); t.classList.remove('hidden');
+        setTimeout(function(){ t.classList.add('hidden'); }, 3200);
+        resetForm();
+        document.getElementById('meus').scrollIntoView({ behavior:'smooth' });
+      });
+
+      function resetForm(){
+        $('fTitle').value=''; $('fDesc').value=''; $('fVideo').value='';
+        $('fLevel').selectedIndex=0; $('fEmoji').selectedIndex=0;
+        state.mods = []; renderMods(); renderPreview();
+      }
+      $('resetBtn').addEventListener('click', resetForm);
+
+      // ---- reveal ----
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+
+      // init
+      renderMods(); renderPreview(); renderMine();
+    })();
+  </script>
+
+  <script src="../assets/anim.js"></script>
+</body>
+</html>

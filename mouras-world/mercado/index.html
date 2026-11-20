@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mercado & Afiliação | Mouras-World</title>
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode:'class', theme:{ extend:{
+      colors:{ brand:{ dark:'#0A0612', card:'#120B1E', surface:'#1A1030', border:'#241A3A', primary:'#7C3AED', primaryHover:'#5B21B6', accent:'#C084FC', accentGlow:'#A855F7' }},
+      fontFamily:{ sans:['Inter','system-ui','sans-serif'], display:['Syne','Inter','sans-serif'] }
+    }}}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/anim.css">
+  <style>
+    body { background-color:#0A0612; color:#F1F0F5; font-family:'Inter',sans-serif; overflow-x:hidden; }
+    h1,h2,h3,h4,.font-display { font-family:'Syne','Inter',sans-serif; }
+    .brand-gradient-text { background:linear-gradient(135deg,#A855F7 0%,#7C3AED 50%,#5B21B6 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .glass-card { background:rgba(18,11,30,0.75); backdrop-filter:blur(12px); border:1px solid rgba(124,58,237,0.2); }
+    .glass-card-hover:hover { border-color:rgba(168,85,247,0.5); transform:translateY(-3px); transition:all .25s ease; }
+    .badge-glow { box-shadow:0 0 15px rgba(124,58,237,0.3); }
+    @keyframes pop { 0%{transform:scale(.9);opacity:0} 100%{transform:scale(1);opacity:1} } .pop{ animation:pop .3s ease; }
+    .reveal { opacity:0; transform:translateY(24px); transition:all .6s ease; } .reveal.in { opacity:1; transform:none; }
+    .locked { filter:grayscale(.6); }
+    /* entrada em cascata */
+    @keyframes riseUp { from{opacity:0; transform:translateY(18px) scale(.97);} to{opacity:1; transform:none;} }
+    .rise-in { animation:riseUp .5s ease both; }
+    /* brilho passando */
+    @keyframes shimmer { 0%{background-position:-200% 0;} 100%{background-position:200% 0;} }
+    .shimmer { background:linear-gradient(110deg,rgba(124,58,237,0.0) 30%,rgba(168,85,247,0.25) 50%,rgba(124,58,237,0.0) 70%); background-size:200% 100%; animation:shimmer 2.5s infinite; }
+    /* barra que cresce */
+    .barfill { height:100%; border-radius:9999px; background:linear-gradient(90deg,#7C3AED,#C084FC); width:0; transition:width 1.1s cubic-bezier(.2,.8,.2,1); }
+    /* contador pulsa ao atualizar */
+    @keyframes tick { 0%{transform:scale(1)} 40%{transform:scale(1.12)} 100%{transform:scale(1)} } .tick{ animation:tick .4s ease; }
+    /* card hover levanta */
+    .lift { transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    .lift:hover { transform:translateY(-4px); box-shadow:0 12px 30px rgba(124,58,237,0.25); border-color:rgba(168,85,247,0.5); }
+    @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} } .floaty{ animation:floaty 5s ease-in-out infinite; }
+    @keyframes shine { to{ left:160%; } }
+    .btn-shine { position:relative; overflow:hidden; }
+    .btn-shine::after { content:''; position:absolute; top:0; left:-60%; width:40%; height:100%; background:linear-gradient(120deg,transparent,rgba(255,255,255,0.35),transparent); transform:skewX(-20deg); animation:shine 3.5s infinite; }
+  </style>
+</head>
+<body class="selection:bg-purple-500 selection:text-white">
+
+  <div class="bg-gradient-to-r from-brand-primary to-purple-700 text-white text-[11px] font-bold text-center py-1.5 px-4">
+    🛍️ MERCADO & AFILIAÇÃO — afilie qualquer loja, gere vídeos por IA e venda direto das suas redes.
+  </div>
+
+  <header class="sticky top-0 z-50 glass-card border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2.5 group shrink-0">
+        <img src="../assets/logo.png" alt="Mouras-World" class="w-9 h-9 rounded-lg object-cover group-hover:scale-105 transition-transform duration-300">
+        <div class="leading-none"><span class="text-sm font-black tracking-wide text-white">MOURAS<span class="text-brand-primary">-WORLD</span></span><span class="text-[8px] uppercase tracking-[0.2em] text-brand-accent block font-semibold mt-0.5">Mercado</span></div>
+      </a>
+      <nav class="hidden lg:flex items-center gap-6 text-[13px] font-medium text-slate-300">
+        <a href="#afiliar" class="hover:text-brand-primary transition">Afiliar</a>
+        <a href="#catalogo" class="hover:text-brand-primary transition">Catálogo</a>
+        <a href="#gerar" class="hover:text-brand-primary transition">Gerar vídeo</a>
+        <a href="#comissoes" class="hover:text-brand-primary transition">Comissões</a>
+        <a href="#vitrine" class="hover:text-brand-primary transition">Vitrine</a>
+        <a href="../conectores/index.html" class="hover:text-brand-accent transition">Conectores</a>
+      </nav>
+      <a href="#afiliar" class="hidden sm:flex px-4 py-2 rounded-lg font-bold text-[13px] bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 transition shadow-md items-center">Começar a vender</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="relative pt-12 pb-10 overflow-hidden text-center">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(124,58,237,0.18),rgba(255,255,255,0))]"></div>
+    <div class="max-w-3xl mx-auto px-4 relative z-10">
+      <div class="text-5xl mb-3">🛍️</div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight mb-4">Venda de <span class="brand-gradient-text">qualquer loja</span>, direto do seu conteúdo.</h1>
+      <p class="text-lg text-slate-300 max-w-2xl mx-auto">Afilie Shopee, Mercado Livre, Kaiross e outras. Gere o vídeo do produto por IA aqui dentro e poste nas suas redes — tudo num fluxo só.</p>
+    </div>
+  </section>
+
+  <!-- AFILIAR LOJAS -->
+  <section id="afiliar" class="py-14 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Afiliação</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Afilie qualquer loja</h3>
+        <p class="text-slate-400 mt-4">Conecte sua conta de afiliado e traga os produtos pro seu catálogo. Você divulga, a venda acontece, a comissão é sua.</p>
+      </div>
+      <div id="lojaGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+      <p class="text-[11px] text-slate-500 text-center mt-6 max-w-2xl mx-auto">Prévia: a afiliação usa os programas oficiais de cada loja (Shopee Afiliados, Mercado Livre, etc.). Percentuais de comissão são definidos por cada loja/acordo — os valores mostrados aqui são ilustrativos até você configurar os reais.</p>
+    </div>
+  </section>
+
+  <!-- FLUXO: gerar vídeo e postar -->
+  <section id="fluxo" class="py-16 bg-brand-card border-t border-brand-border">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-primary font-bold mb-2">Do produto à venda</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Gere o vídeo e poste</h3>
+        <p class="text-slate-400 mt-4">Escolheu um produto? A IA monta o vídeo de divulgação e você publica nas redes conectadas, direto daqui.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+        <div class="glass-card rounded-2xl p-5 text-center reveal"><div class="text-3xl mb-2">🔎</div><div class="font-bold text-white text-sm">1. Escolha o produto</div><div class="text-[11px] text-slate-400 mt-1">Do catálogo afiliado</div></div>
+        <div class="glass-card rounded-2xl p-5 text-center reveal"><div class="text-3xl mb-2">🎬</div><div class="font-bold text-white text-sm">2. Vídeo por IA</div><div class="text-[11px] text-slate-400 mt-1">Grátis, aqui dentro</div></div>
+        <div class="glass-card rounded-2xl p-5 text-center reveal"><div class="text-3xl mb-2">📲</div><div class="font-bold text-white text-sm">3. Poste nas redes</div><div class="text-[11px] text-slate-400 mt-1">Insta, TikTok, etc.</div></div>
+        <div class="glass-card rounded-2xl p-5 text-center reveal"><div class="text-3xl mb-2">💰</div><div class="font-bold text-white text-sm">4. Receba a comissão</div><div class="text-[11px] text-slate-400 mt-1">A cada venda</div></div>
+      </div>
+      <div class="text-center mt-8 reveal">
+        <a href="#gerar" class="inline-block px-7 py-3.5 rounded-xl font-extrabold bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 shadow-lg transition">Gerar meu vídeo agora ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GERAR VÍDEO DO PRODUTO -->
+  <section id="gerar" class="py-16 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Vídeo por IA</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Monte o vídeo do seu produto</h3>
+        <p class="text-slate-400 mt-4">Preencha os dados do produto e a IA monta o <strong class="text-white">roteiro do vídeo + a legenda pronta</strong> (com hashtags) pra você postar nas redes.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- FORM -->
+        <div class="glass-card rounded-2xl p-6 reveal space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Nome do produto</label>
+            <input id="gProd" type="text" placeholder="Ex.: Fone Bluetooth XZ" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Texto / o que o produto tem de bom</label>
+            <textarea id="gDesc" rows="3" placeholder="Bateria de 30h, cancela ruído, cabe no bolso..." class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm resize-none focus:outline-none focus:border-brand-primary"></textarea>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Valor (R$)</label>
+              <input id="gPreco" type="text" placeholder="149,90" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Mercado / nicho</label>
+              <input id="gNicho" type="text" placeholder="Tecnologia, moda, casa..." class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Loja (link afiliado)</label>
+              <input id="gLoja" type="text" placeholder="Shopee, ML, Amazon..." class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Chamada (CTA)</label>
+              <input id="gCta" type="text" placeholder="Compre pelo link da bio" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary">
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Hashtags</label>
+            <input id="gTags" type="text" placeholder="#promo #achadinhos #tecnologia" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary">
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Tom do vídeo</label>
+              <select id="gTom" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary">
+                <option>Animado / vendedor</option><option>Calmo / explicativo</option><option>Engraçado / viral</option><option>Elegante / premium</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Formato</label>
+              <select id="gFmt" class="w-full px-4 py-3 rounded-xl bg-brand-surface border border-brand-border text-white text-sm focus:outline-none focus:border-brand-primary">
+                <option>Reels / TikTok (9:16)</option><option>Feed (1:1)</option><option>YouTube (16:9)</option>
+              </select>
+            </div>
+          </div>
+          <button id="gGerar" class="w-full py-3.5 rounded-xl font-extrabold bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 shadow-lg transition">Gerar roteiro + legenda 🎬</button>
+        </div>
+
+        <!-- RESULTADO -->
+        <div class="space-y-4">
+          <div class="glass-card rounded-2xl overflow-hidden reveal">
+            <div class="px-4 py-2 border-b border-brand-border flex items-center justify-between">
+              <span class="text-xs font-bold text-white">🎬 Roteiro do vídeo</span>
+              <button id="copyScript" class="text-[11px] font-bold text-brand-accent hover:text-white transition">copiar</button>
+            </div>
+            <pre id="outScript" class="p-4 text-xs text-slate-300 whitespace-pre-wrap leading-relaxed" style="font-family:inherit">Preencha os dados ao lado e clique em gerar. O roteiro aparece aqui, cena a cena. ✨</pre>
+          </div>
+          <div class="glass-card rounded-2xl overflow-hidden reveal">
+            <div class="px-4 py-2 border-b border-brand-border flex items-center justify-between">
+              <span class="text-xs font-bold text-white">📝 Legenda pra postar</span>
+              <button id="copyCap" class="text-[11px] font-bold text-brand-accent hover:text-white transition">copiar</button>
+            </div>
+            <pre id="outCap" class="p-4 text-xs text-slate-300 whitespace-pre-wrap leading-relaxed" style="font-family:inherit">A legenda com hashtags e CTA aparece aqui, pronta pra colar no Instagram, TikTok e afins.</pre>
+          </div>
+          <a href="../conectores/index.html" class="block text-center w-full py-3 rounded-xl text-sm font-bold bg-brand-surface border border-brand-border text-slate-300 hover:border-brand-primary/50 transition">Postar nas redes conectadas →</a>
+        </div>
+      </div>
+      <p class="text-[11px] text-slate-500 text-center mt-6 max-w-2xl mx-auto">O roteiro e a legenda são gerados de verdade a partir do que você digita. A renderização do vídeo em si (imagens/animação) usa o gerador de vídeo da Central de IAs — que entra quando o conector de vídeo estiver ativo.</p>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO -->
+  <section id="catalogo" class="py-16 bg-brand-card border-t border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-8 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Seu catálogo</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Produtos importados</h3>
+        <p class="text-slate-400 mt-4">Tudo que você trouxe das lojas afiliadas fica aqui. Clique em <strong class="text-white">🎬 Gerar vídeo</strong> em qualquer produto pra criar a divulgação na hora.</p>
+      </div>
+      <div id="catFilters" class="flex flex-wrap gap-2 justify-center mb-6"></div>
+      <div id="catEmpty" class="glass-card rounded-2xl p-10 text-center reveal">
+        <div class="text-4xl mb-3 floaty">📦</div>
+        <p class="text-slate-400 text-sm mb-4">Seu catálogo está vazio. Afilie uma loja e importe produtos pra começar.</p>
+        <a href="#afiliar" class="inline-block px-6 py-3 rounded-xl font-bold bg-brand-primary/20 text-brand-accent hover:bg-brand-primary/30 transition">Afiliar uma loja ↑</a>
+      </div>
+      <div id="catGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 hidden"></div>
+    </div>
+  </section>
+
+  <!-- PRODUTOS EXCLUSIVOS -->
+  <section id="produtos" class="py-16 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-6 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Benefício de quem é membro de plano</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Produtos exclusivos da Mouras-World</h3>
+        <p class="text-slate-400 mt-4">Produtos próprios da plataforma, selecionados por valerem o investimento. Quem comprou o <strong class="text-white">plano anual ou vitalício da Mouras-World</strong> (aqui no site) libera tudo de graça — incluindo criar os vídeos por qualquer IA da plataforma.</p>
+      </div>
+
+      <!-- aviso: separado da afiliação -->
+      <div class="max-w-2xl mx-auto mb-8 glass-card rounded-xl p-4 border-brand-primary/30 flex items-start gap-3 reveal">
+        <span class="text-lg">ℹ️</span>
+        <p class="text-xs text-slate-400">Isto é diferente da afiliação acima. Estes produtos são <strong class="text-white">da Mouras-World</strong> e o acesso grátis vem do <strong class="text-white">seu plano da Mouras-World</strong>, não das lojas afiliadas (Shopee, Mercado Livre, etc.).</p>
+      </div>
+
+      <!-- seletor de plano (prévia) -->
+      <div class="flex items-center justify-center gap-2 mb-8 flex-wrap">
+        <span class="text-xs text-slate-400">Simular meu plano da Mouras-World:</span>
+        <button data-plan="gratis" class="planBtn px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-primary/20 border border-brand-primary/50 text-white">Gratuito</button>
+        <button data-plan="anual" class="planBtn px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-surface border border-brand-border text-slate-300">Anual</button>
+        <button data-plan="vitalicio" class="planBtn px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-surface border border-brand-border text-slate-300">Vitalício</button>
+      </div>
+
+      <div id="prodGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      <p class="text-[11px] text-slate-500 text-center mt-6 max-w-2xl mx-auto">Prévia: os produtos e preços ainda serão definidos junto com o Gabriel. O desbloqueio por plano é demonstrativo.</p>
+    </div>
+  </section>
+
+  <!-- COMISSÕES -->
+  <section id="comissoes" class="py-16 bg-brand-card border-t border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-primary font-bold mb-2">Seus ganhos</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Painel de comissões</h3>
+        <p class="text-slate-400 mt-4">Acompanhe produtos no catálogo, lojas ativas e a estimativa de comissão. <span class="text-slate-500">(Números de venda são simulação de prévia.)</span></p>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="glass-card rounded-2xl p-5 reveal lift"><div class="text-3xl font-black brand-gradient-text counter" data-to="0" id="stProd">0</div><div class="text-xs text-slate-400 mt-1">Produtos no catálogo</div></div>
+        <div class="glass-card rounded-2xl p-5 reveal lift"><div class="text-3xl font-black text-white counter" data-to="0" id="stLojas">0</div><div class="text-xs text-slate-400 mt-1">Lojas ativas</div></div>
+        <div class="glass-card rounded-2xl p-5 reveal lift"><div class="text-3xl font-black text-brand-accent counter" data-to="0" id="stVendas">0</div><div class="text-xs text-slate-400 mt-1">Vendas (simulado)</div></div>
+        <div class="glass-card rounded-2xl p-5 reveal lift"><div class="text-3xl font-black brand-gradient-text" id="stComissao">R$ 0</div><div class="text-xs text-slate-400 mt-1">Comissão estimada</div></div>
+      </div>
+      <div class="glass-card rounded-2xl p-6 reveal">
+        <div class="flex items-center justify-between mb-4"><h4 class="font-black text-white">Por loja</h4><span class="text-[11px] text-slate-500">estimativa de prévia</span></div>
+        <div id="comBars" class="space-y-4"></div>
+        <div id="comEmpty" class="text-center text-sm text-slate-400 py-6">Importe produtos pra ver seus ganhos por loja aqui. 📈</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VITRINE PÚBLICA -->
+  <section id="vitrine" class="py-16 bg-brand-dark border-t border-brand-border">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="text-center max-w-2xl mx-auto mb-10 reveal">
+        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Sua loja pra mostrar</h2>
+        <h3 class="text-3xl sm:text-4xl font-black text-white">Vitrine pública</h3>
+        <p class="text-slate-400 mt-4">Uma página só sua com todos os seus produtos. Compartilhe o link na bio e venda sem parar.</p>
+      </div>
+
+      <div class="glass-card rounded-2xl overflow-hidden reveal max-w-md mx-auto">
+        <!-- capa -->
+        <div class="relative h-28 shimmer bg-gradient-to-br from-brand-primary/30 to-brand-dark">
+          <img src="../assets/logo.png" alt="" class="absolute -bottom-7 left-1/2 -translate-x-1/2 w-16 h-16 rounded-2xl object-cover border-4 border-brand-card shadow-lg floaty">
+        </div>
+        <div class="pt-10 pb-6 px-5 text-center">
+          <div class="flex items-center justify-center gap-2">
+            <input id="vHandle" type="text" value="minha-loja" class="bg-transparent text-center text-white font-black text-lg w-40 focus:outline-none border-b border-transparent focus:border-brand-primary transition">
+          </div>
+          <div class="text-xs text-brand-accent mb-1">mouras-world.com/<span id="vHandleEcho">minha-loja</span></div>
+          <p class="text-xs text-slate-400 mb-4">Achadinhos selecionados com carinho 💜</p>
+          <div id="vGrid" class="grid grid-cols-3 gap-2 mb-5"></div>
+          <div class="flex gap-2">
+            <button id="vCopy" class="btn-shine flex-1 py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 transition">🔗 Copiar link da vitrine</button>
+            <a href="../conectores/index.html" class="px-4 py-2.5 rounded-xl text-sm font-bold bg-brand-surface border border-brand-border text-slate-300 hover:border-brand-primary/50 transition">Divulgar</a>
+          </div>
+        </div>
+      </div>
+      <p class="text-[11px] text-slate-500 text-center mt-5">Prévia da vitrine. No ar, cada membro terá o link público próprio pra compartilhar.</p>
+    </div>
+  </section>
+
+  <footer class="bg-brand-dark border-t border-brand-border py-10 text-xs text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <a href="../index.html" class="flex items-center gap-2"><img src="../assets/logo.png" alt="" class="w-8 h-8 rounded-lg object-cover"><span class="text-white font-black">MOURAS-WORLD</span></a>
+      <div>© 2026 Mouras-World · Mercado</div>
+      <a href="../index.html" class="hover:text-white transition">← Início</a>
+    </div>
+  </footer>
+
+  <!-- MODAL DE AFILIAÇÃO -->
+  <div id="afModal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="pop glass-card rounded-2xl w-full max-w-lg border-brand-primary/40 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between p-5 border-b border-brand-border">
+        <div class="flex items-center gap-2"><span id="mEmoji" class="text-2xl">🛒</span><h3 id="mNome" class="text-lg font-black text-white">Loja</h3></div>
+        <button id="mClose" class="w-8 h-8 rounded-lg bg-brand-surface text-slate-400 hover:text-white transition">✕</button>
+      </div>
+      <div class="p-5 space-y-4">
+
+        <!-- passo 1 -->
+        <div class="glass-card rounded-xl p-4">
+          <div class="flex items-center gap-2 mb-2"><span id="s1n" class="w-6 h-6 rounded-full bg-brand-primary/20 text-brand-accent flex items-center justify-center text-xs font-black">1</span><h4 class="font-bold text-white text-sm">Afilie-se (ou venda) na loja</h4></div>
+          <p class="text-xs text-slate-400 mb-3">Abra o programa oficial da loja, cadastre-se como afiliado(a) ou vendedor(a) e pegue seu link/conta.</p>
+          <a id="mGo" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 transition">Ir para a loja ↗</a>
+          <label class="flex items-center gap-2 mt-3 text-xs text-slate-300 cursor-pointer"><input id="mAfiliada" type="checkbox" class="accent-purple-600 w-4 h-4"> Já me afiliei / tenho conta de vendedor</label>
+        </div>
+
+        <!-- passo 2 -->
+        <div id="box2" class="glass-card rounded-xl p-4 opacity-50 pointer-events-none transition">
+          <div class="flex items-center gap-2 mb-2"><span class="w-6 h-6 rounded-full bg-brand-primary/20 text-brand-accent flex items-center justify-center text-xs font-black">2</span><h4 class="font-bold text-white text-sm">Conecte a loja no Mouras-World</h4></div>
+          <p class="text-xs text-slate-400 mb-3">Ligue sua conta da loja à plataforma pra trazer os produtos pra cá.</p>
+          <button id="mConnect" class="px-4 py-2.5 rounded-xl text-sm font-bold bg-brand-surface border border-brand-border text-white hover:border-brand-primary/50 transition">🔗 Conectar loja</button>
+        </div>
+
+        <!-- passo 3 -->
+        <div id="box3" class="glass-card rounded-xl p-4 opacity-50 pointer-events-none transition">
+          <div class="flex items-center gap-2 mb-2"><span class="w-6 h-6 rounded-full bg-brand-primary/20 text-brand-accent flex items-center justify-center text-xs font-black">3</span><h4 class="font-bold text-white text-sm">Importe os produtos</h4></div>
+          <p class="text-xs text-slate-400 mb-3">Quantos produtos dessa loja você quer trazer pro seu catálogo?</p>
+          <div class="flex items-center gap-3 mb-3">
+            <input id="mQty" type="number" min="1" max="500" value="20" class="w-24 px-3 py-2 rounded-xl bg-brand-surface border border-brand-border text-white text-sm">
+            <span class="text-xs text-slate-400">produtos</span>
+          </div>
+          <div class="space-y-2 mb-4">
+            <label class="flex items-start gap-2 text-xs text-slate-300 cursor-pointer"><input type="radio" name="mImport" value="eu" checked class="accent-purple-600 mt-0.5"> <span><strong class="text-white">Eu escolho na loja</strong> e trago os links.</span></label>
+            <label class="flex items-start gap-2 text-xs text-slate-300 cursor-pointer"><input type="radio" name="mImport" value="mw" class="accent-purple-600 mt-0.5"> <span><strong class="text-white">O Mouras-World importa por mim</strong> — seleciona os mais vendidos automaticamente.</span></label>
+          </div>
+          <button id="mImportBtn" class="w-full py-3 rounded-xl text-sm font-extrabold bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 shadow-lg transition">Importar produtos</button>
+        </div>
+
+        <div id="mDone" class="hidden pop glass-card rounded-xl p-4 border border-emerald-500/30 bg-emerald-500/5 text-sm text-emerald-200"></div>
+        <p class="text-[11px] text-slate-500 text-center">Prévia: o "Ir para a loja" abre o programa oficial de afiliados de cada rede. Conexão e importação automática serão feitas pela plataforma quando estiver no ar. Depois é só repetir pra outras lojas.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] hidden"><div class="pop glass-card rounded-xl px-5 py-3 border border-brand-primary/50 badge-glow flex items-center gap-3"><span class="text-xl">🛍️</span><span id="toastMsg" class="text-sm font-semibold text-white"></span></div></div>
+
+  <script>
+    (function(){
+      var $=function(id){return document.getElementById(id);};
+      function toast(m){ $('toastMsg').textContent=m; var t=$('toast'); t.classList.remove('hidden'); setTimeout(function(){ t.classList.add('hidden'); },2400); }
+      var KEY='mw_mercado_afiliadas';
+      function load(){ try{ return JSON.parse(localStorage.getItem(KEY)||'{}'); }catch(e){ return {}; } }
+      function save(o){ try{ localStorage.setItem(KEY,JSON.stringify(o)); }catch(e){} }
+
+      // url = programa oficial de afiliados/vendedores. Onde a URL exata varia,
+      // usamos uma busca que leva direto ao programa oficial (honesto e sempre funciona).
+      function busca(q){ return 'https://www.google.com/search?q='+encodeURIComponent(q+' programa de afiliados'); }
+      var lojas=[
+        {id:'shopee',   nome:'Shopee',        emoji:'🛒', url:busca('Shopee')},
+        {id:'ml',       nome:'Mercado Livre', emoji:'💛', url:busca('Mercado Livre')},
+        {id:'amazon',   nome:'Amazon',        emoji:'📦', url:'https://associados.amazon.com.br/'},
+        {id:'ali',      nome:'AliExpress',    emoji:'🔴', url:'https://portals.aliexpress.com/'},
+        {id:'magalu',   nome:'Magalu',        emoji:'🔵', url:busca('Magazine Luiza Parceiro Magalu')},
+        {id:'americanas',nome:'Americanas',   emoji:'🔺', url:busca('Americanas')},
+        {id:'casasbahia',nome:'Casas Bahia',  emoji:'🏠', url:busca('Casas Bahia')},
+        {id:'shein',    nome:'Shein',         emoji:'👗', url:busca('Shein')},
+        {id:'temu',     nome:'Temu',          emoji:'🟠', url:busca('Temu')},
+        {id:'netshoes', nome:'Netshoes',      emoji:'👟', url:busca('Netshoes')},
+        {id:'centauro', nome:'Centauro',      emoji:'⚽', url:busca('Centauro')},
+        {id:'kabum',    nome:'KaBuM!',        emoji:'🎮', url:busca('KaBuM')},
+        {id:'dafiti',   nome:'Dafiti',        emoji:'🛍️', url:busca('Dafiti')},
+        {id:'natura',   nome:'Natura',        emoji:'🌿', url:busca('Natura consultoria')},
+        {id:'hotmart',  nome:'Hotmart',       emoji:'🔥', url:'https://www.hotmart.com/pt-br/marketplace'},
+        {id:'eduzz',    nome:'Eduzz',         emoji:'📘', url:'https://www.eduzz.com/'},
+        {id:'monetizze',nome:'Monetizze',     emoji:'💹', url:'https://www.monetizze.com.br/'},
+        {id:'braip',    nome:'Braip',         emoji:'🧩', url:'https://braip.com/'},
+        {id:'lomadee',  nome:'Lomadee (rede)',emoji:'🔗', url:busca('Lomadee')},
+        {id:'awin',     nome:'Awin (rede)',   emoji:'🌐', url:'https://www.awin.com/br'},
+        {id:'outras',   nome:'Outras lojas',  emoji:'➕', url:busca('loja online')}
+      ];
+      function lojaById(id){ return lojas.filter(function(x){return x.id===id;})[0]; }
+
+      function renderLojas(){
+        var st=load(); var g=$('lojaGrid'); g.innerHTML='';
+        lojas.forEach(function(l){
+          var s=st[l.id]||{};
+          var done = s.produtos>0;
+          var c=document.createElement('div');
+          c.className='glass-card rounded-2xl p-5 text-center pop '+(done?'border-emerald-500/40':(s.conectada?'border-brand-primary/40':''));
+          var status = done ? ('✅ '+s.produtos+' produtos') : (s.conectada ? '🔗 Conectada' : (s.afiliada ? '◔ Afiliada' : 'Não afiliada'));
+          c.innerHTML='<div class="text-3xl mb-2">'+l.emoji+'</div><div class="font-bold text-white text-sm mb-1">'+l.nome+'</div>'+
+            '<div class="text-[11px] mb-3 '+(done?'text-emerald-300':'text-slate-400')+'">'+status+'</div>'+
+            '<button data-id="'+l.id+'" class="afBtn w-full py-2 rounded-lg text-xs font-bold transition '+(done?'bg-emerald-500/10 text-emerald-300 border border-emerald-500/30':'bg-brand-primary/20 text-brand-accent hover:bg-brand-primary/30')+'">'+(done?'Gerenciar':(s.afiliada?'Continuar':'Afiliar'))+'</button>';
+          c.querySelector('.afBtn').addEventListener('click',function(){ openModal(l.id); });
+          g.appendChild(c);
+        });
+        if(typeof refreshMercado==='function'){ refreshMercado(); }
+      }
+
+      // ---------- modal de afiliação ----------
+      var modalId=null;
+      function stepState(){
+        var st=load(); var s=st[modalId]||{};
+        $('mAfiliada').checked = !!s.afiliada;
+        setBox('box2', !!s.afiliada);
+        setBox('box3', !!s.conectada);
+        $('mConnect').textContent = s.conectada ? '✓ Loja conectada' : '🔗 Conectar loja';
+        $('mConnect').disabled = !!s.conectada;
+        if(s.produtos>0){ showDone(s); } else { $('mDone').classList.add('hidden'); }
+        if(s.qty){ $('mQty').value = s.qty; }
+      }
+      function setBox(id, enabled){
+        var b=$(id);
+        if(enabled){ b.classList.remove('opacity-50','pointer-events-none'); }
+        else { b.classList.add('opacity-50','pointer-events-none'); }
+      }
+      function showDone(s){
+        var modo = s.importBy==='mw' ? 'o Mouras-World importou pra você' : 'prontos pra você trazer os links';
+        $('mDone').innerHTML = '✅ <strong>'+s.produtos+' produtos</strong> da '+lojaById(modalId).nome+' — '+modo+'. Quer fazer o mesmo com outra loja? É só fechar e escolher outra. 😉';
+        $('mDone').classList.remove('hidden');
+      }
+      function openModal(id){
+        modalId=id; var l=lojaById(id);
+        $('mEmoji').textContent=l.emoji; $('mNome').textContent=l.nome; $('mGo').href=l.url;
+        stepState();
+        var m=$('afModal'); m.classList.remove('hidden'); m.classList.add('flex');
+      }
+      function closeModal(){ var m=$('afModal'); m.classList.add('hidden'); m.classList.remove('flex'); renderLojas(); }
+      $('mClose').addEventListener('click', closeModal);
+      $('afModal').addEventListener('click', function(e){ if(e.target===this) closeModal(); });
+
+      $('mAfiliada').addEventListener('change', function(){
+        var st=load(); st[modalId]=st[modalId]||{}; st[modalId].afiliada=this.checked; if(!this.checked){ st[modalId].conectada=false; } save(st); stepState();
+      });
+      $('mConnect').addEventListener('click', function(){
+        var st=load(); st[modalId]=st[modalId]||{}; st[modalId].conectada=true; save(st); stepState(); toast(lojaById(modalId).nome+' conectada ao Mouras-World!');
+      });
+      $('mImportBtn').addEventListener('click', function(){
+        var qty=Math.max(1, parseInt($('mQty').value,10)||1);
+        var by=(document.querySelector('input[name="mImport"]:checked')||{}).value||'eu';
+        var st=load(); st[modalId]=st[modalId]||{}; st[modalId].produtos=qty; st[modalId].qty=qty; st[modalId].importBy=by; save(st);
+        showDone(st[modalId]); renderLojas();
+        toast(qty+' produtos da '+lojaById(modalId).nome+' importados!');
+      });
+
+      // produtos
+      var plan='gratis';
+      var produtos=[
+        {nome:'Pack de Templates de Site', emoji:'🧩', desc:'Modelos prontos pra entregar sites mais rápido.', nivel:'anual'},
+        {nome:'Biblioteca de Vídeos por IA', emoji:'🎬', desc:'Crie vídeos de divulgação ilimitados pra suas vendas.', nivel:'anual'},
+        {nome:'Pacote de Automações Prontas', emoji:'🤖', desc:'Fluxos de bot pra WhatsApp e Instagram já configurados.', nivel:'vitalicio'},
+        {nome:'Curso Avançado de Vendas', emoji:'📈', desc:'Do primeiro contato ao fechamento, passo a passo.', nivel:'anual'},
+        {nome:'Mentoria em Grupo', emoji:'💬', desc:'Encontros ao vivo com o Gabriel e a comunidade.', nivel:'vitalicio'},
+        {nome:'Selo Verificado de Membro', emoji:'🏅', desc:'Destaque seu perfil na comunidade.', nivel:'anual'}
+      ];
+      function unlocked(nivel){ if(plan==='vitalicio') return true; if(plan==='anual') return nivel==='anual'; return false; }
+      function renderProds(){
+        var g=$('prodGrid'); g.innerHTML='';
+        produtos.forEach(function(p){
+          var free=unlocked(p.nivel);
+          var c=document.createElement('div');
+          c.className='glass-card rounded-2xl p-6 '+(free?'border-emerald-500/40':'locked');
+          c.innerHTML='<div class="flex items-center justify-between mb-3"><span class="text-3xl">'+p.emoji+'</span>'+
+            (free?'<span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">Liberado grátis</span>':'<span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-brand-surface text-slate-400 border border-brand-border">🔒 Plano MW '+(p.nivel==='vitalicio'?'vitalício':'anual')+'</span>')+'</div>'+
+            '<h4 class="font-bold text-white mb-1">'+p.nome+'</h4><p class="text-sm text-slate-400 mb-4">'+p.desc+'</p>'+
+            (free?'<button class="w-full py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 transition">Acessar de graça</button>':'<a href="../planos/index.html" class="block text-center w-full py-2.5 rounded-xl text-sm font-bold bg-brand-surface border border-brand-border text-slate-300 hover:border-brand-primary/50 transition">Liberar com plano da Mouras-World</a>');
+          g.appendChild(c);
+        });
+      }
+      document.querySelectorAll('.planBtn').forEach(function(b){
+        b.addEventListener('click',function(){
+          plan=b.getAttribute('data-plan');
+          document.querySelectorAll('.planBtn').forEach(function(x){ x.className='planBtn px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-surface border border-brand-border text-slate-300'; });
+          b.className='planBtn px-3 py-1.5 rounded-lg text-xs font-bold bg-brand-primary/20 border border-brand-primary/50 text-white';
+          renderProds();
+        });
+      });
+
+      // ---------- gerar vídeo do produto ----------
+      function val(id){ return ($(id).value||'').trim(); }
+      function limpaTags(raw){
+        if(!raw) return '';
+        return raw.split(/[\s,]+/).filter(Boolean).map(function(t){ return t[0]==='#'?t:'#'+t; }).join(' ');
+      }
+      function gerar(){
+        var prod=val('gProd')||'seu produto', desc=val('gDesc'), preco=val('gPreco'),
+            nicho=val('gNicho'), loja=val('gLoja'), cta=val('gCta')||'Garanta o seu pelo link!',
+            tags=limpaTags(val('gTags')), tom=val('gTom'), fmt=val('gFmt');
+        var precoTxt = preco ? ('por apenas R$ '+preco) : 'com preço especial';
+        var beneficios = desc ? desc.split(/[.;\n]+/).map(function(s){return s.trim();}).filter(Boolean) : [];
+
+        // ROTEIRO (cena a cena)
+        var script = '🎬 ROTEIRO — '+prod+'\n';
+        script += 'Formato: '+fmt+' · Tom: '+tom+(nicho?(' · Nicho: '+nicho):'')+'\n';
+        script += '────────────────────\n\n';
+        script += '⏱️ 0–3s (GANCHO):\n"'+(nicho?('Se você curte '+nicho+', presta atenção nisso 👀'):('Olha só o que eu achei 👀'))+'"\n\n';
+        script += '⏱️ 3–10s (PRODUTO):\n"Esse é o '+prod+'"'+(beneficios.length?(' — e ele '+beneficios.slice(0,3).join(', ')+'.'):'.')+'\n';
+        script += '[mostrar o produto em close, girando]\n\n';
+        if(beneficios.length>1){
+          script += '⏱️ 10–18s (BENEFÍCIOS):\n';
+          beneficios.slice(0,4).forEach(function(b,i){ script += '• '+b+'\n'; });
+          script += '[texto na tela a cada benefício]\n\n';
+        }
+        script += '⏱️ 18–25s (OFERTA):\n"E o melhor: '+precoTxt+(loja?(' lá na '+loja):'')+'!"\n[destaque o preço grande na tela]\n\n';
+        script += '⏱️ 25–30s (CTA):\n"'+cta+'" 🔗\n[seta apontando pro link / "link na bio"]\n\n';
+        script += '🎵 Trilha: '+(tom.indexOf('viral')>=0||tom.indexOf('Animado')>=0?'música animada em alta':'música suave de fundo')+'. Legendas sempre na tela.';
+
+        // LEGENDA
+        var cap = '';
+        cap += (nicho?('🔥 Achadinho de '+nicho+'! '):'🔥 Achadinho do dia! ');
+        cap += prod+(beneficios.length?(' — '+beneficios[0].toLowerCase()+'.'):'.')+'\n\n';
+        if(preco) cap += '💰 '+precoTxt.charAt(0).toUpperCase()+precoTxt.slice(1)+'\n';
+        cap += '🛒 '+cta+(loja?(' ('+loja+')'):'')+'\n\n';
+        if(tags) cap += tags;
+
+        $('outScript').textContent = script;
+        $('outCap').textContent = cap;
+        toast('Roteiro e legenda gerados! 🎬');
+        $('gerar').scrollIntoView({behavior:'smooth', block:'nearest'});
+      }
+      $('gGerar').addEventListener('click', gerar);
+      function copiar(id, btn){ try{ navigator.clipboard.writeText($(id).textContent); btn.textContent='copiado ✓'; setTimeout(function(){ btn.textContent='copiar'; },1500); }catch(e){ var r=document.createRange(); r.selectNode($(id)); window.getSelection().removeAllRanges(); window.getSelection().addRange(r); } }
+      $('copyScript').addEventListener('click', function(){ copiar('outScript', this); });
+      $('copyCap').addEventListener('click', function(){ copiar('outCap', this); });
+
+      // ---------- catálogo / comissões / vitrine ----------
+      var TICKET=60, COMISSAO=0.12, catFilter='all';
+      function money(v){ return 'R$ '+v.toFixed(2).replace('.',','); }
+      function allProducts(){
+        var st=load(), out=[];
+        lojas.forEach(function(l){ var n=(st[l.id]||{}).produtos||0; for(var i=1;i<=n;i++){ out.push({ loja:l.id, nome:l.nome, emoji:l.emoji, idx:i, preco:(19.9+((i*37)%180)) }); } });
+        return out;
+      }
+      function lojasAtivas(){ var st=load(); return lojas.filter(function(l){ return (st[l.id]||{}).produtos>0; }); }
+
+      function animateCounter(el){
+        var to=parseInt(el.getAttribute('data-to'),10)||0;
+        var from=parseInt((el.textContent||'0').replace(/\D/g,''),10)||0;
+        if(from===to){ el.textContent=to; return; }
+        var start=performance.now(), dur=800;
+        (function step(t){ var p=Math.min(1,(t-start)/dur); var v=Math.round(from+(to-from)*(1-Math.pow(1-p,3))); el.textContent=v; if(p<1){ requestAnimationFrame(step); } else { el.classList.add('tick'); setTimeout(function(){ el.classList.remove('tick'); },400); } })(start);
+      }
+
+      function buildCatalog(){
+        var prods=allProducts(), ativ=lojasAtivas();
+        var filtros=$('catFilters'), grid=$('catGrid'), empty=$('catEmpty');
+        if(prods.length===0){ grid.classList.add('hidden'); empty.classList.remove('hidden'); filtros.innerHTML=''; return; }
+        empty.classList.add('hidden'); grid.classList.remove('hidden');
+        // chips
+        filtros.innerHTML='';
+        var mk=function(id,label){ var b=document.createElement('button'); b.className='px-3 py-1.5 rounded-lg text-xs font-bold border transition '+(catFilter===id?'bg-brand-primary/20 border-brand-primary/50 text-white':'bg-brand-surface border-brand-border text-slate-300 hover:border-brand-primary/40'); b.textContent=label; b.addEventListener('click',function(){ catFilter=id; buildCatalog(); }); filtros.appendChild(b); };
+        mk('all','Todas ('+prods.length+')');
+        ativ.forEach(function(l){ var n=prods.filter(function(p){return p.loja===l.id;}).length; mk(l.id, l.emoji+' '+l.nome+' ('+n+')'); });
+        // grid
+        var list = catFilter==='all'?prods:prods.filter(function(p){return p.loja===catFilter;});
+        var show = list.slice(0,24);
+        grid.innerHTML='';
+        show.forEach(function(p,i){
+          var c=document.createElement('div');
+          c.className='glass-card rounded-2xl p-4 lift rise-in';
+          c.style.animationDelay=(i*0.03)+'s';
+          c.innerHTML='<div class="aspect-square rounded-xl bg-gradient-to-br from-brand-surface to-brand-dark flex items-center justify-center text-4xl mb-3 relative overflow-hidden"><span class="relative z-10">'+p.emoji+'</span><div class="absolute inset-0 shimmer opacity-40"></div></div>'+
+            '<div class="text-[10px] text-brand-accent font-bold uppercase mb-0.5">'+p.nome+'</div>'+
+            '<div class="font-bold text-white text-sm mb-1">Produto #'+p.idx+'</div>'+
+            '<div class="text-brand-accent font-black text-sm mb-3">'+money(p.preco)+'</div>'+
+            '<button class="genBtn w-full py-2 rounded-lg text-xs font-bold bg-brand-primary/20 text-brand-accent hover:bg-brand-primary/30 transition">🎬 Gerar vídeo</button>';
+          c.querySelector('.genBtn').addEventListener('click',function(){
+            $('gProd').value='Produto #'+p.idx+' ('+p.nome+')'; $('gLoja').value=p.nome; $('gPreco').value=p.preco.toFixed(2).replace('.',',');
+            $('gerar').scrollIntoView({behavior:'smooth'}); setTimeout(function(){ $('gGerar').click(); },500);
+          });
+          grid.appendChild(c);
+        });
+        if(list.length>24){ var more=document.createElement('div'); more.className='glass-card rounded-2xl p-4 flex items-center justify-center text-sm text-slate-400'; more.textContent='+'+(list.length-24)+' produtos'; grid.appendChild(more); }
+      }
+
+      function buildComissoes(){
+        var prods=allProducts(), ativ=lojasAtivas();
+        var total=prods.length, vendas=Math.round(total*1.6), comissao=vendas*TICKET*COMISSAO;
+        $('stProd').setAttribute('data-to', total); animateCounter($('stProd'));
+        $('stLojas').setAttribute('data-to', ativ.length); animateCounter($('stLojas'));
+        $('stVendas').setAttribute('data-to', vendas); animateCounter($('stVendas'));
+        $('stComissao').textContent = money(comissao); $('stComissao').classList.add('tick'); setTimeout(function(){ $('stComissao').classList.remove('tick'); },400);
+        var bars=$('comBars'), empty=$('comEmpty');
+        if(ativ.length===0){ bars.innerHTML=''; empty.classList.remove('hidden'); return; }
+        empty.classList.add('hidden');
+        var st=load(); var max=Math.max.apply(null, ativ.map(function(l){ return st[l.id].produtos; }));
+        bars.innerHTML='';
+        ativ.forEach(function(l){ var n=st[l.id].produtos, v=Math.round(n*1.6), com=v*TICKET*COMISSAO;
+          var row=document.createElement('div');
+          row.innerHTML='<div class="flex items-center justify-between text-xs mb-1"><span class="text-white font-semibold">'+l.emoji+' '+l.nome+'</span><span class="text-brand-accent font-bold">'+money(com)+'</span></div>'+
+            '<div class="h-2.5 rounded-full bg-brand-surface overflow-hidden"><div class="barfill"></div></div>'+
+            '<div class="text-[10px] text-slate-500 mt-1">'+n+' produtos · '+v+' vendas (simulado)</div>';
+          bars.appendChild(row);
+          var fill=row.querySelector('.barfill'); setTimeout(function(){ fill.style.width=((n/max)*100)+'%'; },50);
+        });
+      }
+
+      function buildVitrine(){
+        $('vHandleEcho').textContent = ($('vHandle').value||'minha-loja').replace(/\s+/g,'-').toLowerCase();
+        var prods=allProducts(); var grid=$('vGrid'); grid.innerHTML='';
+        var tiles = prods.length? prods.slice(0,6) : [1,2,3,4,5,6].map(function(){ return {emoji:'🛍️'}; });
+        tiles.forEach(function(p,i){ var d=document.createElement('div'); d.className='aspect-square rounded-lg bg-gradient-to-br from-brand-surface to-brand-dark flex items-center justify-center text-2xl rise-in'; d.style.animationDelay=(i*0.05)+'s'; d.textContent=p.emoji; grid.appendChild(d); });
+      }
+
+      function refreshMercado(){ buildCatalog(); buildComissoes(); buildVitrine(); }
+
+      $('vHandle').addEventListener('input', function(){ $('vHandleEcho').textContent=(this.value||'minha-loja').replace(/\s+/g,'-').toLowerCase(); });
+      $('vCopy').addEventListener('click', function(){ var link='mouras-world.com/'+$('vHandleEcho').textContent; try{ navigator.clipboard.writeText(link); }catch(e){} toast('Link copiado: '+link); });
+
+      var obs=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target);} }); },{threshold:.12});
+      document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+
+      renderLojas(); renderProds(); refreshMercado();
+    })();
+  </script>
+
+  <script src="../assets/anim.js"></script>
+</body>
+</html>
