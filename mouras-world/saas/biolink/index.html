@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouras BioLink Pro | Hub de Links & Automação</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { background-color: #080c14; font-family: 'Inter', sans-serif; color: #f8fafc; }
+    .phone-mockup { width: 320px; height: 600px; border-radius: 40px; box-shadow: 0 25px 50px -12px rgba(0, 229, 255, 0.25); }
+  </style>
+</head>
+<body class="selection:bg-cyan-500 selection:text-black">
+
+  <!-- TOPO RETORNO -->
+  <div class="bg-cyan-500/10 border-b border-cyan-500/20 py-2 px-4 text-xs text-center text-cyan-300 flex items-center justify-between">
+    <span>SaaS Produto 02 • <strong>Mouras BioLink Pro</strong></span>
+    <a href="../../index.html" class="underline hover:text-white transition">← Voltar ao Portal Mouras-World</a>
+  </div>
+
+  <!-- HEADER -->
+  <header class="border-b border-slate-800 bg-slate-950/80 px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center font-black text-black">
+        BL
+      </div>
+      <div>
+        <h1 class="text-lg font-bold text-white flex items-center gap-2">
+          Mouras BioLink Pro
+          <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 font-semibold">Micro-SaaS Ativo</span>
+        </h1>
+        <p class="text-xs text-slate-400">Criador de Links para Instagram e Automação de Cliques</p>
+      </div>
+    </div>
+    <div class="text-xs text-slate-400">
+      Cliques Registrados Hoje: <span id="click-counter" class="text-cyan-400 font-bold text-sm">247 cliques</span>
+    </div>
+  </header>
+
+  <!-- WORKSPACE DO SAAS: FORMULÁRIO DE EDIÇÃO + PREVIEW DO CELULAR -->
+  <main class="max-w-6xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
+    <!-- PAINEL DE CONFIGURAÇÃO (ESQUERDA) -->
+    <div class="bg-slate-900/60 rounded-2xl p-6 border border-slate-800">
+      <h2 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+        Personalize Seu BioLink em Tempo Real
+      </h2>
+
+      <div class="space-y-4 text-xs">
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Título / Nome da Empresa</label>
+          <input type="text" id="input-title" value="Mouras-World Oficial" oninput="updatePreview()" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-cyan-400">
+        </div>
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Bio / Slogan</label>
+          <input type="text" id="input-bio" value="Criação de Sites, SaaS e Automações de Elite" oninput="updatePreview()" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-cyan-400">
+        </div>
+
+        <div class="pt-4 border-t border-slate-800">
+          <div class="flex items-center justify-between mb-3">
+            <span class="font-bold text-slate-200">Botões de Ação</span>
+            <button onclick="addLink()" class="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-400 font-semibold hover:bg-cyan-500/30 transition">+ Novo Botão</button>
+          </div>
+          <div id="links-editor-list" class="space-y-3">
+            <!-- BOTÃO 1 -->
+            <div class="p-3 bg-slate-950 rounded-lg border border-slate-800 flex gap-2">
+              <input type="text" value="Abrir WhatsApp" aria-label="Texto do botão de link" oninput="updatePreview()" class="flex-1 px-2 py-1 bg-slate-900 border border-slate-700 rounded text-white link-title">
+              <input type="text" value="https://wa.me/?text=Ol%C3%A1%2C%20vim%20pelo%20Mouras-World" aria-label="URL do botão de link" oninput="updatePreview()" class="flex-1 px-2 py-1 bg-slate-900 border border-slate-700 rounded text-slate-300 link-url">
+            </div>
+            <!-- BOTÃO 2 -->
+            <div class="p-3 bg-slate-950 rounded-lg border border-slate-800 flex gap-2">
+              <input type="text" value="Ver Mouras-World" aria-label="Texto do botão de link" oninput="updatePreview()" class="flex-1 px-2 py-1 bg-slate-900 border border-slate-700 rounded text-white link-title">
+              <input type="text" value="https://moura-hub.vercel.app/mouras-world" aria-label="URL do botão de link" oninput="updatePreview()" class="flex-1 px-2 py-1 bg-slate-900 border border-slate-700 rounded text-slate-300 link-url">
+            </div>
+          </div>
+          <p id="link-validation" role="status" aria-live="polite" class="mt-2 min-h-4 text-[10px] text-rose-300"></p>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800">
+          <label class="block text-slate-300 font-semibold mb-2">Tema do Fundo do Celular</label>
+          <div class="flex gap-3">
+            <button onclick="setTheme('dark')" class="px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-white font-medium hover:border-cyan-400">Escuro Ônix</button>
+            <button onclick="setTheme('gold')" class="px-3 py-1.5 rounded-lg bg-amber-950/50 border border-amber-600 text-amber-300 font-medium hover:border-amber-400">Ouro Mouras</button>
+            <button onclick="setTheme('cyan')" class="px-3 py-1.5 rounded-lg bg-cyan-950/50 border border-cyan-600 text-cyan-300 font-medium hover:border-cyan-400">Ciano Cyber</button>
+          </div>
+        </div>
+
+        <button onclick="alert('Configurações salvas e integradas na nuvem do Supabase com sucesso!')" class="w-full mt-4 py-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-bold text-xs uppercase tracking-wider hover:opacity-95 transition">
+          Salvar & Gerar Link da Bio
+        </button>
+      </div>
+    </div>
+
+    <!-- SIMULADOR MOBILE / CELULAR AO VIVO (DIREITA) -->
+    <div class="flex flex-col items-center justify-center">
+      <div class="text-xs text-slate-400 mb-3 font-medium">Prévia Interativa em Tempo Real</div>
+
+      <!-- CARCAÇA DO SMARTPHONE -->
+      <div class="phone-mockup border-4 border-slate-700 bg-slate-950 p-4 flex flex-col justify-between relative overflow-hidden" id="phone-bg">
+        <!-- ALTO-FALANTE DO SMARTPHONE -->
+        <div class="w-24 h-4 bg-slate-800 rounded-full mx-auto mb-4"></div>
+
+        <!-- CONTEÚDO DA BIO DO CLIENTE -->
+        <div class="flex-1 flex flex-col items-center text-center">
+          <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-cyan-400 to-blue-600 flex items-center justify-center text-white text-xl font-black mb-3 border-2 border-slate-800 shadow-md">
+            MW
+          </div>
+          <h3 id="preview-title" class="text-sm font-bold text-white mb-1">Mouras-World Oficial</h3>
+          <p id="preview-bio" class="text-[11px] text-slate-400 max-w-[240px] mb-6">Criação de Sites, SaaS e Automações de Elite</p>
+
+          <!-- LISTA DE BOTÕES DINÂMICOS -->
+          <div id="preview-links-container" class="w-full space-y-3 px-2">
+            <!-- Links renderizados via JS -->
+          </div>
+        </div>
+
+        <div class="text-[10px] text-slate-500 text-center pb-2">
+          Powered by Mouras BioLink Pro
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    let clicks = 247;
+
+    function updatePreview() {
+      const title = document.getElementById('input-title').value;
+      const bio = document.getElementById('input-bio').value;
+
+      document.getElementById('preview-title').textContent = title;
+      document.getElementById('preview-bio').textContent = bio;
+
+      const linkTitles = document.querySelectorAll('.link-title');
+      const linkUrls = document.querySelectorAll('.link-url');
+      const container = document.getElementById('preview-links-container');
+      container.innerHTML = '';
+      let hasInvalidUrl = false;
+
+      linkTitles.forEach((titleInput, index) => {
+        const label = titleInput.value.trim();
+        const urlValue = linkUrls[index]?.value.trim() || '';
+        if (!label || !urlValue) return;
+
+        let destination;
+        try {
+          destination = new URL(urlValue);
+        } catch {
+          hasInvalidUrl = true;
+          return;
+        }
+        if (!['http:', 'https:'].includes(destination.protocol)) {
+          hasInvalidUrl = true;
+          return;
+        }
+
+        const btn = document.createElement('a');
+        btn.href = destination.href;
+        btn.target = '_blank';
+        btn.rel = 'noopener noreferrer';
+        btn.addEventListener('click', () => {
+          clicks++;
+          document.getElementById('click-counter').textContent = clicks + ' cliques';
+        });
+        btn.className = "block w-full py-2.5 px-3 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs font-semibold hover:border-cyan-400 hover:text-cyan-300 transition shadow-sm text-center";
+        btn.textContent = label;
+        container.appendChild(btn);
+      });
+
+      document.getElementById('link-validation').textContent = hasInvalidUrl
+        ? 'Use uma URL completa iniciando com http:// ou https://.'
+        : '';
+    }
+
+    function addLink() {
+      const list = document.getElementById('links-editor-list');
+      const row = document.createElement('div');
+      row.className = "p-3 bg-slate-950 rounded-lg border border-slate-800 flex gap-2";
+      row.innerHTML = `
+        <input type="text" value="Novo Link" aria-label="Texto do botão de link" oninput="updatePreview()" class="flex-1 px-2 py-1 bg-slate-900 border border-slate-700 rounded text-white link-title">
+        <input type="text" value="https://" aria-label="URL do botão de link" oninput="updatePreview()" class="flex-1 px-2 py-1 bg-slate-900 border border-slate-700 rounded text-slate-300 link-url">
+      `;
+      list.appendChild(row);
+      updatePreview();
+    }
+
+    function setTheme(t) {
+      const bg = document.getElementById('phone-bg');
+      if (t === 'dark') {
+        bg.style.backgroundColor = '#020617';
+      } else if (t === 'gold') {
+        bg.style.backgroundColor = '#1c1917';
+      } else if (t === 'cyan') {
+        bg.style.backgroundColor = '#082f49';
+      }
+    }
+
+    updatePreview();
+  </script>
+
+</body>
+</html>
