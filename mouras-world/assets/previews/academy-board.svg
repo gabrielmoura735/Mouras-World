@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none">
+  <defs>
+    <linearGradient id="background" x1="72" y1="22" x2="890" y2="522" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1A1030"/>
+      <stop offset="1" stop-color="#0A0612"/>
+    </linearGradient>
+    <linearGradient id="cover" x1="124" y1="228" x2="368" y2="354" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#5B21B6"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" rx="28" fill="url(#background)"/>
+  <circle cx="780" cy="90" r="154" fill="#A855F7" fill-opacity=".1"/>
+  <rect x="58" y="46" width="844" height="448" rx="22" fill="#10091C" stroke="#392654"/>
+  <path d="M58 104h844" stroke="#392654"/>
+  <circle cx="88" cy="75" r="6" fill="#A855F7"/>
+  <circle cx="108" cy="75" r="6" fill="#5B21B6"/>
+  <circle cx="128" cy="75" r="6" fill="#33264A"/>
+  <text x="164" y="81" fill="#F1F0F5" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700">MOURAS ACADEMY / TRILHAS</text>
+  <text x="88" y="151" fill="#F1F0F5" font-family="Inter,Arial,sans-serif" font-size="23" font-weight="700">Aprender fazendo</text>
+  <text x="88" y="178" fill="#A09BB5" font-family="Inter,Arial,sans-serif" font-size="14">Uma proposta visual para organizar aulas e projetos.</text>
+  <rect x="88" y="212" width="244" height="190" rx="16" fill="#171025" stroke="#33264A"/>
+  <rect x="108" y="232" width="204" height="82" rx="12" fill="url(#cover)"/>
+  <path d="m194 254 39 19-39 19v-38Z" fill="#fff"/>
+  <text x="108" y="342" fill="#F1F0F5" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700">Trilha de IA</text>
+  <text x="108" y="364" fill="#A09BB5" font-family="Inter,Arial,sans-serif" font-size="12">Comece pelos fundamentos</text>
+  <rect x="108" y="378" width="156" height="7" rx="3.5" fill="#33264A"/>
+  <rect x="108" y="378" width="68" height="7" rx="3.5" fill="#A855F7"/>
+  <rect x="352" y="212" width="244" height="190" rx="16" fill="#171025" stroke="#33264A"/>
+  <rect x="372" y="232" width="204" height="82" rx="12" fill="#241A3A"/>
+  <circle cx="474" cy="273" r="27" fill="#7C3AED" fill-opacity=".65"/>
+  <path d="m460 277 10 10 20-25" stroke="#E9D5FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="372" y="342" fill="#F1F0F5" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="700">Projetos práticos</text>
+  <text x="372" y="364" fill="#A09BB5" font-family="Inter,Arial,sans-serif" font-size="12">Conteúdo por etapas</text>
+  <rect x="372" y="378" width="156" height="7" rx="3.5" fill="#33264A"/>
+  <rect x="372" y="378" width="112" height="7" rx="3.5" fill="#A855F7"/>
+  <rect x="616" y="212" width="256" height="190" rx="16" fill="#171025" stroke="#33264A"/>
+  <text x="640" y="246" fill="#C084FC" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700">CONTEÚDOS PREVISTOS</text>
+  <rect x="640" y="266" width="208" height="30" rx="9" fill="#241A3A"/>
+  <text x="656" y="286" fill="#F1F0F5" font-family="Inter,Arial,sans-serif" font-size="12">Aulas e workshops</text>
+  <rect x="640" y="306" width="208" height="30" rx="9" fill="#241A3A"/>
+  <text x="656" y="326" fill="#F1F0F5" font-family="Inter,Arial,sans-serif" font-size="12">Trilhas por nível</text>
+  <rect x="640" y="346" width="208" height="30" rx="9" fill="#241A3A"/>
+  <text x="656" y="366" fill="#F1F0F5" font-family="Inter,Arial,sans-serif" font-size="12">Novos projetos</text>
+  <rect x="88" y="430" width="784" height="32" rx="10" fill="#241A3A"/>
+  <text x="110" y="451" fill="#C084FC" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700">ILUSTRAÇÃO CONCEITUAL · NÃO É UMA TELA FUNCIONAL</text>
+</svg>

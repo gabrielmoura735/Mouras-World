@@ -135,25 +135,25 @@ const categories = [
 
 const slides = [
   {
-    src: "../app/public/previews/ai-workspace.svg",
+    src: "../assets/previews/ai-workspace.svg",
     alt: "Ilustração conceitual do espaço de ferramentas de IA",
     title: "IA e modelos",
     description: "Ideias, prompts e recursos de IA em uma área organizada.",
   },
   {
-    src: "../app/public/previews/content-studio.svg",
+    src: "../assets/previews/content-studio.svg",
     alt: "Ilustração conceitual de um estúdio de criação de conteúdo",
     title: "Criação de conteúdo",
     description: "Planejamento visual para textos, posts e materiais.",
   },
   {
-    src: "../app/public/previews/automation-flow.svg",
+    src: "../assets/previews/automation-flow.svg",
     alt: "Ilustração conceitual de uma rotina com agentes e automações",
     title: "Automação e bots",
     description: "Fluxos e agentes apresentados em uma prévia visual.",
   },
   {
-    src: "../app/public/previews/academy-board.svg",
+    src: "../assets/previews/academy-board.svg",
     alt: "Ilustração conceitual da área de aprendizado da Mouras Academy",
     title: "Academy e projetos",
     description: "Trilhas de aprendizado e projetos em um só lugar.",
