@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" fill="none">
+  <defs>
+    <linearGradient id="background" x1="72" y1="30" x2="906" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1A1030"/>
+      <stop offset="1" stop-color="#0A0612"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="130" y1="112" x2="782" y2="430" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A855F7"/>
+      <stop offset="1" stop-color="#7C3AED"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" rx="28" fill="url(#background)"/>
+  <circle cx="786" cy="106" r="172" fill="#7C3AED" fill-opacity=".12"/>
+  <rect x="58" y="46" width="844" height="448" rx="22" fill="#10091C" stroke="#392654"/>
+  <path d="M58 104h844" stroke="#392654"/>
+  <circle cx="88" cy="75" r="6" fill="#A855F7"/>
+  <circle cx="108" cy="75" r="6" fill="#5B21B6"/>
+  <circle cx="128" cy="75" r="6" fill="#33264A"/>
+  <text x="164" y="81" fill="#F1F0F5" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700">MOURAS-WORLD / ESPAÇO DE IA</text>
+  <rect x="86" y="132" width="184" height="326" rx="16" fill="#171025" stroke="#33264A"/>
+  <text x="108" y="168" fill="#C084FC" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700">SUAS ÁREAS</text>
+  <rect x="104" y="188" width="148" height="38" rx="10" fill="#7C3AED" fill-opacity=".22"/>
+  <text x="120" y="212" fill="#F1F0F5" font-family="Inter,Arial,sans-serif" font-size="13">Modelos de IA</text>
+  <text x="120" y="262" fill="#A09BB5" font-family="Inter,Arial,sans-serif" font-size="13">Biblioteca de prompts</text>
+  <text x="120" y="306" fill="#A09BB5" font-family="Inter,Arial,sans-serif" font-size="13">Ideias e pesquisa</text>
+  <text x="120" y="350" fill="#A09BB5" font-family="Inter,Arial,sans-serif" font-size="13">Seus projetos</text>
+  <rect x="296" y="132" width="578" height="96" rx="16" fill="#171025" stroke="#33264A"/>
+  <text x="322" y="170" fill="#F1F0F5" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="700">Organize uma ideia</text>
+  <text x="322" y="198" fill="#A09BB5" font-family="Inter,Arial,sans-serif" font-size="14">Uma área visual para explorar possibilidades com IA.</text>
+  <rect x="296" y="250" width="350" height="164" rx="16" fill="#171025" stroke="#33264A"/>
+  <text x="322" y="286" fill="#C084FC" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700">RASCUNHO</text>
+  <rect x="322" y="306" width="288" height="12" rx="6" fill="#49345F"/>
+  <rect x="322" y="332" width="244" height="10" rx="5" fill="#33264A"/>
+  <rect x="322" y="354" width="264" height="10" rx="5" fill="#33264A"/>
+  <rect x="322" y="382" width="132" height="22" rx="11" fill="url(#accent)"/>
+  <rect x="664" y="250" width="210" height="164" rx="16" fill="#171025" stroke="#33264A"/>
+  <circle cx="769" cy="318" r="38" fill="#7C3AED" fill-opacity=".23"/>
+  <path d="M769 289v58m-29-29h58" stroke="#C084FC" stroke-width="3" stroke-linecap="round"/>
+  <text x="715" y="383" fill="#A09BB5" font-family="Inter,Arial,sans-serif" font-size="12">NOVAS IDEIAS</text>
+  <rect x="296" y="430" width="578" height="32" rx="10" fill="#241A3A"/>
+  <text x="318" y="451" fill="#C084FC" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="700">ILUSTRAÇÃO CONCEITUAL · NÃO É UMA TELA FUNCIONAL</text>
+</svg>
