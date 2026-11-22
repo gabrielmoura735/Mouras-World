@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Planos | Mouras-World</title>
-  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <meta name="description" content="Compare os planos Essencial, Pro, Max e Infinity da Mouras-World. Veja as listas e prévias conceituais antes da abertura.">
+  <link rel="icon" type="image/png" href="/mouras-world/assets/logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -25,15 +26,16 @@
   <style>
     body { background-color:#0A0612; color:#F1F0F5; font-family:'Inter',sans-serif; overflow-x:hidden; }
     h1,h2,h3,h4,.font-display { font-family:'Syne','Inter',sans-serif; }
-    .brand-gradient-text { background:linear-gradient(135deg,#A855F7 0%,#7C3AED 50%,#5B21B6 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-    .accent-gradient-text { background:linear-gradient(135deg,#E9D5FF 0%,#C084FC 50%,#7C3AED 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-    .glass-card { background:rgba(18,11,30,0.75); backdrop-filter:blur(12px); border:1px solid rgba(124,58,237,0.2); }
-    .glass-card-hover:hover { border-color:rgba(168,85,247,0.5); transform:translateY(-3px); transition:all .25s ease; }
-    .badge-glow { box-shadow:0 0 15px rgba(124,58,237,0.3); }
-    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
-    .float { animation: float 6s ease-in-out infinite; }
+    .glass-card { background:rgba(18,11,30,0.75); border:1px solid rgba(124,58,237,0.2); }
     .reveal { opacity:0; transform:translateY(24px); transition:all .6s ease; }
     .reveal.in { opacity:1; transform:none; }
+    .plan-option { border:1px solid rgba(124,58,237,.22); background:rgba(18,11,30,.72); transition:border-color .2s ease,background .2s ease,transform .2s ease; }
+    .plan-option:hover { border-color:rgba(192,132,252,.65); background:#1A1030; transform:translateY(-2px); }
+    .plan-option[aria-pressed="true"] { border-color:#C084FC; background:#1A1030; box-shadow:inset 3px 0 0 #C084FC; }
+    .plan-option:focus-visible,.carousel-control:focus-visible,.carousel-dot:focus-visible { outline:2px solid #C084FC; outline-offset:3px; }
+    .preview-frame { aspect-ratio:16/9; background:#0A0612; }
+    .carousel-dot[aria-current="true"] { background:#7C3AED; border-color:#C084FC; color:#fff; }
+    @media (prefers-reduced-motion: reduce) { .plan-option,.reveal { transition:none; } .reveal { opacity:1; transform:none; } }
     details > summary { list-style:none; cursor:pointer; }
     details > summary::-webkit-details-marker { display:none; }
     details[open] .faq-plus { transform:rotate(45deg); }
@@ -45,7 +47,7 @@
   <header class="sticky top-0 z-50 glass-card border-b border-brand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
       <a href="../index.html" class="flex items-center gap-2.5 group shrink-0">
-        <img src="../assets/logo.png" alt="Mouras-World" class="w-9 h-9 rounded-lg object-contain bg-brand-primary/10 group-hover:scale-105 transition-transform duration-300">
+        <img src="/mouras-world/assets/logo.png" alt="Mouras-World" class="w-9 h-9 rounded-lg object-contain bg-brand-primary/10 group-hover:scale-105 transition-transform duration-300">
         <div class="leading-none">
           <span class="text-sm font-black tracking-wide text-white">MOURAS<span class="text-brand-primary">-WORLD</span></span>
           <span class="text-[8px] uppercase tracking-[0.2em] text-brand-accent block font-semibold mt-0.5">Planos</span>
@@ -62,30 +64,36 @@
   </header>
 
   <!-- HERO -->
-  <section class="relative pt-16 pb-20 overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(124,58,237,0.18),rgba(255,255,255,0))]"></div>
-    <div class="absolute -top-24 -left-24 w-80 h-80 bg-brand-primary/20 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute top-20 -right-24 w-80 h-80 bg-brand-accentGlow/15 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="max-w-4xl mx-auto px-4 relative z-10 text-center">
-      <div class="flex justify-center mb-6">
-        <div class="relative float">
-          <div class="absolute inset-0 bg-brand-accentGlow/30 rounded-full blur-3xl scale-110"></div>
-          <img src="../assets/logo.png" alt="Mouras-World" class="relative w-20 h-20 rounded-2xl object-contain bg-brand-primary/10 shadow-2xl shadow-brand-primary/40">
+  <section class="border-b border-brand-border bg-brand-dark">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)]">
+        <div class="max-w-2xl">
+          <p class="flex items-center gap-3 text-sm font-semibold text-brand-accent">
+            <span class="h-px w-8 bg-brand-primary"></span>
+            Planos Mouras-World
+          </p>
+          <h1 class="mt-5 text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Comece pelo essencial.<br>Avance no seu ritmo.
+          </h1>
+          <p class="mt-6 max-w-xl text-base leading-7 text-slate-300">
+            Quatro opções para aprender, criar e automatizar. Compare os recursos previstos e veja uma prévia visual antes de decidir.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href="#planos" class="inline-flex min-h-12 items-center rounded-xl bg-brand-primary px-6 py-3 font-bold text-white transition-colors hover:bg-brand-primaryHover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent">Explorar os planos</a>
+            <span class="text-sm text-slate-500">Prévia em desenvolvimento · sem cobrança</span>
+          </div>
         </div>
-      </div>
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-card border border-brand-primary/40 text-xs font-semibold text-brand-accent mb-6 badge-glow">
-        <span class="w-2 h-2 rounded-full bg-brand-primary animate-ping"></span>
-        Transparência total
-      </div>
-      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight mb-6">
-        Planos para quem <span class="brand-gradient-text">quer ir além.</span>
-      </h1>
-      <p class="text-lg text-slate-300 max-w-2xl mx-auto mb-8 leading-relaxed">
-        É <strong class="text-white">grátis de verdade</strong> para quem não tem condições. Para quem pode e quer o acesso completo — mentoria, parcerias e tudo por dentro — existem planos exclusivos. <strong class="text-white">Ninguém fica de fora.</strong>
-      </p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#planos" class="w-full sm:w-auto px-8 py-4 rounded-xl font-extrabold bg-gradient-to-r from-brand-primary via-purple-500 to-purple-700 text-white hover:opacity-95 shadow-xl transition-all">Ver os planos</a>
-        <a href="../comunidade/index.html" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold bg-brand-card border border-brand-border text-white hover:border-brand-accent/50 hover:text-brand-accent transition-all">Conhecer a comunidade</a>
+
+        <div class="rounded-2xl border border-brand-border bg-brand-card p-5 sm:p-7">
+          <div class="flex items-end justify-between gap-4 border-b border-brand-border pb-5">
+            <div>
+              <p class="text-sm font-bold text-white">Recursos previstos</p>
+              <p class="mt-1 text-sm text-slate-400">O total cresce a cada plano.</p>
+            </div>
+            <p id="progression-range" class="text-xs font-semibold text-slate-500"></p>
+          </div>
+          <ol id="plan-progression" class="divide-y divide-brand-border" aria-label="Quantidade prevista por plano"></ol>
+        </div>
       </div>
     </div>
   </section>
@@ -93,108 +101,80 @@
   <!-- PLANOS -->
   <section id="planos" class="py-20 bg-brand-dark border-t border-brand-border">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
-        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Escolha seu caminho</h2>
-        <h3 class="text-3xl sm:text-4xl font-black text-white">Os planos</h3>
-        <p class="text-slate-400 mt-4">Os valores dos planos pagos serão definidos junto com você. Por enquanto, veja o que cada um entrega.</p>
+      <div class="mb-10 flex flex-col gap-4 reveal md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="text-sm font-semibold text-brand-accent">Quatro níveis</p>
+          <h2 class="mt-2 text-3xl font-black text-white sm:text-4xl">Escolha por onde começar</h2>
+        </div>
+        <p class="max-w-xl text-sm leading-6 text-slate-400">As categorias são as mesmas; cada plano libera uma quantidade diferente. Selecione uma opção para ver a lista completa e as imagens conceituais.</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- GRATUITO -->
-        <div class="glass-card rounded-2xl p-6 glass-card-hover flex flex-col reveal">
-          <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 w-fit">Para quem precisa</span>
-          <h4 class="text-xl font-black text-white mt-4">Gratuito</h4>
-          <div class="my-4">
-            <span class="text-3xl font-black brand-gradient-text">R$ 0</span>
-            <span class="text-xs text-slate-400 block mt-1">vitalício · sem pegadinha</span>
+      <div id="plan-picker" class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4" role="group" aria-label="Selecione um plano para ver os detalhes"></div>
+      <section id="plan-preview" class="mt-8 scroll-mt-24 rounded-2xl border border-brand-border bg-brand-card p-5 sm:p-7 reveal" aria-labelledby="selected-plan-name">
+        <div class="flex flex-col gap-5 border-b border-brand-border pb-6 sm:flex-row sm:items-start sm:justify-between">
+          <div class="max-w-2xl">
+            <p class="text-sm font-semibold text-brand-accent">Prévia conceitual</p>
+            <h3 id="selected-plan-name" class="mt-2 text-2xl font-black text-white sm:text-3xl">Essencial</h3>
+            <p id="selected-plan-summary" class="mt-2 text-sm leading-6 text-slate-300"></p>
           </div>
-          <ul class="text-sm text-slate-300 space-y-2.5 mb-6 flex-1">
-            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Comunidade e conversas</li>
-            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Cursos publicados por membros</li>
-            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Trilhas por nível</li>
-            <li class="flex items-start gap-2"><span class="text-emerald-400 mt-0.5">✓</span> Recursos básicos das IAs</li>
-          </ul>
-          <a href="../comunidade/index.html#entrar" class="w-full py-3 rounded-xl text-center font-bold bg-brand-surface text-white hover:bg-brand-primary/30 transition">Entrar grátis</a>
-        </div>
-        <!-- 6 MESES -->
-        <div class="glass-card rounded-2xl p-6 glass-card-hover flex flex-col reveal">
-          <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/20 text-brand-accent border border-brand-primary/30 w-fit">Semestral</span>
-          <h4 class="text-xl font-black text-white mt-4">6 Meses</h4>
-          <div class="my-4">
-            <span class="text-3xl font-black text-white">a definir</span>
-            <span class="text-xs text-slate-400 block mt-1">acesso completo por 6 meses</span>
+          <div class="flex items-center gap-5 sm:gap-7">
+            <div>
+              <p class="text-xs font-semibold text-slate-500">Recursos</p>
+              <p class="mt-1 text-2xl font-black text-white"><span id="selected-plan-count">12</span></p>
+            </div>
+            <div class="border-l border-brand-border pl-5 sm:pl-7">
+              <p id="selected-plan-term" class="text-sm font-semibold text-white"></p>
+              <p id="selected-plan-price" class="mt-1 text-xs text-slate-400"></p>
+            </div>
           </div>
-          <ul class="text-sm text-slate-300 space-y-2.5 mb-6 flex-1">
-            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Tudo do gratuito, sem limites</li>
-            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Módulos exclusivos</li>
-            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Metas acompanhadas</li>
-            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> IAs prioritárias e ao vivo</li>
-          </ul>
-          <a href="#falar" class="w-full py-3 rounded-xl text-center font-bold bg-brand-surface text-white hover:bg-brand-primary/30 transition">Quero este</a>
         </div>
-        <!-- 1 ANO -->
-        <div class="glass-card rounded-2xl p-6 glass-card-hover flex flex-col border-brand-primary/50 badge-glow relative reveal">
-          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-brand-primary text-white text-[11px] font-extrabold uppercase tracking-wider whitespace-nowrap">Melhor custo</div>
-          <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/20 text-brand-accent border border-brand-primary/30 w-fit">Anual</span>
-          <h4 class="text-xl font-black text-white mt-4">1 Ano</h4>
-          <div class="my-4">
-            <span class="text-3xl font-black brand-gradient-text">a definir</span>
-            <span class="text-xs text-slate-400 block mt-1">melhor valor proporcional</span>
+        <div class="mt-6 grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+          <div>
+            <div id="plan-carousel" class="overflow-hidden rounded-2xl border border-brand-border bg-brand-dark" role="region" aria-roledescription="carrossel" aria-label="Imagens conceituais do plano Essencial">
+              <div class="preview-frame relative">
+                <img id="carousel-image" src="../app/public/previews/ai-workspace.svg" alt="Ilustração conceitual do espaço de ferramentas de IA" width="960" height="540" loading="lazy" class="h-full w-full object-cover">
+                <button id="carousel-prev" type="button" aria-label="Imagem anterior" class="carousel-control absolute left-3 top-1/2 flex min-h-11 min-w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/75 text-white hover:bg-black">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+                </button>
+                <button id="carousel-next" type="button" aria-label="Próxima imagem" class="carousel-control absolute right-3 top-1/2 flex min-h-11 min-w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-black/75 text-white hover:bg-black">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+                </button>
+              </div>
+              <div class="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">
+                <div aria-live="polite" aria-atomic="true">
+                  <p id="carousel-title" class="text-sm font-bold text-white">IA e modelos</p>
+                  <p id="carousel-description" class="mt-1 text-sm leading-5 text-slate-400"></p>
+                  <p id="carousel-position" class="sr-only"></p>
+                </div>
+                <div id="carousel-dots" class="flex items-center gap-2" role="group" aria-label="Escolha uma imagem"></div>
+              </div>
+            </div>
+            <p class="mt-3 text-xs leading-5 text-slate-500">As imagens são ilustrações conceituais; não representam ferramentas já disponíveis.</p>
           </div>
-          <ul class="text-sm text-slate-300 space-y-2.5 mb-6 flex-1">
-            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Tudo do semestral</li>
-            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Mentoria direta com o Gabriel</li>
-            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Oportunidades de parceria</li>
-            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Acompanhamento de perto</li>
-          </ul>
-          <a href="#falar" class="w-full py-3 rounded-xl text-center font-bold bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 transition shadow-lg">Quero este</a>
-        </div>
-        <!-- VITALÍCIO -->
-        <div class="glass-card rounded-2xl p-6 glass-card-hover flex flex-col reveal">
-          <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/10 text-brand-accent border border-brand-accent/30 w-fit">Para sempre</span>
-          <h4 class="text-xl font-black text-white mt-4">Vitalício</h4>
-          <div class="my-4">
-            <span class="text-3xl font-black text-white">sob consulta</span>
-            <span class="text-xs text-slate-400 block mt-1">pagamento único</span>
+          <div>
+            <div class="flex items-end justify-between gap-3">
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-brand-accent">Lista do plano</p>
+                <h4 class="mt-2 text-xl font-bold text-white">O que está previsto</h4>
+              </div>
+              <span id="resource-list-count" class="rounded-full border border-brand-border px-3 py-1.5 text-xs font-bold text-slate-300">12 itens</span>
+            </div>
+            <div id="resource-list" class="mt-4 space-y-4" aria-live="polite"></div>
           </div>
-          <ul class="text-sm text-slate-300 space-y-2.5 mb-6 flex-1">
-            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Acesso completo para sempre</li>
-            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Mentoria e parcerias</li>
-            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Prioridade máxima</li>
-            <li class="flex items-start gap-2"><span class="text-brand-accent mt-0.5">✓</span> Sem renovação, sem mensalidade</li>
-          </ul>
-          <a href="#falar" class="w-full py-3 rounded-xl text-center font-bold bg-brand-surface text-white hover:bg-brand-primary/30 transition">Quero este</a>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMPARATIVO -->
-  <section class="py-20 bg-brand-card border-t border-brand-border">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-12 reveal">
-        <h2 class="text-xs uppercase tracking-widest text-brand-primary font-bold mb-2">Lado a lado</h2>
-        <h3 class="text-3xl sm:text-4xl font-black text-white">Gratuito x Pago</h3>
-      </div>
-      <div class="glass-card rounded-2xl overflow-hidden reveal">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="border-b border-brand-border">
-              <th class="text-left p-4 text-slate-400 font-semibold">Recurso</th>
-              <th class="p-4 text-emerald-300 font-bold text-center">Gratuito</th>
-              <th class="p-4 text-brand-accent font-bold text-center">Pago</th>
-            </tr>
-          </thead>
-          <tbody class="text-slate-300">
-            <tr class="border-b border-brand-border/50"><td class="p-4">Comunidade e conversas</td><td class="text-center text-emerald-400">✓</td><td class="text-center text-brand-accent">✓</td></tr>
-            <tr class="border-b border-brand-border/50"><td class="p-4">Cursos dos membros</td><td class="text-center text-emerald-400">✓</td><td class="text-center text-brand-accent">✓</td></tr>
-            <tr class="border-b border-brand-border/50"><td class="p-4">Trilhas por nível</td><td class="text-center text-emerald-400">✓</td><td class="text-center text-brand-accent">✓</td></tr>
-            <tr class="border-b border-brand-border/50"><td class="p-4">Módulos exclusivos</td><td class="text-center text-slate-600">—</td><td class="text-center text-brand-accent">✓</td></tr>
-            <tr class="border-b border-brand-border/50"><td class="p-4">Metas acompanhadas</td><td class="text-center text-slate-600">—</td><td class="text-center text-brand-accent">✓</td></tr>
-            <tr class="border-b border-brand-border/50"><td class="p-4">Mentoria direta com o Gabriel</td><td class="text-center text-slate-600">—</td><td class="text-center text-brand-accent">✓</td></tr>
-            <tr class="border-b border-brand-border/50"><td class="p-4">Oportunidades de parceria</td><td class="text-center text-slate-600">—</td><td class="text-center text-brand-accent">✓</td></tr>
-            <tr><td class="p-4">IAs prioritárias e ao vivo</td><td class="text-center text-slate-600">básico</td><td class="text-center text-brand-accent">✓</td></tr>
-          </tbody>
-        </table>
+        <div class="mt-7 grid gap-5 border-t border-brand-border pt-5 md:grid-cols-2">
+          <div>
+            <h4 class="text-sm font-bold text-white">Calls com o Gabriel</h4>
+            <p id="selected-plan-calls" class="mt-1 text-sm leading-5 text-slate-400"></p>
+          </div>
+          <div>
+            <h4 class="text-sm font-bold text-white">APIs externas de IA</h4>
+            <p class="mt-1 text-sm leading-5 text-slate-400">O uso sem cobrança adicional está planejado para todos os planos. Provedores, integrações e uso ilimitado ainda serão validados; nada está ativo nesta prévia.</p>
+          </div>
+        </div>
+      </section>
+      <div class="mt-6 border-l-2 border-brand-primary pl-4">
+        <h3 class="text-sm font-bold text-white">Contratação ainda não aberta</h3>
+        <p class="mt-1 text-sm leading-6 text-slate-400">Preços e links de checkout serão adicionados quando a plataforma estiver pronta. Selecionar um plano só mostra a prévia: não inicia compra nem cobrança.</p>
       </div>
     </div>
   </section>
@@ -202,30 +182,30 @@
   <!-- FAQ -->
   <section id="falar" class="py-20 bg-brand-dark border-t border-brand-border">
     <div class="max-w-3xl mx-auto px-4">
-      <div class="text-center mb-12 reveal">
-        <h2 class="text-xs uppercase tracking-widest text-brand-accent font-bold mb-2">Dúvidas</h2>
-        <h3 class="text-3xl sm:text-4xl font-black text-white">Perguntas frequentes</h3>
+      <div class="mb-10 reveal">
+        <p class="text-sm font-semibold text-brand-accent">Dúvidas</p>
+        <h2 class="mt-2 text-3xl font-black text-white sm:text-4xl">Perguntas frequentes</h2>
       </div>
       <div class="space-y-4">
         <details class="glass-card rounded-xl p-5 reveal">
-          <summary class="flex items-center justify-between text-white font-bold">É grátis mesmo? <span class="faq-plus text-brand-accent text-xl transition-transform">+</span></summary>
-          <p class="text-sm text-slate-400 mt-3 leading-relaxed">É sim. Quem não tem condições financeiras entra de graça, vitalício, sem cartão e sem pegadinha. Isso é um valor da Mouras-World, não uma estratégia de venda.</p>
+          <summary class="flex min-h-11 items-center justify-between gap-4 text-white font-bold">O Essencial é gratuito? <span aria-hidden="true" class="faq-plus text-brand-accent text-xl transition-transform">+</span></summary>
+          <p class="text-sm text-slate-400 mt-3 leading-relaxed">O Essencial é gratuito para quem não tem condições de pagar e exige aprovação. O processo e os critérios de solicitação serão publicados quando estiverem definidos. Nunca pediremos senha ou acesso à sua conta bancária.</p>
         </details>
         <details class="glass-card rounded-xl p-5 reveal">
-          <summary class="flex items-center justify-between text-white font-bold">Como defino meu plano? <span class="faq-plus text-brand-accent text-xl transition-transform">+</span></summary>
-          <p class="text-sm text-slate-400 mt-3 leading-relaxed">A gente conversa. Os valores dos planos pagos ainda estão sendo definidos — você escolhe entre 6 meses, 1 ano ou vitalício conforme o que faz sentido pra você.</p>
+          <summary class="flex min-h-11 items-center justify-between gap-4 text-white font-bold">Quais são os valores iniciais? <span aria-hidden="true" class="faq-plus text-brand-accent text-xl transition-transform">+</span></summary>
+          <p class="text-sm text-slate-400 mt-3 leading-relaxed">Pro: R$ 39,90 por mês durante 6 meses (R$ 239,40 no período). Max: R$ 59,90 por mês durante 12 meses (R$ 718,80 no período). Infinity: R$ 1.497,00 em pagamento único e acesso vitalício. São valores iniciais; o checkout ainda não está aberto.</p>
         </details>
         <details class="glass-card rounded-xl p-5 reveal">
-          <summary class="flex items-center justify-between text-white font-bold">Posso trocar depois? <span class="faq-plus text-brand-accent text-xl transition-transform">+</span></summary>
-          <p class="text-sm text-slate-400 mt-3 leading-relaxed">Pode. Começou no gratuito e quis evoluir pra um plano? Sem problema. Estava num plano e quer mudar a duração? Também dá — é só falar com a gente.</p>
+          <summary class="flex min-h-11 items-center justify-between gap-4 text-white font-bold">Como funcionam as calls e APIs? <span aria-hidden="true" class="faq-plus text-brand-accent text-xl transition-transform">+</span></summary>
+          <p class="text-sm text-slate-400 mt-3 leading-relaxed">Essencial e Pro terão 1–2 sessões em grupo por fim de semana. Max e Infinity terão calls com horário marcado. APIs externas ilimitadas estão previstas para os quatro planos, sem cobrança adicional ao membro, mas ainda estão em desenvolvimento e não estão disponíveis. A liberação depende da infraestrutura e da validação dos custos.</p>
         </details>
         <details class="glass-card rounded-xl p-5 reveal">
-          <summary class="flex items-center justify-between text-white font-bold">O que é mentoria direta? <span class="faq-plus text-brand-accent text-xl transition-transform">+</span></summary>
-          <p class="text-sm text-slate-400 mt-3 leading-relaxed">É conversa direta com o Gabriel sobre seus projetos, metas e caminhos — além de oportunidades reais de parceria para fazer projetos e ganhar dinheiro junto.</p>
+          <summary class="flex min-h-11 items-center justify-between gap-4 text-white font-bold">Já posso contratar? <span aria-hidden="true" class="faq-plus text-brand-accent text-xl transition-transform">+</span></summary>
+          <p class="text-sm text-slate-400 mt-3 leading-relaxed">Ainda não. Os checkouts serão conectados depois que a plataforma estiver finalizada e os links forem criados. Esta página não cobra nem ativa um plano.</p>
         </details>
       </div>
-      <div class="text-center mt-12 reveal">
-        <a href="../comunidade/index.html#entrar" class="inline-block px-8 py-4 rounded-xl font-extrabold bg-gradient-to-r from-brand-primary to-purple-700 text-white hover:opacity-90 shadow-xl transition-all">Quero fazer parte</a>
+      <div class="mt-8 reveal">
+        <a href="#planos" class="inline-flex min-h-11 items-center text-sm font-semibold text-brand-accent hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-accent">Voltar aos planos</a>
       </div>
     </div>
   </section>
@@ -234,7 +214,7 @@
   <footer class="bg-brand-dark border-t border-brand-border py-10 text-xs text-slate-400">
     <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
       <a href="../index.html" class="flex items-center gap-2">
-        <img src="../assets/logo.png" alt="Mouras-World" class="w-8 h-8 rounded-lg object-contain bg-brand-primary/10">
+        <img src="/mouras-world/assets/logo.png" alt="Mouras-World" class="w-8 h-8 rounded-lg object-contain bg-brand-primary/10">
         <span class="text-white font-black">MOURAS-WORLD</span>
       </a>
       <div>© 2026 Mouras-World · Planos</div>
@@ -249,6 +229,7 @@
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   </script>
 
+  <script src="../assets/plan-showcase.js"></script>
   <script src="../assets/anim.js"></script>
 </body>
 </html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouras LeadFlow CRM | Gestão de Prospecção & Vendas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { background-color: #090d16; font-family: 'Inter', sans-serif; color: #f8fafc; }
+    .kanban-col { min-height: 480px; }
+  </style>
+</head>
+<body class="selection:bg-yellow-500 selection:text-black">
+
+  <!-- TOPO RETORNO -->
+  <div class="bg-amber-500/10 border-b border-amber-500/20 py-2 px-4 text-xs text-center text-amber-300 flex items-center justify-between">
+    <span>SaaS Produto 01 • <strong>Mouras LeadFlow CRM</strong></span>
+    <a href="../../index.html" class="underline hover:text-white transition">← Voltar ao Portal Mouras-World</a>
+  </div>
+
+  <!-- HEADER DO SAAS -->
+  <header class="border-b border-slate-800 bg-slate-950/80 px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-500 to-yellow-600 flex items-center justify-center font-black text-black">
+        LF
+      </div>
+      <div>
+        <h1 class="text-lg font-bold text-white flex items-center gap-2">
+          Mouras LeadFlow CRM
+          <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-semibold">Online v1.0</span>
+        </h1>
+        <p class="text-xs text-slate-400">Pipeline de Prospecção dos 5 Esquadrões</p>
+      </div>
+    </div>
+
+    <!-- MÉTRICAS DO PIPELINE -->
+    <div class="flex items-center gap-6 text-xs">
+      <div class="text-center sm:text-right">
+        <span class="text-slate-400 block">Total de Leads Ativos</span>
+        <span id="total-leads-count" class="text-base font-bold text-white">4 Leads</span>
+      </div>
+      <div class="text-center sm:text-right">
+        <span class="text-slate-400 block">Valor em Negociação</span>
+        <span id="total-pipeline-value" class="text-base font-bold text-amber-400">R$ 5.400,00</span>
+      </div>
+      <button onclick="openNewLeadModal()" class="px-4 py-2 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-600 text-black font-bold text-xs hover:opacity-90 transition flex items-center gap-1 shadow-md">
+        <span>+ Novo Lead</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- KANBAN BOARD -->
+  <main class="max-w-7xl mx-auto p-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+      <!-- COLUNA 1: PROSPEÇÃO / NOVO LEAD -->
+      <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-800 flex flex-col kanban-col">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-200">1. Prospecção</h3>
+          </div>
+          <span id="count-prospeccao" class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-semibold">2</span>
+        </div>
+        <div id="col-prospeccao" class="space-y-3 flex-1">
+          <!-- CARD LEAD 1 -->
+          <div class="p-3.5 rounded-lg bg-slate-950 border border-slate-800 hover:border-slate-700 transition relative group">
+            <div class="text-xs font-bold text-white mb-1">Restaurante Sabor & Lenha</div>
+            <div class="text-[11px] text-slate-400 mb-2">Canal: Instagram Direct • Resp: Esquadrão Vendas</div>
+            <div class="flex items-center justify-between text-xs pt-2 border-t border-slate-800/80">
+              <span class="text-amber-400 font-semibold">R$ 1.200 (Site)</span>
+              <button onclick="moveLead(this, 'contato')" class="text-[10px] px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded transition">Avançar →</button>
+            </div>
+          </div>
+          <!-- CARD LEAD 2 -->
+          <div class="p-3.5 rounded-lg bg-slate-950 border border-slate-800 hover:border-slate-700 transition relative group">
+            <div class="text-xs font-bold text-white mb-1">Oficina Mecânica Total</div>
+            <div class="text-[11px] text-slate-400 mb-2">Canal: WhatsApp • Sem site próprio</div>
+            <div class="flex items-center justify-between text-xs pt-2 border-t border-slate-800/80">
+              <span class="text-amber-400 font-semibold">R$ 800 (Landing)</span>
+              <button onclick="moveLead(this, 'contato')" class="text-[10px] px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded transition">Avançar →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUNA 2: EM CONTATO / REUNIÃO -->
+      <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-800 flex flex-col kanban-col">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-200">2. Em Contato / Call</h3>
+          </div>
+          <span id="count-contato" class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-semibold">1</span>
+        </div>
+        <div id="col-contato" class="space-y-3 flex-1">
+          <!-- CARD LEAD 3 -->
+          <div class="p-3.5 rounded-lg bg-slate-950 border border-slate-800 hover:border-slate-700 transition relative group">
+            <div class="text-xs font-bold text-white mb-1">Dr. Marcos Oftalmologia</div>
+            <div class="text-[11px] text-slate-400 mb-2">Call agendada p/ apresentação de modelo</div>
+            <div class="flex items-center justify-between text-xs pt-2 border-t border-slate-800/80">
+              <span class="text-amber-400 font-semibold">R$ 1.800 (Institucional)</span>
+              <button onclick="moveLead(this, 'proposta')" class="text-[10px] px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded transition">Avançar →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUNA 3: PROPOSTA & CONTRATO BLINDADO -->
+      <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-800 flex flex-col kanban-col">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-200">3. Proposta & Contrato</h3>
+          </div>
+          <span id="count-proposta" class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-semibold">1</span>
+        </div>
+        <div id="col-proposta" class="space-y-3 flex-1">
+          <!-- CARD LEAD 4 -->
+          <div class="p-3.5 rounded-lg bg-slate-950 border border-purple-900/40 hover:border-purple-500/50 transition relative group">
+            <div class="text-xs font-bold text-white mb-1">Academia Iron Fitness</div>
+            <div class="text-[11px] text-slate-400 mb-2">Contrato digital enviado para assinatura</div>
+            <div class="flex items-center justify-between text-xs pt-2 border-t border-slate-800/80">
+              <span class="text-amber-400 font-semibold">R$ 1.600 (Site + BioLink)</span>
+              <button onclick="moveLead(this, 'fechado')" class="text-[10px] px-2 py-1 bg-emerald-600 hover:bg-emerald-500 text-black font-bold rounded transition">Fechar Venda ✓</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUNA 4: FECHADO / EM DESENVOLVIMENTO -->
+      <div class="bg-slate-900/60 rounded-xl p-4 border border-slate-800 flex flex-col kanban-col">
+        <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-800">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-200">4. Fechado / Dev</h3>
+          </div>
+          <span id="count-fechado" class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-semibold">0</span>
+        </div>
+        <div id="col-fechado" class="space-y-3 flex-1">
+          <!-- Leads fechados aparecem aqui -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- MODAL DE NOVO LEAD -->
+  <div id="modal-new-lead" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-md w-full shadow-2xl">
+      <h3 class="text-lg font-bold text-white mb-4">Adicionar Novo Lead ao Pipeline</h3>
+      <form onsubmit="handleCreateLead(event)" class="space-y-4 text-xs">
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Nome do Cliente ou Empresa</label>
+          <input type="text" id="lead-name" required placeholder="Ex.: Lanchonete Central" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-amber-500">
+        </div>
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Canal de Contato</label>
+          <input type="text" id="lead-channel" required placeholder="Ex.: WhatsApp (11) 98888-7777" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-amber-500">
+        </div>
+        <div>
+          <label class="block text-slate-300 font-semibold mb-1">Valor Estimado do Contrato (R$)</label>
+          <input type="number" id="lead-value" required placeholder="Ex.: 1500" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-amber-500">
+        </div>
+        <div class="flex gap-3 pt-2">
+          <button type="button" onclick="closeNewLeadModal()" class="flex-1 py-2.5 rounded-lg bg-slate-800 text-slate-300 font-semibold hover:bg-slate-700 transition">Cancelar</button>
+          <button type="submit" class="flex-1 py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-black font-bold transition">Adicionar Lead</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openNewLeadModal() {
+      document.getElementById('modal-new-lead').classList.remove('hidden');
+      document.getElementById('modal-new-lead').classList.add('flex');
+    }
+    function closeNewLeadModal() {
+      document.getElementById('modal-new-lead').classList.add('hidden');
+      document.getElementById('modal-new-lead').classList.remove('flex');
+    }
+    function handleCreateLead(e) {
+      e.preventDefault();
+      const name = document.getElementById('lead-name').value;
+      const channel = document.getElementById('lead-channel').value;
+      const val = parseFloat(document.getElementById('lead-value').value) || 0;
+
+      const card = document.createElement('div');
+      card.className = "p-3.5 rounded-lg bg-slate-950 border border-slate-800 hover:border-slate-700 transition relative group";
+      card.innerHTML = `
+        <div class="text-xs font-bold text-white mb-1">${name}</div>
+        <div class="text-[11px] text-slate-400 mb-2">Canal: ${channel}</div>
+        <div class="flex items-center justify-between text-xs pt-2 border-t border-slate-800/80">
+          <span class="text-amber-400 font-semibold">R$ ${val.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
+          <button onclick="moveLead(this, 'contato')" class="text-[10px] px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded transition">Avançar →</button>
+        </div>
+      `;
+      document.getElementById('col-prospeccao').appendChild(card);
+      updateCounts();
+      closeNewLeadModal();
+      e.target.reset();
+    }
+
+    function moveLead(btn, targetCol) {
+      const card = btn.closest('.group');
+      if (targetCol === 'contato') {
+        document.getElementById('col-contato').appendChild(card);
+        btn.setAttribute('onclick', "moveLead(this, 'proposta')");
+      } else if (targetCol === 'proposta') {
+        document.getElementById('col-proposta').appendChild(card);
+        btn.setAttribute('onclick', "moveLead(this, 'fechado')");
+        btn.className = "text-[10px] px-2 py-1 bg-emerald-600 hover:bg-emerald-500 text-black font-bold rounded transition";
+        btn.textContent = "Fechar Venda ✓";
+      } else if (targetCol === 'fechado') {
+        document.getElementById('col-fechado').appendChild(card);
+        btn.remove();
+        card.classList.add('border-emerald-500/50');
+        alert('🎉 Parabéns! Mais um contrato fechado para a Mouras-World! Notificação disparada para o esquadrão de dev.');
+      }
+      updateCounts();
+    }
+
+    function updateCounts() {
+      const p = document.getElementById('col-prospeccao').children.length;
+      const c = document.getElementById('col-contato').children.length;
+      const pr = document.getElementById('col-proposta').children.length;
+      const f = document.getElementById('col-fechado').children.length;
+
+      document.getElementById('count-prospeccao').textContent = p;
+      document.getElementById('count-contato').textContent = c;
+      document.getElementById('count-proposta').textContent = pr;
+      document.getElementById('count-fechado').textContent = f;
+      document.getElementById('total-leads-count').textContent = (p + c + pr + f) + ' Leads';
+    }
+  </script>
+
+</body>
+</html>
